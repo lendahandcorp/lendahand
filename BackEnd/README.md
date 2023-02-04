@@ -3,3 +3,7 @@
 ## System setup
 
 - Node: v18.13.0
+
+## Start server
+
+- `npm start`
