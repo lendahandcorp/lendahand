@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGO_DB);
 //import the Products model
 const users = require('./models/user')
 
+//Temporary test
 app.get('/users', (req, res) => {
   // res.send('Hello World!');
   users.find((err, data) => {
