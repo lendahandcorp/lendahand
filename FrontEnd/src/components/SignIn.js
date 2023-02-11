@@ -48,7 +48,7 @@ const SignIn = (props) => {
             <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
             <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
             <h1 className="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
-            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <label htmlFor="inputEmail" className="sr-only">Email</label>
             <input onChange={e => setEmail(e.target.value)} name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
             <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input onChange={e => setPassword(e.target.value)} name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />

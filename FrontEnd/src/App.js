@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import SignIn from './components/SignIn';
+import Register from './components/Register';
+import './css/app.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import authService from './services/authService';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () => {
+
+  // For reloading navbar
+  // const [authUser, setAuthUser] = useState(authService.isAuthenticated())
+ 
+  // const updateNav = () => {
+  //   setAuthUser(authService.isAuthenticated())
+  //}
+
+    return (
+      <React.Fragment>
+        <BrowserRouter>
+
+          {/* Include navbar here */}
+          {/* <NavBar authUser={authUser} updateNav={updateNav}/> */}
+
+          <div id="main-content">
+          <Routes>
+              
+              {/* This is the homepage */}
+              {/* <Route path='/' element={<Main />}/> */}
+
+              {/* This is the navbar */}
+              {/* <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/> */}
+              
+              {/* Raw signin page, to be removed */}
+              <Route path='/signin' element={<SignIn />}/>
+
+              {/* routes that require token */}
+              {/* <Route element={<ProtectedRoutes/>}>
+                <Route path='/create' element={<CreatePokemon />}/>
+                <Route path='/update/:id' element={<EditPokemon />}/>
+              </Route> */}
+
+              <Route path='/register' element={<Register />}/>
+              <Route path='*' element={<NotFound />}/>
+            </Routes>
+          </div>
+          {/* Footer goes here */}
+          {/* <Footer /> */}
+        </BrowserRouter>
+      </React.Fragment>
+    )
+}
+const NotFound = () =>{
+  return <h1>Not Found</h1>
 }
 
 export default App;
