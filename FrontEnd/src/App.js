@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
+import Profile from './components/Profile';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -44,6 +45,9 @@ const App = () => {
               <Route path='/signin' element={<SignIn />}/>
               
 
+              <Route path='/profile/:id' element={<Profile />}/>
+
+
               {/* routes that require token */}
               {/* <Route element={<ProtectedRoutes/>}>
                 <Route path='/create' element={<CreatePokemon />}/>
@@ -62,7 +66,12 @@ const App = () => {
     )
   }
   const NotFound = () =>{
-    return <h1>Not Found</h1>
+    return (
+      <div className="container text-center">
+          <h1>Page Not Found !</h1>
+          <h2>You may have entered the wrong url or clicked on a broken link.</h2>
+      </div>
+    )
 }
 
 export default App;

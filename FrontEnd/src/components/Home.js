@@ -1,4 +1,3 @@
-//this is a placeholder component for the body section.
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/footer.css';
