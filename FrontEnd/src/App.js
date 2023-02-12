@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
+import Home from './components/Home';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import About from './components/About';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -22,18 +26,23 @@ const App = () => {
 
           {/* Include navbar here */}
           {/* <NavBar authUser={authUser} updateNav={updateNav}/> */}
-
+          <Header/>
           <div id="main-content">
           <Routes>
               
               {/* This is the homepage */}
               {/* <Route path='/' element={<Main />}/> */}
+              <Route path='/' element={<Home />}/>
+              
+              {/* This is the About us Page */}
+              <Route path='/about' element={<About />}/>
 
               {/* This is the navbar */}
               {/* <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/> */}
               
               {/* Raw signin page, to be removed */}
               <Route path='/signin' element={<SignIn />}/>
+              
 
               {/* routes that require token */}
               {/* <Route element={<ProtectedRoutes/>}>
@@ -45,14 +54,15 @@ const App = () => {
               <Route path='*' element={<NotFound />}/>
             </Routes>
           </div>
+          <Footer/>
           {/* Footer goes here */}
           {/* <Footer /> */}
         </BrowserRouter>
       </React.Fragment>
     )
-}
-const NotFound = () =>{
-  return <h1>Not Found</h1>
+  }
+  const NotFound = () =>{
+    return <h1>Not Found</h1>
 }
 
 export default App;
