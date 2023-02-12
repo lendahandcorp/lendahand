@@ -28,11 +28,11 @@ const Footer = (props) => {
             </div>
           </div>
           <div className="float-right">
-            <ul>
-              <li><Link>Donate</Link></li>
-              <li><Link>Security</Link></li>
-              <li><Link>Feedback</Link></li>
-              <li className="btn"><Link>Contact Us</Link></li>
+            <ul className="nav">
+              <li clasName="nav-item"><Link to="/#" clasName="nav-link">Donate</Link></li>
+              <li clasName="nav-item"><Link to="/#">Security</Link></li>
+              <li clasName="nav-item"><Link to="/#">Feedback</Link></li>
+              <li className="nav-item btn"><Link to="/#">Contact Us</Link></li>
             </ul>
           </div>
         </div>
