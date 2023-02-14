@@ -15,6 +15,10 @@ mongoose.set('strictQuery', false);
 console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
 mongoose.connect(process.env.MONGO_DB);
 
+// import routers
+var indexRouter = require('./routes/index'); //index = index.js
+var apiRouter = require('./routes/api/api'); //api = api folder
+
 //import the Products model
 const users = require('./models/user');
 
@@ -29,9 +33,6 @@ app.get('/users', (req, res) => {
     res.json(data);
   });
 });
-
-// var indexRouter = require('./routes/index'); //index = index.js
-// var apiRouter = require('./routes/api/api');  //api = api folder
 
 app.listen(port, () => {
   console.log(`Server is running. http://localhost:${port}`);
