@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const db = require('./db/db')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -10,16 +11,18 @@ require('dotenv').config();
 //create an instenece of our express app
 const app = express();
 //Temp Port (can be replaced with the .env port)
-const port = 3000;
+// const port = 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // connect to MongoDB
-mongoose.set('strictQuery', false);
-console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
-mongoose.connect(process.env.MONGO_DB);
+mongoDB = db.getDb(process.env.MONGO_DB)
+// mongoose.set('strictQuery', false);
+// console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
+// mongoose.connect(process.env.MONGO_DB);
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -52,8 +55,8 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running. http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running. http://localhost:${process.env.PORT}`);
 });
 
 module.exports = app;

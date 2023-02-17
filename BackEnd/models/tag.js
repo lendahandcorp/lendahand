@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const tagSchema = new Schema({
+const TagSchema = new Schema({
   title: {
     type: String,
-    required: [true, 'Tag title is required!!'],
+    lowercase: true,
+    required: [true, 'Tag title is required!'],
     max: 100,
   },
   date_created: {
@@ -12,4 +13,7 @@ const tagSchema = new Schema({
     default: Date.now,
   }
 });
-module.exports = mongoose.model('Tag', userSchema);
+// Export model
+module.exports = {
+    Tag: mongoose.model("Tag", TagSchema),
+  }
