@@ -1,9 +1,8 @@
 //this is a placeholder component for the body section.
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/footer.css';
-const no_image = require('../img/no_image.png');
 
+const no_image = require('../img/no_image.png');
 
 const Post = (props) => {
 
@@ -20,9 +19,9 @@ const Post = (props) => {
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
                     <div class="caption">
-                        <h3 class="md-heading"><a href="#">The Heading Text Size Should Match</a></h3>
-                        <p> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                        <a class="btn btn-default" href="#" role="button">Read More</a> 
+                        <h3 class="md-heading"><a href="#">{props.tc.title}</a></h3>
+                        <p> {props.tc.body} </p>
+                        <button type="button" onClick={() => props.gotToProfile(props.tc.poster_id)} className="btn btn-sm btn-outline-secondary">view poster</button>
                     </div>
                     <ul class="list-inline">
                             <li>

@@ -1,10 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../css/footer.css';
+import { useNavigate } from 'react-router-dom';
 
 import Post from './Post';
 
+let tempPosts = [
+    {
+        title: "title",
+        body: "beep boop bop i am description text beepee",
+        poster_id: 1,
+        post_id: 1
+    },
+    {
+        title: "title2",
+        body: "beep boop bop i am description text beepee",
+        poster_id: 1,
+        post_id: 2
+    },
+    {
+        title: "title3",
+        body: "beep boop bop i am description text beepee",
+        poster_id: 2,
+        post_id: 3
+    },
+    {
+        title: "title4",
+        body: "beep boop bop i am description text beepee",
+        poster_id: 3,
+        post_id: 4
+    }
+]
+
 const Home = (props) => {
+
+    const navigate = useNavigate();
+
+    const gotToProfile = (id) => {
+        navigate('/profile/' + id);
+    }
+
+    const showPost = (id) => {
+        //navigate('/post/' + id); // this will be for when post-page is made
+    }
+
+
 
     return (
         <div class="container">
@@ -20,11 +58,14 @@ const Home = (props) => {
             {/* Post Container */}
             <div class="container">
                 <div class="col-md-12 col-lg-12">
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
+
+                    {
+                        tempPosts.forEach(tc => {
+                            return <Post data={tc} goToProfile={gotToProfile} />
+                        })
+                    }
+                    
+
                 </div>
             </div>
         </div>
