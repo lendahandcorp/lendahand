@@ -1,47 +1,104 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import Post from './Post';
 
-let tempPosts = [
-    {
-        title: "title",
-        body: "beep boop bop i am description text beepee",
-        poster_id: 1,
-        post_id: 1
-    },
-    {
-        title: "title2",
-        body: "beep boop bop i am description text beepee",
-        poster_id: 1,
-        post_id: 2
-    },
-    {
-        title: "title3",
-        body: "beep boop bop i am description text beepee",
-        poster_id: 2,
-        post_id: 3
-    },
-    {
-        title: "title4",
-        body: "beep boop bop i am description text beepee",
-        poster_id: 3,
-        post_id: 4
-    }
-]
+const no_image = require('../img/no_image.png');
+const tempPosts = require('../pseudodata_posts.json')
+
+//console.log('\x1b[\x1b[36m user attempted to go to profile:'+id+']]')
+//console.log('%c user attempted to go to profile:'+id,'color:blue');
 
 const Home = (props) => {
 
+    const [searchedTags, setSearchedTags] = useState([])
+
     const navigate = useNavigate();
 
-    const gotToProfile = (id) => {
+    const goToProfile = (id) => {
+        console.log('%c user attempted to go to profile:' + id, 'color:blue');
         navigate('/profile/' + id);
     }
 
     const showPost = (id) => {
-        //navigate('/post/' + id); // this will be for when post-page is made
+        console.log('%c user attempted to go to post view page:' + id, 'color:blue');
+        navigate('/postdetails/' + id); // this will be for when post-page is made
     }
 
+    const tagSearchBarChanged = () => {
+        let searchBar = document.getElementById("searchBar");
+        let searchBarValue = searchBar.value;
+        //let tagBarRaw = event.target.value;
+
+        //this gurantees that the searched tags bar always starts with a #.
+        //its not neccesary but makes it look nicer.
+        if(searchBarValue[0] != '#')
+            searchBarValue = '#'+searchBarValue;
+
+        //this uses regex to limit the search bar to only having one # in a row.
+        searchBarValue = searchBarValue.replace(/##+/g, "#");
+
+        //this uses regex to limit the search bar to only alphanumeric and # symbols.
+        searchBarValue = searchBarValue.replace(/(?=\W)([^#])/g, "");
+
+
+        //this uses regex to split the raw string into seperate strings that start with #
+        //and populate a new array with the new strings.
+        //if no matches (and therefore returns undefined) it defaults to an empty array.
+        let splitTags = searchBarValue.match(/((?<=#)|^)[a-z|A-Z]+/g) ?? [];
+
+        searchBar.value = searchBarValue;
+        setSearchedTags(splitTags);
+    }
+
+    const removeTagFromSearchBar = (tagToRemove) => {
+        console.log('removey');
+        let searchBar = document.getElementById("searchBar");
+
+        searchBar.value = searchBar.value.replace('#'+tagToRemove, "");
+
+        tagSearchBarChanged();
+    }
+
+
+    const tagClicked = (tag) => {
+        let searchBar = document.getElementById("searchBar");
+
+        if(searchBar.value.includes("#"+tag)){
+            removeTagFromSearchBar(tag)
+        } else {
+            addTagToSearchBar(tag)
+        }
+    }
+
+    const addTagToSearchBar = (newTag) => {
+        console.log('clicky');
+        let searchBar = document.getElementById("searchBar");
+
+
+        searchBar.value += "#"+newTag;
+
+        tagSearchBarChanged();
+    }
+
+    // const splitTagBar = (rawTags) => {
+    //     return rawTags.match(/((?<=#)|^)[a-z|A-Z]+/g)
+    // }
+
+    //takes an array of post
+    //example ["bike","fix","ect"]
+    const getPostsWithRelevantTags = () => {
+        if(searchedTags.length > 0){
+            return tempPosts.filter((tp) => {      
+                if(tp.tags.some(tag => searchedTags.indexOf(tag) >= 0)){
+                    return tp;
+                }
+            })
+        }
+        else {
+            return tempPosts.filter((tp) => tp);
+        }
+    }
 
 
     return (
@@ -49,7 +106,7 @@ const Home = (props) => {
             {/* <h1>Home.</h1> */}
             {/* Search bar */}
             <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" id="searchBar" class="form-control rounded" onChange={tagSearchBarChanged} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                 </span>
@@ -60,11 +117,17 @@ const Home = (props) => {
                 <div class="col-md-12 col-lg-12">
 
                     {
-                        tempPosts.forEach(tc => {
-                            return <Post data={tc} goToProfile={gotToProfile} />
+                        getPostsWithRelevantTags().map((tp, i) => {
+                            console.log('post');
+                            return <Post key={i} data={tp} 
+                                goToProfile={goToProfile} 
+                                showPost={showPost} 
+                                tagClicked={tagClicked}
+                            />
+                            //return <Post/>
                         })
                     }
-                    
+
 
                 </div>
             </div>
