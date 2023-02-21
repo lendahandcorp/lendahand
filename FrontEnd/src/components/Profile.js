@@ -10,7 +10,9 @@ const Profile = (props) => {
     const [email, setEmail] = useState("");
     const [user_img, setUserImg] = useState("");
     const [introduction, setIntroduction] = useState("");
-    const [user_tags, setUserTags] = useState("");
+    const [frequent_tags, setFrequentTags] = useState("");
+    const [been_helped, setBeenHelped] = useState("");
+    const [helped_others, setHelpedOthers] = useState("");
     const [errors,  setErrors] = useState({});
     // Get user Id
     const params = useParams();
@@ -31,47 +33,50 @@ const Profile = (props) => {
         setHelpedOthers(data.helped_others)
       })
     }, [] )
+
+    const full_name = first_name + " " + last_name
   
-  return (
-  <div className="container">
-        <div class="row">
-            <div class="col">
-                <img src={user_img}></img>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="d-flex">
-                    <h2 name="first_name">{first_name}</h2>
-                    <h2 name="last_name">{last_name}</h2>
-                </div>
-                <p name="email">{email}</p>
-                <p name="introduction">{introduction}</p>
-                <div name="user_tags" class="d-flex">
-                    { frequent_tags.map( tag => {
-                        return (
-                            <div class="btn btn-light btn-outline-dark">{tag}</div> //modify the btn if neeeded in css
-                        )
-                    }) }
-                </div>
-                <div>Number of posts...</div>
-            </div>
-            <div class="col d-flex">
-                <div>
-                    <h2>Hands Requested</h2>
-                    <div>{been_helped}</div>
-                </div>
-                <div>
-                    <h2>Hands Given</h2>
-                    <div>{helped_others}</div>
+    return (
+        
+        <div className="container">
+            <div class="row">
+                <div class="col">
+                    <img src={user_img}></img>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>{full_name}</h2>
+                    <p>{email}</p>
+                    <p>{introduction}</p>
+                    <div class="d-flex">
+                        { frequent_tags.map( tag => {
+                            return (
+                                <div class="btn btn-light btn-outline-dark">{tag}</div> //modify the btn if neeeded in css
+                            )
+                        }) }
+                    </div>
+                    <div class="d-flex">
+                        <div>Number of posts...</div>
+                        <div>??</div>
+                    </div>  
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div>
+                        <h2>Hands Requested</h2>
+                        <div>{been_helped}</div>
+                    </div>
+                    <div>
+                        <h2>Hands Given</h2>
+                        <div>{helped_others}</div>
+                    </div>
+                </div>
+            </div>
+            {/* Posts will be listed here. Needs to modify! */}
+            <div class="row">
+                <Post></Post>
+            </div>
         </div>
-        {/* Posts will be listed here. Needs to modify! */}
-        <div class="row">
-            <Post></Post>
-        </div>
-    </div>
     )
 }
 
