@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 
-
 const Profile = (props) => {
-
+    //User
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("")
     const [email, setEmail] = useState("");
@@ -13,6 +12,12 @@ const Profile = (props) => {
     const [frequent_tags, setFrequentTags] = useState("");
     const [been_helped, setBeenHelped] = useState("");
     const [helped_others, setHelpedOthers] = useState("");
+    //Posts
+    // const [title, setTitle] = useState("");
+    // const [body, setBody] = useState("")
+    // const [availablity, setAvailablity] = useState("");
+    // const [status, setStatus] = useState("");
+
     const [errors,  setErrors] = useState({});
     // Get user Id
     const params = useParams();
@@ -21,8 +26,8 @@ const Profile = (props) => {
     const navigate = useNavigate();
     
     useEffect(() => {
-      dataService.getOneData( userId, (data) => {
-        console.log(data)
+      dataService.getOneUser( userId, (data) => {
+        // console.log(data)
         setFirstName(data.first_name)
         setLastName(data.last_name)
         setEmail(data.email)
@@ -35,11 +40,23 @@ const Profile = (props) => {
     }, [] )
 
     const full_name = first_name + " " + last_name
-  
+    
+    // question: getting posts?
+    // useEffect(() => {
+    //   dataService.getOneUser( userId, (data) => {
+    //     // console.log(data)
+    //     setTitle(data.title)
+    //     setBody(data.body)
+    //     setAvailablity(data.availablity)
+    //     setStatus(data.status)
+    //   })
+    // }, [] )
+
     return (
         
         <div className="container">
             <div class="row">
+                {/* need to set orange background in css! */}
                 <div class="col">
                     <img src={user_img}></img>
                 </div>
@@ -74,7 +91,7 @@ const Profile = (props) => {
             </div>
             {/* Posts will be listed here. Needs to modify! */}
             <div class="row">
-                <Post></Post>
+                <Post />
             </div>
         </div>
     )

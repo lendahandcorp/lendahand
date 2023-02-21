@@ -40,6 +40,15 @@ class authService {
     signout(){
         localStorage.removeItem('token')
     }
+
+    //need to have this for profile component
+    getOneUser(credentials, callback){
+
+        axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user`, credentials)
+        .then(response=>{
+            callback(response.data)
+        })
+    }
 }
 
 export default new authService()
