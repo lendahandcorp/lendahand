@@ -17,5 +17,9 @@ router.use('/users', usersRouter);
 var tagsRouter = require('./tags');
 router.use('/tags', tagsRouter);
 
+// POSTS
+var tagsRouter = require('./posts');
+router.use('/posts', tagsRouter);
+
 
 module.exports = router;
