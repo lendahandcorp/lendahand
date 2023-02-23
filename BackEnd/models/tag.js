@@ -5,7 +5,11 @@ const TagSchema = new Schema({
   title: {
     type: String,
     lowercase: true,
-    required: [true, 'Tag title is required!'],
+    match: [
+      /[A-Za-z]+/,
+      'Tags must contain only letters',
+    ],
+    required: [true, 'Tag is required!'],
     max: 100,
   },
   date_created: {

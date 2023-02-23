@@ -18,16 +18,14 @@ router.get("/", async (req, res) => {
 });
 
 // POST
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
 
-    title: req.body.title
-
-    // JWtoken validation goes here
-    if (true) {
+    const specificTag = await Tag.find({title: req.body.title}).count();
+    // Insert if not exist
+    if(specificTag===0) {
         const tag = new Tag({
             title: req.body.title
         });
-
         tag.save()
             .then(data => {
                 res.status(201).json(data);
@@ -37,18 +35,15 @@ router.post("/", (req, res) => {
                     message: err
                 })
             })
-
     } else {
-        res.status(401).json({
-            message: "Access is Denied"
-        })
+        res.status(422).json({
+            message: "Tag already exist",
+            specificTag
+            });
     }
-
-
 })
 
 // GET BY ID
-
 router.get("/:Id", async (req, res) => {
     try {
         const specificTag = await Tag.findById(req.params.Id);
@@ -65,7 +60,6 @@ router.get("/:Id", async (req, res) => {
 })
 
 // DELETE
-
 router.delete("/:Id", async (req, res) => {
     // jwt validation goes here
     if (true) {
@@ -93,7 +87,6 @@ router.delete("/:Id", async (req, res) => {
 })
 
 // PUT
-
 router.put("/:Id", async (req, res) => {
 
     title: req.body.Id
