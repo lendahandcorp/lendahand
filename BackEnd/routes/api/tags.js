@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
             })
     } else {
         res.status(422).json({
-            message: "Tag already exist",
+            message: "Tag already exists",
             specificTag
             });
     }
