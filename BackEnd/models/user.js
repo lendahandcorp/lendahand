@@ -12,18 +12,18 @@ const userSchema = new Schema({
     required: [true, 'Last name is required!!'],
     max: 100,
   },
-  //   address: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   phone: {
-  //     type: Number,
-  //     required: true
-  //   },
-  //   photo: {
-  //     type: String,
-  //     required: true
-  //   },
+  address: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+  },
+  photo: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     trim: true,
@@ -39,15 +39,14 @@ const userSchema = new Schema({
     required: [true, 'Password is required!!'],
     max: 255,
   },
-  //   ,
-  //   been_helped: {
-  //     type: Number,
-  //     required: false
-  //   },
-  //   helped_others: {
-  //     type: Number,
-  //     required: false
-  //   }
+  been_helped: {
+    type: Number,
+    required: false,
+  },
+  helped_others: {
+    type: Number,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);
