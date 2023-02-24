@@ -13,7 +13,7 @@ const reviewSchema = new Schema({
         required: [true, 'What post!!?']
     },
     title: {
-        type: Number,
+        type: String,
         required: [true, 'Title is required!']
     },
     body: {

@@ -21,5 +21,8 @@ router.use('/tags', tagsRouter);
 var tagsRouter = require('./posts');
 router.use('/posts', tagsRouter);
 
+// REVIEWS
+var reviewsRouter = require('./reviews');
+router.use('/reviews', reviewsRouter);
 
 module.exports = router;
