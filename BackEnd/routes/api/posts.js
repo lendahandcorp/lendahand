@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-
+const tagLookUpAndInsertService = require('../../services/lookupAndInsertService')
 
 // router.use(validateToken)
 
@@ -42,8 +42,12 @@ router.get('/:id', (req, res) => {
 })
 
 //Create a new post
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+
     const thePost = new Posts(req.body)
+
+    const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(req.body.tags)
+
     thePost.validate(req.body, (error) => {
 
         if (error) {
@@ -53,7 +57,7 @@ router.post('/', (req, res) => {
         const newPost = new Posts({
             title: req.body.title,
             body: req.body.body,
-            tags: req.body.tags,
+            tags: listOfTags,
             availability: req.body.availability,
             date_created: req.body.date_created,
             status_id: req.body.status_id,
@@ -63,9 +67,11 @@ router.post('/', (req, res) => {
             people_accepted: req.body.people_accepted
         })
 
+        console.log(newPost)
+
         newPost.save()
             .then(pos => {
-                res.status(201).send('The new post was successfully created')
+                res.status(201).json(pos)
 
             })
             .catch(err => {
@@ -76,24 +82,34 @@ router.post('/', (req, res) => {
 })
 
 //Update post By ID
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     const thePost = new Posts(req.body)
+    const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(req.body.tags)
     thePost.validate(req.body, (error) => {
 
         if (error) {
             return res.status(422).send(error);
         }
 
-        Posts.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+        Posts.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            body: req.body.body,
+            tags: listOfTags,
+            availability: req.body.availability,
+            date_created: req.body.date_created,
+            status_id: req.body.status_id,
+            reviews: req.body.reviews,
+            location: req.body.location,
+            people_needed: req.body.people_needed,
+            people_accepted: req.body.people_accepted
+        }, (err, data) => {
             if (err) {
                 return res.status(401).send(err)
             }
-
             if (!data) {
                 res.status(404).send()
             }
-
-            res.send(data)
+                res.status(204).send("Post updated")
         })
     })
 

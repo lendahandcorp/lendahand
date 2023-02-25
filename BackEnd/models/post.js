@@ -17,7 +17,7 @@ const postSchema = new Schema({
     //resource found: 
     //https://stackoverflow.com/questions/8111846/how-to-set-objectid-as-a-data-type-in-mongoose
     tags: {
-        type: Number,
+        type: Array, "default": [],
         required: [true, 'Tags Required!!!']
     },
     availability: {
