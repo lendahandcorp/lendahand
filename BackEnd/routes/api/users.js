@@ -10,7 +10,7 @@ const Login = require('../../models/login');
 /* GET users listing. */
 router.get('/', function (req, res) {
   // res.send('respond with a resource');
-
+ 
   User.find({}, (err, users) => {
     //handle if err occurred
     if (err) {
@@ -25,6 +25,7 @@ router.get('/', function (req, res) {
 
 // GET ONE USER BY ID
 router.get('/:id', (req, res) => {
+  
   User.findById(req.params.id, (err, oneUser) => {
     if (err) {
       return res.status(400).send(`Error: ${err.message}`);

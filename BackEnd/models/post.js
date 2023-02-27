@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 
 //define the schema
 const postSchema = new Schema({
+    writer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required:true
+    },
     title: {
         type: String,
         required: [true, 'Product Name Required!!!']
@@ -25,8 +30,12 @@ const postSchema = new Schema({
         required: [true, 'Availability Date Required!!!']
     },
     date_created: { type: Date, default: Date.now },
-    status_id: { type: Number,
-        required: [true, 'Status Required!!!'] },
+    status: {
+        type: String,
+        enum : ['New','Available','Pending','Closed'],
+        default: 'New',
+        required: true
+    },
     reviews: { type: Array, "default": [] },
     location: {
         type: String,

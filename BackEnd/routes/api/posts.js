@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const tagLookUpAndInsertService = require('../../services/lookupAndInsertService');
+const User = require('../../models/user')
 
 // router.use(validateToken)
 
@@ -44,6 +45,11 @@ router.get('/:id', validateToken, (req, res) => {
 router.post('/', async (req, res) => {
   const thePost = new Posts(req.body);
 
+  const currentUser = await User.findById(req.user.id)
+  if (!currentUser) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+      
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
@@ -54,6 +60,7 @@ router.post('/', async (req, res) => {
     }
 
     const newPost = new Posts({
+      writer: currentUser.firstName,
       title: req.body.title,
       body: req.body.body,
       tags: listOfTags,
