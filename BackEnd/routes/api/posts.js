@@ -44,11 +44,6 @@ router.get('/:id', validateToken, (req, res) => {
 //Create a new post
 router.post('/', async (req, res) => {
   const thePost = new Posts(req.body);
-
-  const currentUser = await User.findById(req.user.id)
-  if (!currentUser) {
-    return res.status(404).json({ error: 'User not found' });
-  }
       
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
@@ -60,7 +55,7 @@ router.post('/', async (req, res) => {
     }
 
     const newPost = new Posts({
-      writer: currentUser.firstName,
+      //writer:
       title: req.body.title,
       body: req.body.body,
       tags: listOfTags,

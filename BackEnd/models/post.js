@@ -32,8 +32,8 @@ const postSchema = new Schema({
     date_created: { type: Date, default: Date.now },
     status: {
         type: String,
-        enum : ['New','Available','Pending','Closed'],
-        default: 'New',
+        enum : ['Draft','Open','In Progress','Closed'],
+        default: 'Draft',
         required: true
     },
     reviews: { type: Array, "default": [] },
