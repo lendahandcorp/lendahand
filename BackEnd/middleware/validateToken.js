@@ -10,7 +10,10 @@ const validateToken = (req, res, next) => {
     return res.status(401).send('Access is Denied!!');
   }
 
-  const decode = jwt.verify(req.get('x-auth-token'), process.env.SECRET);
+  const decode = jwt.verify(
+    req.get('x-auth-token'),
+    process.env.JWT_SECRET_KEY
+  );
   console.log(decode.password);
 
   // if it does exist, make sure it is valid...if not send 401,
