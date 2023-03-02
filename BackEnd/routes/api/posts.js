@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     }
 
     const newPost = new Posts({
-      //writer:
+      writer: req.body.writer,
       title: req.body.title,
       body: req.body.body,
       tags: listOfTags,

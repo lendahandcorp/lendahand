@@ -133,7 +133,7 @@ router.post('/login', (req, res) => {
         if (!result) {
           // if there is no match....respond with unauthorized response (401)
           // if there is a match....create a jwt send back in the response.
-          return res.status(401).send('Unauthorized response');
+          return res.status(404).send('Unauthorized response');
         }
         const token = jwt.sign(
           {
