@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 
 const no_image = require('../img/no_image.png');
 
+
+
 const Post = (props) => {
+
+    const spotsLeft = () => {
+        return props.data.people_needed - props.data.people_accepted.length
+    }
 
     return (
         <article class="post vt-post">
@@ -21,12 +27,19 @@ const Post = (props) => {
                     <div class="caption">
                         <h3 class="md-heading"><a href="#">{props.data.title}</a></h3>
                         <p> {props.data.body} </p>
-                        <button type="button" onClick={() => props.goToProfile(props.data.poster_id)} className="btn btn-sm btn-outline-secondary">view poster</button>
-                        <button type="button" onClick={() => props.showPost(props.data.post_id)} className="btn btn-sm btn-outline-secondary">view post</button>
+                        <button type="button" onClick={() => props.goToProfile(props.data.writer)} className="btn btn-sm btn-outline-secondary">view author</button>
+                        <button type="button" onClick={() => props.showPost(props.data._id)} className="btn btn-sm btn-outline-secondary">view post</button>
                     </div>
                     <ul class="list-inline">
                         <li>
                             <div class="info">
+                                {
+                                    props.data.people_needed == props.data.people_accepted.length 
+                                    ? <p>Spots left (full)</p>
+
+                                    : <p>Spots left {spotsLeft()}/{props.data.people_needed}</p>
+                                }
+                                
                                 <p>Posted on:</p>
                                 <strong>Mar 21, 2015</strong>
                             </div>

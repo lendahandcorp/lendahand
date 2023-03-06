@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
+import dataService from '../services/dataService';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -12,8 +13,15 @@ const tempPosts = require('../pseudodata_posts.json')
 const Home = (props) => {
 
     const [searchedTags, setSearchedTags] = useState([])
+    const [posts, setPosts] = useState([])
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dataService.getPosts(posts => {
+          setPosts(posts);
+        })
+    }, [])
 
     const goToProfile = (id) => {
         console.log('%c user attempted to go to profile:' + id, 'color:blue');
@@ -88,15 +96,17 @@ const Home = (props) => {
     //takes an array of post
     //example ["bike","fix","ect"]
     const getPostsWithRelevantTags = () => {
+        console.log("p");
+
         if(searchedTags.length > 0){
-            return tempPosts.filter((tp) => {      
+            return posts.filter((tp) => {      
                 if(tp.tags.some(tag => searchedTags.indexOf(tag) >= 0)){
                     return tp;
                 }
             })
         }
         else {
-            return tempPosts.filter((tp) => tp);
+            return posts.filter((tp) => tp);
         }
     }
 
@@ -115,10 +125,14 @@ const Home = (props) => {
             {/* Post Container */}
             <div class="container">
                 <div class="col-md-12 col-lg-12">
-
                     {
+                        console.log(getPostsWithRelevantTags())
+                    }
+                    {
+
+                        //console.log(getPostsWithRelevantTags());
                         getPostsWithRelevantTags().map((tp, i) => {
-                            console.log('post');
+                            //console.log('post');
                             return <Post key={i} data={tp} 
                                 goToProfile={goToProfile} 
                                 showPost={showPost} 
