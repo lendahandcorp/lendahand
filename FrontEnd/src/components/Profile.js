@@ -89,9 +89,7 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            {/* Posts will be listed here. Needs to modify! */}
             <div class="row">
-                <Post />
             </div>
         </div>
     )
