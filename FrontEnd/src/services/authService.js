@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt from 'jwt-decode';
 
 class authService {
   signin(credentials, callback) {
@@ -47,6 +48,12 @@ class authService {
       .then((response) => {
         callback(response.data);
       });
+  }
+
+  showEmail() {
+    const auth = localStorage.getItem('token');
+    console.log(jwt(auth).email);
+    return jwt(auth).email;
   }
 }
 
