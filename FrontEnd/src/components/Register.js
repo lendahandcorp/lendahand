@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/signin.css'
 import { useNavigate } from "react-router-dom";
 import authService from '../services/authService';
-import { firstNameValidator, lastNameValidator, addressValidator, emailValidator, telephoneNumberValidator, passwordValidator} from './Validator'
+import { firstNameValidator, lastNameValidator, addressValidator, emailValidator, phoneValidator, passwordValidator} from './Validator'
 
 
 
@@ -11,7 +11,7 @@ const Register = (props) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [address, setAddress] = useState('')
-    const [telephoneNumber, setTelephoneNumber] = useState('')
+    const [phone, setPhone] = useState('')
     const [picture, setPicture] = useState(null);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -25,6 +25,7 @@ const Register = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
+
         const isFirstNameValid = firstNameValidator(firstName)
         if(isFirstNameValid !== "") {
             setFirstNameError(isFirstNameValid)
@@ -37,9 +38,9 @@ const Register = (props) => {
         if(isAddressValid !== "") {
             setAddressError(isAddressValid)
         }
-        const isTelephoneNumberValid = telephoneNumberValidator(telephoneNumber)
-        if(isTelephoneNumberValid !== "") {
-            setTelephoneNumberError(isTelephoneNumberValid)
+        const isPhoneValid = phoneValidator(phone)
+        if(isPhoneValid !== "") {
+            setTelephoneNumberError(isPhoneValid)
         }
         const isEmailValid = emailValidator(email)
         if(isEmailValid !== "") {
@@ -53,17 +54,17 @@ const Register = (props) => {
         if(isFirstNameValid === "" 
         && isLastNameValid === "" 
         && isAddressValid === "" 
-        && isTelephoneNumberValid === "" 
+        && isPhoneValid === "" 
         && isEmailValid === "" 
         && isPasswordValid === "")
         {
             // Invoke auth.Service that call API to insert data
-            authService.register({ firstName, lastName, address, telephoneNumber, picture, email, password },(error)=> {
+            authService.register({ firstName, lastName, address, phone, picture, email, password },(error)=> {
                 if(!error) {
                     navigate('/') //Redirect to main with token in browser storage with the name x-auth-token
                 }
                 else {
-                    
+                   console.log(error.data.message) 
                 }
             })
         }
@@ -75,8 +76,8 @@ const Register = (props) => {
             {/* Validators */}
             <p className={firstNameError ? 'alert alert-danger text-center' : 'hidden'}>{firstNameError}</p>
             <p className={lastNameError ? 'alert alert-danger text-center' : 'hidden'}>{lastNameError}</p>
-            <p className={address ? 'alert alert-danger text-center' : 'hidden'}>{addressError}</p>
-            <p className={telephoneNumber ? 'alert alert-danger text-center' : 'hidden'}>{telephoneNumberError}</p>
+            <p className={addressError ? 'alert alert-danger text-center' : 'hidden'}>{addressError}</p>
+            <p className={telephoneNumberError ? 'alert alert-danger text-center' : 'hidden'}>{telephoneNumberError}</p>
             <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
             <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
             {/* HTML */}
@@ -88,7 +89,7 @@ const Register = (props) => {
             <label htmlFor="inputAddress" className="sr-only">Address</label>
             <input onChange={e => setAddress(e.target.value)} name="address" type="text" id="address" className="form-control" placeholder="Enter Address" required autoFocus />
             <label htmlFor="inputTelephoneNumber" className="sr-only">Telephone Number</label>
-            <input onChange={e => setTelephoneNumber(e.target.value)} name="telephoneNumber" type="number" id="telephoneNumber" className="form-control" placeholder="Enter Telephone Number" required autoFocus />
+            <input onChange={e => setPhone(e.target.value)} name="telephoneNumber" type="number" id="telephoneNumber" className="form-control" placeholder="Enter Telephone Number" required autoFocus />
             {/* Picture is Not Mandatory */}
             <label htmlFor="inputPicture" className="sr-only">Picture</label>
             <input onChange={(event) => {setPicture(event.target.files[0])}} name="picture" type="file" id="picture" className="form-control"/>
