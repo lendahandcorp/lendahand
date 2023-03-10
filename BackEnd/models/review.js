@@ -6,26 +6,32 @@ const { Schema } = mongoose;
 const reviewSchema = new Schema({
     reviewer: {
         type: String,
-        required: [true, 'Who created this review?']
+        required: [true, 'Id of the person who created the post.']
+    },
+    personBeingReviewed: {
+        type: String,
+        required: [true, 'Id of the person who is being reviewed']
     },
     post_id: {
         type: String,
-        required: [true, 'What post!!?']
+        required: [true, 'Post Id.']
     },
-    title: {
+    description: {
         type: String,
-        required: [true, 'Title is required!']
-    },
-    body: {
-        type: String,
-        required: [true, 'Want more story!!']
+        maxlength: 255
     },
     stars: {
         type: Number,
-        required: [true, 'Give some starts!']
+        required: [true, 'Review rating, between 1 and 5'],
+        min: [1, 'Must be a value between 1 and 5, inclusive.'],
+        max: [5, 'Must be a value between 1 and 5, inclusive.']
     },
     date_created: { type: Date, default: Date.now }
 });
+
+// Unique constraint between reviewer, personBeingReviewed and postId
+// To avoid duplicated reviews for the same personBeingReviewed
+reviewSchema.index({ reviewer:1 , personBeingReviewed: 1 , post_id: 1 },{unique: true})
 
 //generating the model from the schema 
 const review = mongoose.model('reviews', reviewSchema);
