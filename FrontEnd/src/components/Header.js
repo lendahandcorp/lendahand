@@ -1,13 +1,23 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/header.css';
 
 const Header = () => {
+
   const navigate = useNavigate();
 
   const logo = require('../img/logo.png');
+
+  const [data, updateData] = useState();
+  useEffect(() => {
+    const getData = async (userId) => {
+      const resp = await componentService.countMyHands(userId);
+      updateData(resp);
+    }
+    getData(componentService.grabMyUserDetails().userId);
+  }, []);
 
   const logout = () => {
     authService.signout().catch((err) => console.log(err));
@@ -26,7 +36,7 @@ const Header = () => {
         { authService.isAuthenticated() ? 
           <div className="nav-item active dropdown d-block float-right">
             <Link className="nav-link dropdown-toggle" to="/#" aria-expanded="false">
-              {componentService.grabMyUserDetails().email}
+              {componentService.grabMyUserDetails().email} - {JSON.stringify(data.handsRequested)}
             </Link>
             <div className="dropdown-menu">
               <Link className="dropdown-item" onClick={ () => logout() }>Sign out</Link>

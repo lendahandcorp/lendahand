@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+const validateToken = require('../../middleware/validateToken');
 
 // Import Review Model
 const Reviews = require('../../models/review')
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
 
 // Get all the reviews by post_id
 // frontEnd will need that
-router.get('/:post_id', (req, res) => {
+router.get('/:post_id', validateToken, (req, res) => {
 
     Reviews.find((err, data) => {
 
@@ -44,7 +45,7 @@ router.get('/:post_id', (req, res) => {
 
 // Get One review By ID
 // Meant to be used by "system admin"
-router.get('/:id', (req, res) => {
+router.get('/:id', validateToken, (req, res) => {
 
   Reviews.findById(req.params.id, (err, data) => {
         if (err) {
@@ -61,7 +62,7 @@ router.get('/:id', (req, res) => {
 
 // Create a new review
 // * Create a review under "post id" *
-router.post('/', (req, res) => {
+router.post('/', validateToken, (req, res) => {
     const theReview = new Reviews(req.body)
     theReview.validate(req.body, (error) => {
 
@@ -116,7 +117,7 @@ router.post('/', (req, res) => {
 
 // Delete review By ID
 // * Validation : delete ONLY by "lendAHand admin"
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateToken, (req, res) => {
 
     Reviews.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) {

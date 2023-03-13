@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const validateToken = require('../../middleware/validateToken');
 
 // import the User model
 const User = require('../../models/user');
 const Login = require('../../models/login');
 
 /* GET users listing. */
-router.get('/', function (req, res) {
+router.get('/',  validateToken, function (req, res) {
   // res.send('respond with a resource');
  
   User.find({}, (err, users) => {
@@ -17,14 +18,12 @@ router.get('/', function (req, res) {
       console.log(err);
       res.status(500).send('An error occurred');
     }
-
-    console.log(users);
     res.send(users);
   });
 });
 
 // GET ONE USER BY ID
-router.get('/:id', (req, res) => {
+router.get('/:id',  validateToken, (req, res) => {
   
   User.findById(req.params.id, (err, oneUser) => {
     if (err) {
