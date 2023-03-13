@@ -46,7 +46,7 @@ const App = () => {
               <Route path='/signin' element={<SignIn />}/>
               
 
-              <Route path='/profile/:id' element={<Profile />}/>
+              <Route path='/profile/:UserId' element={<Profile />}/>
               <Route path='/postdetails/:id' element={<PostDetails />}/>
 
 
