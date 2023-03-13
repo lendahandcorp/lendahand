@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 import Home from './components/Home';
