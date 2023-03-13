@@ -2,29 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
+import '../css/app.css';
 import '../css/profile.css';
 // import Post from './Post';
 
 const Profile = (props) => {
   
-  //*User
+  // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
   // const [introduction, setIntroduction] = useState(''); // not set it up in db
-  const [frequent_tags, setFrequentTags] = useState('');
+  // const [frequent_tags, setFrequentTags] = useState('');
   const [been_helped, setBeenHelped] = useState('');
-  const [helped_others, setHelpedOthers] = useState('');
-  
-  //*Posts
+  const [helped_others, setHelpedOthers] = useState(''); 
+  // Posts
   // const [title, setTitle] = useState("");
   // const [body, setBody] = useState("")
   // const [availablity, setAvailablity] = useState("");
   // const [status, setStatus] = useState("");
+  const [errors, setErrors] = useState({});
 
-  // const [errors, setErrors] = useState({});
-  //*Get user Id
+  // Get User Id
   const params = useParams();
   const userId = params.UserId;
 
@@ -37,8 +37,9 @@ const Profile = (props) => {
       setEmail(data.email);
       setUserImg(data.photo);
       // setIntroduction(data.introduction); // not set it up in db
-      setFrequentTags(data.frequent_tags);
+      // setFrequentTags(data.frequent_tags);
       setBeenHelped(data.been_helped);
+      console.log(data.been_helped)
       setHelpedOthers(data.helped_others);
     });
   }, []);
@@ -46,7 +47,6 @@ const Profile = (props) => {
 
   const full_name = first_name + ' ' + last_name;
 
-  // question: getting posts?
   // useEffect(() => {
   //   dataService.getData( userId, (data) => {
   //     console.log(data)
@@ -75,51 +75,32 @@ const Profile = (props) => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <div className="d-flex">
-            <div className="tags btn btn-outline-secondary">Gardening</div>
-            <div className="tags btn btn-outline-secondary">Painting</div>
+            <div className="tags btn btn-outline-secondary">#gardening</div>
+            <div className="tags btn btn-outline-secondary">#painting</div>
             {/* {frequent_tags.map((tag) => {
               return (
                 <div className="btn btn-light btn-outline-dark">{tag}</div>
               );
             })} */}
           </div>
-          <div>How many posts</div>
+          <div>Num of posts</div>
         </div>
         <div className="col-md-6 d-flex hands-box">
           <div className="hands">
             <h2>Hands Requested</h2>
-            <div className="hands-circle rounded-circle">{been_helped}</div>
+            <div className="hands-circle">{been_helped}</div>
           </div>
           <div className="hands">
             <h2>Hands Requested</h2>
-            <div className="hands-circle">{been_helped}</div>
+            <div className="hands-circle">{helped_others}</div>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          This is placeholder for where Post will be listed
+          Placeholder for Posts and Applicants
         </div>
       </div>
-      {/* <div className="row">
-          <div className="d-flex">
-            <div>Number of posts...</div>
-            <div>??</div>
-          </div>
-        </div>
-        <div className="col-md-6 d-flex">
-          <div>
-            <h2>Hands Requested</h2>
-            <div>{been_helped}</div>
-          </div>
-          <div>
-            <h2>Hands Given</h2>
-            <div>{helped_others}</div>
-          </div>
-        </div> */}
-      {/* Posts will be listed here. Needs to modify! */}
-      {/* <div class="row">
-        <Post /> */}
     </div>
   );
 };
