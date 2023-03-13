@@ -41,10 +41,10 @@ class authService {
     localStorage.removeItem('token');
   }
 
-  //need to have this for profile component
-  getOneUser(credentials, callback) {
+  // for Profile Component
+  getOneUser(id, callback) {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/users`, credentials)
+      .get(`${process.env.REACT_APP_API_URL}/users/${id}`)
       .then((response) => {
         callback(response.data);
       });
@@ -52,7 +52,7 @@ class authService {
 
   showEmail() {
     const auth = localStorage.getItem('token');
-    console.log(jwt(auth).email);
+    // console.log(jwt(auth).email);
     return jwt(auth).email;
   }
 }
