@@ -52,7 +52,7 @@ class authService {
 
   showEmail() {
     const auth = localStorage.getItem('token');
-    // console.log(jwt(auth).email);
+    console.log(jwt(auth).email);
     return jwt(auth).email;
   }
 }
