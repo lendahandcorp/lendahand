@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
+import componentService from '../services/componentService';
 import '../css/header.css';
 
 const Header = () => {
@@ -25,7 +26,7 @@ const Header = () => {
         { authService.isAuthenticated() ? 
           <div className="nav-item active dropdown d-block float-right">
             <Link className="nav-link dropdown-toggle" to="/#" aria-expanded="false">
-              {authService.showEmail()}              
+              {componentService.grabMyUserDetails().email}
             </Link>
             <div className="dropdown-menu">
               <Link className="dropdown-item" onClick={ () => logout() }>Sign out</Link>

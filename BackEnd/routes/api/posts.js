@@ -44,7 +44,20 @@ router.get('/:id', validateToken, (req, res) => {
 //Create a new post
 router.post('/', async (req, res) => {
   const thePost = new Posts(req.body);
-      
+  
+  /**
+   * Here the code is expecting an array with tags object, example:
+   * [
+   *  {
+   *    "title": car
+   *  },
+   *  {
+   *    "title": gardening
+   *  },
+   * ... etc
+   * ]
+   * 
+   */
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );

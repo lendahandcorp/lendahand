@@ -49,12 +49,6 @@ class authService {
         callback(response.data);
       });
   }
-
-  showEmail() {
-    const auth = localStorage.getItem('token');
-    console.log(jwt(auth).email);
-    return jwt(auth).email;
-  }
 }
 
 export default new authService();
