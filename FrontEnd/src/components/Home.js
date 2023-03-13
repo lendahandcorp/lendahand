@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 import dataService from '../services/dataService';
+import authService from '../services/authService';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -19,7 +20,11 @@ const Home = (props) => {
 
     useEffect(() => {
         dataService.getPosts(posts => {
-          setPosts(posts);
+
+            //convert the tag ids into names
+            dataService.getTagsById();
+
+            setPosts(posts);
         })
     }, [])
 
@@ -60,7 +65,7 @@ const Home = (props) => {
     }
 
     const removeTagFromSearchBar = (tagToRemove) => {
-        console.log('removey');
+        //console.log('removey');
         let searchBar = document.getElementById("searchBar");
 
         searchBar.value = searchBar.value.replace('#'+tagToRemove, "");
@@ -80,13 +85,20 @@ const Home = (props) => {
     }
 
     const addTagToSearchBar = (newTag) => {
-        console.log('clicky');
+        //console.log('clicky');
         let searchBar = document.getElementById("searchBar");
 
 
         searchBar.value += "#"+newTag;
 
         tagSearchBarChanged();
+    }
+
+
+    const testerBoy = () => {
+        console.log(authService.isAuthenticated())
+
+        //dataService.getD("63f414487cf34484cee0fda8");
     }
 
     // const splitTagBar = (rawTags) => {
@@ -96,11 +108,12 @@ const Home = (props) => {
     //takes an array of post
     //example ["bike","fix","ect"]
     const getPostsWithRelevantTags = () => {
-        console.log("p");
+        //console.log("p");
 
         if(searchedTags.length > 0){
             return posts.filter((tp) => {      
-                if(tp.tags.some(tag => searchedTags.indexOf(tag) >= 0)){
+                if(tp.tagTitles.some(tag => searchedTags.indexOf(tag) >= 0)){
+                    
                     return tp;
                 }
             })
@@ -122,11 +135,13 @@ const Home = (props) => {
                 </span>
             </div>
 
+            <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button>
+
             {/* Post Container */}
             <div class="container">
                 <div class="col-md-12 col-lg-12">
                     {
-                        console.log(getPostsWithRelevantTags())
+                        //console.log(getPostsWithRelevantTags())
                     }
                     {
 

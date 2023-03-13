@@ -7,6 +7,26 @@ const no_image = require('../img/no_image.png');
 
 
 const Post = (props) => {
+    const getDate = () => {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let date = new Date(props.data.availability);
+
+        let str = `${months[date.getMonth()]} 
+                    ${date.getDate()}${getDaySuffix(date.getDate())}, 
+                    ${date.getFullYear()}`
+        //console.log(str);
+        return str;
+    }
+
+    const getDaySuffix = (i) => {
+        const daySuffix = [ "st", "nd", "rd", "th"]
+        //console.log(i);
+        if(i > 3) {
+            return daySuffix[3];
+        }else {
+            return daySuffix[i - 1];
+        }
+    }
 
     const spotsLeft = () => {
         return props.data.people_needed - props.data.people_accepted.length
@@ -57,47 +77,67 @@ const Post = (props) => {
         //     <br />
         // </article>
         <article>
-        <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75">
-        <div class="col-sm">
-    
-        <div>
-            <img src="https://source.unsplash.com/WLUHO9A_xik/200x200" alt="lol" class="rounded" />
-        </div>
-    
-        <div class="mt-3">
-            <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" class="rounded-circle" />
-            <span>By Jason Sunnyassy</span>
-        </div>
-    
-        </div>
-    
-        <div class="col-sm">
-        
-        <h5 class="fw-bold">Help for moving out</h5>
-        
-        <h6 class="fst-italic">Availability: 01 Dec 2023</h6>
-        
-        <span class="fw-light">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure dolores neque libero accusantium fugit amet
-            repellat? Quod eligendi, obcaecati nostrum iure, inventore delectus, fugiat ad dolor libero porro velit
-            eveniet.
-        </span>
+            <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75">
+                <div class="col-sm">
 
-        <br/>
-        
-        <span class="badge badge1">#furniture</span>
-        <span class="badge badge2">#Uhaul</span>
-        <br/>
+                    <div>
+                        <img src="https://source.unsplash.com/WLUHO9A_xik/200x200" 
+                            alt="lol" 
+                            className="rounded"
+                            onClick={() => props.showPost(props.data.post_id)}
+                             />
+                    </div>
 
-            <div class="flex-d mt-2 justify-content-sm-center flex-row-reverse">
-            <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                    <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
+                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" class="rounded-circle" />
+                        <span>By Jason Sunnyassy</span>
+                    </div>
+
+                </div>
+
+                <div class="col-sm">
+
+                    <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
+                    {/* <h5 class="fw-bold" >
+                        <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                            {props.data.title}
+                        </button>
+                    </h5> */}
+                    {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                        <h5 class="fw-bold" >
+                            {props.data.title}
+                        </h5>
+                    </button> */}
+                    
+
+                    <h6 class="fst-italic">Availability: {getDate()} </h6>
+
+                    <span class="fw-light">
+                        {props.data.body}
+                    </span>
+                    <br />
+                    {/* <span class="badge badge1">#furniture</span> */}
+                    {/* <span class="badge badge2">#Uhaul</span> */}
+                    {
+                        props.data.tagTitles.map((tag, i) => {
+                            return  <span key={i} class={`btn badge badge${(i+1)}`}
+                                onClick={() => props.tagClicked(tag)}
+                            >
+                                {" #" + tag}
+                            </span>
+                        })
+                    }
+                    <br />
+
+                    <div class="flex-d mt-2 justify-content-sm-center flex-row-reverse">
+                        <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                    </div>
+
+
+                </div>
+
             </div>
-
-
-        </div>
-    
-    </div>
-  </article>
+        </article>
     )
 }
 

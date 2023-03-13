@@ -29,7 +29,7 @@ const PostCreate = (props) => {
             "writer": '63e018aa42a38b860599766c',
             "body": body,
             "tags": tags,
-            "availability": '2002-12-09',
+            "availability": availability,
             "location": location,
             "people_needed": people_needed,
         }
@@ -44,13 +44,14 @@ const PostCreate = (props) => {
         //     "people_needed": 3,
         // }
 
-        dataService.createPost(post, (error) => {
-            if (error) {
-                console.log(error)
-            } else {
-                navigate('/');
-            }
-        });
+        // dataService.createPost(post, (error) => {
+        //     if (error) {
+        //         console.log(error)
+        //     } else {
+        //         navigate('/');
+        //     }
+        // });
+        navigate('/');
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -91,7 +92,8 @@ const PostCreate = (props) => {
                 convertTagsToArray(event.target.value, event.target);
                 break;
             case 'availability':
-                setAvailability(event.target.checked);
+                //console.log(event.target.value)
+                setAvailability(event.target.value);
                 break;
             case 'location':
                 setLocation(event.target.value);
@@ -146,7 +148,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
-                <label htmlFor="title">Location</label>
+                <label htmlFor="location">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
@@ -158,7 +160,19 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
-                <label htmlFor="title">Tags</label>
+                <label htmlFor="availability">End Date</label>
+                <input type="datetime-local"
+                    id="availability"
+                    name="availability"
+                    className="form-control"
+                    placeholder="..."
+                    onChange={handleChange}
+                    required />
+            </div>
+
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group">
+                <label htmlFor="tags">Tags</label>
                 <input type="text"
                     id="tags"
                     name="tags"
