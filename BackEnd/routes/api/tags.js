@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken')
 
-// import the User model
+// import the Tag model
 const { Tag } = require('../../models/tag');
 
 // GET
@@ -20,25 +20,29 @@ router.get("/", async (req, res) => {
 // POST
 router.post("/", async (req, res) => {
 
-    const specificTag = await Tag.find({title: req.body.title}).count();
-    // Insert if not exist
-    if(specificTag===0) {
-        const tag = new Tag({
-            title: req.body.title
-        });
-        tag.save()
-            .then(data => {
-                res.status(201).json(data);
-            })
-            .catch(err => {
-                res.status(422).json({
-                    message: err
-                })
-            })
-    } else {
+    // I'm expecting an array of objects here
+    findMyTags = async() => {
+        return await Tag.find()
+    }
+
+    insertMyTags = async(objectToInsert) => {
+        return await Tag.insertMany(objectToInsert).catch(err => console.log(err))
+    }
+    
+    let currentTagList = await findMyTags()
+
+    let listOfExistingTags = currentTagList.filter(currentTag => req.body.some(reqBody => currentTag.title === reqBody.title))
+
+    let tagsToInsert = req.body.filter(reqBodyTag => !currentTagList.some(currentTag => currentTag.title === reqBodyTag.title))
+
+    if(tagsToInsert.length>0) {
+        let listOfNewTags = await insertMyTags(tagsToInsert)
+        res.status(201).json(listOfNewTags);
+    }
+    else {
         res.status(422).json({
-            message: "Tag already exists",
-            specificTag
+            message: "These tags already exist",
+            listOfExistingTags
             });
     }
 })
@@ -107,7 +111,7 @@ router.put("/:Id", async (req, res) => {
                 res.status(204).json(updatedTag)
             }
         } catch (err) {
-            res.status(422).json({
+            res.status(422).send({
                 message: err
             });
         }

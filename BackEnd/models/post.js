@@ -4,20 +4,27 @@ const { Schema } = mongoose;
 
 //define the schema
 const postSchema = new Schema({
+    writer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required:true
+    },
     title: {
         type: String,
-        required: [true, 'Product Name Required!!!']
+        required: [true, 'Post Title Required!!!'],
+        maxlength: 100
     },
     body: {
         type: String,
-        required: [true, 'Description Required!!!']
+        required: [true, 'Description Required!!!'],
+        maxlength: 1024
     },
     //"int(ObjectId?)" Needed to be explained for tags data type
     //I set it to Number temporary
     //resource found: 
     //https://stackoverflow.com/questions/8111846/how-to-set-objectid-as-a-data-type-in-mongoose
     tags: {
-        type: Number,
+        type: Array, "default": [],
         required: [true, 'Tags Required!!!']
     },
     availability: {
@@ -25,8 +32,12 @@ const postSchema = new Schema({
         required: [true, 'Availability Date Required!!!']
     },
     date_created: { type: Date, default: Date.now },
-    status_id: { type: Number,
-        required: [true, 'Status Required!!!'] },
+    status: {
+        type: String,
+        enum : ['Draft','Open','In Progress','Closed'],
+        default: 'Draft',
+        required: true
+    },
     reviews: { type: Array, "default": [] },
     location: {
         type: String,

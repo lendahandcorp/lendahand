@@ -5,12 +5,12 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     required: [true, 'First name is required!!'],
-    max: 100,
+    maxlength: 100,
   },
   lastName: {
     type: String,
     required: [true, 'Last name is required!!'],
-    max: 100,
+    maxlength: 100,
   },
   address: {
     type: String,
@@ -21,8 +21,7 @@ const userSchema = new Schema({
     required: true,
   },
   photo: {
-    type: String,
-    required: true,
+    type: String
   },
   email: {
     type: String,
@@ -37,7 +36,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, 'Password is required!!'],
-    max: 255,
+    maxlength: 255,
   },
   been_helped: {
     type: Number,

@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
 import Profile from './components/Profile';
+import PostDetails from './components/PostDetails';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -46,6 +47,7 @@ const App = () => {
               
 
               <Route path='/profile/:id' element={<Profile />}/>
+              <Route path='/postdetails/:id' element={<PostDetails />}/>
 
 
               {/* routes that require token */}
