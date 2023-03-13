@@ -38,7 +38,6 @@ const postSchema = new Schema({
         default: 'Draft',
         required: true
     },
-    reviews: { type: Array, "default": [] },
     location: {
         type: String,
         required: [true, 'Location Required!!!']
@@ -46,6 +45,10 @@ const postSchema = new Schema({
     people_needed: {
         type: Number,
         required: [true, 'The Number of People needed is Required!!!']
+    },
+    applicants: {
+        type: Array, "default": [],
+        required: false
     },
     people_accepted: {
         type: Array, "default": [],
