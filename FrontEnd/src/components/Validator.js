@@ -1,4 +1,4 @@
-export const firstNameValidator = firstName => {
+export const firstNameValidator = function(firstName){
     if (!firstName) {
       return "First Name is required";
     } else if (firstName.length > 100) {
@@ -25,7 +25,7 @@ export const firstNameValidator = firstName => {
     return "";
   };
 
-  export const telephoneNumberValidator = telephoneNumber => {
+  export const phoneValidator = telephoneNumber => {
     if (!telephoneNumber) {
       return "Telephone Number is required";
     } else if (!new RegExp(/^(\(\+[0-9]{2}\))?([0-9]{3}-?)?([0-9]{3})\-?([0-9]{4})(\/[0-9]{4})?$/gm).test(telephoneNumber)) {

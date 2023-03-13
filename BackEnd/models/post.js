@@ -11,11 +11,13 @@ const postSchema = new Schema({
     },
     title: {
         type: String,
-        required: [true, 'Product Name Required!!!']
+        required: [true, 'Post Title Required!!!'],
+        maxlength: 100
     },
     body: {
         type: String,
-        required: [true, 'Description Required!!!']
+        required: [true, 'Description Required!!!'],
+        maxlength: 1024
     },
     //"int(ObjectId?)" Needed to be explained for tags data type
     //I set it to Number temporary

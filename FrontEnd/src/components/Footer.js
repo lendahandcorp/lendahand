@@ -11,7 +11,7 @@ const Footer = (props) => {
     return (
       <footer className="text-muted bg-dark">
         <div className="container">
-          <div className="flaot-left">
+          <div className="float-left">
             <div>
               <a href="https://www.google.com" target="_blank" rel="noreferrer">
                 <img className="social-link" src={twitter} alt="twitter"/>
@@ -29,9 +29,9 @@ const Footer = (props) => {
           </div>
           <div className="float-right">
             <ul className="nav">
-              <li clasName="nav-item"><Link to="/#" clasName="nav-link">Donate</Link></li>
-              <li clasName="nav-item"><Link to="/#">Security</Link></li>
-              <li clasName="nav-item"><Link to="/#">Feedback</Link></li>
+              <li className="nav-item"><Link to="/#" className="nav-link">Donate</Link></li>
+              <li className="nav-item"><Link to="/#">Security</Link></li>
+              <li className="nav-item"><Link to="/#">Feedback</Link></li>
               <li className="nav-item btn"><Link to="/#">Contact Us</Link></li>
             </ul>
           </div>

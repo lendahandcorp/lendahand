@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const db = require('./db/db')
+const db = require('./db/db');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 //load in any env variables from our .env file
 require('dotenv').config();
@@ -17,13 +18,17 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+const corsOptions = {
+  exposedHeaders: 'x-auth-token',
+};
+
 // connect to MongoDB
-mongoDB = db.getDb(process.env.MONGO_DB)
+mongoDB = db.getDb(process.env.MONGO_DB);
 // mongoose.set('strictQuery', false);
 // console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
 // mongoose.connect(process.env.MONGO_DB);
 
-
+app.use(cors(corsOptions)); //allow access from anywhere
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,7 +46,7 @@ app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  next(createError(404)); //This is not working
 });
 
 // error handler

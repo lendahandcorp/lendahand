@@ -1,3 +1,79 @@
 #main-content {
     min-height: calc(100vh - 208px);
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+/* Heading */
+.heading {
+    font-family: 'Patrick Hand', cursive;
+}
+
+/* Button */
+.customButton {
+    background-color: #ffb347 !important;
+}
+
+.customButton:hover {
+    background-color: #ff781f !important;
+}
+
+.customButton2 {
+    background-color: white;
+    color: #ff781f !important; 
+}
+
+.customButton2:hover {
+    background-color: #ff781f !important;
+    color: white !important; 
+    border: 2px solid white !important;
+}
+
+.btn-special {
+    background-color: #ff781f !important;
+    color: white !important; 
+}
+
+
+/* Badges */
+.badge1 {
+    background-color: coral;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge2 {
+    background-color: #ca80e9;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge3 {
+    background-color:  #82b7f7;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge4 {
+    background-color:  #90ee99;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge5 {
+    background-color:  #f6b1b2;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge6 {
+    background-color:  #ffbbee;
+    color: white;
+    border-radius: 20px !important;
+}
+
+.badge7 {
+    background-color:  #babcc0;
+    color: white;
+    border-radius: 20px !important;
+}

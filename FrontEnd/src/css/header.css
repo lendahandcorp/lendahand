@@ -1,0 +1,20 @@
+nav {
+    background-color: #fd6a02;
+}
+
+.navbar-brand {
+    /* position: relative; */
+    width: 90px;
+    left: 15px;
+    background-size: contain;
+}
+
+.nav-link {
+    border-radius: 10px;
+}
+
+.nav-link:hover {
+    background-color: white;
+    color: #fd6a02;
+    border-radius: 10px;
+}

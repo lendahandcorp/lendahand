@@ -76,26 +76,23 @@ router.post('/register', (req, res) => {
           if (err) {
             return res.status(400).send(`Error: ${err.message}`);
           }
-          console.log(savedUser);
-          res.status(201).send();
-        });
+          console.log(savedUser._id.toString());
+          // If the user was successfully created.
+          // generate a json web token send a response back to the client
+          const token = jwt.sign(
+            {
+              userId: savedUser._id.toString(),
+              email: req.body.email,
+            },
+            process.env.JWT_SECRET_KEY
+          );
 
-        // If the user was successfully created.
-        // generate a json web token send a response back to the client
+          res.set('x-auth-token', token);
 
-        const token = jwt.sign(
-          {
+          res.status(201).send({
             email: req.body.email,
-            password: req.password,
-          },
-          process.env.JWT_SECRET_KEY
-        );
-
-        res.set('x-auth-token', token);
-
-        res.send({
-          email: req.body.email,
-          password: req.body.password,
+            password: req.body.password,
+          });
         });
       });
     });
@@ -126,7 +123,7 @@ router.post('/login', (req, res) => {
       if (user === null) {
         return res.status(401).send('No user exists');
       }
-      console.log(user.password);
+      console.log(user._id.toString());
 
       // if there is a user....compare the submitted password with the user's password hash
       bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -137,8 +134,8 @@ router.post('/login', (req, res) => {
         }
         const token = jwt.sign(
           {
+            userId: user._id.toString(),
             email: req.body.email,
-            password: user.password,
           },
           process.env.JWT_SECRET_KEY
         );

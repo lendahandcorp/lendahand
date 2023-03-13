@@ -10,7 +10,7 @@ const TagSchema = new Schema({
       'Tags must contain only letters',
     ],
     required: [true, 'Tag is required!'],
-    max: 100,
+    maxlength: 100,
   },
   date_created: {
     type: Date,
