@@ -46,7 +46,11 @@ class authService {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${id}`)
       .then((response) => {
-        callback(response.data);
+        console.log(response.data)
+        if (response.status === 201) {
+          localStorage.setItem('token', response.headers['x-auth-token']);
+          callback(response.data);
+        }
       });
   }
 

@@ -5,11 +5,14 @@
 .profile-img{
  height: 200px;
  width: 200px;
+ border: black 2px 2px;
 }
 
 .tags{
  margin: 5px;
+ padding: 1px 10px;
  cursor: pointer;
+ border-radius: 30px;
 }
 
 .hands{
@@ -26,4 +29,5 @@
  text-align: center;
  color: red;
  font-size: 30px;
+ margin: 0 auto;
 }
