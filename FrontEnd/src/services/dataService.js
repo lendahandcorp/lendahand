@@ -80,18 +80,24 @@ class dataService {
         let userPosts = [];
         let helpedPosts = [];
 
+        let data = {
+            userPosts: [],
+            helpedPosts: [],
+            mostCommonTags: []
+        }
+
         //get all posts
         this.getPosts(posts => {
             posts.forEach(post => {
                 if (post.writer == id) {
                     //get all posts posted
                     console.log('posted');
-                    userPosts.push(post);
+                    data.userPosts.push(post);
 
                 } else if (post.people_accepted.includes(id)) {
                     //get all posts worked in
                     console.log('helped');
-                    helpedPosts.push(post);
+                    data.helpedPosts.push(post);
 
                 }
                 //console.log(post);

@@ -128,23 +128,23 @@ const PostCreate = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
+            {/* <div className="form-group">
                 <input type="checkbox"
                     id="displayEmail"
                     name="displayEmail"
                     className="form-check-input"
                     onChange={handleChange} />
                 <label className="form-check-label" htmlFor="displayEmail">Display Email?</label>
-            </div>
+            </div> */}
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
+            {/* <div className="form-group">
                 <input type="checkbox"
                     id="displayPhone"
                     name="displayPhone"
                     className="form-check-input"
                     onChange={handleChange} />
                 <label className="form-check-label" htmlFor="displayPhone">Display Phone Number?</label>
-            </div>
+            </div> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
