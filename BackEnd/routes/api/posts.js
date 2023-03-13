@@ -78,6 +78,7 @@ router.post('/', validateToken, async (req, res) => {
       people_needed: req.body.people_needed,
       applicants: req.body.applicants,
       people_accepted: req.body.people_accepted,
+      media: req.body.media
     });
 
     console.log(newPost);
@@ -117,6 +118,7 @@ router.put('/:id', validateToken, async (req, res) => {
         people_needed: req.body.people_needed,
         applicants: req.body.applicants,
         people_accepted: req.body.people_accepted,
+        media: req.body.media
       },
       (err, data) => {
         if (err) {

@@ -19,10 +19,6 @@ const postSchema = new Schema({
         required: [true, 'Description Required!!!'],
         maxlength: 1024
     },
-    //"int(ObjectId?)" Needed to be explained for tags data type
-    //I set it to Number temporary
-    //resource found: 
-    //https://stackoverflow.com/questions/8111846/how-to-set-objectid-as-a-data-type-in-mongoose
     tags: {
         type: Array, "default": [],
         required: [true, 'Tags Required!!!']
@@ -53,6 +49,11 @@ const postSchema = new Schema({
     people_accepted: {
         type: Array, "default": [],
         required: false
+    },
+    media: {
+        data: Buffer,
+        contentType: String,
+        required : [true, 'Media Required!!!']
     }
 }, { collection: 'posts' });
 
