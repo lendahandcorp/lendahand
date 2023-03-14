@@ -20,10 +20,16 @@ const Header = () => {
       </Link>
 
       {/* <div className="collapse navbar-collapse">   */}
-      <div>       
-        <nav className="navbar-nav d-block float-right">
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+
+
+      <div className="d-flex justify-content-between">       
+        <div className="navbar-nav">
         { authService.isAuthenticated() ? 
-          <div className="nav-item active dropdown d-block float-right">
+          <div className="nav-item active dropdown d-block">
             <Link className="nav-link dropdown-toggle" to="/#" aria-expanded="false">
               {authService.showEmail()}              
             </Link>
@@ -32,12 +38,13 @@ const Header = () => {
             </div>
           </div>
         :
-          <div className="d-flex float-right">
+          <div className="d-flex navbar-nav">
             <Link className="nav-link nav-item" to="/signin">Sign in</Link>
             <Link className="nav-link nav-item" to="/register">Register</Link>
           </div> 
           }
-        </nav>
+        </div>
+      </div>
       </div>
     </div>
   </nav>
