@@ -9,6 +9,14 @@ nav {
     background-size: contain;
 }
 
+.links {
+    width: 40%;
+}
+
+.navbar-collapse {
+    flex-grow: 0 !important;
+}
+
 .nav-link {
     border-radius: 10px;
 }
