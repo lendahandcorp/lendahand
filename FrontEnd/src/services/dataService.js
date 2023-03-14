@@ -11,7 +11,7 @@ class dataService {
         }
     }
 
-    getPosts(callback) {
+    getPostsWithTags(callback) {
         //axios.get(`${process.env.REACT_APP_API_URL}/posts`)
         axios.get(`${process.env.REACT_APP_API_URL}/posts`)
         .then(response => {
@@ -21,9 +21,6 @@ class dataService {
             this.getTags(tagList => {
                 //console.log(tagList);
                 //foreach post 
-                
-
-
                 let dataWithTags = response.data.map(post => {
                     post.tagData = [];
                     post.tagTitles = [];
@@ -67,6 +64,16 @@ class dataService {
         })
     }
 
+
+    getPosts(callback) {
+        //axios.get(`${process.env.REACT_APP_API_URL}/posts`)
+        axios.get(`${process.env.REACT_APP_API_URL}/posts`)
+        .then(response => {
+            callback(response.data)
+             
+        })
+    }
+
     getOnePost(id, callback) {
         axios.get(`${process.env.REACT_APP_API_URL}/posts/${id}`)
             .then(response => {
@@ -75,7 +82,7 @@ class dataService {
     }
 
 
-    getD(id, callback) {
+    getHands(id, callback) {
 
         let userPosts = [];
         let helpedPosts = [];
@@ -110,32 +117,13 @@ class dataService {
         callback(userPosts, helpedPosts);
     }
 
-    getTagById(tagId, callback) {
-        axios.get(`${process.env.REACT_APP_API_URL}/tags/${tagId}`)
-            .then(response => {
-                console.log(response.data)
-                callback(response.data);
 
-            })
-    }
     getTags(callback) {
         axios.get(`${process.env.REACT_APP_API_URL}/tags/`)
             .then(response => {
                 //console.log(response.data)
                 callback(response.data);
             })
-    }
-
-    getTagsById(TagIds) {
-
-        axios.get(`${process.env.REACT_APP_API_URL}/tags`)
-            .then(response => {
-                //console.log(response.data)
-
-
-            })
-
-
     }
 
 
