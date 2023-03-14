@@ -36,6 +36,24 @@ class componentService {
         return userPosts
     }
 
+    insertUserDescription (userID, description, token, callback) {
+
+        axios.put(`${process.env.REACT_APP_API_URL}/users/${userID}`, description, token)
+        .then(
+            response => {
+                if (response.status === 204) {
+                    callback(true)
+                }
+            })
+        .catch(error => {
+            console.log(error.response)
+            callback(false)
+        })
+
+    }
+
+
+
 
 
 
