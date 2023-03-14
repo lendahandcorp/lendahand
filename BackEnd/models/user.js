@@ -15,6 +15,11 @@ const userSchema = new Schema({
   address: {
     type: String,
     required: true,
+    maxlength: 250,
+  },
+  description: {
+    type: String,
+    maxlength: 280
   },
   phone: {
     type: Number,

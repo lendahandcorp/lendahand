@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 import Home from './components/Home';
@@ -47,7 +47,7 @@ const App = () => {
               <Route path='/signin' element={<SignIn />}/>
               
 
-              <Route path='/profile/:id' element={<Profile />}/>
+              <Route path='/profile/:UserId' element={<Profile />}/>
               <Route path='/postdetails/:id' element={<PostDetails />}/>
               <Route path='/postcreate' element={<PostCreate />}/>
 

@@ -1,52 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
-
-import Post from './Post';
+import authService from '../services/authService';
+import '../css/app.css';
+import '../css/profile.css';
+// import Post from './Post';
 
 const Profile = (props) => {
-  //User
+  
+  // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
-  const [introduction, setIntroduction] = useState('');
-  const [frequent_tags, setFrequentTags] = useState('');
+  // const [introduction, setIntroduction] = useState(''); // not set it up in db
+  // const [frequent_tags, setFrequentTags] = useState('');
   const [been_helped, setBeenHelped] = useState('');
-  const [helped_others, setHelpedOthers] = useState('');
-  //Posts
+  const [helped_others, setHelpedOthers] = useState(''); 
+  // Posts
   // const [title, setTitle] = useState("");
   // const [body, setBody] = useState("")
   // const [availablity, setAvailablity] = useState("");
   // const [status, setStatus] = useState("");
-
   const [errors, setErrors] = useState({});
-  // Get user Id
+
+  // Get User Id
   const params = useParams();
-  const userId = params.userId; // need to add some from App.js to get userId from params. Currently, it is NOT set it up.
+  const userId = params.UserId;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    dataService.getOneUser(userId, (data) => {
-      // console.log(data)
-      setFirstName(data.first_name);
-      setLastName(data.last_name);
+    authService.getOneUser(userId, (data) => {
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
       setEmail(data.email);
-      setUserImg(data.user_img);
-      setIntroduction(data.introduction); // we are missing this from DB
-      setFrequentTags(data.frequent_tags); // ??
+      setUserImg(data.photo);
+      // setIntroduction(data.introduction); // not set it up in db
+      // setFrequentTags(data.frequent_tags);
       setBeenHelped(data.been_helped);
+      console.log(data.been_helped)
       setHelpedOthers(data.helped_others);
     });
   }, []);
 
+
   const full_name = first_name + ' ' + last_name;
 
-  // question: getting posts?
   // useEffect(() => {
-  //   dataService.getOneUser( userId, (data) => {
-  //     // console.log(data)
+  //   dataService.getData( userId, (data) => {
+  //     console.log(data)
   //     setTitle(data.title)
   //     setBody(data.body)
   //     setAvailablity(data.availablity)
@@ -56,43 +59,47 @@ const Profile = (props) => {
 
   return (
     <div className="container">
-      <div class="row">
-        {/* need to set orange background in css! */}
-        <div class="col">
-          <img src={user_img}></img>
+      <div className="row mb-3">
+        <div className="col profile-col">
+          <img 
+          className="card-img-top rounded-circle profile-img" 
+          src={user_img}
+          data-holder-rendered="true" />
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
+      <div className="row mb-3">
+        <div className="col-md-6">
           <h2>{full_name}</h2>
           <p>{email}</p>
-          <p>{introduction}</p>
-          <div class="d-flex">
-            {frequent_tags.map((tag) => {
+          <p className="introduction">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <div className="d-flex">
+            <div className="tags btn btn-outline-secondary">#gardening</div>
+            <div className="tags btn btn-outline-secondary">#painting</div>
+            {/* {frequent_tags.map((tag) => {
               return (
-                <div class="btn btn-light btn-outline-dark">{tag}</div> //modify the btn if neeeded in css
+                <div className="btn btn-light btn-outline-dark">{tag}</div>
               );
-            })}
+            })} */}
           </div>
-          <div class="d-flex">
-            <div>Number of posts...</div>
-            <div>??</div>
-          </div>
+          <div>Num of posts</div>
         </div>
-        <div class="col-md-6 d-flex">
-          <div>
+        <div className="col-md-6 d-flex hands-box">
+          <div className="hands">
             <h2>Hands Requested</h2>
-            <div>{been_helped}</div>
+            <div className="hands-circle">{been_helped}</div>
           </div>
-          <div>
-            <h2>Hands Given</h2>
-            <div>{helped_others}</div>
+          <div className="hands">
+            <h2>Hands Requested</h2>
+            <div className="hands-circle">{helped_others}</div>
           </div>
         </div>
       </div>
-      {/* Posts will be listed here. Needs to modify! */}
-      <div class="row">
-        <Post />
+      <div className="row">
+        <div className="col">
+          Placeholder for Posts and Applicants
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,56 @@
+footer {
+  background-color: #fd6a02;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
   
-  footer {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  
-  footer p {
-    margin-bottom: .25rem;
-  }
+footer p {
+  margin-bottom: .25rem;
+}
+
+.socials  {
+  width: 180px;
+}
+
+/* .social-link {
+  width: 40px;
+} */
+
+.fa-twitter, .fa-instagram, .fa-facebook  {
+  color: white;
+}
+
+.fa-twitter:hover, .fa-instagram:hover, .fa-facebook:hover {
+  color: blue;
+  transition: .4s;
+}
+
+.other-links {
+  width: 35%;
+}
+
+.foot-link {
+  color: white;
+  text-decoration: none;
+}
+
+.foot-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+}
+
+.customButton2 {
+  background-color: white;
+  color: #ff781f; 
+  border: 2px solid #ff781f;
+}
+
+.customButton2:hover {
+  background-color: #ff781f;
+  color: white; 
+  border: 2px solid white;
+}
