@@ -28,6 +28,14 @@ const Post = (props) => {
         }
     }
 
+    const getTagColorId = (num) => {
+        let newNum = num.toString(7);
+        newNum = newNum.match(/(\d)$/g)[0];
+        newNum = parseInt(newNum, 7);
+        newNum++;
+        return newNum
+    }
+
     const spotsLeft = () => {
         return props.data.people_needed - props.data.people_accepted.length
     }
@@ -119,11 +127,11 @@ const Post = (props) => {
                     {/* <span class="badge badge1">#furniture</span> */}
                     {/* <span class="badge badge2">#Uhaul</span> */}
                     {
-                        props.data.tagTitles.map((tag, i) => {
-                            return  <span key={i} class={`btn badge badge${(i+1)}`}
-                                onClick={() => props.tagClicked(tag)}
+                        props.data.tags.map((tag, i) => {
+                            return  <span key={i} class={`btn badge badge${getTagColorId(i)}`}
+                                onClick={() => props.tagClicked(tag.title)}
                             >
-                                {" #" + tag}
+                                {" #" + tag.title}
                             </span>
                         })
                     }

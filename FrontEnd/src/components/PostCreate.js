@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
+import componentService from '../services/componentService';
 
 
 
@@ -21,17 +22,35 @@ const PostCreate = (props) => {
 
     const navigate = useNavigate();
 
+
+    const objectify = (tags) => {
+
+        let objectedTags = [];
+
+        tags.forEach(tag => {
+            objectedTags.push({title: tag})
+        });
+
+        return objectedTags
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        console.log(objectify(tags))
+
         let post = {
-            "title": title,
-            "writer": '63e018aa42a38b860599766c',
-            "body": body,
-            "tags": tags,
-            "availability": availability,
-            "location": location,
-            "people_needed": people_needed,
+            title: title,
+            writer: componentService.grabMyUserDetails().userId,
+            body: body,
+            tags: objectify(tags),
+            availability: availability,
+            status: "Open",
+            location: location,
+            people_needed: people_needed,
+            applicants: [],
+            people_accepted: [],
+            media: null
         }
 
         // let post = {
@@ -44,14 +63,14 @@ const PostCreate = (props) => {
         //     "people_needed": 3,
         // }
 
-        // dataService.createPost(post, (error) => {
-        //     if (error) {
-        //         console.log(error)
-        //     } else {
-        //         navigate('/');
-        //     }
-        // });
-        navigate('/');
+        dataService.createPost(post, (error) => {
+            if (error) {
+                console.log(error)
+            } else {
+                navigate('/');
+            }
+        });
+        //navigate('/');
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -76,8 +95,7 @@ const PostCreate = (props) => {
     }
 
     const handleChange = (event) => {
-        console.log(event.target.value)
-
+        //console.log(event.target.value)
         switch (event.target.name) {
             case 'title':
                 setTitle(event.target.value);

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
+import componentService from '../services/componentService';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -22,7 +23,7 @@ const Home = (props) => {
         dataService.getPosts(posts => {
 
             //convert the tag ids into names
-            dataService.getTagsById();
+            //dataService.getTagsById();
 
             setPosts(posts);
         })
@@ -96,10 +97,9 @@ const Home = (props) => {
 
 
     const testerBoy = () => {
-        console.log(authService.isAuthenticated())
-
-        //dataService.getD("63f414487cf34484cee0fda8");
+        //console.log(componentService.grabMyUserDetails().userId)
     }
+
 
     // const splitTagBar = (rawTags) => {
     //     return rawTags.match(/((?<=#)|^)[a-z|A-Z]+/g)
@@ -111,15 +111,15 @@ const Home = (props) => {
         //console.log("p");
 
         if(searchedTags.length > 0){
-            return posts.filter((tp) => {      
-                if(tp.tagTitles.some(tag => searchedTags.indexOf(tag) >= 0)){
+            return posts.filter((post) => {      
+                if(post.tags.some(tag => searchedTags.indexOf(tag.title) >= 0)){
                     
-                    return tp;
+                    return post;
                 }
             })
         }
         else {
-            return posts.filter((tp) => tp);
+            return posts.filter((post) => post);
         }
     }
 
@@ -144,7 +144,6 @@ const Home = (props) => {
                         //console.log(getPostsWithRelevantTags())
                     }
                     {
-
                         //console.log(getPostsWithRelevantTags());
                         getPostsWithRelevantTags().map((tp, i) => {
                             //console.log('post');
@@ -156,8 +155,6 @@ const Home = (props) => {
                             //return <Post/>
                         })
                     }
-
-
                 </div>
             </div>
         </div>
