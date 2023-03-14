@@ -135,6 +135,7 @@ const Home = (props) => {
                 </span>
             </div>
 
+            <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary">Write a Post</button>
             <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button>
 
             {/* Post Container */}
