@@ -13,26 +13,27 @@ class componentService {
     }
 
     // Return an object with hands requested and hands given per userID
-    async countMyHands (userID) {
+    async grabMyPosts (userID) {
 
         let posts = await axios.get(`${process.env.REACT_APP_API_URL}/posts`)
 
-        let userHands = {
-            "handsRequested": "",
-            "handsGiven": ""
+        let userPosts = {
+            "postCreatedByUser": "",
+            "postAttendedByUser": ""
         }
-        // Counting how many times userID appears on "writer" property of post
-        userHands.handsRequested = posts.data.reduce((handsRequestedCounter, post)=>{
-            if(post.writer === userID) handsRequestedCounter += 1
-            return handsRequestedCounter
-        },0)
-        // Counting how many times userID appears on "people_accepted" array property of post
-        userHands.handsGiven = posts.data.reduce((handsGivenCounter, post)=>{
-            if(post.people_accepted.filter(userAccepted => userAccepted.userID === userID).length !== 0) handsGivenCounter += 1
-            return handsGivenCounter
-        },0)
+        // Returning posts where userID appears on "writer" property of post
+        userPosts.postCreatedByUser = posts.data.filter(post => post.writer === userID)
 
-        return userHands
+        // Returning posts where userID appears on "people_accepted" array property of post
+        let postAttendedByUser = []
+        posts.data.forEach(post => {
+            if(post.people_accepted.filter(peopleAccepted =>peopleAccepted.userID === userID).length!==0) {
+                postAttendedByUser.push(post)
+            }
+        });
+        userPosts.postAttendedByUser = postAttendedByUser
+
+        return userPosts
     }
 
 
