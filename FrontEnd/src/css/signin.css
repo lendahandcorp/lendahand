@@ -45,11 +45,12 @@ button {
   background-color: #fd6a02;
 }
 
-.card {
+.card-signin {
   width: 20rem;
   height: 440px;
   margin: auto;
   border-radius: 15px;
+  box-shadow: rgb(191, 57, 0) 0px 5px 15px;
 }
 
 .signin-btn {

@@ -44,13 +44,16 @@ const SignIn = (props) => {
 
     return ( 
         <div className="card1 p-5">
-            <div className="card shadow">
+            <div className="d-flex justify-content-center mb-4">
+                <h3 className="text-white">Sign In</h3>
+            </div>
+            <div className="card-signin card">
                 <form className="form-signin" onSubmit={handleSubmit}>
                     <p className={errors ? 'alert alert-danger text-center' : 'hidden'}>{errors}</p>
                     <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
                     <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
 
-                    <h1 className="h3 mb-5 font-weight-normal text-center">Sign in</h1>
+                    {/* <h1 className="h3 mb-5 font-weight-normal text-center">Sign in</h1> */}
                     
                     <div className="mb-3">
                         <label htmlFor="inputEmail" className="sr-only form-label">Email</label>
