@@ -1,0 +1,51 @@
+.bg-register {
+    height: 130vh;
+    width: 100%;
+
+    background-color: #fd6a02;
+}
+
+.card-register {
+    width: 20.5rem;
+    height: 670px;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: rgb(191, 57, 0) 0px 5px 15px;
+}
+
+.form-signin input[type="email"] {
+    width: 80%;
+    margin: auto;
+}
+
+.form-signin input[type="password"] {
+    width: 80%;
+    margin: auto;
+}
+
+.form-signin input[type="text"] {
+    width: 80%;
+    margin: auto;
+}
+
+.form-signin input[type="number"] {
+    width: 80%;
+    margin: auto;
+}
+
+.form-signin input[type="file"] {
+    width: 80%;
+    margin: auto;
+}
+
+.register-btn {
+    background-color: #ff781f;
+    color: white; 
+    border: 2px solid white;
+}
+  
+.register-btn:hover {
+    background-color: white;
+    color: #ff781f; 
+    border: 2px solid #ff781f;
+}
