@@ -1,10 +1,11 @@
 var express = require('express')
 var router = express.Router()
+const validateToken = require('../../middleware/validateToken');
 
 // Import Review Model
 const Reviews = require('../../models/review')
 
-// Get all the reviews --> Delete this
+// Get all the reviews
 router.get('/', (req, res) => {
 
     Reviews.find((err, data) => {
@@ -18,7 +19,8 @@ router.get('/', (req, res) => {
 })
 
 // Get all the reviews by post_id
-router.get('/:post_id', (req, res) => {
+// frontEnd will need that
+router.get('/:post_id', validateToken, (req, res) => {
 
     Reviews.find((err, data) => {
 
@@ -41,25 +43,26 @@ router.get('/:post_id', (req, res) => {
     })
 })
 
-// Get One review By ID --> Delete this
-// router.get('/:id', (req, res) => {
+// Get One review By ID
+// Meant to be used by "system admin"
+router.get('/:id', validateToken, (req, res) => {
 
-//   Reviews.findById(req.params.id, (err, data) => {
-//         if (err) {
-//             return res.status(400).send(`Error: ${err}`)
-//         }
+  Reviews.findById(req.params.id, (err, data) => {
+        if (err) {
+            return res.status(400).send(`Error: ${err}`)
+        }
 
-//         if (!data) {
-//             res.status(404).send('No Data Found')
-//         }
+        if (!data) {
+            res.status(404).send('No Data Found')
+        }
 
-//         res.send(data)
-//     })
-// })
+        res.send(data)
+    })
+})
 
 // Create a new review
 // * Create a review under "post id" *
-router.post('/', (req, res) => {
+router.post('/', validateToken, (req, res) => {
     const theReview = new Reviews(req.body)
     theReview.validate(req.body, (error) => {
 
@@ -69,11 +72,10 @@ router.post('/', (req, res) => {
 
         const newReview = new Reviews({
             reviewer: req.body.reviewer,
+            personBeingReviewed: req.body.personBeingReviewed,
             post_id: req.body.post_id,
-            title: req.body.title,
-            body: req.body.body,
-            stars: req.body.stars,
-            date_created: req.body.date_created
+            description: req.body.description,
+            stars: req.body.stars
         })
 
         newReview.save()
@@ -89,33 +91,33 @@ router.post('/', (req, res) => {
 })
 
 // Update review By ID
-// * Validation : update ONLY by "reviewer" who created the review *
-router.put('/:id', (req, res) => {
-    const theReview = new Reviews(req.body)
-    theReview.validate(req.body, (error) => {
+// Reviews are not meant to be edited
+// router.put('/:id', (req, res) => {
+//     const theReview = new Reviews(req.body)
+//     theReview.validate(req.body, (error) => {
 
-        if (error) {
-            return res.status(422).send(error);
-        }
+//         if (error) {
+//             return res.status(422).send(error);
+//         }
 
-        Reviews.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
-            if (err) {
-                return res.status(401).send(err)
-            }
+//         Reviews.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+//             if (err) {
+//                 return res.status(401).send(err)
+//             }
 
-            if (!data) {
-                res.status(404).send()
-            }
+//             if (!data) {
+//                 res.status(404).send()
+//             }
 
-            res.send('Review was Edited')
-        })
-    })
+//             res.send('Review was Edited')
+//         })
+//     })
 
-})
+// })
 
 // Delete review By ID
-// * Validation : delete ONLY by "reviewer" who created the review *
-router.delete('/:id', (req, res) => {
+// * Validation : delete ONLY by "lendAHand admin"
+router.delete('/:id', validateToken, (req, res) => {
 
     Reviews.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken')
+const validateToken = require('../../middleware/validateToken');
 
 // import the Tag model
 const { Tag } = require('../../models/tag');
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST
-router.post("/", async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
 
     // I'm expecting an array of objects here
     findMyTags = async() => {
@@ -64,7 +65,7 @@ router.get("/:Id", async (req, res) => {
 })
 
 // DELETE
-router.delete("/:Id", async (req, res) => {
+router.delete("/:Id", validateToken, async (req, res) => {
     // jwt validation goes here
     if (true) {
         try {
@@ -91,7 +92,7 @@ router.delete("/:Id", async (req, res) => {
 })
 
 // PUT
-router.put("/:Id", async (req, res) => {
+router.put("/:Id", validateToken, async (req, res) => {
 
     title: req.body.Id
 

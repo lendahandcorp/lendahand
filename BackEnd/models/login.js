@@ -15,7 +15,7 @@ const loginSchema = new Schema({
   password: {
     type: String,
     required: [true, 'Password is required!!'],
-    max: 255,
+    maxlength: 255,
   },
 });
 

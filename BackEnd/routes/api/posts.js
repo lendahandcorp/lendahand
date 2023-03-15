@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 });
 
 //Get One post By ID
-router.get('/:id', validateToken, (req, res) => {
+router.get('/:id', (req, res) => {
   Posts.findById(req.params.id, (err, data) => {
     if (err) {
       return res.status(400).send(`Error: ${err}`);
@@ -42,9 +42,22 @@ router.get('/:id', validateToken, (req, res) => {
 });
 
 //Create a new post
-router.post('/', async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
   const thePost = new Posts(req.body);
-      
+  
+  /**
+   * Here the code is expecting an array with tags object, example:
+   * [
+   *  {
+   *    "title": car
+   *  },
+   *  {
+   *    "title": gardening
+   *  },
+   * ... etc
+   * ]
+   * 
+   */
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
@@ -60,12 +73,12 @@ router.post('/', async (req, res) => {
       body: req.body.body,
       tags: listOfTags,
       availability: req.body.availability,
-      date_created: req.body.date_created,
-      status_id: req.body.status_id,
-      reviews: req.body.reviews,
+      status: req.body.status,
       location: req.body.location,
       people_needed: req.body.people_needed,
+      applicants: req.body.applicants,
       people_accepted: req.body.people_accepted,
+      media: req.body.media
     });
 
     console.log(newPost);
@@ -82,7 +95,7 @@ router.post('/', async (req, res) => {
 });
 
 //Update post By ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateToken, async (req, res) => {
   const thePost = new Posts(req.body);
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
@@ -101,10 +114,11 @@ router.put('/:id', async (req, res) => {
         availability: req.body.availability,
         date_created: req.body.date_created,
         status_id: req.body.status_id,
-        reviews: req.body.reviews,
         location: req.body.location,
         people_needed: req.body.people_needed,
+        applicants: req.body.applicants,
         people_accepted: req.body.people_accepted,
+        media: req.body.media
       },
       (err, data) => {
         if (err) {
@@ -120,7 +134,7 @@ router.put('/:id', async (req, res) => {
 });
 
 //Delete post By ID\
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
       return res.status(401).send(err);

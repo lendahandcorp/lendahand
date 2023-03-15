@@ -6,11 +6,12 @@ const TagSchema = new Schema({
     type: String,
     lowercase: true,
     match: [
-      /[A-Za-z]+/,
-      'Tags must contain only letters',
+      /^[a-zA-Z]*$/,
+      'Tags must contain only letters and no spaces or symbols',
     ],
     required: [true, 'Tag is required!'],
-    max: 100,
+    minlength: 2,
+    maxlength: 100,
   },
   date_created: {
     type: Date,

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 import Home from './components/Home';
@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Profile from './components/Profile';
 import PostDetails from './components/PostDetails';
+import PostCreate from './components/PostCreate';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -46,8 +47,9 @@ const App = () => {
               <Route path='/signin' element={<SignIn />}/>
               
 
-              <Route path='/profile/:id' element={<Profile />}/>
+              <Route path='/profile/:UserId' element={<Profile />}/>
               <Route path='/postdetails/:id' element={<PostDetails />}/>
+              <Route path='/postcreate' element={<PostCreate />}/>
 
 
               {/* routes that require token */}

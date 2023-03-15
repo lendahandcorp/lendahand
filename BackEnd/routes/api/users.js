@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const validateToken = require('../../middleware/validateToken');
 
 // import the User model
 const User = require('../../models/user');
 const Login = require('../../models/login');
 
 /* GET users listing. */
-router.get('/', function (req, res) {
+router.get('/',  validateToken, function (req, res) {
   // res.send('respond with a resource');
  
   User.find({}, (err, users) => {
@@ -17,14 +18,12 @@ router.get('/', function (req, res) {
       console.log(err);
       res.status(500).send('An error occurred');
     }
-
-    console.log(users);
     res.send(users);
   });
 });
 
 // GET ONE USER BY ID
-router.get('/:id', (req, res) => {
+router.get('/:id',  validateToken, (req, res) => {
   
   User.findById(req.params.id, (err, oneUser) => {
     if (err) {
@@ -34,9 +33,28 @@ router.get('/:id', (req, res) => {
     if (!oneUser) {
       return res.status(404).send();
     }
-    console.log(oneUser);
     res.send(oneUser);
   });
+});
+
+// Update user description
+router.put('/:id', validateToken, (req, res) => {
+    User.findByIdAndUpdate(
+      req.params.id,
+      {
+        description: req.body.description
+      },
+      (err, data) => {
+        if (err) {
+          return res.status(401).send(err);
+        }
+        if (!data) {
+          res.status(404).send();
+        }
+        res.status(204).send('User description updated');
+      }
+    );
+
 });
 
 /* POST user data*/
@@ -76,7 +94,6 @@ router.post('/register', (req, res) => {
           if (err) {
             return res.status(400).send(`Error: ${err.message}`);
           }
-          console.log(savedUser._id.toString());
           // If the user was successfully created.
           // generate a json web token send a response back to the client
           const token = jwt.sign(
@@ -123,7 +140,6 @@ router.post('/login', (req, res) => {
       if (user === null) {
         return res.status(401).send('No user exists');
       }
-      console.log(user._id.toString());
 
       // if there is a user....compare the submitted password with the user's password hash
       bcrypt.compare(req.body.password, user.password, (err, result) => {
