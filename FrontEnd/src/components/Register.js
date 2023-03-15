@@ -215,7 +215,7 @@ const Register = (props) => {
         required
       />
       <button className="btn btn-lg btn-primary btn-block" type="submit">
-        Sign in
+        Sign up
       </button>
     </form>
   );
