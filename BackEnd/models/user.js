@@ -19,14 +19,14 @@ const userSchema = new Schema({
   },
   description: {
     type: String,
-    maxlength: 280
+    maxlength: 280,
   },
   phone: {
     type: Number,
     required: true,
   },
-  photo: {
-    type: String
+  picture: {
+    type: Object,
   },
   email: {
     type: String,
