@@ -9,9 +9,9 @@ const User = require('../../models/user');
 const Login = require('../../models/login');
 
 /* GET users listing. */
-router.get('/',  validateToken, function (req, res) {
+router.get('/', validateToken, function (req, res) {
   // res.send('respond with a resource');
- 
+
   User.find({}, (err, users) => {
     //handle if err occurred
     if (err) {
@@ -23,8 +23,7 @@ router.get('/',  validateToken, function (req, res) {
 });
 
 // GET ONE USER BY ID
-router.get('/:id',  validateToken, (req, res) => {
-  
+router.get('/:id', validateToken, (req, res) => {
   User.findById(req.params.id, (err, oneUser) => {
     if (err) {
       return res.status(400).send(`Error: ${err.message}`);
@@ -39,26 +38,26 @@ router.get('/:id',  validateToken, (req, res) => {
 
 // Update user description
 router.put('/:id', validateToken, (req, res) => {
-    User.findByIdAndUpdate(
-      req.params.id,
-      {
-        description: req.body.description
-      },
-      (err, data) => {
-        if (err) {
-          return res.status(401).send(err);
-        }
-        if (!data) {
-          res.status(404).send();
-        }
-        res.status(204).send('User description updated');
+  User.findByIdAndUpdate(
+    req.params.id,
+    {
+      description: req.body.description,
+    },
+    (err, data) => {
+      if (err) {
+        return res.status(401).send(err);
       }
-    );
-
+      if (!data) {
+        res.status(404).send();
+      }
+      res.status(204).send('User description updated');
+    }
+  );
 });
 
 /* POST user data*/
 router.post('/register', (req, res) => {
+  console.log(req.body);
   //create an instance of the Login model
   const signin = new User(req.body);
   //execute the validate method...
@@ -86,7 +85,7 @@ router.post('/register', (req, res) => {
       // replace the req,body.password value with the hashed equivalent
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         req.body.password = hash;
-        // console.log(req.body);
+        // console.log(req.body.picture);
 
         // Use the user model to insert a new record.
         // may have a validation error

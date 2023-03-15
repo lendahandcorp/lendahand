@@ -1,75 +1,95 @@
 import React, { useState } from 'react';
+import { Buffer } from 'buffer';
 import '../css/register.css'
 import { Link, useNavigate } from "react-router-dom";
 import authService from '../services/authService';
-import { firstNameValidator, lastNameValidator, addressValidator, emailValidator, phoneValidator, passwordValidator} from './Validator'
-
-
+import {
+  firstNameValidator,
+  lastNameValidator,
+  addressValidator,
+  emailValidator,
+  phoneValidator,
+  passwordValidator,
+} from './Validator';
 
 const Register = (props) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [picture, setPicture] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [addressError, setAddressError] = useState('');
+  const [telephoneNumberError, setTelephoneNumberError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [address, setAddress] = useState('')
-    const [phone, setPhone] = useState('')
-    const [picture, setPicture] = useState(null);
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [firstNameError, setFirstNameError] = useState('')
-    const [lastNameError, setLastNameError] = useState('')
-    const [addressError, setAddressError] = useState('')
-    const [telephoneNumberError, setTelephoneNumberError] = useState('')
-    const [emailError, setEmailError] = useState('')
-    const [passwordError, setPasswordError] = useState('')
-    const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const handleSubmit = event => {
-        event.preventDefault()
-
-        const isFirstNameValid = firstNameValidator(firstName)
-        if(isFirstNameValid !== "") {
-            setFirstNameError(isFirstNameValid)
-        }
-        const isLastNameValid = lastNameValidator(lastName)
-        if(isLastNameValid !== "") {
-            setLastNameError(isLastNameValid)
-        }
-        const isAddressValid = addressValidator(address)
-        if(isAddressValid !== "") {
-            setAddressError(isAddressValid)
-        }
-        const isPhoneValid = phoneValidator(phone)
-        if(isPhoneValid !== "") {
-            setTelephoneNumberError(isPhoneValid)
-        }
-        const isEmailValid = emailValidator(email)
-        if(isEmailValid !== "") {
-            setEmailError(isEmailValid)
-        }
-        const isPasswordValid = passwordValidator(password)
-        if(isPasswordValid !== "") {
-            setPasswordError(isPasswordValid)
-        }
-
-        if(isFirstNameValid === "" 
-        && isLastNameValid === "" 
-        && isAddressValid === "" 
-        && isPhoneValid === "" 
-        && isEmailValid === "" 
-        && isPasswordValid === "")
-        {
-            // Invoke auth.Service that call API to insert data
-            authService.register({ firstName, lastName, address, phone, picture, email, password },(error)=> {
-                if(!error) {
-                    navigate('/') //Redirect to main with token in browser storage with the name x-auth-token
-                }
-                else {
-                   console.log(error.data.message) 
-                }
-            })
-        }
+    const isFirstNameValid = firstNameValidator(firstName);
+    if (isFirstNameValid !== '') {
+      setFirstNameError(isFirstNameValid);
     }
-    
+    const isLastNameValid = lastNameValidator(lastName);
+    if (isLastNameValid !== '') {
+      setLastNameError(isLastNameValid);
+    }
+    const isAddressValid = addressValidator(address);
+    if (isAddressValid !== '') {
+      setAddressError(isAddressValid);
+    }
+    const isPhoneValid = phoneValidator(phone);
+    if (isPhoneValid !== '') {
+      setTelephoneNumberError(isPhoneValid);
+    }
+    const isEmailValid = emailValidator(email);
+    if (isEmailValid !== '') {
+      setEmailError(isEmailValid);
+    }
+    const isPasswordValid = passwordValidator(password);
+    if (isPasswordValid !== '') {
+      setPasswordError(isPasswordValid);
+    }
+
+    if (
+      isFirstNameValid === '' &&
+      isLastNameValid === '' &&
+      isAddressValid === '' &&
+      isPhoneValid === '' &&
+      isEmailValid === '' &&
+      isPasswordValid === ''
+    ) {
+      // Invoke auth.Service that call API to insert data
+      authService.register(
+        { firstName, lastName, address, phone, picture, email, password },
+        (error) => {
+          if (!error) {
+            navigate('/'); //Redirect to main with token in browser storage with the name x-auth-token
+          } else {
+            console.log(error.data.message);
+          }
+        }
+      );
+    }
+  };
+
+  const handleImageBuffer = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onload = () => {
+      const buffer = Buffer.from(reader.result);
+      console.log(buffer);
+      setPicture(buffer);
+    };
+    // console.log(file);
+    // setPicture(file);
+  };
 
     return ( 
         <div className="bg-register p-5">
@@ -111,7 +131,7 @@ const Register = (props) => {
 
                     {/* Picture is Not Mandatory */}
                     <label htmlFor="inputPicture" className="sr-only">Picture</label>
-                    <input onChange={(event) => {setPicture(event.target.files[0])}} name="picture" type="file" id="picture" className="form-control"/>
+                    <input onChange={(event) => {handleImageBuffer}} name="picture" type="file" id="picture" className="form-control"/>
                     
                     <br/>
 
