@@ -183,7 +183,7 @@ class dataService {
     }
 
     getOneUser(id, callback) {
-        axios.get(`${process.env.REACT_APP_API_URL}/users/${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/users/${id}`, this.getUserId())
             .then(response => {
                 callback(response.data)
             })
