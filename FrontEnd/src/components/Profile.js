@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import dataService from '../services/dataService';
+import { useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
+import componentService from '../services/componentService';
 import '../css/app.css';
 import '../css/profile.css';
-// import Post from './Post';
+import ProfilePost from './ProfilePost';
 
 const Profile = (props) => {
   
@@ -13,20 +13,13 @@ const Profile = (props) => {
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
-  // const [introduction, setIntroduction] = useState(''); // not set it up in db
-  // const [frequent_tags, setFrequentTags] = useState('');
+  // const [description, setDescription] = useState('');
   const [been_helped, setBeenHelped] = useState('');
   const [helped_others, setHelpedOthers] = useState(''); 
-  // Posts
-  // const [title, setTitle] = useState("");
-  // const [body, setBody] = useState("")
-  // const [availablity, setAvailablity] = useState("");
-  // const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
 
   // Get User Id
-  const params = useParams();
-  const userId = params.UserId;
+  const userId = componentService.grabMyUserDetails().userId;
 
   const navigate = useNavigate();
 
@@ -36,8 +29,7 @@ const Profile = (props) => {
       setLastName(data.lastName);
       setEmail(data.email);
       setUserImg(data.photo);
-      // setIntroduction(data.introduction); // not set it up in db
-      // setFrequentTags(data.frequent_tags);
+      // setDescription(data.description);
       setBeenHelped(data.been_helped);
       console.log(data.been_helped)
       setHelpedOthers(data.helped_others);
@@ -47,15 +39,18 @@ const Profile = (props) => {
 
   const full_name = first_name + ' ' + last_name;
 
-  // useEffect(() => {
-  //   dataService.getData( userId, (data) => {
-  //     console.log(data)
-  //     setTitle(data.title)
-  //     setBody(data.body)
-  //     setAvailablity(data.availablity)
-  //     setStatus(data.status)
-  //   })
-  // }, [] )
+ //Post
+ const [postData, updatePostData] = useState([]);
+
+  useEffect(() => {
+    const getPostData = async () => {
+      const resp = await componentService.grabMyPosts(userId)
+      updatePostData(resp.postCreatedByUser);
+    }
+    getPostData();
+  }, []);
+
+  console.log(postData)
 
   return (
     <div className="container">
@@ -77,13 +72,8 @@ const Profile = (props) => {
           <div className="d-flex">
             <div className="tags btn btn-outline-secondary">#gardening</div>
             <div className="tags btn btn-outline-secondary">#painting</div>
-            {/* {frequent_tags.map((tag) => {
-              return (
-                <div className="btn btn-light btn-outline-dark">{tag}</div>
-              );
-            })} */}
           </div>
-          <div>Num of posts</div>
+          <div className="post-num">{postData.length} posts</div>
         </div>
         <div className="col-md-6 d-flex hands-box">
           <div className="hands">
@@ -98,7 +88,7 @@ const Profile = (props) => {
       </div>
       <div className="row">
         <div className="col">
-          Placeholder for Posts and Applicants
+          <ProfilePost key={postData._id} postData={postData} />
         </div>
       </div>
     </div>
