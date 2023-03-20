@@ -1,36 +1,45 @@
-.profile-col{
- background-color: #fd6a02;
+.img-row{
+ background: -moz-linear-gradient(top, #fd6a02 50%, #ffffff 50%);
+ background: -webkit-linear-gradient(top, #fd6a02 50%,#ffffff 50%);
+ background: linear-gradient(to bottom, #fd6a02 50%,#ffffff 50%);
+
+ /* #ed8941 */
 }
 
 .profile-img{
  height: 200px;
  width: 200px;
- border: black 2px 2px;
 }
 
-.tags{
+.tag{
  margin: 5px;
  padding: 1px 10px;
- cursor: pointer;
  border-radius: 30px;
+ border: #edeaea solid 0.2px;
 }
 
 .hands{
  margin: 10px;
 }
 
+.hands h4{
+ text-align: center;
+}
+
 .hands-circle{
  background: #FFDF8B;
- width: 200px;
- height: 200px;
+ width: 180px;
+ height: 180px;
  border-radius: 50%;
  display: flex;
  align-items: center;
- text-align: center;
  color: red;
- font-size: 30px;
- margin: 0 auto;
+ font-size: 40px;
+ font-weight: 600;
+ justify-content: center;
+ align-items: center;
 }
+
 
 .post-num{
  background: #FFDF8B;
