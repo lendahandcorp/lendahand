@@ -11,67 +11,25 @@ class dataService {
         }
     }
 
-    // getPostsWithTags(callback) {
-    //     //axios.get(`${process.env.REACT_APP_API_URL}/posts`)
-    //     axios.get(`${process.env.REACT_APP_API_URL}/posts`)
-    //     .then(response => {
-    //         //console.log(response.data);
-
-
-    //         this.getTags(tagList => {
-    //             //console.log(tagList);
-    //             //foreach post 
-    //             let dataWithTags = response.data.map(post => {
-    //                 post.tagData = [];
-    //                 post.tagTitles = [];
-
-    //                 //foreach tag inside the post add to the new field
-    //                 //console.log(post);
-    //                 //console.log(typeof(post.tags)[0]);
-                    
-    //                 if(typeof(post.tags)[0] != "string") {
-    //                     post.tagTitles.push(post.tags[0].title);
-
-    //                     return post;
-    //                 }
-
-    //                 post.tags.forEach(tag => {
-    //                     //console.log(tag);
-
-    //                     let tagname = tagList.filter(t => {
-    //                         return t._id == tag
-    //                     })
-    //                     //console.log(tagname.length);
-    //                     //console.log(tagname[0].title);
-    //                     post.tagData.push(
-    //                         {
-    //                             id: tag,
-    //                             title: tagname[0].title
-    //                         }
-    //                     );
-    //                     post.tagTitles.push(tagname[0].title);
-
-    //                     //console.log(post);
-    //                 })
-
-    //                 return post;
-    //             })
-
-    //             console.log(dataWithTags[0])
-
-    //             callback(dataWithTags)
-    //         })
-    //     })
-    // }
-
-
-    getPosts(callback) {
-        //axios.get(`${process.env.REACT_APP_API_URL}/posts`)
-        axios.get(`${process.env.REACT_APP_API_URL}/posts`)
+    getReviews(id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/reviews/${id}`, this.getUserId())
         .then(response => {
-            console.log(response.data);
+            callback(response.data);
+        })
+    }
+
+    getAllReviews(callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/reviews`)
+        .then(response => {
             callback(response.data);
              
+        })
+    }
+
+    getPosts(callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts`)
+        .then(response => {
+            callback(response.data);
         })
     }
 
@@ -82,51 +40,12 @@ class dataService {
             })
     }
 
-
-    // getHands(id, callback) {
-
-    //     let userPosts = [];
-    //     let helpedPosts = [];
-
-    //     let data = {
-    //         userPosts: [],
-    //         helpedPosts: [],
-    //         mostCommonTags: []
-    //     }
-
-    //     //get all posts
-    //     this.getPosts(posts => {
-    //         posts.forEach(post => {
-    //             if (post.writer == id) {
-    //                 //get all posts posted
-    //                 console.log('posted');
-    //                 data.userPosts.push(post);
-
-    //             } else if (post.people_accepted.includes(id)) {
-    //                 //get all posts worked in
-    //                 console.log('helped');
-    //                 data.helpedPosts.push(post);
-
-    //             }
-    //             //console.log(post);
-
-    //         });
-    //         console.log(`user posted : ${userPosts.length} posts. and helped ${helpedPosts.length} posts.`);
-
-    //     })
-
-    //     callback(userPosts, helpedPosts);
-    // }
-
-
     getTags(callback) {
         axios.get(`${process.env.REACT_APP_API_URL}/tags/`)
             .then(response => {
-                //console.log(response.data)
                 callback(response.data);
             })
     }
-
 
     createPost(APIdata, callback) {
         axios.post(`${process.env.REACT_APP_API_URL}/posts`, APIdata, this.getUserId())
@@ -142,9 +61,9 @@ class dataService {
             })
     }
 
-    updatePost(param, APIdata, token, callback) {
+    updatePost(param, APIdata, callback) {
         console.log(APIdata)
-        axios.put(`${process.env.REACT_APP_API_URL}/posts/${param}`, APIdata, token)
+        axios.put(`${process.env.REACT_APP_API_URL}/posts/${param}`, APIdata, this.getUserId())
             .then(
                 response => {
                     if (response.status === 204) {
@@ -152,13 +71,14 @@ class dataService {
                     }
                 })
             .catch(error => {
+                console.log(error)
                 console.log(error.response)
                 callback(false)
             })
     }
 
-    deletePost(id, token, callback) {
-        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, token)
+    deletePost(id, callback) {
+        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, this.getUserId())
             .then(
                 response => {
                     if (response.status === 204) {
@@ -169,10 +89,6 @@ class dataService {
                 callback(false)
             })
     }
-
-
-
-
 
     getUsers(callback) {
         //axios.get(`${process.env.REACT_APP_API_URL}/posts`)
