@@ -31,3 +31,12 @@
  font-size: 30px;
  margin: 0 auto;
 }
+
+.post-num{
+ background: #FFDF8B;
+ width: 100px;
+ height: 35px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
