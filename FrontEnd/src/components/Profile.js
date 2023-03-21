@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
@@ -10,13 +10,18 @@ import ProfilePost from './ProfilePost';
 const Profile = (props) => {
 
   // Get User Id and email
-  const userId = componentService.grabMyUserDetails().userId;
-  const email = componentService.grabMyUserDetails().email;
+  const params = useParams();
+  const userId = params.UserId;
+ 
+  const currentUserId = componentService.grabMyUserDetails().userId;
+  // const email = componentService.grabMyUserDetails().email;
   const token = authService.isAuthenticated();
+
   
   // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
   const [description, setDescription] = useState('');
   const [been_helped, setBeenHelped] = useState('');
@@ -30,6 +35,7 @@ const Profile = (props) => {
       // console.log(data)
       setFirstName(data.firstName);
       setLastName(data.lastName);
+      setEmail(data.email)
       setUserImg(data.picture);
       setDescription(data.description);
       setBeenHelped(data.been_helped);
@@ -121,10 +127,7 @@ const Profile = (props) => {
         <div className="col-md-6">
           <h2>{full_name}</h2>
           <p>{email}</p>
-          <div className="description">
-            <p className="">{description}</p>
-            <button className="btn btn-primary">Edit</button>
-          </div>
+          { userId == currentUserId ?
           <form method="post" className="form-create" onSubmit={handleSubmit}>
             <textarea
               name="description"
@@ -141,8 +144,10 @@ const Profile = (props) => {
             <button className="btn btn-primary mt-1 form-btn" type="submit">
               Submit
             </button>
-          </form>
-
+          </form> :
+          <div className="description">
+            <p className="">{description}</p>
+          </div>  }
           <div className="d-flex">
             <ul className="tags">
               {

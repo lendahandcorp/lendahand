@@ -23,7 +23,7 @@ router.get('/', validateToken, function (req, res) {
 });
 
 // GET ONE USER BY ID
-router.get('/:id', validateToken, (req, res) => {
+router.get('/:id', (req, res) => {
   User.findById(req.params.id, (err, oneUser) => {
     if (err) {
       return res.status(400).send(`Error: ${err.message}`);
@@ -37,7 +37,7 @@ router.get('/:id', validateToken, (req, res) => {
 });
 
 // Update user description
-router.put('/:id', validateToken, (req, res) => {
+router.put('/:id', (req, res) => {
   User.findByIdAndUpdate(
     req.params.id,
     {
