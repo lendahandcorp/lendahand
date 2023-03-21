@@ -8,6 +8,7 @@ import About from './components/About';
 import Profile from './components/Profile';
 import PostDetails from './components/PostDetails';
 import PostCreate from './components/PostCreate';
+import ProtectedRoutes from './components/ProtectedRoutes';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -45,9 +46,12 @@ const App = () => {
               
               {/* Raw signin page, to be removed */}
               <Route path='/signin' element={<SignIn />}/>
+
+              <Route element={<ProtectedRoutes />}>
+                <Route path='/profile/:UserId' element={<Profile />}/>
+              </Route>
               
 
-              <Route path='/profile/:UserId' element={<Profile />}/>
               <Route path='/postdetails/:id' element={<PostDetails />}/>
               <Route path='/postcreate' element={<PostCreate />}/>
 
