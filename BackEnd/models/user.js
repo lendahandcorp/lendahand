@@ -26,7 +26,7 @@ const userSchema = new Schema({
     required: true,
   },
   picture: {
-    type: Object,
+    type: String,
   },
   email: {
     type: String,
