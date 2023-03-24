@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const validateToken = require('../../middleware/validateToken');
+const { reviewSchemaValidation } = require('../../middleware/joiValidation');
 
 // Import Review Model
 const Reviews = require('../../models/review')
@@ -63,19 +64,21 @@ router.get('/:id', validateToken, (req, res) => {
 // Create a new review
 // * Create a review under "post id" *
 router.post('/', validateToken, (req, res) => {
+     //create an instance of the Reviews model
     const theReview = new Reviews(req.body)
-    theReview.validate(req.body, (error) => {
-
-        if (error) {
-            return res.status(422).send(error);
-        }
+    const theReviewObject = theReview.toObject();
+    //execute the validate method...
+    const { error, value } = reviewSchemaValidation.validate(theReviewObject);
+    if (error) {
+        return res.status(422).send(error.details[0].message);
+    } else {
 
         const newReview = new Reviews({
-            reviewer: req.body.reviewer,
-            personBeingReviewed: req.body.personBeingReviewed,
-            post_id: req.body.post_id,
-            description: req.body.description,
-            stars: req.body.stars
+            reviewer: value.reviewer,
+            personBeingReviewed: value.personBeingReviewed,
+            post_id: value.post_id,
+            description: value.description,
+            stars: value.stars
         })
 
         newReview.save()
@@ -86,7 +89,7 @@ router.post('/', validateToken, (req, res) => {
             .catch(err => {
                 res.status(422).send(err)
             })
-    })
+    }
 
 })
 
