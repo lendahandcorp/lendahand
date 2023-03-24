@@ -8,12 +8,8 @@ import About from './components/About';
 import Profile from './components/Profile';
 import PostDetails from './components/PostDetails';
 import PostCreate from './components/PostCreate';
-<<<<<<< HEAD
-import ProtectedRoutes from './components/ProtectedRoutes';
-=======
 import ProtectedRoutes from './components/ProtectedRoutes';
 import PostEdit from './components/PostEdit';
->>>>>>> TAP-28-postpage
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
