@@ -40,58 +40,19 @@ const Post = (props) => {
         return props.data.people_needed - props.data.people_accepted.length
     }
 
+    const convertImage = (a) => {
+        return `data:image/png;base64,${a}`;
+    }
+
     return (
-        // <article class="post vt-post">
-        //     <div class="row">
-        //         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
-        //             <div class="post-type post-img">
-        //                 <a href="#"><img src={props.data.image != "" ? props.data.image : no_image} class="img-fluid" alt="blank" /></a>
-        //             </div>
-        //             <div class="author-info author-info-2">
-
-        //             </div>
-        //         </div>
-        //         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
-        //             <div class="caption">
-        //                 <h3 class="md-heading"><a href="#">{props.data.title}</a></h3>
-        //                 <p> {props.data.body} </p>
-        //                 <button type="button" onClick={() => props.goToProfile(props.data.poster_id)} className="btn btn-sm btn-outline-secondary">view poster</button>
-        //                 <button type="button" onClick={() => props.showPost(props.data.post_id)} className="btn btn-sm btn-outline-secondary">view post</button>
-        //             </div>
-        //             <ul class="list-inline">
-        //                 <li>
-        //                     <div class="info">
-        //                         <p>Posted on:</p>
-        //                         <strong>Mar 21, 2015</strong>
-        //                     </div>
-        //                 </li>
-        //                 <li>
-        //                 </li>
-        //             </ul>
-
-        //             <ul class="list-inline">
-        //                 {
-        //                     props.data.tags.map(tag => {
-        //                         return <li class="d-inline" 
-        //                                     onClick={() => props.tagClicked(tag)} 
-        //                                 >
-        //                                     {" #"+tag}
-        //                                 </li>
-        //                     })
-        //                 }
-        //             </ul>
-        //         </div>
-        //     </div>
-        //     <br />
-        // </article>
         <article>
             <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75">
                 <div class="col-sm">
 
                     <div>
-                        <img src="https://source.unsplash.com/WLUHO9A_xik/200x200" 
+                        <img src={convertImage(props.data.media)}
                             alt="lol" 
-                            className="rounded"
+                            className="rounded "
                             onClick={() => props.showPost(props.data.post_id)}
                              />
                     </div>

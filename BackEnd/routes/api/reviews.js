@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 // Get all the reviews by post_id
 // frontEnd will need that
 router.get('/:post_id', validateToken, (req, res) => {
-
+    console.log('A1')
     Reviews.find((err, data) => {
 
         const newReviewArray = [];
@@ -46,7 +46,7 @@ router.get('/:post_id', validateToken, (req, res) => {
 // Get One review By ID
 // Meant to be used by "system admin"
 router.get('/:id', validateToken, (req, res) => {
-
+    console.log('A2')
   Reviews.findById(req.params.id, (err, data) => {
         if (err) {
             return res.status(400).send(`Error: ${err}`)
