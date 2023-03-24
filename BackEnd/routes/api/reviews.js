@@ -97,13 +97,13 @@ router.post('/', validateToken, (req, res) => {
 // Reviews are not meant to be edited
 // router.put('/:id', (req, res) => {
 //     const theReview = new Reviews(req.body)
-//     theReview.validate(req.body, (error) => {
+    // const theReviewObject = theReview.toObject();
+//    const { error, value } = reviewSchemaValidation.validate(theReviewObject);
+    // if (error) {
+    //     return res.status(422).send(error.details[0].message);
+    // } else {
 
-//         if (error) {
-//             return res.status(422).send(error);
-//         }
-
-//         Reviews.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+//         Reviews.findByIdAndUpdate(req.params.id, value, (err, data) => {
 //             if (err) {
 //                 return res.status(401).send(err)
 //             }
@@ -114,7 +114,7 @@ router.post('/', validateToken, (req, res) => {
 
 //             res.send('Review was Edited')
 //         })
-//     })
+//     }
 
 // })
 

@@ -100,28 +100,30 @@ router.post('/', validateToken, async (req, res) => {
 //Update post By ID
 router.put('/:id', validateToken, async (req, res) => {
   const thePost = new Posts(req.body);
+  const postObject = thePost.toObject();
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
-  thePost.validate(req.body, (error) => {
-    if (error) {
-      return res.status(422).send(error);
-    }
+
+  const { error, value } = postValidationSchema.validate(postObject);
+  if (error) {
+    return res.status(422).send(error.details[0].message);
+  } else {
 
     Posts.findByIdAndUpdate(
       req.params.id,
       {
-        title: req.body.title,
-        body: req.body.body,
+        title: value.title,
+        body: value.body,
         tags: listOfTags,
-        availability: req.body.availability,
-        date_created: req.body.date_created,
-        status_id: req.body.status_id,
-        location: req.body.location,
-        people_needed: req.body.people_needed,
-        applicants: req.body.applicants,
-        people_accepted: req.body.people_accepted,
-        media: req.body.media
+        availability: value.availability,
+        date_created: value.date_created,
+        status_id: value.status_id,
+        location: value.location,
+        people_needed: value.people_needed,
+        applicants: value.applicants,
+        people_accepted: value.people_accepted,
+        media: value.media
       },
       (err, data) => {
         if (err) {
@@ -133,7 +135,7 @@ router.put('/:id', validateToken, async (req, res) => {
         res.status(204).send('Post updated');
       }
     );
-  });
+  }
 });
 
 //Delete post By ID\
