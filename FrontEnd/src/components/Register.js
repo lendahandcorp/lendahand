@@ -83,7 +83,7 @@ const Register = (props) => {
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
     reader.onload = () => {
-      const buffer = Buffer.from(reader.result);
+      const buffer = Buffer.from(reader.result).toString('base64');
       console.log(buffer);
       setPicture(buffer);
     };

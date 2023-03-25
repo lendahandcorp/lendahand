@@ -137,13 +137,15 @@ router.put('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
+      console.log('YT1')
       return res.status(401).send(err);
     }
 
     if (!data) {
+      console.log('YT2')
       res.status(404).send();
     }
-
+    console.log('YT3')
     res.send(data);
   });
 });
