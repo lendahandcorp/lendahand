@@ -35,7 +35,7 @@ const Footer = (props) => {
                 <li className="nav-item"><Link to="/#" className="foot-link">Donate</Link></li>
                 <li className="nav-item"><Link to="/#" className="foot-link">Security</Link></li>
                 <li className="nav-item"><Link to="/#" className="foot-link">Feedback</Link></li>
-                <li className="nav-item btn"><Link to="/#" className="btn customButton2 rounded shadow-sm fw-bold">Contact Us</Link></li>
+                <li className="nav-item btn"><Link to="/contact" className="btn customButton2 rounded shadow-sm fw-bold">Contact Us</Link></li>
             </ul>
           </div>
         </div>
