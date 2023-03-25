@@ -3,6 +3,10 @@ var router = express.Router();
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const validateToken = require('../../middleware/validateToken');
+const { userValidationSchema } = require('../../middleware/joiValidation');
+const { loginValidationSchema } = require('../../middleware/joiValidation');
+
+
 
 // import the User model
 const User = require('../../models/user');
@@ -60,16 +64,18 @@ router.post('/register', (req, res) => {
   console.log(req.body);
   //create an instance of the Login model
   const signin = new User(req.body);
+  const signinObject = signin.toObject();
   //execute the validate method...
-  signin.validate((error) => {
-    if (error) {
-      //we have validation errors...respond with details
-      return res.status(422).send(error);
-    }
+
+  const { error, value } = userValidationSchema.validate(signinObject);
+  if (error) {
+    return res.status(422).send(error.details[0].message);
+  } else {
+
     // get the email from the body of the request
     // query the db with User model to see if a document already exists
     // with the submitted email
-    User.findOne({ email: req.body.email }, (err, users) => {
+    User.findOne({ email: value.email }, (err, users) => {
       //handle if err occurred
       if (err) {
         console.log(err);
@@ -83,13 +89,13 @@ router.post('/register', (req, res) => {
       }
 
       // replace the req,body.password value with the hashed equivalent
-      bcrypt.hash(req.body.password, 10, (err, hash) => {
-        req.body.password = hash;
+      bcrypt.hash(value.password, 10, (err, hash) => {
+        value.password = hash;
         // console.log(req.body.picture);
 
         // Use the user model to insert a new record.
         // may have a validation error
-        User.create(req.body, (err, savedUser) => {
+        User.create(value, (err, savedUser) => {
           if (err) {
             return res.status(400).send(`Error: ${err.message}`);
           }
@@ -98,7 +104,7 @@ router.post('/register', (req, res) => {
           const token = jwt.sign(
             {
               userId: savedUser._id.toString(),
-              email: req.body.email,
+              email: value.email,
             },
             process.env.JWT_SECRET_KEY
           );
@@ -106,28 +112,31 @@ router.post('/register', (req, res) => {
           res.set('x-auth-token', token);
 
           res.status(201).send({
-            email: req.body.email,
-            password: req.body.password,
+            email: value.email,
+            password: value.password,
           });
         });
       });
     });
-  });
+
+  }
 });
 
 router.post('/login', (req, res) => {
   //create an instance of the Login model
+
   const login = new Login(req.body);
+  const loginObject = login.toObject();
   //execute the validate method...
-  login.validate((error) => {
-    if (error) {
-      //we have validation errors...respond with details
-      return res.status(422).send(error);
-    }
+
+  const { error, value } = loginValidationSchema.validate(loginObject);
+  if (error) {
+    return res.status(422).send(error.details[0].message);
+  } else {
 
     // sample req.body could be { email: "joe@foo.com", password: "letmein" }
     // query the database using the User model to see
-    User.findOne({ email: req.body.email }, (err, user) => {
+    User.findOne({ email: value.email }, (err, user) => {
       //handle if err occurred
       if (err) {
         console.log(err);
@@ -141,7 +150,7 @@ router.post('/login', (req, res) => {
       }
 
       // if there is a user....compare the submitted password with the user's password hash
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
+      bcrypt.compare(value.password, user.password, (err, result) => {
         if (!result) {
           // if there is no match....respond with unauthorized response (401)
           // if there is a match....create a jwt send back in the response.
@@ -150,7 +159,7 @@ router.post('/login', (req, res) => {
         const token = jwt.sign(
           {
             userId: user._id.toString(),
-            email: req.body.email,
+            email: value.email,
           },
           process.env.JWT_SECRET_KEY
         );
@@ -160,7 +169,7 @@ router.post('/login', (req, res) => {
       });
       // res.send('login');
     });
-  });
+  }
 });
 
 module.exports = router;
