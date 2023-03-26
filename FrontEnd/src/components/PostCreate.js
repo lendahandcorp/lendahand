@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import '../css/postDetail.css';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 import dataService from '../services/dataService';
@@ -19,6 +20,7 @@ const PostCreate = (props) => {
     const [people_needed, setPeople_needed] = useState(0);
     const [displayEmail, setDisplayEmail] = useState(false);
     const [displayPhone, setDisplayPhone] = useState(false);
+    const [media, setMedia] = useState('');
 
     const navigate = useNavigate();
 
@@ -50,7 +52,7 @@ const PostCreate = (props) => {
             people_needed: people_needed,
             applicants: [],
             people_accepted: [],
-            media: null
+            media: media
         }
 
         // let post = {
@@ -63,14 +65,12 @@ const PostCreate = (props) => {
         //     "people_needed": 3,
         // }
 
-        dataService.createPost(post, (error) => {
-            if (error) {
-                console.log(error)
-            } else {
+        dataService.createPost(post, (success) => {
+            if (success) {
                 navigate('/');
+            } else {
             }
         });
-        //navigate('/');
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -94,11 +94,41 @@ const PostCreate = (props) => {
         setTags(splitTags);
     }
 
+
+    const fileManip = (a) => {
+        console.log(a)
+        let f = a;
+        console.log(f[0])
+        console.log(f.length)
+
+        let file = a[0];
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function () {
+
+            let p = new RegExp("^(data:image/png;base64,)|^(data:image/jpeg;base64,)", "g");
+            //let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
+            let image = reader.result.replace(p, "");
+            console.log(image);
+            setMedia(image);
+          //console.log(reader.result);
+        };
+
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        };
+    }
+
     const handleChange = (event) => {
         //console.log(event.target.value)
         switch (event.target.name) {
             case 'title':
                 setTitle(event.target.value);
+                break;
+            case 'media':
+                fileManip(event.target.files)
                 break;
             case 'writer':
                 setWriter(event.target.value);
@@ -131,7 +161,7 @@ const PostCreate = (props) => {
     return (
         <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
 
-            <h1 className="h3 mb-3 font-weight-normal text-center">Create Planet</h1>
+            <h1 className="h3 mb-3 font-weight-normal text-center">Create Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
@@ -144,6 +174,20 @@ const PostCreate = (props) => {
                     onChange={handleChange}
                     required />
             </div>
+
+
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group">
+                <label htmlFor="media">Image</label>
+                <input type="file"
+                    id="media"
+                    name="media"
+                    className="form-control"
+                    accept="image/png, image/jpeg"
+                    onChange={handleChange}
+                    required />
+            </div>
+
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             {/* <div className="form-group">

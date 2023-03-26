@@ -128,7 +128,7 @@ const Home = (props) => {
         <div class="container">
             {/* <h1>Home.</h1> */}
             {/* Search bar */}
-            <div class="input-group rounded">
+            <div class="input-group rounded mt-5 mb-4 searchbar mx-auto">
                 <input type="search" id="searchBar" class="form-control rounded" onChange={tagSearchBarChanged} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
