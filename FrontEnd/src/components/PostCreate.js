@@ -5,7 +5,14 @@ import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
-
+import {
+    titleValidator,
+    locationValidator,
+    availabilityValidator,
+    tagsValidator,
+    bodyValidator,
+    peopleNeededValidator,
+} from './Validator';
 
 
 const PostCreate = (props) => {
@@ -20,6 +27,12 @@ const PostCreate = (props) => {
     const [displayEmail, setDisplayEmail] = useState(false);
     const [displayPhone, setDisplayPhone] = useState(false);
     const [media, setMedia] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [locationError, setLocationError] = useState('');
+    const [availabilityError, setAvailabilityError] = useState('');
+    const [tagsError, setTagsError] = useState('');
+    const [bodyError, setBodyError] = useState('');
+    const [peopleNeededError, setPeopleNeededError] = useState('');
 
     const navigate = useNavigate();
 
@@ -38,38 +51,74 @@ const PostCreate = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log(objectify(tags))
-
-        let post = {
-            title: title,
-            writer: componentService.grabMyUserDetails().userId,
-            body: body,
-            tags: objectify(tags),
-            availability: availability,
-            status: "Open",
-            location: location,
-            people_needed: people_needed,
-            applicants: [],
-            people_accepted: [],
-            media: media
+        const isTitleValid = titleValidator(title);
+        if (isTitleValid !== '') {
+            setTitleError(isTitleValid);
+        }
+        const isLocationValid = locationValidator(location);
+        if (isLocationValid !== '') {
+            setLocationError(isLocationValid);
+        }
+        const isAvailabilityValid = availabilityValidator(availability);
+        if (isAvailabilityValid !== '') {
+            setAvailabilityError(isAvailabilityValid);
+        }
+        const isTagsValid = tagsValidator(tags);
+        if (isTagsValid !== '') {
+            setTagsError(isTagsValid);
+        }
+        const isBodyValid = bodyValidator(body);
+        if (isBodyValid !== '') {
+            setBodyError(isBodyValid);
+        }
+        const isPeopleNeededValid = peopleNeededValidator(people_needed);
+        if (isPeopleNeededValid !== '') {
+            setPeopleNeededError(isPeopleNeededValid);
         }
 
-        // let post = {
-        //     "title": "tagtest 1",
-        //     "writer": '63e018aa42a38b860599766c',
-        //     "body": "tt",
-        //     "tags": ["tt1","tt2"],
-        //     "availability": '2002-12-09',
-        //     "location": "123 tt",
-        //     "people_needed": 3,
-        // }
+        if (
+            isTitleValid === '' &&
+            isLocationValid === '' &&
+            isAvailabilityValid === '' &&
+            isTagsValid === '' &&
+            isBodyValid === '' &&
+            isPeopleNeededValid === ''
+        ) {
 
-        dataService.createPost(post, (success) => {
-            if (success) {
-                navigate('/');
-            } else {
+            console.log(objectify(tags))
+
+            let post = {
+                title: title,
+                writer: componentService.grabMyUserDetails().userId,
+                body: body,
+                tags: objectify(tags),
+                availability: availability,
+                status: "Open",
+                location: location,
+                people_needed: people_needed,
+                applicants: [],
+                people_accepted: [],
+                media: media
             }
-        });
+
+            // let post = {
+            //     "title": "tagtest 1",
+            //     "writer": '63e018aa42a38b860599766c',
+            //     "body": "tt",
+            //     "tags": ["tt1","tt2"],
+            //     "availability": '2002-12-09',
+            //     "location": "123 tt",
+            //     "people_needed": 3,
+            // }
+
+            dataService.createPost(post, (success) => {
+                if (success) {
+                    navigate('/');
+                } else {
+                }
+            });
+
+        }
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -111,11 +160,11 @@ const PostCreate = (props) => {
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
-          //console.log(reader.result);
+            //console.log(reader.result);
         };
 
         reader.onerror = function (error) {
-          console.log('Error: ', error);
+            console.log('Error: ', error);
         };
     }
 
@@ -162,6 +211,48 @@ const PostCreate = (props) => {
 
             <h1 className="h3 mb-3 font-weight-normal text-center">Create Post</h1>
 
+            {/* Validators */}
+            <p
+                className={
+                    titleError ? 'alert alert-danger text-center' : 'hidden'
+                }
+            >
+                {titleError}
+            </p>
+            <p
+                className={
+                    locationError ? 'alert alert-danger text-center' : 'hidden'
+                }
+            >
+                {locationError}
+            </p>
+            <p
+                className={
+                    availabilityError ? 'alert alert-danger text-center' : 'hidden'
+                }
+            >
+                {availabilityError}
+            </p>
+            <p
+                className={
+                    tagsError ? 'alert alert-danger text-center' : 'hidden'
+                }
+            >
+                {tagsError}
+            </p>
+            <p
+                className={bodyError ? 'alert alert-danger text-center' : 'hidden'}
+            >
+                {bodyError}
+            </p>
+            <p
+                className={
+                    peopleNeededError ? 'alert alert-danger text-center' : 'hidden'
+                }
+            >
+                {peopleNeededError}
+            </p>
+
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
                 <label htmlFor="title">Title</label>
@@ -171,7 +262,11 @@ const PostCreate = (props) => {
                     className="form-control"
                     placeholder="..."
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = titleValidator(title);
+                        setTitleError(error);
+                    }}
+                     />
             </div>
 
 
@@ -184,7 +279,8 @@ const PostCreate = (props) => {
                     className="form-control"
                     accept="image/png, image/jpeg"
                     onChange={handleChange}
-                    required />
+                    required
+                     />
             </div>
 
 
@@ -216,7 +312,11 @@ const PostCreate = (props) => {
                     className="form-control"
                     placeholder="..."
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = locationValidator(location);
+                        setLocationError(error);
+                    }}
+                     />
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -228,7 +328,11 @@ const PostCreate = (props) => {
                     className="form-control"
                     placeholder="..."
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = availabilityValidator(availability);
+                        setAvailabilityError(error);
+                    }}
+                     />
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -240,7 +344,11 @@ const PostCreate = (props) => {
                     className="form-control"
                     placeholder="..."
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = tagsValidator(tags);
+                        setTagsError(error);
+                    }}
+                     />
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -252,7 +360,11 @@ const PostCreate = (props) => {
                     className="form-control"
                     placeholder="..."
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = bodyValidator(body);
+                        setBodyError(error);
+                    }}
+                     />
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
@@ -262,7 +374,11 @@ const PostCreate = (props) => {
                     name="people_needed"
                     className="form-control"
                     onChange={handleChange}
-                    required />
+                    onBlur={() => {
+                        const error = peopleNeededValidator(people_needed);
+                        setPeopleNeededError(error);
+                    }}
+                     />
             </div>
 
 
