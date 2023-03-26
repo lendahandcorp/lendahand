@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
-import { Buffer } from 'buffer';
 import '../css/app.css';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
@@ -41,16 +40,14 @@ const Profile = (props) => {
     }
   }
 
-
   useEffect(() => {
     dataService.getOneUser(userId, (info) => {
-      // console.log(info.picture.data)
+      console.log(info)
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
-      let buffer = Buffer.from(info.picture.data).toString('base64');
-      setUserImg(buffer)
-      SetImgType(findImgType(buffer))
+      setUserImg(info.picture)
+      SetImgType(findImgType(info.picture))
       setDescription(info.description);
       setBeenHelped(info.been_helped);
       setHelpedOthers(info.helped_others);
