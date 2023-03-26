@@ -1,8 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
-import componentService from '../services/componentService';
-import '../css/app.css';
+import React from 'react';
 import '../css/profile.css';
 const no_image = require('../img/no_image.png');
 
@@ -42,14 +38,14 @@ const ProfilePost = (props) => {
         {props.postData.map(item => {
                     let tag = item.tags
                     return (
-                      <div className="row d-flex justify-content-md-center">
+                      <div class="row shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="col-sm">
                         <img src={ item.media = null ? item.media: `https://source.unsplash.com/WLUHO9A_xik/200x200`}
                             alt="lol" 
                             className="rounded profile-post-img"
                            />
                         </div>
-                        <div className="col-sm shadow-sm p-3 mb-5 bg-white rounded w-75">
+                        <div className="col-sm shadow-sm p-3 mb-5 bg-white rounded">
                           <h5 class="fw-bold">{item.title}</h5>
                           <div className="fst-italic">Availability:
                           <span> {getDate(item.availability)}</span>

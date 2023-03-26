@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import { Buffer } from 'buffer';
 import '../css/app.css';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
@@ -14,38 +15,50 @@ const Profile = (props) => {
   const userId = params.UserId;
  
   const currentUserId = componentService.grabMyUserDetails().userId;
-  // const email = componentService.grabMyUserDetails().email;
   const token = authService.isAuthenticated();
 
-  
   // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
+  const [img_type, SetImgType] = useState('');
   const [description, setDescription] = useState('');
   const [been_helped, setBeenHelped] = useState('');
   const [helped_others, setHelpedOthers] = useState(''); 
   const [errors, setErrors] = useState({});
 
+  const full_name = first_name + ' ' + last_name;
+
   const navigate = useNavigate();
 
+  const findImgType = (e) => {
+    let s = e.slice(0,3)
+    if( s = '/9j' ){
+      return 'jpg'
+    } else{
+      return 'png'
+    }
+  }
+
+
   useEffect(() => {
-    dataService.getOneUser(userId, (data) => {
-      // console.log(data)
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setEmail(data.email)
-      setUserImg(data.picture);
-      setDescription(data.description);
-      setBeenHelped(data.been_helped);
-      setHelpedOthers(data.helped_others);
+    dataService.getOneUser(userId, (info) => {
+      // console.log(info.picture.data)
+      setFirstName(info.firstName);
+      setLastName(info.lastName);
+      setEmail(info.email)
+      let buffer = Buffer.from(info.picture.data).toString('base64');
+      setUserImg(buffer)
+      SetImgType(findImgType(buffer))
+      setDescription(info.description);
+      setBeenHelped(info.been_helped);
+      setHelpedOthers(info.helped_others);
     });
   }, []);
 
-  console.log(description)
-
-  const full_name = first_name + ' ' + last_name;
+  //Get Image URL
+  const img_url = `data:image/${img_type};base64,${user_img}`
 
  //Post
  const [postData, updatePostData] = useState([]);
@@ -57,19 +70,18 @@ const Profile = (props) => {
     }
     getPostData();
   }, []);
-  // console.log(postData)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors({})
+    setErrors({});
     componentService.insertUserDescription( userId, description, token, (error) => {
 
       if(!error){
-        navigate(`/profile/${userId}`)
+        navigate(`/`)
 
       }else{
 
-        console.log(error.message) //access denied
+        console.log(error) //access denied
 
         switch(error.status){
           case 400: { setErrors(error.message); break; }
@@ -77,10 +89,9 @@ const Profile = (props) => {
         }
       }
     })
-    console.log(description)
   };
-
-
+  
+  // ** Remove it after getting funtion from others **
   // Getting the first three frequent tags --> randomly generated three of them
   let newArr = []
   for(var i=0; i<postData.length; i++){
@@ -113,18 +124,18 @@ const Profile = (props) => {
   const tagsArray = unique.slice(0, 3);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid profile">
       <div className="row mb-3 img-row">
         <div className="col profile-col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src={user_img}
+          src={img_url}
           data-holder-rendered="true" />
         </div>
       </div>
       <div className="container">
       <div className="row mb-3">
-        <div className="col-md-6">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <h2>{full_name}</h2>
           <p>{email}</p>
           { userId == currentUserId ?
@@ -161,7 +172,7 @@ const Profile = (props) => {
           </div>
           <div className="post-num">{postData.length} posts</div>
         </div>
-        <div className="col-md-6 d-flex hands-box justify-content-end">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
             <h4>Hands Requested</h4>
             <div className="hands-circle">{been_helped}</div>
@@ -173,7 +184,7 @@ const Profile = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col">
+        <div className="col-sm-12 w-75">
           <ProfilePost key={postData._id} postData={postData} />
         </div>
       </div>
