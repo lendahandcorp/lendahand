@@ -13,7 +13,6 @@ const Profile = (props) => {
   // Get User Id and email
   const params = useParams();
   const userId = params.UserId;
-  // console.log(userId)
  
   const currentUserId = componentService.grabMyUserDetails().userId;
   const token = authService.isAuthenticated();
@@ -23,38 +22,43 @@ const Profile = (props) => {
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
+  const [img_type, SetImgType] = useState('');
   const [description, setDescription] = useState('');
   const [been_helped, setBeenHelped] = useState('');
   const [helped_others, setHelpedOthers] = useState(''); 
   const [errors, setErrors] = useState({});
 
+  const full_name = first_name + ' ' + last_name;
+
   const navigate = useNavigate();
+
+  const findImgType = (e) => {
+    let s = e.slice(0,3)
+    if( s = '/9j' ){
+      return 'jpg'
+    } else{
+      return 'png'
+    }
+  }
+
 
   useEffect(() => {
     dataService.getOneUser(userId, (info) => {
-      console.log(info)
+      // console.log(info.picture.data)
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
-
-      // console.log(info.picture.data)
-      // console.log(info.picture.data.toString('base64'))
-
-    //   const test = btoa(
-    //     info.picture.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
-    //  );
-
-      // const s = Buffer.from(info.picture.data)
-      // console.log(s.toString())
-      // setUserImg(test);
+      let buffer = Buffer.from(info.picture.data).toString('base64');
+      setUserImg(buffer)
+      SetImgType(findImgType(buffer))
       setDescription(info.description);
       setBeenHelped(info.been_helped);
       setHelpedOthers(info.helped_others);
     });
   }, []);
 
-
-  const full_name = first_name + ' ' + last_name;
+  //Get Image URL
+  const img_url = `data:image/${img_type};base64,${user_img}`
 
  //Post
  const [postData, updatePostData] = useState([]);
@@ -66,7 +70,6 @@ const Profile = (props) => {
     }
     getPostData();
   }, []);
-  // console.log(postData)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -86,10 +89,7 @@ const Profile = (props) => {
         }
       }
     })
-
   };
-
-  // console.log(description)
   
   // ** Remove it after getting funtion from others **
   // Getting the first three frequent tags --> randomly generated three of them
@@ -129,7 +129,7 @@ const Profile = (props) => {
         <div className="col profile-col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src="https://source.unsplash.com/WLUHO9A_xik/35x35"
+          src={img_url}
           data-holder-rendered="true" />
         </div>
       </div>
