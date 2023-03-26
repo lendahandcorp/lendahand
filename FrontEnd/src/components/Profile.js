@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import { Buffer } from 'buffer';
 import '../css/app.css';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
@@ -12,12 +13,11 @@ const Profile = (props) => {
   // Get User Id and email
   const params = useParams();
   const userId = params.UserId;
+  // console.log(userId)
  
   const currentUserId = componentService.grabMyUserDetails().userId;
-  // const email = componentService.grabMyUserDetails().email;
   const token = authService.isAuthenticated();
 
-  
   // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -31,19 +31,28 @@ const Profile = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dataService.getOneUser(userId, (data) => {
-      // console.log(data)
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setEmail(data.email)
-      setUserImg(data.picture);
-      setDescription(data.description);
-      setBeenHelped(data.been_helped);
-      setHelpedOthers(data.helped_others);
+    dataService.getOneUser(userId, (info) => {
+      console.log(info)
+      setFirstName(info.firstName);
+      setLastName(info.lastName);
+      setEmail(info.email)
+
+      // console.log(info.picture.data)
+      // console.log(info.picture.data.toString('base64'))
+
+    //   const test = btoa(
+    //     info.picture.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
+    //  );
+
+      // const s = Buffer.from(info.picture.data)
+      // console.log(s.toString())
+      // setUserImg(test);
+      setDescription(info.description);
+      setBeenHelped(info.been_helped);
+      setHelpedOthers(info.helped_others);
     });
   }, []);
 
-  console.log(description)
 
   const full_name = first_name + ' ' + last_name;
 
@@ -61,15 +70,15 @@ const Profile = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors({})
+    setErrors({});
     componentService.insertUserDescription( userId, description, token, (error) => {
 
       if(!error){
-        navigate(`/profile/${userId}`)
+        navigate(`/`)
 
       }else{
 
-        console.log(error.message) //access denied
+        console.log(error) //access denied
 
         switch(error.status){
           case 400: { setErrors(error.message); break; }
@@ -77,10 +86,12 @@ const Profile = (props) => {
         }
       }
     })
-    console.log(description)
+
   };
 
-
+  // console.log(description)
+  
+  // ** Remove it after getting funtion from others **
   // Getting the first three frequent tags --> randomly generated three of them
   let newArr = []
   for(var i=0; i<postData.length; i++){
@@ -113,18 +124,18 @@ const Profile = (props) => {
   const tagsArray = unique.slice(0, 3);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid profile">
       <div className="row mb-3 img-row">
         <div className="col profile-col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src={user_img}
+          src="https://source.unsplash.com/WLUHO9A_xik/35x35"
           data-holder-rendered="true" />
         </div>
       </div>
       <div className="container">
       <div className="row mb-3">
-        <div className="col-md-6">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <h2>{full_name}</h2>
           <p>{email}</p>
           { userId == currentUserId ?
@@ -161,7 +172,7 @@ const Profile = (props) => {
           </div>
           <div className="post-num">{postData.length} posts</div>
         </div>
-        <div className="col-md-6 d-flex hands-box justify-content-end">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
             <h4>Hands Requested</h4>
             <div className="hands-circle">{been_helped}</div>
@@ -173,7 +184,7 @@ const Profile = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col">
+        <div className="col-sm-12 w-75">
           <ProfilePost key={postData._id} postData={postData} />
         </div>
       </div>
