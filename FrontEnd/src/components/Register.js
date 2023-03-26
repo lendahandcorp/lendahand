@@ -170,7 +170,6 @@ const Register = (props) => {
             className="form-control"
             placeholder="Enter Last Name"
             required
-            autoFocus
           />
 
           <br />
@@ -186,7 +185,6 @@ const Register = (props) => {
             className="form-control"
             placeholder="Enter Address"
             required
-            autoFocus
           />
 
           <br />
@@ -202,7 +200,6 @@ const Register = (props) => {
             className="form-control"
             placeholder="Enter Telephone Number"
             required
-            autoFocus
           />
 
           <br />
@@ -232,7 +229,6 @@ const Register = (props) => {
             className="form-control"
             placeholder="Email address"
             required
-            autoFocus
           />
 
           <br />

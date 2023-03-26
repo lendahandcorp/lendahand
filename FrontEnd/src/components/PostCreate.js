@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import '../css/postDetail.css';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 import dataService from '../services/dataService';
@@ -118,7 +119,6 @@ const PostCreate = (props) => {
           console.log('Error: ', error);
         };
     }
-
 
     const handleChange = (event) => {
         //console.log(event.target.value)
