@@ -1,0 +1,15 @@
+textarea {
+    resize: none;
+}
+
+.post-btn {
+    background-color: #ff781f;
+    color: white; 
+    border: 2px solid white;
+}
+  
+.post-btn:hover {
+    background-color: white;
+    color: #ff781f; 
+    border: 2px solid #ff781f;
+}
