@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const validateToken = require('../../middleware/validateToken');
+const { reviewSchemaValidation } = require('../../middleware/joiValidation');
 
 // Import Review Model
 const Reviews = require('../../models/review')
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
 // Get all the reviews by post_id
 // frontEnd will need that
 router.get('/:post_id', validateToken, (req, res) => {
-
+    console.log('A1')
     Reviews.find((err, data) => {
 
         const newReviewArray = [];
@@ -46,7 +47,7 @@ router.get('/:post_id', validateToken, (req, res) => {
 // Get One review By ID
 // Meant to be used by "system admin"
 router.get('/:id', validateToken, (req, res) => {
-
+    console.log('A2')
   Reviews.findById(req.params.id, (err, data) => {
         if (err) {
             return res.status(400).send(`Error: ${err}`)
@@ -63,19 +64,21 @@ router.get('/:id', validateToken, (req, res) => {
 // Create a new review
 // * Create a review under "post id" *
 router.post('/', validateToken, (req, res) => {
+     //create an instance of the Reviews model
     const theReview = new Reviews(req.body)
-    theReview.validate(req.body, (error) => {
-
-        if (error) {
-            return res.status(422).send(error);
-        }
+    const theReviewObject = theReview.toObject();
+    //execute the validate method...
+    const { error, value } = reviewSchemaValidation.validate(theReviewObject);
+    if (error) {
+        return res.status(422).send(error.details[0].message);
+    } else {
 
         const newReview = new Reviews({
-            reviewer: req.body.reviewer,
-            personBeingReviewed: req.body.personBeingReviewed,
-            post_id: req.body.post_id,
-            description: req.body.description,
-            stars: req.body.stars
+            reviewer: value.reviewer,
+            personBeingReviewed: value.personBeingReviewed,
+            post_id: value.post_id,
+            description: value.description,
+            stars: value.stars
         })
 
         newReview.save()
@@ -86,7 +89,7 @@ router.post('/', validateToken, (req, res) => {
             .catch(err => {
                 res.status(422).send(err)
             })
-    })
+    }
 
 })
 
@@ -94,13 +97,13 @@ router.post('/', validateToken, (req, res) => {
 // Reviews are not meant to be edited
 // router.put('/:id', (req, res) => {
 //     const theReview = new Reviews(req.body)
-//     theReview.validate(req.body, (error) => {
+    // const theReviewObject = theReview.toObject();
+//    const { error, value } = reviewSchemaValidation.validate(theReviewObject);
+    // if (error) {
+    //     return res.status(422).send(error.details[0].message);
+    // } else {
 
-//         if (error) {
-//             return res.status(422).send(error);
-//         }
-
-//         Reviews.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+//         Reviews.findByIdAndUpdate(req.params.id, value, (err, data) => {
 //             if (err) {
 //                 return res.status(401).send(err)
 //             }
@@ -111,7 +114,7 @@ router.post('/', validateToken, (req, res) => {
 
 //             res.send('Review was Edited')
 //         })
-//     })
+//     }
 
 // })
 

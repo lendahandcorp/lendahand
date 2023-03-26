@@ -1,15 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import '../css/postDetail.css';
 import { useNavigate } from 'react-router-dom';
-import Post from './Post';
+import { useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 
-
-
-const PostCreate = (props) => {
+const PostEdit = (props) => {
 
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
@@ -21,9 +18,59 @@ const PostCreate = (props) => {
     const [displayEmail, setDisplayEmail] = useState(false);
     const [displayPhone, setDisplayPhone] = useState(false);
     const [media, setMedia] = useState('');
+    const [defaultDate, setDefaultDate] = useState('');
 
     const navigate = useNavigate();
+    const params = useParams();
 
+    useEffect(() => {
+        dataService.getOnePost(params.id, post => {
+            setTitle(post.title);
+            setBody(post.body);
+            setWriter(post.writer);
+            //setTags(post.title);
+            setAvailability(post.availability);
+            setLocation(post.location);
+            setPeople_needed(post.people_needed);
+            setDefaultDate(defaultDateFunc(post.availability))
+            setTags(arrToTagArr(post.tags));
+            setMedia(post.media);
+            console.log(arrToTagArr(post.tags));
+            console.log(defaultDate);
+        })
+
+    }, [])
+
+    const defaultDateFunc = (a) => {
+        console.log(a);
+        let date = new Date(a);
+        //let s = date.toLocaleString();
+        //let s = "2017-06-01T08:30";
+        let s = `${date.getUTCFullYear()}-${addLeadingZero(date.getUTCMonth())}-${addLeadingZero(date.getUTCDate())}T${addLeadingZero(date.getUTCHours())}:${addLeadingZero(date.getUTCMinutes())}`
+        //let s = "2023-04-01T00:00:00.000Z";
+        console.log(s);
+        return s;
+    }
+
+    const arrToTagArr = (a) => {
+        let b = a.map((t => {
+            return t.title
+        }))
+        return b;
+    }
+    const arrToTagString = (a) => {
+        let s = '';
+        a.map((t => {
+            s = s + "#" + t
+        }))
+        return s;
+    }
+
+    const addLeadingZero = (n) => {
+        if (n < 10)
+            n = '0' + n;
+        return n;
+    };
 
     const objectify = (tags) => {
 
@@ -36,6 +83,10 @@ const PostCreate = (props) => {
         return objectedTags
     }
 
+    const convertImage = (a) => {
+        return `data:image/png;base64,${a}`;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -43,34 +94,24 @@ const PostCreate = (props) => {
 
         let post = {
             title: title,
-            writer: componentService.grabMyUserDetails().userId,
+            writer: writer,
             body: body,
             tags: objectify(tags),
             availability: availability,
-            status: "Open",
             location: location,
             people_needed: people_needed,
             applicants: [],
-            people_accepted: [],
-            media: media
+            people_accepted: []
         }
 
-        // let post = {
-        //     "title": "tagtest 1",
-        //     "writer": '63e018aa42a38b860599766c',
-        //     "body": "tt",
-        //     "tags": ["tt1","tt2"],
-        //     "availability": '2002-12-09',
-        //     "location": "123 tt",
-        //     "people_needed": 3,
-        // }
-
-        dataService.createPost(post, (success) => {
+        console.log(post)
+        dataService.updatePost(params.id, post, (success) => {
             if (success) {
                 navigate('/');
             } else {
             }
         });
+        //navigate('/');
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -107,8 +148,8 @@ const PostCreate = (props) => {
 
         reader.onload = function () {
 
-            let p = new RegExp("^(data:image/png;base64,)|^(data:image/jpeg;base64,)", "g");
-            //let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
+            let p = new RegExp("^(data:image/png;base64,)", "g");
+            let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
@@ -127,10 +168,9 @@ const PostCreate = (props) => {
                 setTitle(event.target.value);
                 break;
             case 'media':
+                //setMedia(fileManip(event.target.files))
+                //setMedia(fileManip(event.target.files))
                 fileManip(event.target.files)
-                break;
-            case 'writer':
-                setWriter(event.target.value);
                 break;
             case 'body':
                 setBody(event.target.value);
@@ -139,7 +179,6 @@ const PostCreate = (props) => {
                 convertTagsToArray(event.target.value, event.target);
                 break;
             case 'availability':
-                //console.log(event.target.value)
                 setAvailability(event.target.value);
                 break;
             case 'location':
@@ -148,19 +187,16 @@ const PostCreate = (props) => {
             case 'people_needed':
                 setPeople_needed(event.target.value);
                 break;
-            case 'displayEmail':
-                setDisplayEmail(event.target.checked);
-                break;
-            case 'displayPhone':
-                setDisplayPhone(event.target.checked);
-                break;
         }
     }
 
+    // return (
+    //     <input type="date" {...innerProps} onChange={handleChange} />
+    // );
     return (
         <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
 
-            <h1 className="h3 mb-3 font-weight-normal text-center">Create Post</h1>
+            <h1 className="h3 mb-3 font-weight-normal text-center">Edit Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group">
@@ -170,41 +206,22 @@ const PostCreate = (props) => {
                     name="title"
                     className="form-control"
                     placeholder="..."
+                    defaultValue={title}
                     onChange={handleChange}
                     required />
             </div>
 
-
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
+            {/* <div className="form-group">
                 <label htmlFor="media">Image</label>
                 <input type="file"
                     id="media"
                     name="media"
                     className="form-control"
                     accept="image/png, image/jpeg"
+                    value={convertImage(media)}
                     onChange={handleChange}
                     required />
-            </div>
-
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
-                <input type="checkbox"
-                    id="displayEmail"
-                    name="displayEmail"
-                    className="form-check-input"
-                    onChange={handleChange} />
-                <label className="form-check-label" htmlFor="displayEmail">Display Email?</label>
-            </div> */}
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
-                <input type="checkbox"
-                    id="displayPhone"
-                    name="displayPhone"
-                    className="form-check-input"
-                    onChange={handleChange} />
-                <label className="form-check-label" htmlFor="displayPhone">Display Phone Number?</label>
             </div> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -215,6 +232,7 @@ const PostCreate = (props) => {
                     name="location"
                     className="form-control"
                     placeholder="..."
+                    defaultValue={location}
                     onChange={handleChange}
                     required />
             </div>
@@ -227,6 +245,7 @@ const PostCreate = (props) => {
                     name="availability"
                     className="form-control"
                     placeholder="..."
+                    defaultValue={defaultDate}
                     onChange={handleChange}
                     required />
             </div>
@@ -239,6 +258,7 @@ const PostCreate = (props) => {
                     name="tags"
                     className="form-control"
                     placeholder="..."
+                    defaultValue={arrToTagString(tags)}
                     onChange={handleChange}
                     required />
             </div>
@@ -251,6 +271,7 @@ const PostCreate = (props) => {
                     name="body"
                     className="form-control"
                     placeholder="..."
+                    defaultValue={body}
                     onChange={handleChange}
                     required />
             </div>
@@ -261,6 +282,7 @@ const PostCreate = (props) => {
                     id="people_needed"
                     name="people_needed"
                     className="form-control"
+                    value={people_needed}
                     onChange={handleChange}
                     required />
             </div>
@@ -272,4 +294,4 @@ const PostCreate = (props) => {
     )
 }
 
-export default PostCreate
+export default PostEdit

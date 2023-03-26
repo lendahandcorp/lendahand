@@ -2,104 +2,189 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
+import componentService from '../services/componentService';
 import '../css/app.css';
 import '../css/profile.css';
-// import Post from './Post';
+import ProfilePost from './ProfilePost';
 
 const Profile = (props) => {
-  
+
+  // Get User Id and email
+  const params = useParams();
+  const userId = params.UserId;
+ 
+  const currentUserId = componentService.grabMyUserDetails().userId;
+  const token = authService.isAuthenticated();
+
   // User
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
-  // const [introduction, setIntroduction] = useState(''); // not set it up in db
-  // const [frequent_tags, setFrequentTags] = useState('');
+  const [img_type, SetImgType] = useState('');
+  const [description, setDescription] = useState('');
   const [been_helped, setBeenHelped] = useState('');
   const [helped_others, setHelpedOthers] = useState(''); 
-  // Posts
-  // const [title, setTitle] = useState("");
-  // const [body, setBody] = useState("")
-  // const [availablity, setAvailablity] = useState("");
-  // const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
-
-  // Get User Id
-  const params = useParams();
-  const userId = params.UserId;
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    authService.getOneUser(userId, (data) => {
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setEmail(data.email);
-      setUserImg(data.photo);
-      // setIntroduction(data.introduction); // not set it up in db
-      // setFrequentTags(data.frequent_tags);
-      setBeenHelped(data.been_helped);
-      console.log(data.been_helped)
-      setHelpedOthers(data.helped_others);
-    });
-  }, []);
-
 
   const full_name = first_name + ' ' + last_name;
 
-  // useEffect(() => {
-  //   dataService.getData( userId, (data) => {
-  //     console.log(data)
-  //     setTitle(data.title)
-  //     setBody(data.body)
-  //     setAvailablity(data.availablity)
-  //     setStatus(data.status)
-  //   })
-  // }, [] )
+  const navigate = useNavigate();
+
+  const findImgType = (e) => {
+    let s = e.slice(0,3)
+    if( s = '/9j' ){
+      return 'jpg'
+    } else{
+      return 'png'
+    }
+  }
+
+  useEffect(() => {
+    dataService.getOneUser(userId, (info) => {
+      console.log(info)
+      setFirstName(info.firstName);
+      setLastName(info.lastName);
+      setEmail(info.email)
+      setUserImg(info.picture)
+      SetImgType(findImgType(info.picture))
+      setDescription(info.description);
+      setBeenHelped(info.been_helped);
+      setHelpedOthers(info.helped_others);
+    });
+  }, []);
+
+  //Get Image URL
+  const img_url = `data:image/${img_type};base64,${user_img}`
+
+ //Post
+ const [postData, updatePostData] = useState([]);
+
+  useEffect(() => {
+    const getPostData = async () => {
+      const resp = await componentService.grabMyPosts(userId)
+      updatePostData(resp.postCreatedByUser);
+    }
+    getPostData();
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors({});
+    componentService.insertUserDescription( userId, description, token, (error) => {
+
+      if(!error){
+        navigate(`/`)
+
+      }else{
+
+        console.log(error) //access denied
+
+        switch(error.status){
+          case 400: { setErrors(error.message); break; }
+          case 404: { setErrors(error.statusTe); break;}
+        }
+      }
+    })
+  };
+  
+  // ** Remove it after getting funtion from others **
+  // Getting the first three frequent tags --> randomly generated three of them
+  let newArr = []
+  for(var i=0; i<postData.length; i++){
+
+    let tags = postData[i].tags
+    for(var x=0;x<tags.length;x++){
+      newArr.push(tags[x].title)
+    }
+  }
+
+  let array = []
+  for (var i=0; i<newArr.length; i++)
+  {
+    for (var j=i; j<newArr.length; j++)
+    {
+      if (newArr[i] == newArr[j]){
+        array.push(newArr[i])
+      }
+
+    }
+  }
+
+  let unique = [];
+  for(i=0; i < array.length; i++){ 
+      if(unique.indexOf(array[i]) === -1) { 
+          unique.push(array[i]); 
+      } 
+  }
+
+  const tagsArray = unique.slice(0, 3);
 
   return (
-    <div className="container">
-      <div className="row mb-3">
-        <div className="col profile-col">
+    <div className="container-fluid profile">
+      <div className="row mb-3 img-row">
+        <div className="col profile-col d-flex justify-content-center">
           <img 
-          className="card-img-top rounded-circle profile-img" 
-          src={user_img}
+          className="rounded-circle profile-img" 
+          src={img_url}
           data-holder-rendered="true" />
         </div>
       </div>
+      <div className="container">
       <div className="row mb-3">
-        <div className="col-md-6">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <h2>{full_name}</h2>
           <p>{email}</p>
-          <p className="introduction">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          { userId == currentUserId ?
+          <form method="post" className="form-create" onSubmit={handleSubmit}>
+            <textarea
+              name="description"
+              rows={8} cols={40}
+              type="description"
+              id="inputDescription"
+              className="form-control"  
+              placeholder="Description"
+              onChange={(e) => { setDescription(e.target.value); }}
+              autoFocus
+              defaultValue={description}
+              value={description}
+            />
+            <button className="btn btn-primary mt-1 form-btn" type="submit">
+              Submit
+            </button>
+          </form> :
+          <div className="description">
+            <p className="">{description}</p>
+          </div>  }
           <div className="d-flex">
-            <div className="tags btn btn-outline-secondary">#gardening</div>
-            <div className="tags btn btn-outline-secondary">#painting</div>
-            {/* {frequent_tags.map((tag) => {
-              return (
-                <div className="btn btn-light btn-outline-dark">{tag}</div>
-              );
-            })} */}
+            <ul className="tags">
+              {
+                tagsArray.map(tag => {
+                  return(
+                    <li className="tag btn">#{tag}</li>
+                  )
+                })
+              }
+            </ul>
           </div>
-          <div>Num of posts</div>
+          <div className="post-num">{postData.length} posts</div>
         </div>
-        <div className="col-md-6 d-flex hands-box">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
-            <h2>Hands Requested</h2>
+            <h4>Hands Requested</h4>
             <div className="hands-circle">{been_helped}</div>
           </div>
           <div className="hands">
-            <h2>Hands Requested</h2>
+            <h4>Hands Given</h4>
             <div className="hands-circle">{helped_others}</div>
           </div>
         </div>
       </div>
       <div className="row">
-        <div className="col">
-          Placeholder for Posts and Applicants
+        <div className="col-sm-12 w-75">
+          <ProfilePost key={postData._id} postData={postData} />
         </div>
+      </div>
       </div>
     </div>
   );

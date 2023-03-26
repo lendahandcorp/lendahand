@@ -37,6 +37,7 @@ router.post("/", validateToken, async (req, res) => {
     let tagsToInsert = req.body.filter(reqBodyTag => !currentTagList.some(currentTag => currentTag.title === reqBodyTag.title))
 
     if(tagsToInsert.length>0) {
+        
         let listOfNewTags = await insertMyTags(tagsToInsert)
         res.status(201).json(listOfNewTags);
     }

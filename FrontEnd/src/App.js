@@ -5,9 +5,12 @@ import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
+import Contact from './components/Contact';
 import Profile from './components/Profile';
 import PostDetails from './components/PostDetails';
 import PostCreate from './components/PostCreate';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import PostEdit from './components/PostEdit';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -39,16 +42,21 @@ const App = () => {
               
               {/* This is the About us Page */}
               <Route path='/about' element={<About />}/>
+              <Route path='/contact' element={<Contact />}/>
 
               {/* This is the navbar */}
               {/* <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/> */}
               
               {/* Raw signin page, to be removed */}
               <Route path='/signin' element={<SignIn />}/>
+
+              <Route element={<ProtectedRoutes />}>
+                <Route path='/profile/:UserId' element={<Profile />}/>
+              </Route>
               
 
-              <Route path='/profile/:UserId' element={<Profile />}/>
               <Route path='/postdetails/:id' element={<PostDetails />}/>
+              <Route path='/postedit/:id' element={<PostEdit />}/>
               <Route path='/postcreate' element={<PostCreate />}/>
 
 

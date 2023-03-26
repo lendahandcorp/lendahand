@@ -16,6 +16,7 @@ const Header = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark justify-content-between">
+
     <div className="container">
       <Link to="/#" className="d-flex align-items-center">
        <img className="logo-img navbar-brand" src={logo} alt="logo"/>
@@ -42,18 +43,18 @@ const Header = () => {
                 <li><button type="button" className="dropdown-item" onClick={() => navigate('/postcreate')}>Write a Post</button></li>
                 <li><Link className="dropdown-item" onClick={ () => logout() }>Sign out</Link></li>
             </ul>
+           </div>
+          :
+            <div className="d-flex navbar-nav">
+              <Link className="nav-link nav-item" to="/signin">Sign in</Link>
+              <Link className="nav-link nav-item" to="/register">Register</Link>
+            </div> 
+         }
+            
           </div>
-        :
-          <div className="d-flex navbar-nav">
-            <Link className="nav-link nav-item" to="/signin">Sign in</Link>
-            <Link className="nav-link nav-item" to="/register">Register</Link>
-          </div> 
-          }
         </div>
       </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
   );
 };
 
