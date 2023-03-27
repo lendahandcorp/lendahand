@@ -3,16 +3,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
-import '../css/app.css';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
+const no_image = require('../img/no_image.png');
 
-const Profile = (props) => {
+const Profile = () => {
 
-  // Get User Id and email
+  // Get Id for Viewed User
   const params = useParams();
   const userId = params.UserId;
- 
+
+ // Get my User Id
   const currentUserId = componentService.grabMyUserDetails().userId;
   const token = authService.isAuthenticated();
 
@@ -42,7 +43,6 @@ const Profile = (props) => {
 
   useEffect(() => {
     dataService.getOneUser(userId, (info) => {
-      console.log(info)
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
@@ -54,10 +54,10 @@ const Profile = (props) => {
     });
   }, []);
 
-  //Get Image URL
+  // Get Image URL
   const img_url = `data:image/${img_type};base64,${user_img}`
 
- //Post
+ // Posts
  const [postData, updatePostData] = useState([]);
 
   useEffect(() => {
@@ -68,14 +68,14 @@ const Profile = (props) => {
     getPostData();
   }, []);
 
+// Handle Inserting Description
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors({});
-    componentService.insertUserDescription( userId, description, token, (error) => {
+    componentService.insertUserDescription( currentUserId, {description}, token, (error) => {
 
       if(!error){
-        navigate(`/`)
-
+        navigate('/')
       }else{
 
         console.log(error) //access denied
@@ -87,9 +87,11 @@ const Profile = (props) => {
       }
     })
   };
+
+  console.log(description)
   
-  // ** Remove it after getting funtion from others **
-  // Getting the first three frequent tags --> randomly generated three of them
+  // ** Remove it after getting funtion from other member **
+  // Get the first three duplicate tags
   let newArr = []
   for(var i=0; i<postData.length; i++){
 
@@ -122,11 +124,11 @@ const Profile = (props) => {
 
   return (
     <div className="container-fluid profile">
-      <div className="row mb-3 img-row">
-        <div className="col profile-col d-flex justify-content-center">
+      <div className="row mb-3 profile-background">
+        <div className="col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src={img_url}
+          src={user_img ? img_url: no_image}
           data-holder-rendered="true" />
         </div>
       </div>
@@ -136,17 +138,16 @@ const Profile = (props) => {
           <h2>{full_name}</h2>
           <p>{email}</p>
           { userId == currentUserId ?
-          <form method="post" className="form-create" onSubmit={handleSubmit}>
+          <form onSubmit={(event) => handleSubmit(event)}>
             <textarea
               name="description"
-              rows={8} cols={40}
               type="description"
+              rows = {8}
               id="inputDescription"
               className="form-control"  
               placeholder="Description"
-              onChange={(e) => { setDescription(e.target.value); }}
+              onChange={(event) => { setDescription(event.target.value); }}
               autoFocus
-              defaultValue={description}
               value={description}
             />
             <button className="btn btn-primary mt-1 form-btn" type="submit">
@@ -172,11 +173,11 @@ const Profile = (props) => {
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
             <h4>Hands Requested</h4>
-            <div className="hands-circle">{been_helped}</div>
+            <div className="hands-circle shadow">{been_helped}</div>
           </div>
           <div className="hands">
             <h4>Hands Given</h4>
-            <div className="hands-circle">{helped_others}</div>
+            <div className="hands-circle shadow">{helped_others}</div>
           </div>
         </div>
       </div>

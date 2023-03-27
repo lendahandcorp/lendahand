@@ -1,4 +1,5 @@
-.img-row{
+/* Profile */
+.profile-background{
  background: -moz-linear-gradient(top, #fd6a02 50%, #ffffff 50%);
  background: -webkit-linear-gradient(top, #fd6a02 50%,#ffffff 50%);
  background: linear-gradient(to bottom, #fd6a02 50%,#ffffff 50%);
@@ -45,4 +46,9 @@
  display: flex;
  justify-content: center;
  align-items: center;
+}
+
+/* Profile-Post */
+.profile-post-img{
+ max-width: 250px;
 }

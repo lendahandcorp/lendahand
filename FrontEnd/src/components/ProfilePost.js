@@ -34,13 +34,13 @@ const ProfilePost = (props) => {
   }
 
   return (
-      <div className="container mt-5">
+      <div className="container mt-5 profile-post">
         {props.postData.map(item => {
                     let tag = item.tags
                     return (
                       <div class="row shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="col-sm">
-                        <img src={ item.media = null ? item.media: `https://source.unsplash.com/WLUHO9A_xik/200x200`}
+                        <img src={ item.media = null ? item.media: no_image}
                             alt="lol" 
                             className="rounded profile-post-img"
                            />
