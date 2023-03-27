@@ -194,13 +194,13 @@ const PostEdit = (props) => {
     //     <input type="date" {...innerProps} onChange={handleChange} />
     // );
     return (
-        <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
+        <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
 
-            <h1 className="h3 mb-3 font-weight-normal text-center">Edit Post</h1>
+            <h1 className="h3 mb-5 mt-4 fw-bold text-center">Edit Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="title">Title</label>
+            <div className="form-group mb-4">
+                <label htmlFor="title" className="mb-2">Title</label>
                 <input type="text"
                     id="title"
                     name="title"
@@ -225,8 +225,8 @@ const PostEdit = (props) => {
             </div> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="location">Location</label>
+            <div className="form-group mb-4">
+                <label htmlFor="location" className="mb-2">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
@@ -238,8 +238,8 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="availability">End Date</label>
+            <div className="form-group mb-4">
+                <label htmlFor="availability" className="mb-2">End Date</label>
                 <input type="datetime-local"
                     id="availability"
                     name="availability"
@@ -251,8 +251,8 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="tags">Tags</label>
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2">Tags</label>
                 <input type="text"
                     id="tags"
                     name="tags"
@@ -264,8 +264,8 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="body">Description</label>
+            <div className="form-group mb-4">
+                <label htmlFor="body" className="mb-2">Description</label>
                 <textarea cols="50" rows="3"
                     id="body"
                     name="body"
@@ -276,8 +276,8 @@ const PostEdit = (props) => {
                     required />
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="people_needed">People Needed</label>
+            <div className="form-group mb-5">
+                <label htmlFor="people_needed" className="mb-2">People Needed</label>
                 <input type="number"
                     id="people_needed"
                     name="people_needed"
@@ -289,7 +289,7 @@ const PostEdit = (props) => {
 
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block" >Create Post</button>
+                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
         </form>
     )
 }

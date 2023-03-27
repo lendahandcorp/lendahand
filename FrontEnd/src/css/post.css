@@ -1,0 +1,18 @@
+/* article {
+    display: flex;
+    justify-content: center;
+} */
+
+.postImage {
+    width: 95%;
+}
+
+.user {
+    width: 210px;
+}
+
+.badge {
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
