@@ -135,8 +135,10 @@ const Home = (props) => {
                 </span>
             </div>
 
-            <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary">Write a Post</button>
-            <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button>
+            <div className="ml-5 w-50">
+                <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary mb-4">+ Write a Post</button>
+            </div>
+            {/* <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button> */}
 
             {/* Post Container */}
             <div class="container">

@@ -1,7 +1,7 @@
 //this is a placeholder component for the body section.
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/footer.css';
+import '../css/post.css';
 const no_image = require('../img/no_image.png');
 
 
@@ -45,28 +45,28 @@ const Post = (props) => {
     }
 
     return (
-        <article>
-            <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75">
-                <div class="col-sm">
+        <article className="d-flex justify-content-center">
+            <div className="row shadow-sm p-3 mb-5 bg-white rounded w-75">
+                <div className="col-sm">
 
                     <div>
                         <img src={convertImage(props.data.media)}
                             alt="lol" 
-                            className="rounded "
+                            className="rounded postImage"
                             onClick={() => props.showPost(props.data.post_id)}
                              />
                     </div>
 
-                    <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" class="rounded-circle" />
-                        <span>By Jason Sunnyassy</span>
+                    <div className="btn mt-3 d-flex justify-content-between user" onClick={() => props.goToProfile(props.data.writer)}>
+                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" className="rounded-circle" />
+                        <span className="mt-1">By Jason Sunnyassy</span>
                     </div>
 
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
 
-                    <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
+                    <h5 className="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
                     {/* <h5 class="fw-bold" >
                         <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
                             {props.data.title}
@@ -79,9 +79,9 @@ const Post = (props) => {
                     </button> */}
                     
 
-                    <h6 class="fst-italic">Availability: {getDate()} </h6>
+                    <h6 className="fst-italic">Availability: {getDate()} </h6>
 
-                    <span class="fw-light">
+                    <span className="fw-light">
                         {props.data.body}
                     </span>
                     <br />
@@ -89,7 +89,7 @@ const Post = (props) => {
                     {/* <span class="badge badge2">#Uhaul</span> */}
                     {
                         props.data.tags.map((tag, i) => {
-                            return  <span key={i} class={`btn badge badge${getTagColorId(i)}`}
+                            return  <span key={i} class={`badge btn badge badge${getTagColorId(i)}`}
                                 onClick={() => props.tagClicked(tag.title)}
                             >
                                 {" #" + tag.title}

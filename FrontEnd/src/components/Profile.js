@@ -126,7 +126,8 @@ const Profile = (props) => {
         <div className="col profile-col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src={img_url}
+          // src={img_url}
+          src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
           data-holder-rendered="true" />
         </div>
       </div>
