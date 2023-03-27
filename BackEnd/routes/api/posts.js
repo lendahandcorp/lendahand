@@ -113,7 +113,7 @@ router.put('/:id', validateToken, async (req, res) => {
         tags: listOfTags,
         availability: req.body.availability,
         date_created: req.body.date_created,
-        status_id: req.body.status_id,
+        status: req.body.status,
         location: req.body.location,
         people_needed: req.body.people_needed,
         applicants: req.body.applicants,
@@ -137,15 +137,12 @@ router.put('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
-      console.log('YT1')
       return res.status(401).send(err);
     }
 
     if (!data) {
-      console.log('YT2')
       res.status(404).send();
     }
-    console.log('YT3')
     res.send(data);
   });
 });

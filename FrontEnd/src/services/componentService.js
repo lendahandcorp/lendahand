@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import axios from 'axios'
+const blank_images = require('../img/blank_images.json')
 
 class componentService {
 
@@ -11,6 +12,21 @@ class componentService {
         **/ 
         return userDetail;
     }
+
+    //imageType decides what blank image is returned if a is not base64.
+    convertImageFromBase64 (a, imageType) {
+        var regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        
+        if(a === undefined || a === null || !regex.test(a) || a === "" || typeof a != "string"){
+
+            if(imageType == "img")  return blank_images.image;
+            else if(imageType == "pic") return blank_images.picture;
+
+        } else {
+            return `data:image/png;base64,${a}`;
+        }
+    }
+
 
     // Return an object with hands requested and hands given per userID
     async grabMyPosts (userID) {

@@ -21,7 +21,7 @@ const Home = (props) => {
 
     useEffect(() => {
         dataService.getPosts(posts => {
-
+            
             //convert the tag ids into names
             //dataService.getTagsById();
 
@@ -31,6 +31,7 @@ const Home = (props) => {
 
     const goToProfile = (id) => {
         console.log('%c user attempted to go to profile:' + id, 'color:blue');
+        console.log(id);
         navigate('/profile/' + id);
     }
 

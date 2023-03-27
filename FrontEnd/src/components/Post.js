@@ -1,12 +1,27 @@
 //this is a placeholder component for the body section.
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/footer.css';
+import componentService from '../services/componentService';
+import dataService from '../services/dataService';
 const no_image = require('../img/no_image.png');
 
-
+const blank_images = require('../img/blank_images.json')
 
 const Post = (props) => {
+
+
+    const [writer, setWriter] = useState({})
+
+    useEffect(() => {
+        dataService.getOneUser(props.data.writer, user => {
+            //console.log(user);
+            setWriter(user);
+        })
+    }, [])
+
+
     const getDate = () => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let date = new Date(props.data.availability);
@@ -40,8 +55,43 @@ const Post = (props) => {
         return props.data.people_needed - props.data.people_accepted.length
     }
 
-    const convertImage = (a) => {
-        return `data:image/png;base64,${a}`;
+    const aa = () => {
+        //console.log(props.data.post_id)
+    }
+    
+    const convertImage = (a, imageType) => {
+        //console.log(a);
+        var regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        
+        //console.log(props.data.title + " a ("+imageType+")");
+        // if( props.data.title == "Testing by Joy a"){
+        //     console.log("s");
+        //     if(imageType == "img"){
+        //         console.log(a);
+        //     }
+        // }
+        // if(typeof a != "string"){
+        //     console.log(props.data.title + " ("+imageType+") " + typeof(a));
+        // }
+        if(a === undefined || a === null || !regex.test(a) || a === "" || typeof a != "string"){
+            console.log(props.data.title + " ("+imageType+") " + typeof(a));
+
+            if(imageType == "img"){
+                //console.log(props.data.title + " img");
+                return blank_images.image;
+
+            } else if(imageType == "pic"){
+                //console.log(props.data.title + " pic");
+                return blank_images.picture;
+            } 
+        } else {
+            //console.log(props.data.title + " a ("+imageType+")");
+            return `data:image/png;base64,${a}`;
+        }
+    }
+
+    const username = () => {
+        return `${writer.firstName} ${writer.lastName}`
     }
 
     return (
@@ -50,16 +100,17 @@ const Post = (props) => {
                 <div class="col-sm">
 
                     <div>
-                        <img src={convertImage(props.data.media)}
+                        <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
                             alt="lol" 
                             className="rounded "
-                            onClick={() => props.showPost(props.data.post_id)}
+                            onClick={() => props.showPost(props.data._id)}
+                            //onClick={() => aa()}
                              />
                     </div>
 
                     <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" class="rounded-circle" />
-                        <span>By Jason Sunnyassy</span>
+                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle" />
+                        <span>By {username()}</span>
                     </div>
 
                 </div>
