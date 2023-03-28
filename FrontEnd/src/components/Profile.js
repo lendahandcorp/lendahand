@@ -25,8 +25,6 @@ const Profile = () => {
   const [user_img, setUserImg] = useState('');
   const [img_type, SetImgType] = useState('');
   const [description, setDescription] = useState('');
-  const [been_helped, setBeenHelped] = useState('');
-  const [helped_others, setHelpedOthers] = useState(''); 
   const [errors, setErrors] = useState({});
 
   const full_name = first_name + ' ' + last_name;
@@ -47,29 +45,27 @@ const Profile = () => {
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
-      // let x = Buffer.isBuffer(info.picture)
-      // if(x)
       setUserImg(info.picture)
       SetImgType(findImgType(info.picture))
       setDescription(info.description);
-      setBeenHelped(info.been_helped);
-      setHelpedOthers(info.helped_others);
     });
   }, []);
 
-  console.log(Buffer.isBuffer(user_img))
-  // console.log(img_type)
   // Get Image URL
-  const img_url = `data:image/png;base64,${user_img}`
-  console.log(img_url)
+  const img_url = `data:image/${img_type};base64,${user_img}`
+  // console.log(img_url)
 
  // Posts
  const [postData, updatePostData] = useState([]);
+ const [hands_requested , updateHandsRequested] = useState('')
+ const [hands_given , updateHandsGiven] = useState('')
 
   useEffect(() => {
     const getPostData = async () => {
       const resp = await componentService.grabMyPosts(userId)
       updatePostData(resp.postCreatedByUser);
+      updateHandsRequested(resp.postCreatedByUser.length)
+      updateHandsGiven(resp.postAttendedByUser.length)
     }
     getPostData();
   }, []);
@@ -81,7 +77,7 @@ const Profile = () => {
     componentService.insertUserDescription( currentUserId, {description}, token, (error) => {
 
       if(!error){
-        navigate('/')
+        navigate(`/`)
       }else{
 
         console.log(error) //access denied
@@ -94,7 +90,11 @@ const Profile = () => {
     })
   };
 
-  // console.log(description)
+  // Get most common tags
+  // useEffect(() => {
+  //   componentService.MostCommonTagsForUser(userId, tagsToReturn, callback)
+
+  // },[])
   
   // ** Remove it after getting funtion from other member **
   // Get the first three duplicate tags
@@ -141,7 +141,7 @@ const Profile = () => {
       <div className="container">
       <div className="row mb-3">
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <h1 className="fw-bold">{full_name}</h1>
+          <h2 className="fw-bold full-name">{full_name}</h2>
           <p className="fst-italic email">{email}</p>
           { userId == currentUserId ?
           <form onSubmit={(event) => handleSubmit(event)}>
@@ -178,12 +178,12 @@ const Profile = () => {
         </div>
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
-            <h4 className="fw-bold">Hands Requested</h4>
-            <div className="hands-circle shadow">{been_helped}</div>
+            <h4 className="fw-bold hands-heading">Hands Requested</h4>
+            <div className="hands-circle shadow">{hands_requested}</div>
           </div>
           <div className="hands">
-            <h4 className="fw-bold">Hands Given</h4>
-            <div className="hands-circle shadow">{helped_others}</div>
+            <h4 className="fw-bold hands-heading">Hands Given</h4>
+            <div className="hands-circle shadow">{hands_given}</div>
           </div>
         </div>
       </div>

@@ -10,12 +10,8 @@
  width: 200px;
 }
 
-.email{
- font-size: 20px;
-}
-
-.desc-p{
- font-size: 20px;
+.email, .desc-p{
+ font-size: 1.1rem;
 }
 
 .tag{
