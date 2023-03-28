@@ -33,7 +33,7 @@ app.use(logger('dev'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'FrontEnd/build')));
+app.use(express.static(path.join(__dirname, '../FrontEnd/build')));
 
 // import routers
 var indexRouter = require('./routes/index'); //index = index.js
