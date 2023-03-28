@@ -5,6 +5,7 @@ import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
+import { Buffer } from 'buffer';
 const no_image = require('../img/no_image.png');
 
 const Profile = () => {
@@ -46,6 +47,8 @@ const Profile = () => {
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
+      // let x = Buffer.isBuffer(info.picture)
+      // if(x)
       setUserImg(info.picture)
       SetImgType(findImgType(info.picture))
       setDescription(info.description);
@@ -54,8 +57,11 @@ const Profile = () => {
     });
   }, []);
 
+  console.log(Buffer.isBuffer(user_img))
+  // console.log(img_type)
   // Get Image URL
-  const img_url = `data:image/${img_type};base64,${user_img}`
+  const img_url = `data:image/png;base64,${user_img}`
+  console.log(img_url)
 
  // Posts
  const [postData, updatePostData] = useState([]);
@@ -88,7 +94,7 @@ const Profile = () => {
     })
   };
 
-  console.log(description)
+  // console.log(description)
   
   // ** Remove it after getting funtion from other member **
   // Get the first three duplicate tags
@@ -135,8 +141,8 @@ const Profile = () => {
       <div className="container">
       <div className="row mb-3">
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <h2>{full_name}</h2>
-          <p>{email}</p>
+          <h1 className="fw-bold">{full_name}</h1>
+          <p className="fst-italic email">{email}</p>
           { userId == currentUserId ?
           <form onSubmit={(event) => handleSubmit(event)}>
             <textarea
@@ -155,7 +161,7 @@ const Profile = () => {
             </button>
           </form> :
           <div className="description">
-            <p className="">{description}</p>
+            <p className="fw-normal desc-p">{description}</p>
           </div>  }
           <div className="d-flex">
             <ul className="tags">
@@ -172,17 +178,17 @@ const Profile = () => {
         </div>
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
-            <h4>Hands Requested</h4>
+            <h4 className="fw-bold">Hands Requested</h4>
             <div className="hands-circle shadow">{been_helped}</div>
           </div>
           <div className="hands">
-            <h4>Hands Given</h4>
+            <h4 className="fw-bold">Hands Given</h4>
             <div className="hands-circle shadow">{helped_others}</div>
           </div>
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-12 w-75">
+        <div className="col-sm-12 w-75 m-auto">
           <ProfilePost key={postData._id} postData={postData} />
         </div>
       </div>
