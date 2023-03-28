@@ -112,12 +112,21 @@ export const emailValidator = email => {
     return "";
   };
 
+
   export const peopleNeededValidator = people_needed => {
     if (!people_needed) {
       return "People needed is required";
     } else if (people_needed < 1 ) {
       return "People needed cannot be 0"
     }
+    return "";
+  };
+
+  
+  export const descriptionValidator = des => {
+    if (des.length > 280) {
+      return "Description must be less than 280 chars";
+    } 
     return "";
   };
 

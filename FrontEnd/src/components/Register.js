@@ -172,14 +172,13 @@ const Register = (props) => {
             id="lastName"
             className="form-control"
             placeholder="Enter Last Name"
-<<<<<<< HEAD
+
             onBlur={() => {
               const error = lastNameValidator(lastName);
               setLastNameError(error);
           }}
-=======
             required
->>>>>>> dev
+
           />
 
           <br />
@@ -194,14 +193,13 @@ const Register = (props) => {
             id="address"
             className="form-control"
             placeholder="Enter Address"
-<<<<<<< HEAD
+
             onBlur={() => {
               const error = addressValidator(address);
               setAddressError(error);
           }}
-=======
             required
->>>>>>> dev
+
           />
 
           <br />
@@ -216,14 +214,13 @@ const Register = (props) => {
             id="telephoneNumber"
             className="form-control"
             placeholder="Enter Telephone Number"
-<<<<<<< HEAD
+
             onBlur={() => {
               const error = phoneValidator(phone);
               setTelephoneNumberError(error);
           }}
-=======
+
             required
->>>>>>> dev
           />
 
           <br />
@@ -253,14 +250,14 @@ const Register = (props) => {
             id="inputEmail"
             className="form-control"
             placeholder="Email address"
-<<<<<<< HEAD
+
             onBlur={() => {
               const error = emailValidator(email);
               setEmailError(error);
           }}
-=======
+
             required
->>>>>>> dev
+
           />
 
           <br />

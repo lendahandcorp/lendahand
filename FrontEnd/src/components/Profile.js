@@ -6,7 +6,9 @@ import componentService from '../services/componentService';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
 import { Buffer } from 'buffer';
+import { descriptionValidator } from './Validator';
 const no_image = require('../img/no_image.png');
+
 
 const Profile = () => {
 
@@ -25,6 +27,7 @@ const Profile = () => {
   const [user_img, setUserImg] = useState('');
   const [img_type, SetImgType] = useState('');
   const [description, setDescription] = useState('');
+  const [descriptionError, setDescriptionError] = useState('');
   const [been_helped, setBeenHelped] = useState('');
   const [helped_others, setHelpedOthers] = useState(''); 
   const [errors, setErrors] = useState({});
@@ -77,6 +80,13 @@ const Profile = () => {
 // Handle Inserting Description
   const handleSubmit = (event) => {
     event.preventDefault();
+    const isDesValid = descriptionValidator(description);
+    if (isDesValid !== '') {
+      setDescriptionError(isDesValid);
+    }
+
+    if (isDesValid === ''){
+
     setErrors({});
     componentService.insertUserDescription( currentUserId, {description}, token, (error) => {
 
@@ -92,6 +102,7 @@ const Profile = () => {
         }
       }
     })
+  }
   };
 
   // console.log(description)
@@ -144,7 +155,16 @@ const Profile = () => {
           <h1 className="fw-bold">{full_name}</h1>
           <p className="fst-italic email">{email}</p>
           { userId == currentUserId ?
+          
           <form onSubmit={(event) => handleSubmit(event)}>
+             {/* Validators */}
+             <p
+            className={
+              descriptionError ? 'alert alert-danger text-center' : 'hidden'
+            }
+          >
+            {descriptionError}
+          </p>
             <textarea
               name="description"
               type="description"
@@ -155,6 +175,10 @@ const Profile = () => {
               onChange={(event) => { setDescription(event.target.value); }}
               autoFocus
               value={description}
+              onBlur={() => {
+                const error = descriptionValidator(description);
+                setDescriptionError(error);
+            }}
             />
             <button className="btn btn-primary mt-1 form-btn" type="submit">
               Submit

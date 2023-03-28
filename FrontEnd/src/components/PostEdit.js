@@ -289,7 +289,7 @@ const PostEdit = (props) => {
         {peopleNeededError}
       </p>
 
-<<<<<<< HEAD
+
       {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
       <div className="form-group">
         <label htmlFor="title">Title</label>
@@ -319,17 +319,6 @@ const PostEdit = (props) => {
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Edit Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="title" className="mb-2">Title</label>
-                <input type="text"
-                    id="title"
-                    name="title"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={title}
-                    onChange={handleChange}
-                    required />
-            </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             {/* <div className="form-group">
@@ -345,7 +334,7 @@ const PostEdit = (props) => {
                     required />
             </div> */}
 
-<<<<<<< HEAD
+
       {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
       <div className="form-group">
         <label htmlFor="location">Location</label>
@@ -434,76 +423,8 @@ const PostEdit = (props) => {
         className="btn btn-lg btn-primary btn-block" >Create Post</button>
     </form>
   )
-=======
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="location" className="mb-2">Location</label>
-                <input type="text"
-                    id="location"
-                    name="location"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={location}
-                    onChange={handleChange}
-                    required />
-            </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="availability" className="mb-2">End Date</label>
-                <input type="datetime-local"
-                    id="availability"
-                    name="availability"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={defaultDate}
-                    onChange={handleChange}
-                    required />
-            </div>
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="tags" className="mb-2">Tags</label>
-                <input type="text"
-                    id="tags"
-                    name="tags"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={arrToTagString(tags)}
-                    onChange={handleChange}
-                    required />
-            </div>
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="body" className="mb-2">Description</label>
-                <textarea cols="50" rows="3"
-                    id="body"
-                    name="body"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={body}
-                    onChange={handleChange}
-                    required />
-            </div>
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-5">
-                <label htmlFor="people_needed" className="mb-2">People Needed</label>
-                <input type="number"
-                    id="people_needed"
-                    name="people_needed"
-                    className="form-control"
-                    value={people_needed}
-                    onChange={handleChange}
-                    required />
-            </div>
-
-
-            <button type="submit"
-                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
-        </form>
-    )
->>>>>>> dev
+            
 }
 
 export default PostEdit
