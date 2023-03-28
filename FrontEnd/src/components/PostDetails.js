@@ -150,7 +150,7 @@ const PostDetails = (props) => {
                                 <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
                             </button> */}
 
-                            <div className="container">
+                            <div className="container d-flex justify-content-end">
                                     <div className="dropdown">
                                         <button className="btn dropdown-toggle"
                                                 type="button"

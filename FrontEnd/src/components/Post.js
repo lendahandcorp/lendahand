@@ -64,44 +64,48 @@ const Post = (props) => {
 
                 </div>
 
-                <div className="col-sm">
+                <div className="col-sm d-flex flex-column justify-content-between">
+                    <div className="d-flex flex-column">
+                        <a className="fw-bold pointer-cursor text-decoration-none h4" onClick={() => props.showPost(props.data._id)}>{props.data.title}</a>
+                        {/* <h5 class="fw-bold" >
+                            <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                                {props.data.title}
+                            </button>
+                        </h5> */}
+                        {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                            <h5 class="fw-bold" >
+                                {props.data.title}
+                            </h5>
+                        </button> */}
+                        
 
-                    <h5 className="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
-                    {/* <h5 class="fw-bold" >
-                        <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                            {props.data.title}
-                        </button>
-                    </h5> */}
-                    {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                        <h5 class="fw-bold" >
-                            {props.data.title}
-                        </h5>
-                    </button> */}
-                    
+                        <h6 className="fst-italic">Availability: {getDate()} </h6>
 
-                    <h6 className="fst-italic">Availability: {getDate()} </h6>
-
-                    <span className="fw-light">
-                        {props.data.body}
-                    </span>
-                    <br />
-                    {/* <span class="badge badge1">#furniture</span> */}
-                    {/* <span class="badge badge2">#Uhaul</span> */}
-                    {
-                        props.data.tags.map((tag, i) => {
-                            return  <span key={i} class={`badge btn badge badge${getTagColorId(i)}`}
-                                onClick={() => props.tagClicked(tag.title)}
-                            >
-                                {" #" + tag.title}
-                            </span>
-                        })
-                    }
-                    <br />
-
-                    <div class="flex-d mt-2 justify-content-sm-center flex-row-reverse">
-                        <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                        <span className="fw-light">
+                            {props.data.body}
+                        </span>
                     </div>
-
+                    <div className="d-flex">
+                        {/* <span class="badge badge1">#furniture</span> */}
+                        {/* <span class="badge badge2">#Uhaul</span> */}
+                        {
+                            props.data.tags.map((tag, i) => {
+                                return  <span key={i} class={`badge btn badge badge${getTagColorId(i)}`}
+                                    onClick={() => props.tagClicked(tag.title)}
+                                >
+                                    {" #" + tag.title}
+                                </span>
+                            })
+                        }
+                        
+                        <div class="d-flex mt-2 justify-content-sm-center justify-content-between ml-5">
+                            <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                        </div>
+                    </div>
+                        {/* <div class="d-flex mt-2 justify-content-sm-center flex-row-reverse">
+                            <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                        </div> */}
+                    
 
                 </div>
 

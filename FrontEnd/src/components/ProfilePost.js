@@ -45,18 +45,22 @@ const ProfilePost = (props) => {
                             className="rounded profile-post-img"
                            />
                         </div>
-                        <div className="col-sm shadow-sm p-3 mb-5 bg-white rounded">
-                          <h5 class="fw-bold">{item.title}</h5>
-                          <div className="fst-italic">Availability:
-                          <span> {getDate(item.availability)}</span>
+                        <div className="col-sm d-flex flex-column justify-content-between">
+                          <div className="d-flex flex-column">
+                            <h5 class="fw-bold">{item.title}</h5>
+                            <div className="fst-italic">Availability:
+                            <span> {getDate(item.availability)}</span>
+                            </div>
+                            <div className="fw-light">{item.body}</div>
                           </div>
-                          <div className="fw-light">{item.body}</div>
-                          <div className="tags-flex">
-                            {tag.map((t,i) => { 
-                              return (
-                              <div class={`btn badge badge${getTagColorId(i)}`}>#{t.title}</div>
-                              )
-                            })}
+                          <div className="d-flex">
+                            <div className="tags-flex">
+                              {tag.map((t,i) => { 
+                                return (
+                                <div class={`btn badge badge${getTagColorId(i)}`}>#{t.title}</div>
+                                )
+                              })}
+                            </div>
                           </div>
                         </div>
                      </div>
