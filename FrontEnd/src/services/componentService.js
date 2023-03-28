@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import axios from 'axios'
+import dataService from './dataService';
 const blank_images = require('../img/blank_images.json')
 
 class componentService {
@@ -12,6 +13,77 @@ class componentService {
         **/ 
         return userDetail;
     }
+
+    //Service to return the most 3 common tags for a user
+    MostCommonTagsForUser(user_id, tagsToReturn, callback) {
+        dataService.getPosts(posts => {
+            
+            //filter out all posts besides the ones from the specified user (thansk for the code bruno)
+            let usersPosts = posts.filter(post => post.writer === user_id)
+
+            
+            let tagsByRank = {} //this is an object, not an array.
+
+            //create a property for each tag name with a value equaling its count
+            usersPosts.forEach(post => {
+                post.tags.forEach(tag => {
+                    if(tagsByRank[tag.title] == null) {
+                        tagsByRank[tag.title] = 0;
+                    }
+                    tagsByRank[tag.title] += 1;
+                });
+            });
+
+            //converting the object into an array.
+            let arr = []
+            for (const [key, value] of Object.entries(tagsByRank)) {
+                arr.push({title: key, count: value})
+            }
+
+            //sorting the new array and taking only the amount of tags the caller asked for.
+            arr.sort((a, b) => {
+                return b.count - a.count
+            });
+            
+            arr = arr.slice(0, tagsToReturn);
+            callback(arr);
+        })
+    }
+
+    //Service to return the most 3 common tags for everybody
+    MostCommonTagsForAllUsers(tagsToReturn, callback) {
+        dataService.getPosts(posts => {
+        
+            let tagsByRank = {} //this is an object, not an array.
+
+                        //create a property for each tag name with a value equaling its count
+            posts.forEach(post => {
+                post.tags.forEach(tag => {
+                    if(tagsByRank[tag.title] == null) {
+                        tagsByRank[tag.title] = 0;
+                    }
+                    tagsByRank[tag.title] += 1;
+                });
+            });
+
+            //converting the object into an array.
+            let arr = []
+            for (const [key, value] of Object.entries(tagsByRank)) {
+                arr.push({title: key, count: value})
+            }
+
+            //sorting the new array and taking only the amount of tags the caller asked for.
+            arr.sort((a, b) => {
+                return b.count - a.count
+            })
+
+            arr = arr.slice(0, tagsToReturn);
+
+            callback(arr);
+        })
+    }
+
+
 
     //imageType decides what blank image is returned if a is not base64.
     convertImageFromBase64 (a, imageType) {

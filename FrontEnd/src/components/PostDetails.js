@@ -32,7 +32,7 @@ const PostDetails = (props) => {
             //console.log(post.applicants)
 
             dataService.getOneUser(post.writer, user => {
-                //console.log(user);
+                console.log(user);
                 setWriter(user);
             })
             dataService.getReviews(post._id, newReviews => {
