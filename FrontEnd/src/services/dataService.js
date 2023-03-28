@@ -61,6 +61,20 @@ class dataService {
             })
     }
 
+    createReview(APIdata, callback) {
+        axios.post(`${process.env.REACT_APP_API_URL}/reviews`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 201) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error.response)
+                callback(false)
+            })
+    }
+
     updatePost(param, APIdata, callback) {
         console.log(APIdata)
         axios.put(`${process.env.REACT_APP_API_URL}/posts/${param}`, APIdata, this.getUserId())
@@ -77,8 +91,19 @@ class dataService {
             })
     }
 
-    deletePost(id, callback) {
-        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, this.getUserId())
+    acceptApplicant(applicant_id, post_id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+
+            let APIdata = response.data;
+        
+            APIdata.applicants = APIdata.applicants.filter(a => {
+                return a != applicant_id;
+            })
+
+            APIdata.people_accepted.push(applicant_id);
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
             .then(
                 response => {
                     if (response.status === 204) {
@@ -86,6 +111,152 @@ class dataService {
                     }
                 })
             .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+
+    //This is for development only.
+    clearApplicant(post_id, callback) {
+
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+
+            let APIdata = response.data;
+    
+            APIdata.people_accepted = [];
+            APIdata.applicants = [];
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 204) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+
+    ClosePost(post_id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+
+
+            let APIdata = response.data;
+            APIdata.status = "Closed";
+
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 204) {
+                        //console.log(response.data.status)
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+    OpenPost(post_id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+
+
+            let APIdata = response.data;
+            APIdata.status = "Open";
+
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 204) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+
+    revokeApplicant(applicant_id, post_id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+
+            let APIdata = response.data;
+        
+            APIdata.people_accepted = APIdata.people_accepted.filter(a => {
+                return a != applicant_id;
+            })
+
+            APIdata.applicants.push(applicant_id);
+
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 204) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+
+    addApplicant(applicant_id, post_id, callback) {
+        axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
+        .then(response => {
+            console.log(response.data)
+
+            let APIdata = response.data;
+
+            APIdata.applicants.push(applicant_id);
+
+            axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
+            .then(
+                response => {
+                    if (response.status === 204) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+        })
+    }
+
+
+    deletePost(id, callback) {
+        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, this.getUserId())
+            .then(
+                response => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
                 callback(false)
             })
     }

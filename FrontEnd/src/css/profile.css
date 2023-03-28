@@ -10,6 +10,14 @@
  width: 200px;
 }
 
+.email{
+ font-size: 20px;
+}
+
+.desc-p{
+ font-size: 20px;
+}
+
 .tag{
  margin: 5px;
  padding: 1px 10px;
@@ -48,7 +56,8 @@
  align-items: center;
 }
 
+
 /* Profile-Post */
 .profile-post-img{
- max-width: 250px;
+ max-width: 400px;
 }
