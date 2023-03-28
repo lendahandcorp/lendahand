@@ -112,14 +112,14 @@ router.put('/:id', validateToken, async (req, res) => {
         title: value.title,
         body: value.body,
         tags: listOfTags,
-        availability: value.availability,
-        date_created: value.date_created,
-        status_id: value.status_id,
-        location: value.location,
-        people_needed: value.people_needed,
-        applicants: value.applicants,
-        people_accepted: value.people_accepted,
-        media: value.media,
+        availability: req.body.availability,
+        date_created: req.body.date_created,
+        status: req.body.status,
+        location: req.body.location,
+        people_needed: req.body.people_needed,
+        applicants: req.body.applicants,
+        people_accepted: req.body.people_accepted,
+        media: req.body.media
       },
       (err, data) => {
         if (err) {
@@ -138,15 +138,12 @@ router.put('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
-      console.log('YT1');
       return res.status(401).send(err);
     }
 
     if (!data) {
-      console.log('YT2');
       res.status(404).send();
     }
-    console.log('YT3');
     res.send(data);
   });
 });
