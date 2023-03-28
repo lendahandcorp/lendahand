@@ -319,105 +319,80 @@ const PostEdit = (props) => {
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Edit Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
->>>>>>> dev
-                <label htmlFor="media">Image</label>
-                <input type="file"
-                    id="media"
-                    name="media"
+            <div className="form-group mb-4">
+                <label htmlFor="title" className="mb-2 fw-bold">Title</label>
+                <input type="text"
+                    id="title"
+                    name="title"
                     className="form-control"
-                    accept="image/png, image/jpeg"
-                    value={convertImage(media)}
+                    placeholder="..."
+                    defaultValue={title}
                     onChange={handleChange}
                     required />
-            </div> */}
+            </div>
 
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
+                <label htmlFor="location" className="mb-2 fw-bold">Location</label>
+                <input type="text"
+                    id="location"
+                    name="location"
+                    className="form-control"
+                    placeholder="..."
+                    defaultValue={location}
+                    onChange={handleChange}
+                    required />
+            </div>
 
-      {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="location">Location</label>
-        <input type="text"
-          id="location"
-          name="location"
-          className="form-control"
-          placeholder="..."
-          defaultValue={location}
-          onChange={handleChange}
-          onBlur={() => {
-            const error = locationValidator(location);
-            setLocationError(error);
-        }}
-        />
-      </div>
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
+                <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
+                <input type="datetime-local"
+                    id="availability"
+                    name="availability"
+                    className="form-control"
+                    placeholder="..."
+                    defaultValue={defaultDate}
+                    onChange={handleChange}
+                    required />
+            </div>
 
-      {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="availability">End Date</label>
-        <input type="datetime-local"
-          id="availability"
-          name="availability"
-          className="form-control"
-          placeholder="..."
-          defaultValue={defaultDate}
-          onChange={handleChange}
-          onBlur={() => {
-            const error = availabilityValidator(availability);
-            setAvailabilityError(error);
-        }}
-        />
-      </div>
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <input type="text"
+                    id="tags"
+                    name="tags"
+                    className="form-control"
+                    placeholder="..."
+                    defaultValue={arrToTagString(tags)}
+                    onChange={handleChange}
+                    required />
+            </div>
 
-      {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="tags">Tags</label>
-        <input type="text"
-          id="tags"
-          name="tags"
-          className="form-control"
-          placeholder="..."
-          defaultValue={arrToTagString(tags)}
-          onChange={handleChange}
-          onBlur={() => {
-            const error = tagsValidator(tags);
-            setTagsError(error);
-        }}
-        />
-      </div>
-
-      {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="body">Description</label>
-        <textarea cols="50" rows="3"
-          id="body"
-          name="body"
-          className="form-control"
-          placeholder="..."
-          defaultValue={body}
-          onChange={handleChange}
-          onBlur={() => {
-            const error = bodyValidator(body);
-            setBodyError(error);
-        }}
-        />
-      </div>
-      {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="people_needed">People Needed</label>
-        <input type="number"
-          id="people_needed"
-          name="people_needed"
-          className="form-control"
-          value={people_needed}
-          onChange={handleChange}
-          onBlur={() => {
-            const error = peopleNeededValidator(people_needed);
-            setPeopleNeededError(error);
-        }}
-        />
-      </div>
-
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
+                <label htmlFor="body" className="mb-2 fw-bold">Description</label>
+                <textarea cols="50" rows="3"
+                    id="body"
+                    name="body"
+                    className="form-control"
+                    placeholder="..."
+                    defaultValue={body}
+                    onChange={handleChange}
+                    required />
+            </div>
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-5">
+                <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
+                <input type="number"
+                    id="people_needed"
+                    name="people_needed"
+                    className="form-control"
+                    value={people_needed}
+                    onChange={handleChange}
+                    required />
+            </div>
 
       <button type="submit"
         className="btn btn-lg btn-primary btn-block" >Create Post</button>
