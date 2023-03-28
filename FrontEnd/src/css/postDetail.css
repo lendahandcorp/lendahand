@@ -1,0 +1,55 @@
+textarea {
+    resize: none;
+}
+
+.post-btn {
+    background-color: #ff781f;
+    color: white; 
+    border: 2px solid white;
+}
+  
+.post-btn:hover {
+    background-color: white;
+    color: #ff781f; 
+    border: 2px solid #ff781f;
+}
+
+.postImage {
+    width: 95%;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.border-popup {
+    border-width: 2px;
+    border-color: black;
+    border-radius: 14px !important;
+}
+
+.title {
+    margin-left: 2%;
+}
+
+.people {
+        /* display: flex; */
+        flex-wrap: wrap;
+    }
+    
+.volunteer > div {
+    margin: 23px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+    

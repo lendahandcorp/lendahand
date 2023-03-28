@@ -1,14 +1,21 @@
-.img-row{
+/* Profile */
+.profile-background{
  background: -moz-linear-gradient(top, #fd6a02 50%, #ffffff 50%);
  background: -webkit-linear-gradient(top, #fd6a02 50%,#ffffff 50%);
  background: linear-gradient(to bottom, #fd6a02 50%,#ffffff 50%);
-
- /* #ed8941 */
 }
 
 .profile-img{
  height: 200px;
  width: 200px;
+}
+
+.email{
+ font-size: 20px;
+}
+
+.desc-p{
+ font-size: 20px;
 }
 
 .tag{
@@ -28,8 +35,8 @@
 
 .hands-circle{
  background: #FFDF8B;
- width: 180px;
- height: 180px;
+ width: 150px;
+ height: 150px;
  border-radius: 50%;
  display: flex;
  align-items: center;
@@ -40,7 +47,6 @@
  align-items: center;
 }
 
-
 .post-num{
  background: #FFDF8B;
  width: 100px;
@@ -48,4 +54,10 @@
  display: flex;
  justify-content: center;
  align-items: center;
+}
+
+
+/* Profile-Post */
+.profile-post-img{
+ max-width: 400px;
 }

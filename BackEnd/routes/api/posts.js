@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const tagLookUpAndInsertService = require('../../services/lookupAndInsertService');
-const {postValidationSchema} = require('../../middleware/joiValidation');
-
+const { postValidationSchema } = require('../../middleware/joiValidation');
 
 // router.use(validateToken)
 
@@ -17,14 +16,16 @@ const validateToken = require('../../middleware/validateToken');
 router.get('/', (req, res) => {
   // executes, passing results to callback
 
-  Posts.find((err, data) => {
-    //handle if an error occurred
-    if (err) {
-      res.status(500).send('An error occurred');
-    }
+  Posts.find({})
+    .sort({ date_created: -1 })
+    .exec((err, data) => {
+      //handle if an error occurred
+      if (err) {
+        res.status(500).send('An error occurred');
+      }
 
-    res.json(data);
-  });
+      res.json(data);
+    });
 });
 
 //Get One post By ID
@@ -57,12 +58,11 @@ router.post('/', validateToken, async (req, res) => {
    *  },
    * ... etc
    * ]
-   * 
+   *
    */
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
-
 
   const { error, value } = postValidationSchema.validate(postObject);
   if (error) {
@@ -79,7 +79,7 @@ router.post('/', validateToken, async (req, res) => {
       people_needed: value.people_needed,
       applicants: value.applicants,
       people_accepted: value.people_accepted,
-      media: value.media
+      media: value.media,
     });
 
     newPost
@@ -92,10 +92,7 @@ router.post('/', validateToken, async (req, res) => {
         res.status(422).send(err);
       });
   }
-  
-    
-  });
-
+});
 
 //Update post By ID
 router.put('/:id', validateToken, async (req, res) => {
@@ -109,7 +106,6 @@ router.put('/:id', validateToken, async (req, res) => {
   if (error) {
     return res.status(422).send(error.details[0].message);
   } else {
-
     Posts.findByIdAndUpdate(
       req.params.id,
       {
@@ -123,7 +119,7 @@ router.put('/:id', validateToken, async (req, res) => {
         people_needed: value.people_needed,
         applicants: value.applicants,
         people_accepted: value.people_accepted,
-        media: value.media
+        media: value.media,
       },
       (err, data) => {
         if (err) {
@@ -142,15 +138,15 @@ router.put('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
-      console.log('YT1')
+      console.log('YT1');
       return res.status(401).send(err);
     }
 
     if (!data) {
-      console.log('YT2')
+      console.log('YT2');
       res.status(404).send();
     }
-    console.log('YT3')
+    console.log('YT3');
     res.send(data);
   });
 });
