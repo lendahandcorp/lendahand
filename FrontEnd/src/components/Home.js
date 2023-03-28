@@ -128,15 +128,17 @@ const Home = (props) => {
         <div class="container">
             {/* <h1>Home.</h1> */}
             {/* Search bar */}
-            <div class="input-group rounded">
+            <div class="input-group rounded mt-5 mb-4 searchbar mx-auto">
                 <input type="search" id="searchBar" class="form-control rounded" onChange={tagSearchBarChanged} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                 </span>
             </div>
 
-            <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary">Write a Post</button>
-            <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button>
+            <div className="ml-5 w-50">
+                <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary mb-4">+ Write a Post</button>
+            </div>
+            {/* <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button> */}
 
             {/* Post Container */}
             <div class="container">

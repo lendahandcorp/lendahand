@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const tagLookUpAndInsertService = require('../../services/lookupAndInsertService');
-const User = require('../../models/user')
+const { postValidationSchema } = require('../../middleware/joiValidation');
 
 // router.use(validateToken)
 
@@ -16,14 +16,16 @@ const validateToken = require('../../middleware/validateToken');
 router.get('/', (req, res) => {
   // executes, passing results to callback
 
-  Posts.find((err, data) => {
-    //handle if an error occurred
-    if (err) {
-      res.status(500).send('An error occurred');
-    }
+  Posts.find({})
+    .sort({ date_created: -1 })
+    .exec((err, data) => {
+      //handle if an error occurred
+      if (err) {
+        res.status(500).send('An error occurred');
+      }
 
-    res.json(data);
-  });
+      res.json(data);
+    });
 });
 
 //Get One post By ID
@@ -44,7 +46,7 @@ router.get('/:id', (req, res) => {
 //Create a new post
 router.post('/', validateToken, async (req, res) => {
   const thePost = new Posts(req.body);
-  
+  const postObject = thePost.toObject();
   /**
    * Here the code is expecting an array with tags object, example:
    * [
@@ -56,69 +58,68 @@ router.post('/', validateToken, async (req, res) => {
    *  },
    * ... etc
    * ]
-   * 
+   *
    */
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
 
-  thePost.validate(req.body, (error) => {
-    if (error) {
-      return res.status(422).send(error);
-    }
-
+  const { error, value } = postValidationSchema.validate(postObject);
+  if (error) {
+    return res.status(422).send(error.details[0].message);
+  } else {
     const newPost = new Posts({
-      writer: req.body.writer,
-      title: req.body.title,
-      body: req.body.body,
+      writer: value.writer,
+      title: value.title,
+      body: value.body,
       tags: listOfTags,
-      availability: req.body.availability,
-      status: req.body.status,
-      location: req.body.location,
-      people_needed: req.body.people_needed,
-      applicants: req.body.applicants,
-      people_accepted: req.body.people_accepted,
-      media: req.body.media
+      availability: value.availability,
+      status: value.status,
+      location: value.location,
+      people_needed: value.people_needed,
+      applicants: value.applicants,
+      people_accepted: value.people_accepted,
+      media: value.media,
     });
-
-    console.log(newPost);
 
     newPost
       .save()
       .then((pos) => {
-        res.status(201).json(pos);
+        //changed to .send only rather than .json(pos) because of the error "Error: Can't set headers after they are sent." while testing
+        res.status(201).send();
       })
       .catch((err) => {
         res.status(422).send(err);
       });
-  });
+  }
 });
 
 //Update post By ID
 router.put('/:id', validateToken, async (req, res) => {
   const thePost = new Posts(req.body);
+  const postObject = thePost.toObject();
   const listOfTags = await tagLookUpAndInsertService.tagLookupAndInsert(
     req.body.tags
   );
-  thePost.validate(req.body, (error) => {
-    if (error) {
-      return res.status(422).send(error);
-    }
 
+  const { error, value } = postValidationSchema.validate(postObject);
+  if (error) {
+    return res.status(422).send(error.details[0].message);
+  } else {
     Posts.findByIdAndUpdate(
       req.params.id,
       {
-        title: req.body.title,
-        body: req.body.body,
+        title: value.title,
+        body: value.body,
         tags: listOfTags,
-        availability: req.body.availability,
-        date_created: req.body.date_created,
-        status_id: req.body.status_id,
-        location: req.body.location,
-        people_needed: req.body.people_needed,
-        applicants: req.body.applicants,
-        people_accepted: req.body.people_accepted,
-        media: req.body.media
+        availability: value.availability,
+        date_created: value.date_created,
+        status_id: value.status_id,
+        location: value.location,
+        people_needed: value.people_needed,
+        applicants: value.applicants,
+        people_accepted: value.people_accepted,
+        media: value.media,
       },
       (err, data) => {
         if (err) {
@@ -130,22 +131,22 @@ router.put('/:id', validateToken, async (req, res) => {
         res.status(204).send('Post updated');
       }
     );
-  });
+  }
 });
 
 //Delete post By ID\
 router.delete('/:id', validateToken, (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
-      console.log('YT1')
+      console.log('YT1');
       return res.status(401).send(err);
     }
 
     if (!data) {
-      console.log('YT2')
+      console.log('YT2');
       res.status(404).send();
     }
-    console.log('YT3')
+    console.log('YT3');
     res.send(data);
   });
 });

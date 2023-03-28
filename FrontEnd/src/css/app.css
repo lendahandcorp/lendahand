@@ -77,3 +77,7 @@
     color: white;
     border-radius: 20px !important;
 }
+
+.searchbar {
+    width: 22rem;
+}

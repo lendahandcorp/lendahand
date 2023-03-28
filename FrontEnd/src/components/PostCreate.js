@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import '../css/postDetail.css';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
+import '../css/postDetail.css'
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
@@ -119,7 +121,6 @@ const PostCreate = (props) => {
         };
     }
 
-
     const handleChange = (event) => {
         //console.log(event.target.value)
         switch (event.target.name) {
@@ -158,26 +159,26 @@ const PostCreate = (props) => {
     }
 
     return (
-        <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
+        <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
 
-            <h1 className="h3 mb-3 font-weight-normal text-center">Create Post</h1>
+            <h1 className="h3 mb-5 mt-4 fw-bold text-center">Create Post</h1>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="title">Title</label>
+            <div className="form-group mb-4 ">
+                <label htmlFor="title" className="mb-2">Title</label>
                 <input type="text"
                     id="title"
                     name="title"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Help for moving out"
                     onChange={handleChange}
                     required />
             </div>
 
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="media">Image</label>
+            <div className="form-group mb-4">
+                <label htmlFor="media" className="mb-2">Image</label>
                 <input type="file"
                     id="media"
                     name="media"
@@ -208,20 +209,20 @@ const PostCreate = (props) => {
             </div> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="location">Location</label>
+            <div className="form-group mb-4">
+                <label htmlFor="location" className="mb-2">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="5685 Leeds St, Halifax, NS B3K 4M2"
                     onChange={handleChange}
                     required />
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="availability">End Date</label>
+            <div className="form-group mb-4">
+                <label htmlFor="availability" className="mb-2">End Date</label>
                 <input type="datetime-local"
                     id="availability"
                     name="availability"
@@ -232,31 +233,31 @@ const PostCreate = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="tags">Tags</label>
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2">Tags</label>
                 <input type="text"
                     id="tags"
                     name="tags"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="#help"
                     onChange={handleChange}
                     required />
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="body">Description</label>
+            <div className="form-group mb-4">
+                <label htmlFor="body" className="mb-2">Description</label>
                 <textarea cols="50" rows="3"
                     id="body"
                     name="body"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Write your description here"
                     onChange={handleChange}
                     required />
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group">
-                <label htmlFor="people_needed">People Needed</label>
+            <div className="form-group mb-5">
+                <label htmlFor="people_needed" className="mb-2">People Needed</label>
                 <input type="number"
                     id="people_needed"
                     name="people_needed"
@@ -267,7 +268,7 @@ const PostCreate = (props) => {
 
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block" >Create Post</button>
+                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
         </form>
     )
 }
