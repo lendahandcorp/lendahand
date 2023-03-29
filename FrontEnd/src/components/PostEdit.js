@@ -243,7 +243,7 @@ const PostEdit = (props) => {
   //     <input type="date" {...innerProps} onChange={handleChange} />
   // );
   return (
-    <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
+    <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
 
       <h1 className="h3 mb-3 font-weight-normal text-center">Edit Post</h1>
 
@@ -291,13 +291,13 @@ const PostEdit = (props) => {
 
 
       {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-      <div className="form-group">
-        <label htmlFor="title">Title</label>
+      <div className="form-group mb-4">
+        <label htmlFor="title" className="mb-2 fw-bold">Title</label>
         <input type="text"
           id="title"
           name="title"
           className="form-control"
-          placeholder="..."
+          placeholder="Enter Title here"
           defaultValue={title}
           onChange={handleChange}
           onBlur={() => {
@@ -320,25 +320,12 @@ const PostEdit = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="title" className="mb-2 fw-bold">Title</label>
-                <input type="text"
-                    id="title"
-                    name="title"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={title}
-                    onChange={handleChange}
-                    required />
-            </div>
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
                 <label htmlFor="location" className="mb-2 fw-bold">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter your location"
                     defaultValue={location}
                     onChange={handleChange}
                     required />
@@ -351,7 +338,7 @@ const PostEdit = (props) => {
                     id="availability"
                     name="availability"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter end date"
                     defaultValue={defaultDate}
                     onChange={handleChange}
                     required />
@@ -364,7 +351,7 @@ const PostEdit = (props) => {
                     id="tags"
                     name="tags"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="example: #gardening"
                     defaultValue={arrToTagString(tags)}
                     onChange={handleChange}
                     required />
@@ -377,7 +364,7 @@ const PostEdit = (props) => {
                     id="body"
                     name="body"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter description here"
                     defaultValue={body}
                     onChange={handleChange}
                     required />
@@ -389,13 +376,14 @@ const PostEdit = (props) => {
                     id="people_needed"
                     name="people_needed"
                     className="form-control"
+                    placeholder="Enter a number"
                     value={people_needed}
                     onChange={handleChange}
                     required />
             </div>
 
       <button type="submit"
-        className="btn btn-lg btn-primary btn-block" >Create Post</button>
+        className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
     </form>
   )
 

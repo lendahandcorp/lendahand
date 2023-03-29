@@ -7,6 +7,12 @@
     width: 95%;
 }
 
+.userImage {
+    aspect-ratio: 1/1;
+    max-width: 40px;
+    max-height: 40px;
+}
+
 .user {
     width: 210px;
 }

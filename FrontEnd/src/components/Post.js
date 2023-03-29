@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/footer.css';
+import '../css/post.css';
 import componentService from '../services/componentService';
 import dataService from '../services/dataService';
 const no_image = require('../img/no_image.png');
@@ -102,15 +102,15 @@ const Post = (props) => {
                     <div>
                         <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
                             alt="lol" 
-                            className="rounded "
+                            className="rounded postImage"
                             onClick={() => props.showPost(props.data._id)}
                             //onClick={() => aa()}
                              />
                     </div>
 
-                    <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle" />
-                        <span>By {username()}</span>
+                    <div className="btn mt-3 d-flex justify-content-around user" onClick={() => props.goToProfile(props.data.writer)}>
+                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle img-fluid userImage" />
+                        <span className="mt-1 fw-bold">By {username()}</span>
                     </div>
 
                 </div>
@@ -136,9 +136,10 @@ const Post = (props) => {
                             {props.data.body}
                         </span>
                     </div>
-                    <div className="d-flex">
+                    <div className="d-flex flex-column-reverse">
                         {/* <span class="badge badge1">#furniture</span> */}
                         {/* <span class="badge badge2">#Uhaul</span> */}
+                        <div>
                         {
                             props.data.tags.map((tag, i) => {
                                 return  <span key={i} class={`badge btn badge badge${getTagColorId(i)}`}
@@ -148,9 +149,10 @@ const Post = (props) => {
                                 </span>
                             })
                         }
+                        </div>
                         
-                        <div class="d-flex mt-2 justify-content-sm-center justify-content-between ml-5">
-                            <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+                        <div class="d-flex mt-2 justify-content-start justify-content-between ml-5">
+                            <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Apply</button>
                         </div>
                     </div>
                         {/* <div class="d-flex mt-2 justify-content-sm-center flex-row-reverse">
