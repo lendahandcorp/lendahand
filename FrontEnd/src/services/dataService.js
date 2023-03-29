@@ -174,6 +174,13 @@ class dataService {
 
 
             let APIdata = response.data;
+            //console.log(APIdata.tags)
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+
+            console.log(APIdata.tags)
             APIdata.status = "Open";
 
 
