@@ -165,7 +165,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4 ">
-                <label htmlFor="title" className="mb-2">Title</label>
+                <label htmlFor="title" className="mb-2 fw-bold">Title</label>
                 <input type="text"
                     id="title"
                     name="title"
@@ -178,7 +178,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="media" className="mb-2">Image</label>
+                <label htmlFor="media" className="mb-2 fw-bold">Image</label>
                 <input type="file"
                     id="media"
                     name="media"
@@ -210,7 +210,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="location" className="mb-2">Location</label>
+                <label htmlFor="location" className="mb-2 fw-bold">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
@@ -222,7 +222,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="availability" className="mb-2">End Date</label>
+                <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
                 <input type="datetime-local"
                     id="availability"
                     name="availability"
@@ -234,7 +234,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="tags" className="mb-2">Tags</label>
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input type="text"
                     id="tags"
                     name="tags"
@@ -246,7 +246,7 @@ const PostCreate = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-                <label htmlFor="body" className="mb-2">Description</label>
+                <label htmlFor="body" className="mb-2 fw-bold">Description</label>
                 <textarea cols="50" rows="3"
                     id="body"
                     name="body"
@@ -257,7 +257,7 @@ const PostCreate = (props) => {
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
-                <label htmlFor="people_needed" className="mb-2">People Needed</label>
+                <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
                 <input type="number"
                     id="people_needed"
                     name="people_needed"

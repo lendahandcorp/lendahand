@@ -200,7 +200,11 @@ const PostEdit = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
+<<<<<<< HEAD
                 <label htmlFor="title" className="mb-2">Title</label>
+=======
+                <label htmlFor="title" className="mb-2 fw-bold">Title</label>
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="text"
                     id="title"
                     name="title"
@@ -212,16 +216,25 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+<<<<<<< HEAD
             {/* <div className="form-group">
                 <label htmlFor="media">Image</label>
                 <input type="file"
                     id="media"
                     name="media"
+=======
+            <div className="form-group mb-4">
+                <label htmlFor="location" className="mb-2 fw-bold">Location</label>
+                <input type="text"
+                    id="location"
+                    name="location"
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                     className="form-control"
-                    accept="image/png, image/jpeg"
-                    value={convertImage(media)}
+                    placeholder="..."
+                    defaultValue={location}
                     onChange={handleChange}
                     required />
+<<<<<<< HEAD
             </div> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -235,11 +248,17 @@ const PostEdit = (props) => {
                     defaultValue={location}
                     onChange={handleChange}
                     required />
+=======
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
+<<<<<<< HEAD
                 <label htmlFor="availability" className="mb-2">End Date</label>
+=======
+                <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="datetime-local"
                     id="availability"
                     name="availability"
@@ -252,7 +271,11 @@ const PostEdit = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
+<<<<<<< HEAD
                 <label htmlFor="tags" className="mb-2">Tags</label>
+=======
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="text"
                     id="tags"
                     name="tags"
@@ -265,7 +288,11 @@ const PostEdit = (props) => {
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
+<<<<<<< HEAD
                 <label htmlFor="body" className="mb-2">Description</label>
+=======
+                <label htmlFor="body" className="mb-2 fw-bold">Description</label>
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <textarea cols="50" rows="3"
                     id="body"
                     name="body"
@@ -277,7 +304,11 @@ const PostEdit = (props) => {
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
+<<<<<<< HEAD
                 <label htmlFor="people_needed" className="mb-2">People Needed</label>
+=======
+                <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="number"
                     id="people_needed"
                     name="people_needed"
@@ -287,11 +318,20 @@ const PostEdit = (props) => {
                     required />
             </div>
 
+<<<<<<< HEAD
 
             <button type="submit"
                 className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
         </form>
     )
+=======
+      <button type="submit"
+        className="btn btn-lg btn-primary btn-block" >Create Post</button>
+    </form>
+  )
+
+            
+>>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
 }
 
 export default PostEdit
