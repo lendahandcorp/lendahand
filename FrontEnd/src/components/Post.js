@@ -91,43 +91,124 @@ const Post = (props) => {
     }
 
     return (
-        <article className="d-flex justify-content-center">
-            <div className="row shadow-sm p-3 mb-5 bg-white rounded w-75">
-                <div className="col-sm">
+        // <article className="d-flex justify-content-center">
+        //     <div className="row shadow-sm p-3 mb-5 bg-white rounded w-75">
+        //         <div className="col-sm">
+
+        //             <div>
+        //                 <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
+        //                     alt="lol" 
+        //                     className="rounded "
+        //                     onClick={() => props.showPost(props.data._id)}
+        //                     //onClick={() => aa()}
+        //                      />
+        //             </div>
+
+        //             <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
+        //                 <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle" />
+        //                 <span>By {username()}</span>
+        //             </div>
+
+        //         </div>
+
+        //         <div className="col-sm">
+
+        //             <h5 className="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
+        //             {/* <h5 class="fw-bold" >
+        //                 <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+        //                     {props.data.title}
+        //                 </button>
+        //             </h5> */}
+        //             {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+        //                 <h5 class="fw-bold" >
+        //                     {props.data.title}
+        //                 </h5>
+        //             </button> */}
+                    
+
+        //             <h6 className="fst-italic">Availability: {getDate()} </h6>
+
+        //             <span className="fw-light">
+        //                 {props.data.body}
+        //             </span>
+        //             <br />
+        //             {/* <span class="badge badge1">#furniture</span> */}
+        //             {/* <span class="badge badge2">#Uhaul</span> */}
+        //             {
+        //                 props.data.tags.map((tag, i) => {
+        //                     return  <span key={i} class={`badge btn badge badge${getTagColorId(i)}`}
+        //                         onClick={() => props.tagClicked(tag.title)}
+        //                     >
+        //                         {" #" + tag.title}
+        //                     </span>
+        //                 })
+        //             }
+        //             <br />
+
+        //             <div class="flex-d mt-2 justify-content-sm-center flex-row-reverse">
+        //                 <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
+        //             </div>
+
+
+        //         </div>
+
+        //     </div>
+        // </article>
+        <article>
+            <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75">
+                <div class="col-sm">
 
                     <div>
                         <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
                             alt="lol" 
-                            className="rounded "
-                            onClick={() => props.showPost(props.data._id)}
-                            //onClick={() => aa()}
+                            className="rounded"
+                            onClick={() => props.showPost(props.data.post_id)}
                              />
                     </div>
 
                     <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle" />
+                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" class="rounded-circle" />
                         <span>By {username()}</span>
                     </div>
 
                 </div>
-                <div className="col-sm d-flex flex-column justify-content-between">
-                    <div className="d-flex flex-column">
-                        <a className="fw-bold pointer-cursor text-decoration-none h4" onClick={() => props.showPost(props.data._id)}>{props.data.title}</a>
-                        {/* <h5 class="fw-bold" >
-                            <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                                {props.data.title}
-                            </button>
-                        </h5> */}
-                        {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                            <h5 class="fw-bold" >
-                                {props.data.title}
-                            </h5>
-                        </button> */}
-                        
-                        <h6 className="fst-italic">Availability: {getDate()} </h6>
-                        <span className="fw-light">
-                            {props.data.body}
-                        </span>
+
+                <div class="col-sm">
+
+                    <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
+                    {/* <h5 class="fw-bold" >
+                        <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                            {props.data.title}
+                        </button>
+                    </h5> */}
+                    {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
+                        <h5 class="fw-bold" >
+                            {props.data.title}
+                        </h5>
+                    </button> */}
+                    
+
+                    <h6 class="fst-italic">Availability: {getDate()} </h6>
+
+                    <span class="fw-light">
+                        {props.data.body}
+                    </span>
+                    <br />
+                    {/* <span class="badge badge1">#furniture</span> */}
+                    {/* <span class="badge badge2">#Uhaul</span> */}
+                    {
+                        props.data.tags.map((tag, i) => {
+                            return  <span key={i} class={`btn badge badge${getTagColorId(i)}`}
+                                onClick={() => props.tagClicked(tag.title)}
+                            >
+                                {" #" + tag.title}
+                            </span>
+                        })
+                    }
+                    <br />
+
+                    <div class="flex-d mt-2 justify-content-sm-center flex-row-reverse">
+                        <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
                     </div>
                     <div className="d-flex">
                         {/* <span class="badge badge1">#furniture</span> */}
