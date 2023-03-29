@@ -62,6 +62,7 @@ class dataService {
     }
 
     createReview(APIdata, callback) {
+        console.log(APIdata)
         axios.post(`${process.env.REACT_APP_API_URL}/reviews`, APIdata, this.getUserId())
             .then(
                 response => {

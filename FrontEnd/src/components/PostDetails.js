@@ -28,6 +28,10 @@ const PostDetails = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        updateData();
+    }, [])
+
+    const updateData = () => {
         dataService.getOnePost(params.id, post => {
 
             console.log(post);
@@ -47,7 +51,7 @@ const PostDetails = (props) => {
             //console.log(post);
             setPost(post);
         })
-    }, [])
+    }
 
     const getDate = () => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -114,6 +118,7 @@ const PostDetails = (props) => {
         dataService.addApplicant(componentService.grabMyUserDetails().userId, params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
@@ -124,6 +129,7 @@ const PostDetails = (props) => {
         dataService.acceptApplicant(applicant_id, params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
@@ -134,6 +140,7 @@ const PostDetails = (props) => {
         dataService.revokeApplicant(applicant_id, params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
@@ -144,6 +151,7 @@ const PostDetails = (props) => {
         dataService.clearApplicant(params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
@@ -154,6 +162,7 @@ const PostDetails = (props) => {
         dataService.ClosePost(params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
@@ -163,6 +172,7 @@ const PostDetails = (props) => {
         dataService.OpenPost(params.id, (success) => {
             if (success) {
                 //console.log("U71")
+                updateData();
             } else {
                 //console.log("U72")
             }
