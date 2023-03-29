@@ -101,6 +101,11 @@ class dataService {
                 return a != applicant_id;
             })
 
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.people_accepted.push(applicant_id);
 
             axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
@@ -126,6 +131,12 @@ class dataService {
 
             let APIdata = response.data;
 
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.people_accepted = [];
             APIdata.applicants = [];
 
@@ -150,6 +161,12 @@ class dataService {
 
 
             let APIdata = response.data;
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.status = "Closed";
 
 
@@ -179,8 +196,8 @@ class dataService {
             APIdata.tags = APIdata.tags.map(tag => {
                 return {title: tag.title}
             })
-
-            console.log(APIdata.tags)
+            delete APIdata["__v"]
+            //console.log(APIdata)
             APIdata.status = "Open";
 
 
@@ -209,6 +226,11 @@ class dataService {
                 return a != applicant_id;
             })
 
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.applicants.push(applicant_id);
 
 
@@ -233,6 +255,11 @@ class dataService {
             console.log(response.data)
 
             let APIdata = response.data;
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
 
             APIdata.applicants.push(applicant_id);
 
