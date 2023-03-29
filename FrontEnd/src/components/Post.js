@@ -21,6 +21,20 @@ const Post = (props) => {
         })
     }, [])
 
+    //Get the excerpt
+    let readmore;
+    const excerpt = (b) => {
+        const str = b
+        if(str.length <= 300){
+            readmore = false
+            return str
+        } else{
+            const test = str.substring(0,300);
+            readmore = true
+            return test
+        }
+    }
+
 
     const getDate = () => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -59,16 +73,6 @@ const Post = (props) => {
         //console.log(a);
         var regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
 
-        //console.log(props.data.title + " a ("+imageType+")");
-        // if( props.data.title == "Testing by Joy a"){
-        //     console.log("s");
-        //     if(imageType == "img"){
-        //         console.log(a);
-        //     }
-        // }
-        // if(typeof a != "string"){
-        //     console.log(props.data.title + " ("+imageType+") " + typeof(a));
-        // }
         if(a === undefined || a === null || !regex.test(a) || a === "" || typeof a != "string"){
             console.log(props.data.title + " ("+imageType+") " + typeof(a));
 
@@ -113,22 +117,16 @@ const Post = (props) => {
                 <div class="col-sm">
 
                     <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
-                    {/* <h5 class="fw-bold" >
-                        <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                            {props.data.title}
-                        </button>
-                    </h5> */}
-                    {/* <button type="button" class="btn" onClick={() => props.showPost(props.data.post_id)}>
-                        <h5 class="fw-bold" >
-                            {props.data.title}
-                        </h5>
-                    </button> */}
                     
-
                     <h6 class="fst-italic">Availability: {getDate()} </h6>
 
                     <p class="fw-light">
-                        {props.data.body}
+                        <span>{excerpt(props.data.body)}</span>
+                        <span className=""><Link to={`/postDetails/${props.data._id}`}>
+                        {
+                            readmore == true ? '..Read More' : ''
+                        }
+                        </Link></span>
                     </p>
                     {
                         props.data.tags.map((tag, i) => {
