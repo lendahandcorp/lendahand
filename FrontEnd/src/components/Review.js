@@ -84,14 +84,14 @@ const Review = (props) => {
                     >
                     {props.OwnerOfPost() || props.Administrator() ? (
                         <> 
-                        <a
+                        <Link
                         className="dropdown-item text-danger"
                         onClick={() => props.DeleteReview(props.data._id)}
                         >
                         <span className="d-flex justify-content-between">
                             Delete Post <i className="fa-solid fa-trash mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
                     </>
                     ) : null}
 

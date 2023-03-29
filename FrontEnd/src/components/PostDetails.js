@@ -1,7 +1,7 @@
 //this is a placeholder component for the body section.
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
@@ -307,52 +307,53 @@ const PostDetails = (props) => {
                     >
                     {OwnerOfPost() || Administrator() ? (
                         <> 
-                        <a
+                        <Link
+                        to={`/postedit/${params.id}`}
                         className="dropdown-item"
-                        onClick={() => navigate(`/postedit/${params.id}`)}
+                        // onClick={() => navigate(`/postedit/${params.id}`)}
                         >
                         <span className="d-flex justify-content-between">
                             Edit Post <i class="fa-solid fa-pen text-dark mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                         className="dropdown-item text-danger"
                         onClick={() => deletePost()}
                         >
                         <span className="d-flex justify-content-between">
                             Delete Post <i className="fa-solid fa-trash mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                         className="dropdown-item text-danger"
                         onClick={() => ClearApplicants()}
                         >
                         <span className="d-flex justify-content-between">
                             <p>Clear Applicants</p> <i class="fa-solid fa-circle-xmark mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
 
                         <hr />
 
-                        <a
+                        <Link
                         className="dropdown-item"
                         onClick={() => OpenPost()}
                         >
                         <span className="d-flex justify-content-between">
                             Open Post <i class="fa-solid fa-book-open text-dark mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                         className="dropdown-item text-success"
                         onClick={() => ClosePost()}
                         >
                         <span className="d-flex justify-content-between">
                             Close Post <i class="fa-solid fa-circle-check mt-1"></i>
                         </span>
-                        </a>
+                        </Link>
                     </>
                     ) : null}
 
