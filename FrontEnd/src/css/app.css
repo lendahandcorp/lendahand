@@ -87,12 +87,20 @@
     background-size: cover;
     max-width: 400px;
     aspect-ratio: 3 / 2;
+    min-width: 200px;
 }
 
 .post_user{
-    position: relative;
+    bottom: 0 !important;
 }
 
 .home_post_user-img{
+    margin-right: 10px;
+    background-size: cover;
+    max-width: 55px;
+    aspect-ratio: 1 / 1;
+}
 
+.home_post_user-name{
+    margin: auto 0px;
 }

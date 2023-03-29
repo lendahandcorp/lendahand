@@ -127,8 +127,6 @@ const Home = (props) => {
 
     return (
         <div class="container home">
-            {/* <h1>Home.</h1> */}
-            {/* Search bar */}
             <div class="input-group rounded mt-5 mb-4 searchbar mx-auto">
                 <input type="search" id="searchBar" class="form-control rounded" onChange={tagSearchBarChanged} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
@@ -139,16 +137,11 @@ const Home = (props) => {
             <div className="ml-5 w-50">
                 <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary mb-4">+ Write a Post</button>
             </div>
-            {/* <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button> */}
 
             {/* Post Container */}
-            <div class="container">
-                <div class="col-md-12 col-lg-12">
+            <div className="row">
+                <div className="col-md-12 col-lg-12">
                     {
-                        //console.log(getPostsWithRelevantTags())
-                    }
-                    {
-                        //console.log(getPostsWithRelevantTags());
                         getPostsWithRelevantTags().map((tp, i) => {
                             console.log('post');
                             return <Post key={i} data={tp} 
