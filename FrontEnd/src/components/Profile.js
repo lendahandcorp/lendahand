@@ -48,14 +48,11 @@ const Profile = () => {
   const [tags, updateTags] = useState([]);
 
   useEffect(() => {
-    const getTagData = async () => {
-      const ts = await componentService.MostCommonTagsForAllUsers(userId , 3, (err) => console.log(err))
-      updateTags(ts);
-    }
-    getTagData();
+    componentService.MostCommonTagsForUser(userId , 3, (ts) => updateTags(ts) )
+    // console.log(ts)
   }, []);
 
-  console.log(tags)
+  // console.log(tags)
 
  // Posts Data
  const [postData, updatePostData] = useState([]);
@@ -97,6 +94,14 @@ const Profile = () => {
     })
   }
   };
+
+  const getTagColorId = (num) => {
+    let newNum = num.toString(7);
+    newNum = newNum.match(/(\d)$/g)[0];
+    newNum = parseInt(newNum, 7);
+    newNum++;
+    return newNum
+    }
 
   return (
     <div className="container-fluid profile">
@@ -147,12 +152,12 @@ const Profile = () => {
             <p className="fw-normal desc-p">{description}</p>
           </div>  }
           <div className="d-flex">
-            <ul className="tags">
-              {/* {
-                tags.map( tag => {
-                  console.log(tag)
+            <ul className="tags d-flex">
+              {
+                tags.map( (tag, i) => {
+                  return (<li key={i} className={`btn badge badge${getTagColorId(i)}`}>#{tag.title}</li>)
                 })
-              } */}
+               }
             </ul>
           </div>
           <div className="post-num">{postData.length} posts</div>

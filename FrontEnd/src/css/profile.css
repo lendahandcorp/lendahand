@@ -15,10 +15,7 @@
 }
 
 .tag{
- margin: 5px;
- padding: 1px 10px;
- border-radius: 30px;
- border: #edeaea solid 0.2px;
+ list-style-type: none;
 }
 
 .hands{
@@ -55,5 +52,8 @@
 
 /* Profile-Post */
 .profile-post-img{
+ /* position: relative; */
+ background-size: cover;
  max-width: 400px;
+ aspect-ratio: 3 / 2;
 }
