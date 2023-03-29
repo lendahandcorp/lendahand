@@ -52,12 +52,12 @@ const App = () => {
 
               <Route element={<ProtectedRoutes />}>
                 <Route path='/profile/:UserId' element={<Profile />}/>
+                <Route path='/postedit/:id' element={<PostEdit />}/>
+                <Route path='/postcreate' element={<PostCreate />}/>
               </Route>
               
 
               <Route path='/postdetails/:id' element={<PostDetails />}/>
-              <Route path='/postedit/:id' element={<PostEdit />}/>
-              <Route path='/postcreate' element={<PostCreate />}/>
 
 
               {/* routes that require token */}
