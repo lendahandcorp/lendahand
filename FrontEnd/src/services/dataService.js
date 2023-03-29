@@ -76,6 +76,22 @@ class dataService {
             })
     }
 
+    DeleteReview(id, callback) {
+        axios.delete(`${process.env.REACT_APP_API_URL}/reviews/${id}`, this.getUserId())
+            .then(
+                response => {
+                    console.log(response);
+                    if (response.status === 201) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                callback(false)
+            })
+    }
+
     updatePost(param, APIdata, callback) {
         console.log(APIdata)
         axios.put(`${process.env.REACT_APP_API_URL}/posts/${param}`, APIdata, this.getUserId())

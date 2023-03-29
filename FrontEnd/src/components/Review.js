@@ -9,6 +9,7 @@ const Review = (props) => {
     const [writer, setWriter] = useState([])
 
     useEffect(() => {
+        console.log(props.data);
         dataService.getOneUser(props.data.reviewer, user => {
             // console.log(user);
             setWriter(user);
@@ -64,6 +65,7 @@ const Review = (props) => {
                         <button type="button" class="btn btn-outline-secondary">
                             :
                         </button>
+                        <button type="button" className="btn btn-success" onClick={() => props.DeleteReview(props.data._id)}> delete </button>
                     </p>
                     
                 </div>

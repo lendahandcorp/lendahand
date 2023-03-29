@@ -56,6 +56,7 @@ const reviewSchemaValidation = Joi.object({
     post_id: Joi.string().required(),
     description: Joi.string().max(255),
     stars: Joi.number().integer().min(1).max(5).required(),
+    date_created: Joi.any()
 });
 
 

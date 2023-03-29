@@ -12,6 +12,7 @@ import Review from './Review';
 import Applicant from './Applicant';
 import ApplicantEmpty from './ApplicantEmpty';
 import ReviewCreate from './ReviewCreate';
+//import { update } from '../../../BackEnd/models/user';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -32,6 +33,7 @@ const PostDetails = (props) => {
     }, [])
 
     const updateData = () => {
+        console.log("update called.");
         dataService.getOnePost(params.id, post => {
 
             console.log(post);
@@ -132,6 +134,17 @@ const PostDetails = (props) => {
                 updateData();
             } else {
                 //console.log("U72")
+            }
+        });
+    }
+
+    const DeleteReview = (review_id) => {
+        dataService.DeleteReview(review_id, (success) => {
+            if (success) {
+                console.log("review deleted")
+                updateData();
+            } else {
+                console.log("problem deleting")
             }
         });
     }
@@ -434,7 +447,7 @@ const PostDetails = (props) => {
           <h4>Write Review</h4>
           <div className="row">
             <div className="col-md-12">
-              <ReviewCreate poster={post.writer} post_id={post._id} />
+              <ReviewCreate poster={post.writer} post_id={post._id} updateData={updateData} />
             </div>
           </div>
         </>
@@ -446,7 +459,7 @@ const PostDetails = (props) => {
             <div className="col-md-12">
               {post._id != null
                 ? reviews.map((review, i) => {
-                    return <Review key={i} data={review} />;
+                    return <Review key={i} data={review} DeleteReview={DeleteReview}/>;
                   })
                 : null}
             </div>
