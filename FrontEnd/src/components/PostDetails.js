@@ -297,7 +297,7 @@ const PostDetails = (props) => {
                                 <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
                             </button> */}
 
-<div className="container d-flex justify-content-end">
+                <div className="container d-flex justify-content-end">
                     <div className="dropdown">
                     <button
                         className="btn dropdown-toggle"
@@ -355,11 +355,11 @@ const PostDetails = (props) => {
                         </a>
 
                         <a
-                        className="dropdown-item text-danger"
+                        className="dropdown-item text-success"
                         onClick={() => ClosePost()}
                         >
                         <span className="d-flex justify-content-between">
-                            Close Post <i class="fa-solid fa-door-closed mt-1"></i>
+                            Close Post <i class="fa-solid fa-circle-check mt-1"></i>
                         </span>
                         </a>
                     </>
@@ -402,44 +402,48 @@ const PostDetails = (props) => {
       <br />
       {(OwnerOfPost() || Administrator()) && PostIsOpen() ? (
         <>
-          <h4>Accepted</h4>
-          <div className="row">
-            <div className="col-md-12">
-              {post.people_accepted != null //testy(): null
-                ? post.people_accepted.map((person_accepted, i) => {
-                    return (
-                      <Applicant
-                        key={i}
-                        accepted={true}
-                        id={person_accepted}
-                        RevokeApplication={RevokeApplication}
-                      />
-                    );
-                  })
-                : null}
-              <ApplicantEmpty />
+        <div className="d-flex people">
+            <div>
+                <h4 className="mb-3 title">Accepted</h4>
+                <div className="row">
+                    <div className="col-md-12">
+                    {post.people_accepted != null //testy(): null
+                        ? post.people_accepted.map((person_accepted, i) => {
+                            return (
+                            <Applicant
+                                key={i}
+                                accepted={true}
+                                id={person_accepted}
+                                RevokeApplication={RevokeApplication}
+                            />
+                            );
+                        })
+                        : null}
+                    <ApplicantEmpty />
+                    </div>
+                </div>
             </div>
-          </div>
-          <br />
-          <br />
-          <br />
-          <h4>Volunteered</h4>
-          <div className="row">
-            <div className="col-md-12">
-              {post.applicants != null //testy(): null
-                ? post.applicants.map((applicant, i) => {
-                    return (
-                      <Applicant
-                        key={i}
-                        accepted={false}
-                        id={applicant}
-                        AcceptApplication={AcceptApplication}
-                      />
-                    );
-                  })
-                : null}
+
+            <div className="mx-auto">
+                <h4 className="mb-3 title">Volunteered</h4>
+                <div className="row">
+                    <div className="col-md-12">
+                    {post.applicants != null //testy(): null
+                        ? post.applicants.map((applicant, i) => {
+                            return (
+                            <Applicant
+                                key={i}
+                                accepted={false}
+                                id={applicant}
+                                AcceptApplication={AcceptApplication}
+                            />
+                            );
+                        })
+                        : null}
+                    </div>
+                </div>
             </div>
-          </div>
+        </div>  
         </>
       ) : null}
 
@@ -459,7 +463,7 @@ const PostDetails = (props) => {
       ) : null}
       {PostIsClosed() ? (
         <>
-          <h4>Reviews</h4>
+          <h4 className="mb-3 title">Reviews</h4>
           <div className="row">
             <div className="col-md-12">
               {post._id != null
