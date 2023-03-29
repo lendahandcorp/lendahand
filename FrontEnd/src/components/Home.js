@@ -35,10 +35,10 @@ const Home = (props) => {
         navigate('/profile/' + id);
     }
 
-    const showPost = (id) => {
-        console.log('%c user attempted to go to post view page:' + id, 'color:blue');
-        navigate('/postdetails/' + id); // this will be for when post-page is made
-    }
+    // const showPost = (id) => {
+    //     console.log('%c user attempted to go to post view page:' + id, 'color:blue');
+    //     navigate('/postdetails/' + id); // this will be for when post-page is made
+    // }
 
     const tagSearchBarChanged = () => {
         let searchBar = document.getElementById("searchBar");
@@ -146,7 +146,7 @@ const Home = (props) => {
                             console.log('post');
                             return <Post key={i} data={tp} 
                                 goToProfile={goToProfile} 
-                                showPost={showPost} 
+                                // showPost={showPost} 
                                 tagClicked={tagClicked}
                             />
                         })
