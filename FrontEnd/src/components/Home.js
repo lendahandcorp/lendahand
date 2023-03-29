@@ -149,13 +149,12 @@ const Home = (props) => {
                     {
                         //console.log(getPostsWithRelevantTags());
                         getPostsWithRelevantTags().map((tp, i) => {
-                            //console.log('post');
+                            console.log('post');
                             return <Post key={i} data={tp} 
                                 goToProfile={goToProfile} 
                                 showPost={showPost} 
                                 tagClicked={tagClicked}
                             />
-                            //return <Post/>
                         })
                     }
                 </div>

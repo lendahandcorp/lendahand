@@ -153,8 +153,12 @@ const Register = (props) => {
             id="firstName"
             className="form-control"
             placeholder="Enter First Name"
-            required
             autoFocus
+            required
+            onBlur={() => {
+              const error = firstNameValidator(firstName);
+              setFirstNameError(error);
+          }}
           />
 
           <br />
@@ -169,6 +173,10 @@ const Register = (props) => {
             id="lastName"
             className="form-control"
             placeholder="Enter Last Name"
+            onBlur={() => {
+              const error = lastNameValidator(lastName);
+              setLastNameError(error);
+          }}
             required
           />
 
@@ -184,6 +192,10 @@ const Register = (props) => {
             id="address"
             className="form-control"
             placeholder="Enter Address"
+            onBlur={() => {
+              const error = addressValidator(address);
+              setAddressError(error);
+          }}
             required
           />
 
@@ -199,6 +211,10 @@ const Register = (props) => {
             id="telephoneNumber"
             className="form-control"
             placeholder="Enter Telephone Number"
+            onBlur={() => {
+              const error = phoneValidator(phone);
+              setTelephoneNumberError(error);
+          }}
             required
           />
 
@@ -214,6 +230,7 @@ const Register = (props) => {
             type="file"
             id="picture"
             className="form-control"
+            required
           />
 
           <br />
@@ -228,6 +245,11 @@ const Register = (props) => {
             id="inputEmail"
             className="form-control"
             placeholder="Email address"
+            onBlur={() => {
+              const error = emailValidator(email);
+              setEmailError(error);
+            }}
+
             required
           />
 
@@ -243,7 +265,9 @@ const Register = (props) => {
             id="inputPassword"
             className="form-control"
             placeholder="Password"
-            required
+            onBlur={() => {
+              const error = passwordValidator(password);
+              setPasswordError(error);}}
           />
 
           <div className="d-flex mt-4">

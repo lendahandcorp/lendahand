@@ -1,23 +1,36 @@
 //this is a placeholder component for the body section.
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/post.css';
+import '../css/footer.css';
+import componentService from '../services/componentService';
+import dataService from '../services/dataService';
 const no_image = require('../img/no_image.png');
 
-
+const blank_images = require('../img/blank_images.json')
 
 const Post = (props) => {
+
+
+    const [writer, setWriter] = useState({})
+
+    useEffect(() => {
+        dataService.getOneUser(props.data.writer, user => {
+            //console.log(user);
+            setWriter(user);
+        })
+    }, [])
+
+
     const getDate = () => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let date = new Date(props.data.availability);
-
         let str = `${months[date.getMonth()]} 
                     ${date.getDate()}${getDaySuffix(date.getDate())}, 
                     ${date.getFullYear()}`
         //console.log(str);
         return str;
     }
-
     const getDaySuffix = (i) => {
         const daySuffix = [ "st", "nd", "rd", "th"]
         //console.log(i);
@@ -27,7 +40,6 @@ const Post = (props) => {
             return daySuffix[i - 1];
         }
     }
-
     const getTagColorId = (num) => {
         let newNum = num.toString(7);
         newNum = newNum.match(/(\d)$/g)[0];
@@ -35,13 +47,47 @@ const Post = (props) => {
         newNum++;
         return newNum
     }
-
     const spotsLeft = () => {
         return props.data.people_needed - props.data.people_accepted.length
     }
 
-    const convertImage = (a) => {
-        return `data:image/png;base64,${a}`;
+    const aa = () => {
+        //console.log(props.data.post_id)
+    }
+
+    const convertImage = (a, imageType) => {
+        //console.log(a);
+        var regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
+        //console.log(props.data.title + " a ("+imageType+")");
+        // if( props.data.title == "Testing by Joy a"){
+        //     console.log("s");
+        //     if(imageType == "img"){
+        //         console.log(a);
+        //     }
+        // }
+        // if(typeof a != "string"){
+        //     console.log(props.data.title + " ("+imageType+") " + typeof(a));
+        // }
+        if(a === undefined || a === null || !regex.test(a) || a === "" || typeof a != "string"){
+            console.log(props.data.title + " ("+imageType+") " + typeof(a));
+
+            if(imageType == "img"){
+                //console.log(props.data.title + " img");
+                return blank_images.image;
+
+            } else if(imageType == "pic"){
+                //console.log(props.data.title + " pic");
+                return blank_images.picture;
+            } 
+        } else {
+            //console.log(props.data.title + " a ("+imageType+")");
+            return `data:image/png;base64,${a}`;
+        }
+    }
+
+    const username = () => {
+        return `${writer.firstName} ${writer.lastName}`
     }
 
     return (
@@ -50,20 +96,20 @@ const Post = (props) => {
                 <div className="col-sm">
 
                     <div>
-                        <img src={convertImage(props.data.media)}
+                        <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
                             alt="lol" 
-                            className="rounded postImage"
-                            onClick={() => props.showPost(props.data.post_id)}
+                            className="rounded "
+                            onClick={() => props.showPost(props.data._id)}
+                            //onClick={() => aa()}
                              />
                     </div>
 
-                    <div className="btn mt-3 d-flex justify-content-between user" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src="https://source.unsplash.com/WLUHO9A_xik/35x35" alt="lol" className="rounded-circle" />
-                        <span className="mt-1">By Jason Sunnyassy</span>
+                    <div class="btn mt-3" onClick={() => props.goToProfile(props.data.writer)}>
+                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle" />
+                        <span>By {username()}</span>
                     </div>
 
                 </div>
-
                 <div className="col-sm d-flex flex-column justify-content-between">
                     <div className="d-flex flex-column">
                         <a className="fw-bold pointer-cursor text-decoration-none h4" onClick={() => props.showPost(props.data._id)}>{props.data.title}</a>
@@ -78,9 +124,7 @@ const Post = (props) => {
                             </h5>
                         </button> */}
                         
-
                         <h6 className="fst-italic">Availability: {getDate()} </h6>
-
                         <span className="fw-light">
                             {props.data.body}
                         </span>
@@ -106,12 +150,9 @@ const Post = (props) => {
                             <button type="button" class="btn customButton rounded shadow-sm text-white fw-bold">Quick Help</button>
                         </div> */}
                     
-
                 </div>
-
             </div>
         </article>
     )
 }
-
 export default Post
