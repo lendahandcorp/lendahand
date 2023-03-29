@@ -65,6 +65,40 @@ const Review = (props) => {
                         <button type="button" class="btn btn-outline-secondary">
                             :
                         </button>
+                        <div className="container d-flex justify-content-end">
+                    <div className="dropdown">
+                    <button
+                        className="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
+                    </button>
+
+                    <div
+                        className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                    {props.OwnerOfPost() || props.Administrator() ? (
+                        <> 
+                        <a
+                        className="dropdown-item text-danger"
+                        onClick={() => props.DeleteReview(props.data._id)}
+                        >
+                        <span className="d-flex justify-content-between">
+                            Delete Post <i className="fa-solid fa-trash mt-1"></i>
+                        </span>
+                        </a>
+                    </>
+                    ) : null}
+
+                    </div>
+                    </div>
+                    
+                </div>
                         <button type="button" className="btn btn-success" onClick={() => props.DeleteReview(props.data._id)}> delete </button>
                     </p>
                     

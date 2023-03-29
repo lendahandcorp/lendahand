@@ -459,7 +459,12 @@ const PostDetails = (props) => {
             <div className="col-md-12">
               {post._id != null
                 ? reviews.map((review, i) => {
-                    return <Review key={i} data={review} DeleteReview={DeleteReview}/>;
+                    return <Review 
+                    key={i} 
+                    data={review} 
+                    DeleteReview={DeleteReview}
+                    OwnerOfPost={OwnerOfPost}
+                    Administrator={Administrator}/>;
                   })
                 : null}
             </div>
