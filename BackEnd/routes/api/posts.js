@@ -112,14 +112,14 @@ router.put('/:id', validateToken, async (req, res) => {
         title: value.title,
         body: value.body,
         tags: listOfTags,
-        availability: req.body.availability,
-        date_created: req.body.date_created,
-        status: req.body.status,
-        location: req.body.location,
-        people_needed: req.body.people_needed,
-        applicants: req.body.applicants,
-        people_accepted: req.body.people_accepted,
-        media: req.body.media
+        availability: value.availability,
+        date_created: value.date_created,
+        status: value.status,
+        location: value.location,
+        people_needed: value.people_needed,
+        applicants: value.applicants,
+        people_accepted: value.people_accepted,
+        media: value.media
       },
       (err, data) => {
         if (err) {
