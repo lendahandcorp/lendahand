@@ -85,13 +85,8 @@
 /* Home */
 .home_post-img{
     background-size: cover;
-    max-width: 400px;
+    width: 400px;
     aspect-ratio: 3 / 2;
-    min-width: 200px;
-}
-
-.post_user{
-    bottom: 0 !important;
 }
 
 .home_post_user-img{

@@ -54,6 +54,6 @@
 .profile-post-img{
  /* position: relative; */
  background-size: cover;
- max-width: 400px;
+ width: 400px;
  aspect-ratio: 3 / 2;
 }
