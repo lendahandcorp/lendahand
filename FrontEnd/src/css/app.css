@@ -81,3 +81,18 @@
 .searchbar {
     width: 22rem;
 }
+
+/* Home */
+.home_post-img{
+    background-size: cover;
+    max-width: 400px;
+    aspect-ratio: 3 / 2;
+}
+
+.post_user{
+    position: relative;
+}
+
+.home_post_user-img{
+
+}

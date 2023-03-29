@@ -5,6 +5,7 @@ import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import '../css/app.css';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -125,7 +126,7 @@ const Home = (props) => {
 
 
     return (
-        <div class="container">
+        <div class="container home">
             {/* <h1>Home.</h1> */}
             {/* Search bar */}
             <div class="input-group rounded mt-5 mb-4 searchbar mx-auto">
