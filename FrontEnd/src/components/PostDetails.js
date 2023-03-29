@@ -223,163 +223,227 @@ const PostDetails = (props) => {
     // console.log(params.id)
     return (
         <div className="container-fluid">
+        <div className="shadow-sm p-3 mb-5 bg-white rounded mx-2 my-5">
             <div className="row">
                 <div className="col-md-6">
-                    <img alt="Bootstrap Image Preview" src={componentService.convertImageFromBase64(post.media, "img")} />
-                    <p>
-                        <span>Author: {`${writer.firstName} ${writer.lastName}`}</span>
-                    </p>
-                    {
-                        post.status == "Closed"
-                            ?
-                            <p>
-                                Closed
-                            </p>
-                            :
-                            <p>
-                                Ends: {getDate()}
-                            </p>
-                    }
+                <img
+                    alt="Bootstrap Image Preview"
+                    src={componentService.convertImageFromBase64(post.media, 'img')}
+                    className="rounded postImage"
+                />
+                <p>
+                    <span className="fw-bold">Author: {`${writer.firstName} ${writer.lastName}`}</span>
+                </p>
+                {post.status == 'Closed' ? <p className="fw-bold text-danger">Closed</p> : <p className="fw-bold">Ends: {getDate()}</p>}
+
+                {/* <button>
+                        <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                    </button> */}
 
                 </div>
                 <div className="col-md-6">
-                    {
-                        OwnerOfPost() || Administrator() ?
-                            <>
-                                <button type="button" className="btn btn-success" onClick={() => navigate(`/postedit/${params.id}`)}>
-                                    edit
-                                </button>
-                                <button type="button" className="btn btn-success" onClick={() => deletePost()}>
-                                    Delete
-                                </button>
-                                <button type="button" className="btn btn-success" onClick={() => ClearApplicants()}>
-                                    Clear Applicants
-                                </button>
-                                <button type="button" className="btn btn-success" onClick={() => ClosePost()}>
-                                    Close Post
-                                </button>
-                                <button type="button" className="btn btn-success" onClick={() => OpenPost()}>
-                                    Open Post
-                                </button>
-                            </> : null
-                    }
-                    <h2>
-                        {post.title}
-                    </h2>
-                    <p>
-                        {post.body}
-                    </p>
+                        <div className="d-flex">
+                            {/* <span>
+                                <i className="fa-solid fa-ellipsis-vertical"></i>
+                            </span> */}
+                            {/* <button type="button" className="btn btn-success" onClick={() => navigate(`/postedit/${params.id}`)}>
+                                edit
+                            </button>
+                            <button type="button" className="btn btn-success" onClick={() => deletePost()}>
+                                Delete
+                            </button> */}
+                            <div className="d-flex flex-column">
+                                <h2>
+                                    {post.title}
+                                </h2>
+                                <p>
+                                    {post.body}
+                                </p>
+                            </div>
+
+                            {/* <button>
+                                <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                            </button> */}
+
+                <div className="container d-flex justify-content-end">
+                    <div className="dropdown">
+                    <button
+                        className="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
+                    </button>
+
+                    <div
+                        className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                    {OwnerOfPost() || Administrator() ? (
+                        <> 
+                        <a
+                        className="dropdown-item"
+                        onClick={() => navigate(`/postedit/${params.id}`)}
+                        >
+                        <span className="d-flex justify-content-between">
+                            Edit Post <i class="fa-solid fa-pen text-dark mt-1"></i>
+                        </span>
+                        </a>
+
+                        <a
+                        className="dropdown-item text-danger"
+                        onClick={() => deletePost()}
+                        >
+                        <span className="d-flex justify-content-between">
+                            Delete Post <i className="fa-solid fa-trash mt-1"></i>
+                        </span>
+                        </a>
+
+                        <a
+                        className="dropdown-item text-danger"
+                        onClick={() => ClearApplicants()}
+                        >
+                        <span className="d-flex justify-content-between">
+                            <p>Clear Applicants</p> <i class="fa-solid fa-circle-xmark mt-1"></i>
+                        </span>
+                        </a>
+
+                        <hr />
+
+                        <a
+                        className="dropdown-item"
+                        onClick={() => OpenPost()}
+                        >
+                        <span className="d-flex justify-content-between">
+                            Open Post <i class="fa-solid fa-book-open text-dark mt-1"></i>
+                        </span>
+                        </a>
+
+                        <a
+                        className="dropdown-item text-success"
+                        onClick={() => ClosePost()}
+                        >
+                        <span className="d-flex justify-content-between">
+                            Close Post <i class="fa-solid fa-circle-check mt-1"></i>
+                        </span>
+                        </a>
+                    </>
+                    ) : null}
+
+                    </div>
+                    </div>
+                    
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <p>
-                                User rating: {rating(3)}
-                            </p>
-                        </div>
-                        <div className="col-md-6">
-                            <p>
-                                Average post rating: {rating(3)}
-                            </p>
                         </div>
                     </div>
-                    {
-                        !OwnerOfPost() && PostIsOpen()
-                            ?
-                            <button type="button"
-                                className="btn btn-primary"
-                                onClick={() => applyForPost()}>
-                                Apply
-                            </button> : null
-                    }
-                    {
-                        !OwnerOfPost() && PostIsClosed()
-                            ?
-                            <button type="button"
-                                className="btn btn-sm btn-outline-secondary"
-                                onClick={() => deletePost()}>
-                                Review
-                            </button> : null
-                    }
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+                {!OwnerOfPost() && PostIsOpen() ? (
+                    <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => applyForPost()}
+                    >
+                    Apply
+                    </button>
+                ) : null}
+                {!OwnerOfPost() && PostIsClosed() ? (
+                    <button
+                    type="button"
+                    className="btn btn-sm btn-outline-secondary"
+                    onClick={() => deletePost()}
+                    >
+                    Review
+                    </button>
+                ) : null}
+                </div>
+            </div>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      {(OwnerOfPost() || Administrator()) && PostIsOpen() ? (
+        <>
+        <div className="d-flex people">
+            <div>
+                <h4 className="mb-3 title">Accepted</h4>
+                <div className="row">
+                    <div className="col-md-12">
+                    {post.people_accepted != null //testy(): null
+                        ? post.people_accepted.map((person_accepted, i) => {
+                            return (
+                            <Applicant
+                                key={i}
+                                accepted={true}
+                                id={person_accepted}
+                                RevokeApplication={RevokeApplication}
+                            />
+                            );
+                        })
+                        : null}
+                    <ApplicantEmpty />
+                    </div>
                 </div>
             </div>
 
-            <br /><br /><br />
-            {
-                (OwnerOfPost() || Administrator()) && PostIsOpen() ?
-                    <><h4>Accepted</h4>
-                        <div className="row">
-                            <div className="col-md-12">
-                                {
-                                    post.people_accepted != null ? //testy(): null
-                                        post.people_accepted.map((person_accepted, i) => {
-                                            return <Applicant
-                                                key={i}
-                                                accepted={true}
-                                                id={person_accepted}
-                                                RevokeApplication={RevokeApplication}
-                                            />
-                                        }) : null
-                                }
-                                <ApplicantEmpty />
-                            </div>
-                        </div>
-                        <br /><br /><br />
-                        <h4>Volunteered</h4>
-                        <div className="row">
-                            <div className="col-md-12">
-                                {
-                                    post.applicants != null ? //testy(): null
-                                        post.applicants.map((applicant, i) => {
-                                            return <Applicant
-                                                key={i}
-                                                accepted={false}
-                                                id={applicant}
-                                                AcceptApplication={AcceptApplication}
-                                            />
-                                        }) : null
-                                }
-                            </div>
-                        </div></>
-                    : null
-            }
+            <div className="mx-auto">
+                <h4 className="mb-3 title">Volunteered</h4>
+                <div className="row">
+                    <div className="col-md-12">
+                    {post.applicants != null //testy(): null
+                        ? post.applicants.map((applicant, i) => {
+                            return (
+                            <Applicant
+                                key={i}
+                                accepted={false}
+                                id={applicant}
+                                AcceptApplication={AcceptApplication}
+                            />
+                            );
+                        })
+                        : null}
+                    </div>
+                </div>
+            </div>
+        </div>  
+        </>
+      ) : null}
 
-            <br /><br /><br />
+      <br />
+      <br />
+      <br />
 
-            {
-                (OwnerOfPost() || Administrator()) && PostIsClosed() ?
-                    <>
-                        <h4>Write Review</h4>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <ReviewCreate poster={post.writer} post_id={post._id} />
-                            </div>
-                        </div>
-                    </>
-                    : null
-            }
-            {
-                PostIsClosed() ?
-                    <>
-                        <h4>Reviews</h4>
-                        <div className="row">
-                            <div className="col-md-12">
-                                {
-                                    post._id != null ?
-                                        reviews.map((review, i) => {
-                                            return <Review key={i} data={review}
-                                            />
-                                        }) : null
-                                }
-                            </div>
-                        </div>
-                    </>
-                    : null
-            }
-
-        </div>
+      {(OwnerOfPost() || Administrator()) && PostIsClosed() ? (
+        <>
+          <h4>Write Review</h4>
+          <div className="row">
+            <div className="col-md-12">
+              <ReviewCreate poster={post.writer} post_id={post._id} />
+            </div>
+          </div>
+        </>
+      ) : null}
+      {PostIsClosed() ? (
+        <>
+          <h4 className="mb-3 title">Reviews</h4>
+          <div className="row">
+            <div className="col-md-12">
+              {post._id != null
+                ? reviews.map((review, i) => {
+                    return <Review key={i} data={review} />;
+                  })
+                : null}
+            </div>
+          </div>
+        </>
+      ) : null}
+    </div>
     )
 }
 
