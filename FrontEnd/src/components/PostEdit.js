@@ -7,7 +7,6 @@ import authService from '../services/authService';
 import componentService from '../services/componentService';
 
 const PostEdit = (props) => {
-
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
     const [body, setBody] = useState('');
@@ -58,6 +57,7 @@ const PostEdit = (props) => {
         }))
         return b;
     }
+
     const arrToTagString = (a) => {
         let s = '';
         a.map((t => {
@@ -104,7 +104,7 @@ const PostEdit = (props) => {
             people_accepted: []
         }
 
-        console.log(post)
+        // console.log(post)
         dataService.updatePost(params.id, post, (success) => {
             if (success) {
                 navigate('/');
@@ -190,21 +190,15 @@ const PostEdit = (props) => {
         }
     }
 
-    // return (
+       // return (
     //     <input type="date" {...innerProps} onChange={handleChange} />
     // );
     return (
         <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
-
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Edit Post</h1>
-
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
-<<<<<<< HEAD
-                <label htmlFor="title" className="mb-2">Title</label>
-=======
                 <label htmlFor="title" className="mb-2 fw-bold">Title</label>
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="text"
                     id="title"
                     name="title"
@@ -216,49 +210,34 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-<<<<<<< HEAD
             {/* <div className="form-group">
                 <label htmlFor="media">Image</label>
                 <input type="file"
                     id="media"
                     name="media"
-=======
+                    className="form-control"
+                    accept="image/png, image/jpeg"
+                    value={convertImage(media)}
+                    onChange={handleChange}
+                    required />
+            </div> */}
+
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="location" className="mb-2 fw-bold">Location</label>
                 <input type="text"
                     id="location"
                     name="location"
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                     className="form-control"
                     placeholder="..."
                     defaultValue={location}
                     onChange={handleChange}
                     required />
-<<<<<<< HEAD
-            </div> */}
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-                <label htmlFor="location" className="mb-2">Location</label>
-                <input type="text"
-                    id="location"
-                    name="location"
-                    className="form-control"
-                    placeholder="..."
-                    defaultValue={location}
-                    onChange={handleChange}
-                    required />
-=======
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-<<<<<<< HEAD
-                <label htmlFor="availability" className="mb-2">End Date</label>
-=======
+                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+                        <div className="form-group mb-4">
                 <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="datetime-local"
                     id="availability"
                     name="availability"
@@ -269,13 +248,9 @@ const PostEdit = (props) => {
                     required />
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-<<<<<<< HEAD
-                <label htmlFor="tags" className="mb-2">Tags</label>
-=======
+                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+                        <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="text"
                     id="tags"
                     name="tags"
@@ -286,13 +261,9 @@ const PostEdit = (props) => {
                     required />
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
-<<<<<<< HEAD
-                <label htmlFor="body" className="mb-2">Description</label>
-=======
+                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+                        <div className="form-group mb-4">
                 <label htmlFor="body" className="mb-2 fw-bold">Description</label>
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <textarea cols="50" rows="3"
                     id="body"
                     name="body"
@@ -304,11 +275,7 @@ const PostEdit = (props) => {
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
-<<<<<<< HEAD
-                <label htmlFor="people_needed" className="mb-2">People Needed</label>
-=======
                 <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
                 <input type="number"
                     id="people_needed"
                     name="people_needed"
@@ -318,20 +285,10 @@ const PostEdit = (props) => {
                     required />
             </div>
 
-<<<<<<< HEAD
-
             <button type="submit"
                 className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
         </form>
     )
-=======
-      <button type="submit"
-        className="btn btn-lg btn-primary btn-block" >Create Post</button>
-    </form>
-  )
-
-            
->>>>>>> aa343a50532af0b79cfcb55bcdf06eeee5c71469
 }
 
-export default PostEdit
+export default PostEdit;
