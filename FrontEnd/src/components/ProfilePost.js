@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/profile.css';
-const no_image = require('../img/no_image.png');
+import componentService from '../services/componentService';
 
 const ProfilePost = (props) => {
 
@@ -40,7 +40,7 @@ const ProfilePost = (props) => {
                     return (
                       <div class="row shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="col-sm">
-                        <img src={ item.media = null ? item.media: no_image}
+                        <img src={componentService.convertImageFromBase64(item.media, "img")}
                             alt="lol" 
                             className="rounded profile-post-img"
                            />
