@@ -6,8 +6,8 @@ const Contact = () => {
       <div className="container mt-5 contact">
        <div className="row mb-5">
         <div className="col">
-        <h1 className="text-center fw-bold"> Contact us</h1>
-        <p className="text-center fw-normal">We can help. Our Tech Team is on hand to answer your questions.</p>
+        <h1 className="text-center"> Contact us</h1>
+        <p className="text-center">We can help. Our Tech Team is on hand to answer your questions.</p>
         </div>
        </div>
        <div className="row shadow-sm p-3 mb-5 bg-white rounded w-75 m-auto">

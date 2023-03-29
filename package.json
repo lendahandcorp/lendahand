@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd BackEnd && nodemon app.js",
     "api": "cd BackEnd && npm install && nodemon app.js",
     "client": "cd FrontEnd && npm install && npm start",
     "dev": "npm install && concurrently \"npm run api\" \"npm run client\" --kill-others --kill-others-on-fail"

@@ -21,7 +21,7 @@ const Home = (props) => {
 
     useEffect(() => {
         dataService.getPosts(posts => {
-            
+
             //convert the tag ids into names
             //dataService.getTagsById();
 
@@ -31,7 +31,6 @@ const Home = (props) => {
 
     const goToProfile = (id) => {
         console.log('%c user attempted to go to profile:' + id, 'color:blue');
-        console.log(id);
         navigate('/profile/' + id);
     }
 
@@ -99,16 +98,6 @@ const Home = (props) => {
 
     const testerBoy = () => {
         //console.log(componentService.grabMyUserDetails().userId)
-        componentService.MostCommonTagsForUser("63f414487cf34484cee0fda8", 4, (t => {
-            console.log(t);
-        })); //john
-
-        componentService.MostCommonTagsForAllUsers(6, (t => {
-            console.log(t);
-        })); //all
-
-
-        //componentService.MostCommonTagsForUser("641de21868df47fa8d5f1a05"); //joy
     }
 
 

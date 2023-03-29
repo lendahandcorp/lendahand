@@ -57,20 +57,14 @@ const SignIn = (props) => {
                     
                     <div className="mb-3">
                         <label htmlFor="inputEmail" className="sr-only form-label">Email</label>
-                        <input onChange={e => setEmail(e.target.value)} name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address"  autoFocus  
-                        onBlur={() => {
-                        const error = emailValidator(email);
-                        setEmailError(error);}} />
+                        <input onChange={e => setEmail(e.target.value)} name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
                     </div>
                     
                     <br/>
 
                     <div className="mb-3">
                     <label htmlFor="inputPassword" className="sr-only form-label">Password</label>
-                    <input onChange={e => setPassword(e.target.value)} name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" 
-                     onBlur={() => {
-                        const error = passwordValidator(password);
-                        setPasswordError(error);}}/>
+                    <input onChange={e => setPassword(e.target.value)} name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     </div>
 
                     <div className="d-flex mt-5">

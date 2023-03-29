@@ -3,43 +3,36 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dataService from '../services/dataService';
-import componentService from '../services/componentService';
+import '../css/applicant.css'
 
 const Applicant = (props) => {
     const [user, setUser] = useState([])
 
     useEffect(() => {
-        console.log(props.id);
-        dataService.getOneUser(props.id, user => {
-            console.log(user);
-            setUser(user);
-        })
+        // dataService.getOneUser(props.data.reviewer, user => {
+        //     console.log(user);
+        //     setUser(user);
+        // })
     }, [])
 
     return (
         <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-3">
-                    <img alt="Bootstrap Image Preview" src={componentService.convertImageFromBase64(user.media, "pic")} />
+            <div className="mb-4 d-flex volunteer shadow-sm p-3 bg-white rounded">
+                <div>
+                    <img className="rounded" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
                 </div>
-                <div className="col-md-9">
-                    <p>
-                        {`${user.firstName} ${user.lastName}`}
+                <div>
+                    <p className="fw-bold">
+                        Robert De Niro
                     </p>
                     {
                         props.accepted == true
                             ?
-                            <button type="button" 
-                                class="btn btn-outline-secondary"
-                                onClick={() => props.RevokeApplication(props.id)}
-                            >
+                            <button type="button" class="btn btn-danger">
                                 Revoke
                             </button>
                             :
-                            <button type="button" 
-                                class="btn btn-outline-secondary"
-                                onClick={() => props.AcceptApplication(props.id)}
-                            >
+                            <button type="button" class="btn btn-primary">
                                 Accept
                             </button>
                     }

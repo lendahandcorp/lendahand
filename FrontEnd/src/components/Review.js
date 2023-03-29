@@ -3,14 +3,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dataService from '../services/dataService';
-import componentService from '../services/componentService';
 
 const Review = (props) => {
     const [writer, setWriter] = useState([])
 
     useEffect(() => {
         dataService.getOneUser(props.data.reviewer, user => {
-            //console.log(user);
+            console.log(user);
             setWriter(user);
         })
     }, [])
@@ -34,21 +33,12 @@ const Review = (props) => {
         })
     }
 
-    const convertImage = (a) => {
-        if(a != undefined){
-            return `data:image/png;base64,${a}`;
-        } else {
-            return `.../img/no_image.png`
-            //when first loaded, media (a) is sometimes undefined.
-            //console.log("media is undefined")
-        }
-    }
 
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-3">
-                    <img alt="Bootstrap Image Preview" src={componentService.convertImageFromBase64(writer.picture, "pic")} />
+                    <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
                 </div>
                 <div className="col-md-9">
                     <p>
