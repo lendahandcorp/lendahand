@@ -1,0 +1,45 @@
+.tap-react-tagsinput {
+    overflow: hidden;
+    padding-left: 5px;
+    padding-top: 5px;
+  }
+
+  /* .tap-react-tagsinput:nth-child(2) {
+    background-color: blueviolet;
+  }
+   */
+  .tap-react-tagsinput--focused {
+  }
+  
+  .tap-react-tagsinput-tag {
+    border-radius: 2px;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+  
+  .tap-react-tagsinput-remove {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .tap-react-tagsinput-tag a::before {
+    content: " ×";
+  }
+  
+  .tap-react-tagsinput-input {
+    background: transparent;
+    border: 0;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    outline: none;
+    padding: 5px;
+    width: 80px;
+  }
