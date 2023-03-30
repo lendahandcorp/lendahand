@@ -269,7 +269,7 @@ class dataService {
     addApplicant(applicant_id, post_id, callback) {
         axios.get(`${process.env.REACT_APP_API_URL}/posts/${post_id}`)
         .then(response => {
-            console.log(response.data)
+            //console.log(response.data)
 
             let APIdata = response.data;
 
@@ -299,7 +299,7 @@ class dataService {
         axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, this.getUserId())
             .then(
                 response => {
-                    console.log(response);
+                    //console.log(response);
                     if (response.status === 200) {
                         callback(true)
                     }
