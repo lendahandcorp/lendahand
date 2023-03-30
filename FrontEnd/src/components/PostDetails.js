@@ -252,7 +252,7 @@ const PostDetails = (props) => {
                 <img
                     alt="Bootstrap Image Preview"
                     src={componentService.convertImageFromBase64(post.media, 'img')}
-                    className="rounded postImage"
+                    className="rounded postImage home_post-img"
                 />
                 <p>
                     <span className="fw-bold">Author: {`${writer.firstName} ${writer.lastName}`}</span>
