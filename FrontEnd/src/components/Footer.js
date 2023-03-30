@@ -32,8 +32,8 @@ const Footer = (props) => {
           </div>
           <div className="float-right other-links">
             <ul className="nav d-flex justify-content-between align-items-center">
-                <li className="nav-item"><Link to="/#" className="foot-link">Donate</Link></li>
-                <li className="nav-item"><Link to="/#" className="foot-link">Security</Link></li>
+                <li className="nav-item"><Link to="/donate" className="foot-link">Donate</Link></li>
+                <li className="nav-item"><Link to="/security" className="foot-link">Security</Link></li>
 
                 <li className="nav-item"><Link to="/About" className="foot-link">About Us</Link></li>
                 

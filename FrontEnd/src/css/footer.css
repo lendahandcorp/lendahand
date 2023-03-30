@@ -57,3 +57,9 @@ footer p {
   color: white; 
   border: 2px solid white;
 }
+
+/* Contact */
+.contact-img{
+  width: 250px;
+  aspect-ratio: 1 / 1;
+}

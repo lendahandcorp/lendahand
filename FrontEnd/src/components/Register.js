@@ -28,54 +28,81 @@ const Register = (props) => {
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
+  const handleChange = (event) => {
+    switch (event.target.name) {
+      case 'firstName':
+        setFirstName(event.target.value);
+        setFirstNameError(firstNameValidator(event.target.value));
+        break;
+      case 'lastName':
+        setLastName(event.target.value);
+        setLastNameError(lastNameValidator(event.target.value));
+        break;
+      case 'address':
+        setAddress(event.target.value);
+        setAddressError(addressValidator(event.target.value));
+        break;
+      case 'phone':
+        setPhone(event.target.value);
+        setTelephoneNumberError(phoneValidator(event.target.value));
+        break;
+      case 'email':
+        setEmail(event.target.value);
+        setEmailError(emailValidator(event.target.value));
+        break;
+      case 'password':
+        setPassword(event.target.value);
+        setPasswordError(passwordValidator(event.target.value));
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const isFirstNameValid = firstNameValidator(firstName);
-    if (isFirstNameValid !== '') {
-      setFirstNameError(isFirstNameValid);
-    }
-    const isLastNameValid = lastNameValidator(lastName);
-    if (isLastNameValid !== '') {
-      setLastNameError(isLastNameValid);
-    }
-    const isAddressValid = addressValidator(address);
-    if (isAddressValid !== '') {
-      setAddressError(isAddressValid);
-    }
-    const isPhoneValid = phoneValidator(phone);
-    if (isPhoneValid !== '') {
-      setTelephoneNumberError(isPhoneValid);
-    }
-    const isEmailValid = emailValidator(email);
-    if (isEmailValid !== '') {
-      setEmailError(isEmailValid);
-    }
-    const isPasswordValid = passwordValidator(password);
-    if (isPasswordValid !== '') {
-      setPasswordError(isPasswordValid);
+    if (firstNameValidator(firstName) !== '') {
+      setFirstNameError(firstNameValidator(firstName));
+      return;
     }
 
-    if (
-      isFirstNameValid === '' &&
-      isLastNameValid === '' &&
-      isAddressValid === '' &&
-      isPhoneValid === '' &&
-      isEmailValid === '' &&
-      isPasswordValid === ''
-    ) {
-      // Invoke auth.Service that call API to insert data
-      authService.register(
-        { firstName, lastName, address, phone, picture, email, password },
-        (error) => {
-          if (!error) {
-            navigate('/'); //Redirect to main with token in browser storage with the name x-auth-token
-          } else {
-            console.log(error.data.message);
-          }
-        }
-      );
+    if (lastNameValidator(lastName) !== '') {
+      setLastNameError(lastNameValidator(lastName));
+      return;
     }
+
+    if (addressValidator(address) !== '') {
+      setAddressError(addressValidator(address));
+      return;
+    }
+
+    if (phoneValidator(phone) !== '') {
+      setTelephoneNumberError(phoneValidator(phone));
+      return;
+    }
+
+    if (emailValidator(email) !== '') {
+      setEmailError(emailValidator(email));
+      return;
+    }
+
+    if (passwordValidator(password) !== '') {
+      setPasswordError(passwordValidator(password));
+      return;
+    }
+    console.log(picture);
+    // Invoke auth.Service that call API to insert data
+    authService.register(
+      { firstName, lastName, address, phone, picture, email, password },
+      (error) => {
+        if (!error) {
+          navigate('/'); //Redirect to main with token in browser storage with the name x-auth-token
+        } else {
+          console.log(error.data);
+        }
+      }
+    );
   };
 
   const handleImageBuffer = (event) => {
@@ -98,57 +125,19 @@ const Register = (props) => {
       </div>
       <div className="card-register card">
         <form className="form-signin" onSubmit={handleSubmit}>
-          {/* Validators */}
-          {/* <p
-            className={
-              firstNameError ? 'alert alert-danger text-center' : 'hidden'
-            }
-          >
-            {firstNameError}
-          </p>
-          <p
-            className={
-              lastNameError ? 'alert alert-danger text-center' : 'hidden'
-            }
-          >
-            {lastNameError}
-          </p>
-          <p
-            className={
-              addressError ? 'alert alert-danger text-center' : 'hidden'
-            }
-          >
-            {addressError}
-          </p>
-          <p
-            className={
-              telephoneNumberError ? 'alert alert-danger text-center' : 'hidden'
-            }
-          >
-            {telephoneNumberError}
-          </p>
-          <p
-            className={emailError ? 'alert alert-danger text-center' : 'hidden'}
-          >
-            {emailError}
-          </p>
-          <p
-            className={
-              passwordError ? 'alert alert-danger text-center' : 'hidden'
-            }
-          >
-            {passwordError}
-          </p> */}
-
           {/* HTML */}
           {/* <h1 className="h3 mb-3 font-weight-normal text-center">Register to Lend a Hand</h1> */}
 
-          <p className={ firstNameError ? 'text-danger validationErr' : 'hidden' }> {firstNameError}  </p>
+          <p
+            className={firstNameError ? 'text-danger validationErr' : 'hidden'}
+          >
+            {firstNameError}
+          </p>
           <label htmlFor="inputFirstName" className="sr-only">
             First Name
           </label>
           <input
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={handleChange}
             name="firstName"
             type="text"
             id="firstName"
@@ -156,70 +145,65 @@ const Register = (props) => {
             placeholder="Enter First Name"
             autoFocus
             required
-            onBlur={() => {
-              const error = firstNameValidator(firstName);
-              setFirstNameError(error);
-          }}
           />
 
           <br />
 
-          <p className={ lastNameError ? 'text-danger validationErr' : 'hidden' }> {lastNameError}  </p>
+          <p className={lastNameError ? 'text-danger validationErr' : 'hidden'}>
+            {lastNameError}
+          </p>
           <label htmlFor="inputLastName" className="sr-only">
             Last Name
           </label>
           <input
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={handleChange}
             name="lastName"
             type="text"
             id="lastName"
             className="form-control"
             placeholder="Enter Last Name"
-            onBlur={() => {
-              const error = lastNameValidator(lastName);
-              setLastNameError(error);
-          }}
             required
           />
 
           <br />
 
-          <p className={ addressError ? 'text-danger validationErr' : 'hidden' }> {addressError}  </p>
+          <p className={addressError ? 'text-danger validationErr' : 'hidden'}>
+            {addressError}
+          </p>
           <label htmlFor="inputAddress" className="sr-only">
             Address
           </label>
           <input
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={handleChange}
             name="address"
             type="text"
             id="address"
             className="form-control"
             placeholder="Enter Address"
-            onBlur={() => {
-              const error = addressValidator(address);
-              setAddressError(error);
-          }}
             required
           />
 
           <br />
 
-          <p className={ telephoneNumberError ? 'text-danger validationErr' : 'hidden' }> {telephoneNumberError}  </p>
+          <p
+            className={
+              telephoneNumberError ? 'text-danger validationErr' : 'hidden'
+            }
+          >
+            {telephoneNumberError}
+          </p>
           <label htmlFor="inputTelephoneNumber" className="sr-only">
             Telephone Number
           </label>
           <input
-            onChange={(e) => setPhone(e.target.value)}
-            name="telephoneNumber"
-            type="text"
+            onChange={handleChange}
+            name="phone"
+            type="tel"
             id="telephoneNumber"
             className="form-control"
-            placeholder="Enter Telephone Number"
-            onBlur={() => {
-              const error = phoneValidator(phone);
-              setTelephoneNumberError(error);
-          }}
+            placeholder="000-000-0000"
             required
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           />
 
           <br />
@@ -237,41 +221,38 @@ const Register = (props) => {
 
           <br />
 
-          <p className={ emailError ? 'text-danger validationErr' : 'hidden' }> {emailError}  </p>
+          <p className={emailError ? 'text-danger validationErr' : 'hidden'}>
+            {emailError}
+          </p>
           <label htmlFor="inputEmail" className="sr-only">
             Email address
           </label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
             name="email"
             type="email"
             id="inputEmail"
             className="form-control"
             placeholder="Email address"
-            onBlur={() => {
-              const error = emailValidator(email);
-              setEmailError(error);
-            }}
-
             required
           />
 
           <br />
 
-          <p className={ passwordError ? 'text-danger validationErr' : 'hidden' }> {passwordError}  </p>
+          <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>
+            {passwordError}
+          </p>
           <label htmlFor="inputPassword" className="sr-only">
             Password
           </label>
           <input
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
             name="password"
             type="password"
             id="inputPassword"
             className="form-control"
             placeholder="Password"
-            onBlur={() => {
-              const error = passwordValidator(password);
-              setPasswordError(error);}}
+            required
           />
 
           <div className="d-flex mt-4">

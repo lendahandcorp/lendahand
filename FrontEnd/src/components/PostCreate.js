@@ -16,7 +16,11 @@ import {
     peopleNeededValidator,
 } from './Validator';
 
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
 
+import '../css/tags_in_tagbar.css';
+//i hate git
 const PostCreate = (props) => {
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
@@ -44,77 +48,72 @@ const PostCreate = (props) => {
         });
         return objectedTags
     }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isTitleValid = titleValidator(title);
-        if (isTitleValid !== '') {
-            setTitleError(isTitleValid);
-        }
-        const isLocationValid = locationValidator(location);
-        if (isLocationValid !== '') {
-            setLocationError(isLocationValid);
-        }
-        const isAvailabilityValid = availabilityValidator(availability);
-        if (isAvailabilityValid !== '') {
-            setAvailabilityError(isAvailabilityValid);
-        }
-        const isTagsValid = tagsValidator(tags);
-        if (isTagsValid !== '') {
-            setTagsError(isTagsValid);
-        }
-        const isBodyValid = bodyValidator(body);
-        if (isBodyValid !== '') {
-            setBodyError(isBodyValid);
-        }
-        const isPeopleNeededValid = peopleNeededValidator(people_needed);
-        if (isPeopleNeededValid !== '') {
-            setPeopleNeededError(isPeopleNeededValid);
+        if (titleValidator(title) !== '') {
+            setTitleError(titleValidator(title));
+            return;
         }
 
-        if (
-            isTitleValid === '' &&
-            isLocationValid === '' &&
-            isAvailabilityValid === '' &&
-            isTagsValid === '' &&
-            isBodyValid === '' &&
-            isPeopleNeededValid === ''
-        ) {
+        if (locationValidator(location) !== '') {
+            setLocationError(locationValidator(location));
+            return;
+        }
 
-            console.log(objectify(tags))
+        if (availabilityValidator(availability) !== '') {
+            setAvailabilityError(availabilityValidator(availability));
+            return;
+        }
 
-            let post = {
-                title: title,
-                writer: componentService.grabMyUserDetails().userId,
-                body: body,
-                tags: objectify(tags),
-                availability: availability,
-                status: "Open",
-                location: location,
-                people_needed: people_needed,
-                applicants: [],
-                people_accepted: [],
-                media: media
+        if (tagsValidator(tags) !== '') {
+            setTagsError(tagsValidator(tags));
+            return;
+        }
+
+        if (bodyValidator(body) !== '') {
+            setBodyError(bodyValidator(body));
+            return;
+        }
+
+        if (peopleNeededValidator(people_needed) !== '') {
+            setPeopleNeededError(peopleNeededValidator(people_needed));
+            return;
+        }
+
+        console.log(objectify(tags))
+
+        let post = {
+            title: title,
+            writer: componentService.grabMyUserDetails().userId,
+            body: body,
+            tags: objectify(tags),
+            availability: availability,
+            status: "Open",
+            location: location,
+            people_needed: people_needed,
+            applicants: [],
+            people_accepted: [],
+            media: media
+        }
+
+        // let post = {
+        //     "title": "tagtest 1",
+        //     "writer": '63e018aa42a38b860599766c',
+        //     "body": "tt",
+        //     "tags": ["tt1","tt2"],
+        //     "availability": '2002-12-09',
+        //     "location": "123 tt",
+        //     "people_needed": 3,
+        // }
+
+        dataService.createPost(post, (success) => {
+            if (success) {
+                navigate('/');
+            } else {
             }
-
-            // let post = {
-            //     "title": "tagtest 1",
-            //     "writer": '63e018aa42a38b860599766c',
-            //     "body": "tt",
-            //     "tags": ["tt1","tt2"],
-            //     "availability": '2002-12-09',
-            //     "location": "123 tt",
-            //     "people_needed": 3,
-            // }
-
-            dataService.createPost(post, (success) => {
-                if (success) {
-                    navigate('/');
-                } else {
-                }
-            });
-
-        }
+        });
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -155,11 +154,19 @@ const PostCreate = (props) => {
         };
     }
 
+    
+    const handleTagChange = (ntags) => {
+        //tagIndex.current = 0;
+        setTags(ntags)
+        console.log(tags);
+    }
+
     const handleChange = (event) => {
         //console.log(event.target.value)
         switch (event.target.name) {
             case 'title':
                 setTitle(event.target.value);
+                setTitleError(titleValidator(event.target.value));
                 break;
             case 'media':
                 fileManip(event.target.files)
@@ -169,25 +176,32 @@ const PostCreate = (props) => {
                 break;
             case 'body':
                 setBody(event.target.value);
+                setBodyError(bodyValidator(event.target.value));
                 break;
             case 'tags':
                 convertTagsToArray(event.target.value, event.target);
+                setTagsError(tagsValidator(event.target.value));
                 break;
             case 'availability':
                 //console.log(event.target.value)
                 setAvailability(event.target.value);
+                setAvailabilityError(availabilityValidator(event.target.value));
                 break;
             case 'location':
                 setLocation(event.target.value);
+                setLocationError(locationValidator(event.target.value));
                 break;
             case 'people_needed':
                 setPeople_needed(event.target.value);
+                setPeopleNeededError(peopleNeededValidator(event.target.value));
                 break;
             case 'displayEmail':
                 setDisplayEmail(event.target.checked);
                 break;
             case 'displayPhone':
                 setDisplayPhone(event.target.checked);
+                break;
+                default:
                 break;
         }
     }
@@ -196,188 +210,123 @@ const PostCreate = (props) => {
 
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Create Post</h1>
 
-            {/* Validators */}
-            {/* <p
-                className={
-                    titleError ? 'alert alert-danger text-center' : 'hidden'
-                }
-            >
-                {titleError}
-            </p>
-            <p
-                className={
-                    locationError ? 'alert alert-danger text-center' : 'hidden'
-                }
-            >
-                {locationError}
-            </p>
-            <p
-                className={
-                    availabilityError ? 'alert alert-danger text-center' : 'hidden'
-                }
-            >
-                {availabilityError}
-            </p>
-            <p
-                className={
-                    tagsError ? 'alert alert-danger text-center' : 'hidden'
-                }
-            >
-                {tagsError}
-            </p>
-            <p
-                className={bodyError ? 'alert alert-danger text-center' : 'hidden'}
-            >
-                {bodyError}
-            </p>
-            <p
-                className={
-                    peopleNeededError ? 'alert alert-danger text-center' : 'hidden'
-                }
-            >
-                {peopleNeededError}
-            </p> */}
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4 ">
+            <div className="form-group mb-4">
                 <label htmlFor="title" className="mb-2 fw-bold">Title</label>
-                <input type="text"
+                <input
+                    type="text"
                     id="title"
                     name="title"
                     className="form-control"
                     placeholder="Enter Title here"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = titleValidator(title);
-                        setTitleError(error);
-                    }}
-                     />
-
-                <p className={ titleError ? 'text-danger' : 'hidden' }> {titleError}  </p>
+                    required
+                />
+                {titleError && <p className="text-danger">{titleError}</p>}
             </div>
 
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="media" className="mb-2 fw-bold">Image</label>
-                <input type="file"
+                <input
+                    type="file"
                     id="media"
                     name="media"
                     className="form-control"
                     accept="image/png"
                     onChange={handleChange}
                     required
-                     />
+                />
             </div>
 
-
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
-                <input type="checkbox"
-                    id="displayEmail"
-                    name="displayEmail"
-                    className="form-check-input"
-                    onChange={handleChange} />
-                <label className="form-check-label" htmlFor="displayEmail">Display Email?</label>
-            </div> */}
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
-                <input type="checkbox"
-                    id="displayPhone"
-                    name="displayPhone"
-                    className="form-check-input"
-                    onChange={handleChange} />
-                <label className="form-check-label" htmlFor="displayPhone">Display Phone Number?</label>
-            </div> */}
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="location" className="mb-2 fw-bold">Location</label>
-                <input type="text"
+                <input
+                    type="text"
                     id="location"
                     name="location"
                     className="form-control"
                     placeholder="example: 5685 Leeds St, Halifax, NS B3K 4M2"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = locationValidator(location);
-                        setLocationError(error);
-                    }}
-                     />
-                
-                <p className={ locationError ? 'text-danger' : 'hidden' }> {locationError}  </p>
+                    required
+                />
+                {locationError && <p className="text-danger">{locationError}</p>}
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
-                <input type="datetime-local"
+                <input
+                    type="datetime-local"
                     id="availability"
                     name="availability"
                     className="form-control"
                     placeholder="Enter end date"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = availabilityValidator(availability);
-                        setAvailabilityError(error);
-                    }}
-                     />
-
-                <p className={ availabilityError ? 'text-danger' : 'hidden' }> {availabilityError}  </p>
-
+                    required
+                />
+                {availabilityError && <p className="text-danger">{availabilityError}</p>}
             </div>
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
+
+            {/* <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
-                <input type="text"
+                <input
+                    type="text"
                     id="tags"
                     name="tags"
                     className="form-control"
                     placeholder="example: #help"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = tagsValidator(tags);
-                        setTagsError(error);
+                    required
+                />
+                {tagsError && <p className="text-danger">{tagsError}</p>}
+            </div> */}
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <TagsInput
+                    value={tags}
+                    className="form-control border-0 bg-light"
+                    id="tags"
+                    name="tags"
+                    onChange={handleTagChange}
+                    addKeys={[9, 13, 32]}
+                    onlyUnique="true"
+                    tagProps={{
+                        className: `tap-react-tagsinput-tag btn badge badge1`,
+                        placeholder: "add a tag",
+                        classNameRemove: 'react-tagsinput-remove'
                     }}
-                     />
-
-                <p className={ tagsError ? 'text-danger' : 'hidden' }> {tagsError}  </p>
+                /> 
+                {tagsError && <p className="text-danger">{tagsError}</p>}
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+
             <div className="form-group mb-4">
                 <label htmlFor="body" className="mb-2 fw-bold">Description</label>
-                <textarea cols="50" rows="3"
+                <textarea
+                    cols="50"
+                    rows="3"
                     id="body"
                     name="body"
                     className="form-control"
                     placeholder="Enter description here"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = bodyValidator(body);
-                        setBodyError(error);
-                    }}
-                     />
-
-                <p className={ bodyError ? 'text-danger' : 'hidden' }> {bodyError}  </p>
+                    required
+                ></textarea>
+                {bodyError && <p className="text-danger">{bodyError}</p>}
             </div>
 
-            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
                 <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
-                <input type="number"
+                <input
+                    type="number"
                     id="people_needed"
                     name="people_needed"
                     className="form-control"
                     placeholder="Enter a number"
                     onChange={handleChange}
-                    onBlur={() => {
-                        const error = peopleNeededValidator(people_needed);
-                        setPeopleNeededError(error);
-                    }}
-                     />
-
-                <p className={ peopleNeededError ? 'text-danger' : 'hidden' }> {peopleNeededError}  </p>     
+                    required
+                />
+                {peopleNeededError && <p className="text-danger">{peopleNeededError}</p>}
             </div>
+
 
 
             <button type="submit"
