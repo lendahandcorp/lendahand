@@ -42,7 +42,7 @@ const Footer = (props) => {
           </div>
         </div>
         <div>
-          <p className="text-center mt-3 text-white"><small>2023 Copyright</small></p>
+          <p className="text-center mt-3 text-white"><small>Made with <i class="fa-solid fa-heart"></i> by Team Awesome.</small></p>
         </div>
       </footer>
     );

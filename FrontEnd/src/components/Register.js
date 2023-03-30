@@ -99,7 +99,7 @@ const Register = (props) => {
       <div className="card-register card">
         <form className="form-signin" onSubmit={handleSubmit}>
           {/* Validators */}
-          <p
+          {/* <p
             className={
               firstNameError ? 'alert alert-danger text-center' : 'hidden'
             }
@@ -138,11 +138,12 @@ const Register = (props) => {
             }
           >
             {passwordError}
-          </p>
+          </p> */}
 
           {/* HTML */}
           {/* <h1 className="h3 mb-3 font-weight-normal text-center">Register to Lend a Hand</h1> */}
 
+          <p className={ firstNameError ? 'text-danger validationErr' : 'hidden' }> {firstNameError}  </p>
           <label htmlFor="inputFirstName" className="sr-only">
             First Name
           </label>
@@ -162,6 +163,7 @@ const Register = (props) => {
 
           <br />
 
+          <p className={ lastNameError ? 'text-danger validationErr' : 'hidden' }> {lastNameError}  </p>
           <label htmlFor="inputLastName" className="sr-only">
             Last Name
           </label>
@@ -183,6 +185,7 @@ const Register = (props) => {
 
           <br />
 
+          <p className={ addressError ? 'text-danger validationErr' : 'hidden' }> {addressError}  </p>
           <label htmlFor="inputAddress" className="sr-only">
             Address
           </label>
@@ -204,6 +207,7 @@ const Register = (props) => {
 
           <br />
 
+          <p className={ telephoneNumberError ? 'text-danger validationErr' : 'hidden' }> {telephoneNumberError}  </p>
           <label htmlFor="inputTelephoneNumber" className="sr-only">
             Telephone Number
           </label>
@@ -240,6 +244,7 @@ const Register = (props) => {
 
           <br />
 
+          <p className={ emailError ? 'text-danger validationErr' : 'hidden' }> {emailError}  </p>
           <label htmlFor="inputEmail" className="sr-only">
             Email address
           </label>
@@ -262,6 +267,7 @@ const Register = (props) => {
 
           <br />
 
+          <p className={ passwordError ? 'text-danger validationErr' : 'hidden' }> {passwordError}  </p>
           <label htmlFor="inputPassword" className="sr-only">
             Password
           </label>

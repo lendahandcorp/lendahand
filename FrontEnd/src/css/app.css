@@ -79,5 +79,17 @@
 }
 
 .searchbar {
-    width: 22rem;
+    width: 35rem;
+}
+
+.searchIcon {
+    color: orange;
+}
+
+.createButton {
+    margin-left: 11vw;
+}
+
+.form-control:focus {
+    box-shadow: none;
 }

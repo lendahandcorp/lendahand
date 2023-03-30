@@ -1,3 +1,11 @@
+.alertDiv {
+  width: 90%;
+}
+
+.validationErr {
+  margin-left: 4vw;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -40,14 +48,13 @@ button {
 
 /* orange background */
 .card1 {
-  height: 100vh;
   width: 100%;
   background-color: #fd6a02;
 }
 
 .card-signin {
   width: 20rem;
-  height: 440px;
+  height: auto;
   margin: auto;
   border-radius: 15px;
   box-shadow: rgb(191, 57, 0) 0px 5px 15px;

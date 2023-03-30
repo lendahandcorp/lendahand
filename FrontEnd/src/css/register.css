@@ -1,13 +1,16 @@
-.bg-register {
-    height: 130vh;
-    width: 100%;
+.validationErr {
+    margin-left: 4vw;
+}
 
+.bg-register {
+    /* height: 150vh; */
+    width: 100%;
     background-color: #fd6a02;
 }
 
 .card-register {
     width: 20.5rem;
-    height: 670px;
+    height: auto;
     margin: auto;
     border-radius: 15px;
     box-shadow: rgb(191, 57, 0) 0px 5px 15px;

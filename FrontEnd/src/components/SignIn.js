@@ -49,12 +49,16 @@ const SignIn = (props) => {
             </div>
             <div className="card-signin card">
                 <form className="form-signin" onSubmit={handleSubmit}>
+                    {/* <div className="mx-auto alertDiv">
                     <p className={errors ? 'alert alert-danger text-center' : 'hidden'}>{errors}</p>
                     <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
                     <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
+                    </div> */}
 
                     {/* <h1 className="h3 mb-5 font-weight-normal text-center">Sign in</h1> */}
                     
+                    <p className={errors ? 'text-danger text-center' : 'hidden'}>{errors}</p>
+                    <span><p className={emailError ? 'text-danger validationErr' : 'hidden'}>{emailError}</p></span>
                     <div className="mb-3">
                         <label htmlFor="inputEmail" className="sr-only form-label">Email</label>
                         <input onChange={e => setEmail(e.target.value)} name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address"  autoFocus  
@@ -62,9 +66,11 @@ const SignIn = (props) => {
                         const error = emailValidator(email);
                         setEmailError(error);}} />
                     </div>
+
                     
                     <br/>
 
+                    <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>{passwordError}</p>
                     <div className="mb-3">
                     <label htmlFor="inputPassword" className="sr-only form-label">Password</label>
                     <input onChange={e => setPassword(e.target.value)} name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" 
