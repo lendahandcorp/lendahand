@@ -47,8 +47,8 @@ const Home = (props) => {
 
         //this gurantees that the searched tags bar always starts with a #.
         //its not neccesary but makes it look nicer.
-        if(searchBarValue[0] != '#')
-            searchBarValue = '#'+searchBarValue;
+        if (searchBarValue[0] != '#')
+            searchBarValue = '#' + searchBarValue;
 
         //this uses regex to limit the search bar to only having one # in a row.
         searchBarValue = searchBarValue.replace(/##+/g, "#");
@@ -70,7 +70,7 @@ const Home = (props) => {
         //console.log('removey');
         let searchBar = document.getElementById("searchBar");
 
-        searchBar.value = searchBar.value.replace('#'+tagToRemove, "");
+        searchBar.value = searchBar.value.replace('#' + tagToRemove, "");
 
         tagSearchBarChanged();
     }
@@ -79,7 +79,7 @@ const Home = (props) => {
     const tagClicked = (tag) => {
         let searchBar = document.getElementById("searchBar");
 
-        if(searchBar.value.includes("#"+tag)){
+        if (searchBar.value.includes("#" + tag)) {
             removeTagFromSearchBar(tag)
         } else {
             addTagToSearchBar(tag)
@@ -91,7 +91,7 @@ const Home = (props) => {
         let searchBar = document.getElementById("searchBar");
 
 
-        searchBar.value += "#"+newTag;
+        searchBar.value += "#" + newTag;
 
         tagSearchBarChanged();
     }
@@ -111,10 +111,10 @@ const Home = (props) => {
     const getPostsWithRelevantTags = () => {
         //console.log("p");
 
-        if(searchedTags.length > 0){
-            return posts.filter((post) => {      
-                if(post.tags.some(tag => searchedTags.indexOf(tag.title) >= 0)){
-                    
+        if (searchedTags.length > 0) {
+            return posts.filter((post) => {
+                if (post.tags.some(tag => searchedTags.indexOf(tag.title) >= 0)) {
+
                     return post;
                 }
             })
@@ -127,7 +127,7 @@ const Home = (props) => {
 
     return (
         <div class="container home">
-        
+
             {/* Search bar */}
             <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
                 <div class="input-group">
@@ -141,24 +141,25 @@ const Home = (props) => {
             {/* Post Container */}
             <div class="container mt-5">
                 <div class="col-md-12 col-lg-12">
-                <div className="ml-5 w-50">
-                    <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-4 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
+                    <div className="ml-5 w-50">
+                        <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-4 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
+                    </div>
                 </div>
-            </div>
 
-            {/* Post Container */}
-            <div className="row">
-                <div className="col-md-12 col-lg-12">
-                    {
-                        getPostsWithRelevantTags().map((tp, i) => {
-                            console.log('post');
-                            return <Post key={i} data={tp} 
-                                goToProfile={goToProfile} 
-                                // showPost={showPost} 
-                                tagClicked={tagClicked}
-                            />
-                        })
-                    }
+                {/* Post Container */}
+                <div className="row">
+                    <div className="col-md-12 col-lg-12">
+                        {
+                            getPostsWithRelevantTags().map((tp, i) => {
+                                console.log('post');
+                                return <Post key={i} data={tp}
+                                    goToProfile={goToProfile}
+                                    // showPost={showPost} 
+                                    tagClicked={tagClicked}
+                                />
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>

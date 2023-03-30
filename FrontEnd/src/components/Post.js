@@ -116,7 +116,7 @@ const Post = (props) => {
                 </div>
                 <div className="col-sm d-flex flex-column">
                     <div className="d-flex flex-column">
-                        <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
+                    <Link to={`/postDetails/${props.data._id}`}><h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5></Link>
                         <h6 class="fst-italic">Availability: {getDate()} </h6>
                     </div>
                     
