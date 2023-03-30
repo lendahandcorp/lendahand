@@ -445,7 +445,7 @@ const PostDetails = (props) => {
 
       {(OwnerOfPost() || Administrator()) && PostIsClosed() ? (
         <>
-          <h4>Write Review</h4>
+          {/* <h4>Write Review</h4> */}
           <div className="row">
             <div className="col-md-12">
               <ReviewCreate poster={post.writer} post_id={post._id} updateData={updateData} />
