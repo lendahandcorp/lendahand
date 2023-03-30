@@ -28,7 +28,6 @@ const Register = (props) => {
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
-
   const handleChange = (event) => {
     switch (event.target.name) {
       case 'firstName':
@@ -58,7 +57,7 @@ const Register = (props) => {
       default:
         break;
     }
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -92,7 +91,7 @@ const Register = (props) => {
       setPasswordError(passwordValidator(password));
       return;
     }
-
+    console.log(picture);
     // Invoke auth.Service that call API to insert data
     authService.register(
       { firstName, lastName, address, phone, picture, email, password },
@@ -100,11 +99,10 @@ const Register = (props) => {
         if (!error) {
           navigate('/'); //Redirect to main with token in browser storage with the name x-auth-token
         } else {
-          console.log(error.data.message);
+          console.log(error.data);
         }
       }
     );
-
   };
 
   const handleImageBuffer = (event) => {
@@ -130,7 +128,9 @@ const Register = (props) => {
           {/* HTML */}
           {/* <h1 className="h3 mb-3 font-weight-normal text-center">Register to Lend a Hand</h1> */}
 
-          <p className={firstNameError ? "text-danger validationErr" : "hidden"}>
+          <p
+            className={firstNameError ? 'text-danger validationErr' : 'hidden'}
+          >
             {firstNameError}
           </p>
           <label htmlFor="inputFirstName" className="sr-only">
@@ -149,7 +149,7 @@ const Register = (props) => {
 
           <br />
 
-          <p className={lastNameError ? "text-danger validationErr" : "hidden"}>
+          <p className={lastNameError ? 'text-danger validationErr' : 'hidden'}>
             {lastNameError}
           </p>
           <label htmlFor="inputLastName" className="sr-only">
@@ -167,7 +167,7 @@ const Register = (props) => {
 
           <br />
 
-          <p className={addressError ? "text-danger validationErr" : "hidden"}>
+          <p className={addressError ? 'text-danger validationErr' : 'hidden'}>
             {addressError}
           </p>
           <label htmlFor="inputAddress" className="sr-only">
@@ -185,7 +185,11 @@ const Register = (props) => {
 
           <br />
 
-          <p className={telephoneNumberError ? "text-danger validationErr" : "hidden"}>
+          <p
+            className={
+              telephoneNumberError ? 'text-danger validationErr' : 'hidden'
+            }
+          >
             {telephoneNumberError}
           </p>
           <label htmlFor="inputTelephoneNumber" className="sr-only">
@@ -193,11 +197,11 @@ const Register = (props) => {
           </label>
           <input
             onChange={handleChange}
-            name="telephoneNumber"
-            type="number"
+            name="phone"
+            type="text"
             id="telephoneNumber"
             className="form-control"
-            placeholder="Enter Telephone Number"
+            placeholder="TelephoneNumber"
             required
           />
 
@@ -208,7 +212,7 @@ const Register = (props) => {
             Picture
           </label>
           <input
-            onChange={handleChange}
+            onChange={handleImageBuffer}
             name="picture"
             type="file"
             id="picture"
@@ -218,7 +222,7 @@ const Register = (props) => {
 
           <br />
 
-          <p className={emailError ? "text-danger validationErr" : "hidden"}>
+          <p className={emailError ? 'text-danger validationErr' : 'hidden'}>
             {emailError}
           </p>
           <label htmlFor="inputEmail" className="sr-only">
@@ -236,7 +240,7 @@ const Register = (props) => {
 
           <br />
 
-          <p className={passwordError ? "text-danger validationErr" : "hidden"}>
+          <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>
             {passwordError}
           </p>
           <label htmlFor="inputPassword" className="sr-only">

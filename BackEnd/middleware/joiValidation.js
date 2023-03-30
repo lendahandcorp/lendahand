@@ -85,7 +85,7 @@ const userValidationSchema = Joi.object({
     'string.empty': 'Description cannot be empty',
     'string.max': 'Description length must be at most 280 characters',
   }),
-  phone: Joi.number().required().messages({
+  phone: Joi.string().required().messages({
     'number.empty': 'Phone number cannot be empty',
     'any.required': 'Phone number is required',
   }),
