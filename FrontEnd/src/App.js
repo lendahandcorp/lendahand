@@ -48,7 +48,7 @@ const App = () => {
               <Route path='/security' element={<Security />}/>
               <Route path='/about' element={<About />}/>
               <Route path='/contact' element={<Contact />}/>
-              <Route path='/testtags' element={<TestTags />}/>
+              {/* <Route path='/testtags' element={<TestTags />}/> */}
 
               {/* This is the navbar */}
               {/* <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/> */}
