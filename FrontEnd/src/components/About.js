@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../css/footer.css';
 
 
@@ -13,7 +12,7 @@ const About = (props) => {
                 </div>
             </div>
             <div className="row mb-5">
-                <div className="col-6 m-auto">
+                <div className="col-9 m-auto">
                     <h4 className="fw-bold">Vision</h4>
                     <p className="fw-light">
                         At our company, we believe that collaboration is the key to unlocking the full potential of human potential. We envision a world where people from all backgrounds, experiences, and perspectives can come together to work towards a common goal.
@@ -25,7 +24,7 @@ const About = (props) => {
                 </div>
             </div>
             <div className="row mb-5">
-                <div className="col-6 m-auto">
+                <div className="col-9 m-auto">
                     <h4 className="fw-bold">Mission</h4>
                     <p className="fw-light">
                         Our company's mission is to endorse collaborative work and help each other achieve our goals. We believe that by leveraging the collective knowledge and expertise of our users, we can create a better society.
@@ -36,7 +35,7 @@ const About = (props) => {
                 </div>
             </div>
             <div className="row mb-5">
-                <div className="col-6 m-auto">
+                <div className="col-9 m-auto">
                     <h4 className="fw-bold">Values</h4>
                     <p className="fw-light">
                         Our company values working collaboratively and helping each other as a means to achieving our collective goals and realizing our vision. We believe that collaboration fosters creativity, innovation, and growth, and we recognize that the best solutions come from a diversity of perspectives.
@@ -46,8 +45,8 @@ const About = (props) => {
                     </p>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-6 m-auto">
+            <div className="row mb-5">
+                <div className="col-9 m-auto">
                     <h4 className="fw-bold">Who we are</h4>
                     <p className="fw-light">
                         Project Lend a Hand began from ideas of IT Web Programming students from Nova Scotia Community College in 2023. 

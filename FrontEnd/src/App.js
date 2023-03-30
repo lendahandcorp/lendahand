@@ -4,6 +4,8 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Donate from './components/Donate';
+import Security from './components/Security';
 import About from './components/About';
 import Contact from './components/Contact';
 import Profile from './components/Profile';
@@ -41,6 +43,8 @@ const App = () => {
               <Route path='/' element={<Home />}/>
               
               {/* This is the About us Page */}
+              <Route path='/donate' element={<Donate />}/>
+              <Route path='/security' element={<Security />}/>
               <Route path='/about' element={<About />}/>
               <Route path='/contact' element={<Contact />}/>
 
