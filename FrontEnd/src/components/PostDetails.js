@@ -307,32 +307,33 @@ const PostDetails = (props) => {
                     >
                     {OwnerOfPost() || Administrator() ? (
                         <> 
-                        <Link
-                        to={`/postedit/${params.id}`}
-                        className="dropdown-item"
-                        // onClick={() => navigate(`/postedit/${params.id}`)}
-                        >
-                        <span className="d-flex justify-content-between">
-                            Edit Post <i class="fa-solid fa-pen text-dark mt-1"></i>
-                        </span>
+
+                        <Link to={`/postedit/${params.id}`}
+                          className="dropdown-item"
+                          // onClick={() => navigate(`/postedit/${params.id}`)}
+                          >
+                          <span className="d-flex justify-content-between">
+                              Edit Post <i class="fa-solid fa-pen text-dark mt-1"></i>
+                          </span>
                         </Link>
 
                         <Link
-                        className="dropdown-item text-danger"
-                        onClick={() => deletePost()}
+                          className="dropdown-item text-danger"
+                          onClick={() => deletePost()}
                         >
-                        <span className="d-flex justify-content-between">
-                            Delete Post <i className="fa-solid fa-trash mt-1"></i>
-                        </span>
+                          <span className="d-flex justify-content-between">
+                              Delete Post <i className="fa-solid fa-trash mt-1"></i>
+                          </span>
                         </Link>
 
                         <Link
                         className="dropdown-item text-danger"
                         onClick={() => ClearApplicants()}
                         >
-                        <span className="d-flex justify-content-between">
-                            <p>Clear Applicants</p> <i class="fa-solid fa-circle-xmark mt-1"></i>
-                        </span>
+                          <span className="d-flex justify-content-between">
+                              <p>Clear Applicants</p> <i class="fa-solid fa-circle-xmark mt-1"></i>
+                          </span>
+
                         </Link>
 
                         <hr />
@@ -341,18 +342,18 @@ const PostDetails = (props) => {
                         className="dropdown-item"
                         onClick={() => OpenPost()}
                         >
-                        <span className="d-flex justify-content-between">
-                            Open Post <i class="fa-solid fa-book-open text-dark mt-1"></i>
-                        </span>
+                          <span className="d-flex justify-content-between">
+                              Open Post <i class="fa-solid fa-book-open text-dark mt-1"></i>
+                          </span>
                         </Link>
 
                         <Link
                         className="dropdown-item text-success"
                         onClick={() => ClosePost()}
                         >
-                        <span className="d-flex justify-content-between">
-                            Close Post <i class="fa-solid fa-circle-check mt-1"></i>
-                        </span>
+                          <span className="d-flex justify-content-between">
+                              Close Post <i class="fa-solid fa-circle-check mt-1"></i>
+                          </span>
                         </Link>
                     </>
                     ) : null}
@@ -376,6 +377,7 @@ const PostDetails = (props) => {
                     Apply
                     </button>
                 ) : null}
+
                 {/* {!OwnerOfPost() && PostIsClosed() ? (
                     <button
                     type="button"
@@ -411,7 +413,9 @@ const PostDetails = (props) => {
                             );
                         })
                         : null}
+
                     {/* <ApplicantEmpty /> */}
+
                     </div>
                 </div>
             </div>

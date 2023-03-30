@@ -24,7 +24,9 @@ footer p {
 }
 
 .fa-twitter:hover, .fa-instagram:hover, .fa-facebook:hover {
-  color: blue;
+  color: #fd6a02;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
   transition: .4s;
 }
 

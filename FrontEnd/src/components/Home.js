@@ -127,15 +127,23 @@ const Home = (props) => {
 
     return (
         <div class="container home">
-            <div class="input-group rounded mt-5 mb-4 searchbar mx-auto">
-                <input type="search" id="searchBar" class="form-control rounded" onChange={tagSearchBarChanged} placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </span>
+        
+            {/* Search bar */}
+            <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
+                <div class="input-group">
+                    <input type="search" id="searchBar" class="form-control border-0 bg-light" onChange={tagSearchBarChanged} placeholder="Search for a post or tag here" aria-label="Search" aria-describedby="search-addon" />
+                    <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link searchIcon"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
             </div>
 
-            <div className="ml-5 w-50">
-                <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary mb-4">+ Write a Post</button>
+            {/* Post Container */}
+            <div class="container mt-5">
+                <div class="col-md-12 col-lg-12">
+                <div className="ml-5 w-50">
+                    <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-4 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
+                </div>
             </div>
 
             {/* Post Container */}

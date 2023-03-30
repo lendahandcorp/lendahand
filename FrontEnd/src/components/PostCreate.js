@@ -245,7 +245,7 @@ const PostCreate = (props) => {
                     id="title"
                     name="title"
                     className="form-control"
-                    placeholder="Help for moving out"
+                    placeholder="Enter Title here"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = titleValidator(title);
@@ -294,7 +294,7 @@ const PostCreate = (props) => {
                     id="location"
                     name="location"
                     className="form-control"
-                    placeholder="5685 Leeds St, Halifax, NS B3K 4M2"
+                    placeholder="example: 5685 Leeds St, Halifax, NS B3K 4M2"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = locationValidator(location);
@@ -310,7 +310,7 @@ const PostCreate = (props) => {
                     id="availability"
                     name="availability"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter end date"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = availabilityValidator(availability);
@@ -326,7 +326,7 @@ const PostCreate = (props) => {
                     id="tags"
                     name="tags"
                     className="form-control"
-                    placeholder="#help"
+                    placeholder="example: #help"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = tagsValidator(tags);
@@ -342,7 +342,7 @@ const PostCreate = (props) => {
                     id="body"
                     name="body"
                     className="form-control"
-                    placeholder="Write your description here"
+                    placeholder="Enter description here"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = bodyValidator(body);
@@ -357,6 +357,7 @@ const PostCreate = (props) => {
                     id="people_needed"
                     name="people_needed"
                     className="form-control"
+                    placeholder="Enter a number"
                     onChange={handleChange}
                     onBlur={() => {
                         const error = peopleNeededValidator(people_needed);

@@ -25,7 +25,7 @@ const Contact = () => {
           <img src="https://avatars.githubusercontent.com/u/91203094?v=4" alt="lol" className="rounded profile-post-img" width="250" />
          </div>
          <div className="col-xl-5 col-lg-5 col-md-5 col-sm-12 text-center mx-auto mt-3">
-          <h6 className="admin-name">Bruno Feistas</h6>
+          <h6 className="admin-name">Bruno Freitas</h6>
           <p className="fw-light">Project Manager / Back-End Engineer</p>
           <p className="fw-light"><a href="mailto:w0448225@nscc.ca?subject=Land A Hand Enquiry: <Reason>">w0448225@nscc.ca</a></p>
          </div>

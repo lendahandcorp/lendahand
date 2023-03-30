@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/footer.css';
+import '../css/post.css';
 import componentService from '../services/componentService';
 import dataService from '../services/dataService';
 // const no_image = require('../img/no_image.png');
@@ -95,19 +95,23 @@ const Post = (props) => {
 
     return (
 
-        <article className="home-post">
-            <div class="row shadow-sm p-3 mb-5 bg-white rounded w-75 m-auto">
-                <div className="col-sm d-flex flex-column">
+        <article className="d-flex justify-content-center">
+            <div className="row shadow-sm p-3 mb-5 bg-white rounded w-75">
+                <div className="col-sm">
+
                     <Link to={`/postDetails/${props.data._id}`}>
-                    <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
-                        alt="lol" 
-                        className="rounded home_post-img"
-                        // onClick={() => console.log(props.showPost(props.data.post_id))}
-                        />
+                        <img src={ componentService.convertImageFromBase64(props.data.media, "img") }
+                            alt="lol" 
+                            className="rounded postImage"
+                            onClick={() => props.showPost(props.data._id)}
+                            //onClick={() => aa()}
+                             />
                     </Link>
-                    <div class="btn mt-3 d-flex post_user" onClick={() => props.goToProfile(props.data.writer)}>
-                        <img src={componentService.convertImageFromBase64(user_img, "pic")} alt="lol" class="rounded-circle home_post_user-img" />
-                        <div className="mb-auto home_post_user-name fw-normal">By {username()}</div>
+
+                    <div className="btn mt-3 d-flex justify-content-around user" onClick={() => props.goToProfile(props.data.writer)}>
+                        <img src={ componentService.convertImageFromBase64(writer.picture, "pic") } alt="lol" class="rounded-circle img-fluid userImage" />
+                        <span className="mt-1 fw-bold">By {username()}</span>
+
                     </div>
                 </div>
                 <div className="col-sm d-flex flex-column">
@@ -115,12 +119,15 @@ const Post = (props) => {
                         <h5 class="fw-bold" onClick={() => props.showPost(props.data._id)}>{props.data.title}</h5>
                         <h6 class="fst-italic">Availability: {getDate()} </h6>
                     </div>
+                    
                     <p class="fw-light">
                         <span>{excerpt(props.data.body)}</span>
                         <span className=""><Link to={`/postDetails/${props.data._id}`}  className="text-secondary text-decoration-none">
+
                         {
                             readmore == true ? ' [ ... Read More ]' : ''
                         }
+
                         </Link></span>
                     </p>
                     <div className="d-flex">
