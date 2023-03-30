@@ -265,7 +265,7 @@ const PostCreate = (props) => {
                 {availabilityError && <p className="text-danger">{availabilityError}</p>}
             </div>
 
-            <div className="form-group mb-4">
+            {/* <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input
                     type="text"
@@ -277,7 +277,26 @@ const PostCreate = (props) => {
                     required
                 />
                 {tagsError && <p className="text-danger">{tagsError}</p>}
+            </div> */}
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <TagsInput
+                    value={tags}
+                    className="form-control border-0 bg-light"
+                    id="tags"
+                    name="tags"
+                    onChange={handleTagChange}
+                    addKeys={[9, 13, 32]}
+                    onlyUnique="true"
+                    tagProps={{
+                        className: `tap-react-tagsinput-tag btn badge badge1`,
+                        placeholder: "add a tag",
+                        classNameRemove: 'react-tagsinput-remove'
+                    }}
+                /> 
+                {tagsError && <p className="text-danger">{tagsError}</p>}
             </div>
+
 
             <div className="form-group mb-4">
                 <label htmlFor="body" className="mb-2 fw-bold">Description</label>

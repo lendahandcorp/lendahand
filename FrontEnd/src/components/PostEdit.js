@@ -319,7 +319,7 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
+            {/* <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input type="text"
                     id="tags"
@@ -331,8 +331,26 @@ const PostEdit = (props) => {
                     required />
                 {tagsError && <p className="text-danger">{tagsError}</p>}
 
+            </div> */}
+
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <TagsInput
+                    value={tags}
+                    className="form-control border-0 bg-light"
+                    id="tags"
+                    name="tags"
+                    onChange={handleTagChange}
+                    addKeys={[9, 13, 32]}
+                    onlyUnique="true"
+                    tagProps={{
+                        className: `tap-react-tagsinput-tag btn badge badge1`,
+                        placeholder: "add a tag",
+                        classNameRemove: 'react-tagsinput-remove'
+                    }}
+                /> 
+                {tagsError && <p className="text-danger">{tagsError}</p>}
             </div>
-            
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
