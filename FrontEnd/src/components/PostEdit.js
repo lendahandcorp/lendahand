@@ -6,6 +6,11 @@ import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
+
+import '../css/tags_in_tagbar.css';
+
 const PostEdit = (props) => {
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
@@ -104,7 +109,7 @@ const PostEdit = (props) => {
             people_accepted: []
         }
 
-        // console.log(post)
+        console.log(post)
         dataService.updatePost(params.id, post, (success) => {
             if (success) {
                 navigate('/');
@@ -153,12 +158,18 @@ const PostEdit = (props) => {
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
-          //console.log(reader.result);
+            //console.log(reader.result);
         };
 
         reader.onerror = function (error) {
-          console.log('Error: ', error);
+            console.log('Error: ', error);
         };
+    }
+
+    const handleTagChange = (ntags) => {
+        //tagIndex.current = 0;
+        setTags(ntags)
+        console.log(tags);
     }
 
     const handleChange = (event) => {
@@ -190,7 +201,7 @@ const PostEdit = (props) => {
         }
     }
 
-       // return (
+    // return (
     //     <input type="date" {...innerProps} onChange={handleChange} />
     // );
     return (
@@ -235,8 +246,8 @@ const PostEdit = (props) => {
                     required />
             </div>
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
                 <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
                 <input type="datetime-local"
                     id="availability"
@@ -248,8 +259,8 @@ const PostEdit = (props) => {
                     required />
             </div>
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            {/* <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input type="text"
                     id="tags"
@@ -259,10 +270,28 @@ const PostEdit = (props) => {
                     defaultValue={arrToTagString(tags)}
                     onChange={handleChange}
                     required />
+            </div> */}
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <TagsInput
+                    value={tags}
+                    className="form-control border-0 bg-light"
+                    id="tags"
+                    name="tags"
+                    onChange={handleTagChange}
+                    addKeys={[9, 13, 32]}
+                    onlyUnique="true"
+                    tagProps={{
+                        className: `tap-react-tagsinput-tag btn badge badge1`,
+                        placeholder: "add a tag",
+                        classNameRemove: 'react-tagsinput-remove'
+                    }}
+                /> 
             </div>
+            
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
                 <label htmlFor="body" className="mb-2 fw-bold">Description</label>
                 <textarea cols="50" rows="3"
                     id="body"

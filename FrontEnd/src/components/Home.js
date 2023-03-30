@@ -7,8 +7,15 @@ import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/app.css';
 
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
+
+import '../css/tags_in_tagbar.css';
+
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
+
+
 
 //console.log('\x1b[\x1b[36m user attempted to go to profile:'+id+']]')
 //console.log('%c user attempted to go to profile:'+id,'color:blue');
@@ -66,35 +73,64 @@ const Home = (props) => {
         setSearchedTags(splitTags);
     }
 
-    const removeTagFromSearchBar = (tagToRemove) => {
-        //console.log('removey');
-        let searchBar = document.getElementById("searchBar");
-
-        searchBar.value = searchBar.value.replace('#' + tagToRemove, "");
-
-        tagSearchBarChanged();
+    const handleTagChange = (ntags) => {
+        //searchBar.value = searchBarValue;
+        setSearchedTags(ntags);
     }
 
+    const addTag = (tag) => {
+        let t = [];
+        t.push(...searchedTags)
+        t.push(tag)
+        handleTagChange(t)
+    }
+
+    const removeTag = (tag) => {
+        let t = [];
+        t.push(...searchedTags)
+        let i = searchedTags.indexOf(tag);
+        t.splice(i, 1);
+        handleTagChange(t)
+    }
 
     const tagClicked = (tag) => {
-        let searchBar = document.getElementById("searchBar");
-
-        if (searchBar.value.includes("#" + tag)) {
-            removeTagFromSearchBar(tag)
+        console.log(searchedTags.indexOf(tag));
+        if(searchedTags.indexOf(tag) > -1){
+            removeTag(tag)
         } else {
-            addTagToSearchBar(tag)
+            addTag(tag)
         }
     }
 
-    const addTagToSearchBar = (newTag) => {
-        //console.log('clicky');
-        let searchBar = document.getElementById("searchBar");
+    // const removeTagFromSearchBar = (tagToRemove) => {
+    //     //console.log('removey');
+    //     let searchBar = document.getElementById("searchBar");
+
+    //     searchBar.value = searchBar.value.replace('#' + tagToRemove, "");
+
+    //     tagSearchBarChanged();
+    // }
 
 
-        searchBar.value += "#" + newTag;
+    // const tagClicked = (tag) => {
+    //     let searchBar = document.getElementById("searchBar");
 
-        tagSearchBarChanged();
-    }
+    //     if (searchBar.value.includes("#" + tag)) {
+    //         removeTagFromSearchBar(tag)
+    //     } else {
+    //         addTagToSearchBar(tag)
+    //     }
+    // }
+
+    // const addTagToSearchBar = (newTag) => {
+    //     //console.log('clicky');
+    //     let searchBar = document.getElementById("searchBar");
+
+
+    //     searchBar.value += "#" + newTag;
+
+    //     tagSearchBarChanged();
+    // }
 
 
     const testerBoy = () => {
@@ -131,12 +167,33 @@ const Home = (props) => {
             {/* Search bar */}
             <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
                 <div class="input-group">
-                    <input type="search" id="searchBar" class="form-control border-0 bg-light" onChange={tagSearchBarChanged} placeholder="Search for a post or tag here" aria-label="Search" aria-describedby="search-addon" />
+                    <TagsInput
+                        value={searchedTags}
+                        className="form-control border-0 bg-transparent"
+                        onChange={handleTagChange}
+                        addKeys={[9, 13, 32]}
+                        onlyUnique="true"
+                        tagProps={{
+                            className: `tap-react-tagsinput-tag btn badge badge1`,
+                            placeholder: "add a tag..",
+                            classNameRemove: 'react-tagsinput-remove'
+                        }}
+                    />
                     <div class="input-group-append">
                         <button id="button-addon1" type="submit" class="btn btn-link searchIcon"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </div>
+
+            {/* Old Search bar */}
+            {/* <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
+                <div class="input-group">
+                    <input type="search" id="searchBar" class="form-control border-0 bg-light" onChange={tagSearchBarChanged} placeholder="Search for a post or tag here" aria-label="Search" aria-describedby="search-addon" />
+                    <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link searchIcon"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div> */}
 
             {/* Post Container */}
             <div class="container mt-5">
@@ -150,14 +207,15 @@ const Home = (props) => {
                 <div className="row">
                     <div className="col-md-12 col-lg-12">
                         {
-                            getPostsWithRelevantTags().map((tp, i) => {
-                                console.log('post');
-                                return <Post key={i} data={tp}
-                                    goToProfile={goToProfile}
-                                    // showPost={showPost} 
-                                    tagClicked={tagClicked}
-                                />
-                            })
+                            getPostsWithRelevantTags().length > 0 ?
+                                getPostsWithRelevantTags().map((tp, i) => {
+                                    return <Post key={i} data={tp}
+                                        goToProfile={goToProfile}
+                                        // showPost={showPost} 
+                                        tagClicked={tagClicked}
+                                    />
+                                }) 
+                                : <h3 className="text-secondary text-center"><i>No relevant post</i></h3>
                         }
                     </div>
                 </div>

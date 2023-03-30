@@ -16,6 +16,10 @@ import {
     peopleNeededValidator,
 } from './Validator';
 
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
+
+import '../css/tags_in_tagbar.css';
 
 const PostCreate = (props) => {
     const [title, setTitle] = useState('');
@@ -153,6 +157,13 @@ const PostCreate = (props) => {
         reader.onerror = function (error) {
             console.log('Error: ', error);
         };
+    }
+
+    
+    const handleTagChange = (ntags) => {
+        //tagIndex.current = 0;
+        setTags(ntags)
+        console.log(tags);
     }
 
     const handleChange = (event) => {
@@ -320,7 +331,7 @@ const PostCreate = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            <div className="form-group mb-4">
+            {/* <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input type="text"
                     id="tags"
@@ -333,6 +344,24 @@ const PostCreate = (props) => {
                         setTagsError(error);
                     }}
                      />
+            </div> */}
+
+            <div className="form-group mb-4">
+                <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
+                <TagsInput
+                    value={tags}
+                    className="form-control border-0 bg-light"
+                    id="tags"
+                    name="tags"
+                    onChange={handleTagChange}
+                    addKeys={[9, 13, 32]}
+                    onlyUnique="true"
+                    tagProps={{
+                        className: `tap-react-tagsinput-tag btn badge badge1`,
+                        placeholder: "add a tag",
+                        classNameRemove: 'react-tagsinput-remove'
+                    }}
+                /> 
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}

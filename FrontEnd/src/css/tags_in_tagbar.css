@@ -29,6 +29,7 @@
   
   .tap-react-tagsinput-tag a::before {
     content: " ×";
+    color: rgb(255, 255, 255);
   }
   
   .tap-react-tagsinput-input {
