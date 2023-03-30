@@ -376,7 +376,7 @@ const PostDetails = (props) => {
                     Apply
                     </button>
                 ) : null}
-                {!OwnerOfPost() && PostIsClosed() ? (
+                {/* {!OwnerOfPost() && PostIsClosed() ? (
                     <button
                     type="button"
                     className="btn btn-sm btn-outline-secondary"
@@ -384,7 +384,7 @@ const PostDetails = (props) => {
                     >
                     Review
                     </button>
-                ) : null}
+                ) : null} */}
                 </div>
             </div>
       </div>
@@ -411,7 +411,7 @@ const PostDetails = (props) => {
                             );
                         })
                         : null}
-                    <ApplicantEmpty />
+                    {/* <ApplicantEmpty /> */}
                     </div>
                 </div>
             </div>
