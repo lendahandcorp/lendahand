@@ -22,6 +22,10 @@ textarea {
     content: none;
 }
 
+.width {
+    width: 180px;
+}
+
 .border-popup {
     border-width: 2px;
     border-color: black;
@@ -53,3 +57,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
     
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}

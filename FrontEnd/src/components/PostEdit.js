@@ -107,7 +107,7 @@ const PostEdit = (props) => {
         // console.log(post)
         dataService.updatePost(params.id, post, (success) => {
             if (success) {
-                navigate('/');
+                navigate(`/postDetails/${params.id}`);
             } else {
             }
         });
@@ -203,7 +203,7 @@ const PostEdit = (props) => {
                     id="title"
                     name="title"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter Title here"
                     defaultValue={title}
                     onChange={handleChange}
                     required />
@@ -229,7 +229,7 @@ const PostEdit = (props) => {
                     id="location"
                     name="location"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="example: 5685 Leeds St, Halifax, NS B3K 4M2"
                     defaultValue={location}
                     onChange={handleChange}
                     required />
@@ -242,7 +242,7 @@ const PostEdit = (props) => {
                     id="availability"
                     name="availability"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter end date"
                     defaultValue={defaultDate}
                     onChange={handleChange}
                     required />
@@ -255,7 +255,7 @@ const PostEdit = (props) => {
                     id="tags"
                     name="tags"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="example: #help"
                     defaultValue={arrToTagString(tags)}
                     onChange={handleChange}
                     required />
@@ -268,7 +268,7 @@ const PostEdit = (props) => {
                     id="body"
                     name="body"
                     className="form-control"
-                    placeholder="..."
+                    placeholder="Enter description here"
                     defaultValue={body}
                     onChange={handleChange}
                     required />
@@ -280,13 +280,14 @@ const PostEdit = (props) => {
                     id="people_needed"
                     name="people_needed"
                     className="form-control"
+                    placeholder="Enter a number"
                     value={people_needed}
                     onChange={handleChange}
                     required />
             </div>
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
+                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Edit Post</button>
         </form>
     )
 }

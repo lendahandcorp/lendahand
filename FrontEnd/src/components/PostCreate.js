@@ -197,7 +197,7 @@ const PostCreate = (props) => {
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Create Post</h1>
 
             {/* Validators */}
-            <p
+            {/* <p
                 className={
                     titleError ? 'alert alert-danger text-center' : 'hidden'
                 }
@@ -236,7 +236,7 @@ const PostCreate = (props) => {
                 }
             >
                 {peopleNeededError}
-            </p>
+            </p> */}
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4 ">
@@ -252,6 +252,8 @@ const PostCreate = (props) => {
                         setTitleError(error);
                     }}
                      />
+
+                <p className={ titleError ? 'text-danger' : 'hidden' }> {titleError}  </p>
             </div>
 
 
@@ -301,6 +303,8 @@ const PostCreate = (props) => {
                         setLocationError(error);
                     }}
                      />
+                
+                <p className={ locationError ? 'text-danger' : 'hidden' }> {locationError}  </p>
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -317,8 +321,10 @@ const PostCreate = (props) => {
                         setAvailabilityError(error);
                     }}
                      />
-            </div>
 
+                <p className={ availabilityError ? 'text-danger' : 'hidden' }> {availabilityError}  </p>
+
+            </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
@@ -333,6 +339,8 @@ const PostCreate = (props) => {
                         setTagsError(error);
                     }}
                      />
+
+                <p className={ tagsError ? 'text-danger' : 'hidden' }> {tagsError}  </p>
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -349,7 +357,10 @@ const PostCreate = (props) => {
                         setBodyError(error);
                     }}
                      />
+
+                <p className={ bodyError ? 'text-danger' : 'hidden' }> {bodyError}  </p>
             </div>
+
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
                 <label htmlFor="people_needed" className="mb-2 fw-bold">People Needed</label>
@@ -364,6 +375,8 @@ const PostCreate = (props) => {
                         setPeopleNeededError(error);
                     }}
                      />
+
+                <p className={ peopleNeededError ? 'text-danger' : 'hidden' }> {peopleNeededError}  </p>     
             </div>
 
 

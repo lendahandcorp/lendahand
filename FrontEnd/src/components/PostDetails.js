@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import '../css/postDetail.css'
 
 //test
 
@@ -281,7 +282,7 @@ const PostDetails = (props) => {
                     </button>
 
                     <div
-                        className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
+                        className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup width"
                         aria-labelledby="dropdownMenuButton"
                     >
                     {OwnerOfPost() || Administrator() ? (
@@ -379,7 +380,7 @@ const PostDetails = (props) => {
             <div>
                 <h4 className="mb-3 title">Accepted</h4>
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-12 ">
                     {post.people_accepted != null //testy(): null
                         ? post.people_accepted.map((person_accepted, i) => {
                             return (
@@ -440,7 +441,7 @@ const PostDetails = (props) => {
         <>
           <h4 className="mb-3 title">Reviews</h4>
           <div className="row">
-            <div className="col-md-12">
+            <div className="grid">
               {post._id != null
                 ? reviews.map((review, i) => {
                     return <Review 

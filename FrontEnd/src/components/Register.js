@@ -211,7 +211,7 @@ const Register = (props) => {
           <input
             onChange={(e) => setPhone(e.target.value)}
             name="telephoneNumber"
-            type="number"
+            type="text"
             id="telephoneNumber"
             className="form-control"
             placeholder="Enter Telephone Number"
@@ -225,15 +225,13 @@ const Register = (props) => {
           <br />
 
           {/* Picture is Not Mandatory */}
-          <label htmlFor="inputPicture" className="sr-only">
-            Picture
-          </label>
+          <label class="text fw-bold">Upload your profile picture:</label>
           <input
             onChange={handleImageBuffer}
             name="picture"
             type="file"
             id="picture"
-            className="form-control"
+            className="mt-1 form-control"
             required
           />
 
@@ -287,7 +285,7 @@ const Register = (props) => {
 
           <div className="d-flex justify-content-center mt-4">
             <p>
-              Already a member? <Link to="/signin">Sign in</Link>
+              Already a member? <Link to="/signin"><span className="link-primary "><u>Sign in</u></span></Link>
             </p>
           </div>
         </form>

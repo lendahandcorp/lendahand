@@ -83,7 +83,7 @@ const SignIn = (props) => {
                     </div>
 
                     <div className="d-flex justify-content-center mt-4">
-                        <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
+                        <p>Don't have an account? <Link to="/register"><span className="link-primary "><u>Sign up</u></span></Link></p>
                     </div>
                 </form>
             </div>

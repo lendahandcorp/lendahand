@@ -2,6 +2,10 @@
     margin-left: 4vw;
 }
 
+.text {
+    margin-left: 10%;
+}
+
 .bg-register {
     /* height: 150vh; */
     width: 100%;

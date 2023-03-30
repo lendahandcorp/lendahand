@@ -6,7 +6,7 @@ import '../css/footer.css';
 const About = (props) => {
 
     return (
-        <div class="container mt-5 about">
+        <div class="container my-5 about">
             <div className="row mb-5">
                 <div className="col-6 m-auto">
                     <h1 className="text-center fw-bold"> About us</h1>

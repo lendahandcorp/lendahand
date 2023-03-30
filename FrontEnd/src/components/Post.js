@@ -125,7 +125,8 @@ const Post = (props) => {
                         <span className=""><Link to={`/postDetails/${props.data._id}`}  className="text-secondary text-decoration-none">
 
                         {
-                            readmore == true ? ' [ ... Read More ]' : ''
+                            // readmore == true ? ' [ ... Read More ]' : ''
+                            readmore == true ? ' Read more...' : ''
                         }
 
                         </Link></span>
