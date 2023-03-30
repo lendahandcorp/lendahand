@@ -14,10 +14,6 @@
  font-size: 1.1rem;
 }
 
-.tag{
- list-style-type: none;
-}
-
 .hands{
  margin: 10px;
 }
@@ -40,6 +36,10 @@
  align-items: center;
 }
 
+.profile-tags{
+ margin-left: -30px;
+}
+
 .post-num{
  background: #FFDF8B;
  width: 100px;
@@ -50,10 +50,27 @@
 }
 
 
+.profile-post{
+ width: 75%;
+}
+
+
+@media (max-width: 992px ) { 
+ .profile-post{
+  width: 100%;
+ }
+}
+
 /* Profile-Post */
-.profile-post-img{
- /* position: relative; */
+.profilePost-img{
  background-size: cover;
- width: 400px;
+ max-width: 400px;
+ /* width: 400px; */
  aspect-ratio: 3 / 2;
+}
+
+@media (max-width: 992px ) { 
+ .profilePost-img{
+  margin-bottom: 10px;
+ }
 }
