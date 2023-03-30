@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import '../css/postDetail.css'
 
 //test
 
@@ -324,23 +325,24 @@ const PostDetails = (props) => {
                                 <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
                             </button> */}
 
-              <div className="container d-flex justify-content-end">
-                <div className="dropdown">
-                  <button
-                    className="btn dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
-                  </button>
+                <div className="container d-flex justify-content-end">
+                    <div className="dropdown">
+                    <button
+                        className="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
+                    </button>
 
-                  <div
-                    className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
-                    aria-labelledby="dropdownMenuButton"
-                  >
+                    <div
+                        className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup width"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+
                     {OwnerOfPost() || Administrator() ? (
                       <>
                         <Link
@@ -436,6 +438,7 @@ const PostDetails = (props) => {
         <>
           <div className="d-flex people">
             <div>
+            
               <h4 className="mb-3 title">Accepted</h4>
               <div className="row">
                 <div className="col-md-12">
@@ -453,6 +456,7 @@ const PostDetails = (props) => {
                     : null}
 
                   {/* <ApplicantEmpty /> */}
+
                 </div>
               </div>
             </div>
@@ -502,7 +506,7 @@ const PostDetails = (props) => {
         <>
           <h4 className="mb-3 title">Reviews</h4>
           <div className="row">
-            <div className="col-md-12">
+            <div className="grid">
               {post._id != null
                 ? reviews.map((review, i) => {
                     return (

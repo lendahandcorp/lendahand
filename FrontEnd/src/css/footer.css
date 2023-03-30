@@ -40,6 +40,7 @@ footer p {
 }
 
 .foot-link:hover {
+  color: white;
   text-decoration: underline;
   text-underline-offset: 8px;
   text-decoration-thickness: 1px;

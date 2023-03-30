@@ -19,7 +19,7 @@ const Applicant = (props) => {
             <div className="row">
                 <div className="col-md-12">
                     <p>
-                        Accepted a volunteer to fill this spot.
+                        No volunteers available yet.
                     </p>
                 </div>
             </div>
