@@ -20,7 +20,7 @@ import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 
 import '../css/tags_in_tagbar.css';
-
+//i hate git
 const PostCreate = (props) => {
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
