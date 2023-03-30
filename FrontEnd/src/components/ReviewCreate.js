@@ -51,35 +51,44 @@ const ReviewCreate = (props) => {
     }
 
     return (
-        <form className="form-create-post w-50 mx-auto" onSubmit={handleSubmit}>
+        
 
-            <h1 className="h3 mb-3 font-weight-normal text-center">Create Review</h1>
+        <div><h1 className="h3 mb-3 font-weight-normal text-center">Create Review</h1>
+        <div className="d-flex justify-content-center">
+            <div className="w-45 shadow-sm px-4 py-5 mb-5 bg-white rounded">
+                <form className="form-create-post w-60 mx-auto" onSubmit={handleSubmit}>
 
-            <div className="form-group">
-                <label htmlFor="body">Review</label>
-                <textarea cols="50" rows="3"
-                    id="description"
-                    name="description"
-                    className="form-control"
-                    placeholder="..."
-                    onChange={handleChange}
-                    required />
+                    <div className="form-group mt-3">
+                        <label htmlFor="body" className="mb-2 fw-bold">Review</label>
+                        <textarea cols="50" rows="3"
+                            id="description"
+                            name="description"
+                            className="form-control"
+                            placeholder="Please insert your review here"
+                            onChange={handleChange}
+                            required />
+                    </div>
+
+                    <div className="form-group mt-3">
+                        <label htmlFor="stars" className="mb-2 fw-bold">Stars</label>
+                        <input type="number"
+                            id="stars"
+                            name="stars"
+                            className="form-control"
+                            placeholder="Please enter a number from 1-5"
+                            onChange={handleChange}
+                            required />
+                    </div>
+
+                    <div className="d-flex mt-4">
+                        <button type="submit"
+                            className="btn btn-lg btn-primary btn-block mx-auto" >Create Review
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <div className="form-group">
-                <label htmlFor="stars">Stars</label>
-                <input type="number"
-                    id="stars"
-                    name="stars"
-                    className="form-control"
-                    onChange={handleChange}
-                    required />
-            </div>
-
-
-            <button type="submit"
-                className="btn btn-lg btn-primary btn-block" >Create Review</button>
-        </form>
+        </div>
+        </div>
     )
 }
 

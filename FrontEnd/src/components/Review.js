@@ -46,68 +46,80 @@ const Review = (props) => {
 
     return (
         <div className="container-fluid">
-            <div className="row">
-                {/* <div className="col-md-3">
-                    <img alt="rounded-circle home_post_user-img" src={componentService.convertImageFromBase64(writer.picture, "pic")} />
-                </div> */}
-                <div class="col-md-3 btn mt-3 post_user" onClick={() => props.goToProfile(props.data.writer)}>
-                    <img src={componentService.convertImageFromBase64(writer.picture, "pic")} alt="lol" class="rounded-circle home_post_user-img" />
-                </div>
-                <div className="col-md-9">
-                    <p>
-                        {props.data.description}
-                    </p>
-                    <p>
-                        <strong>posted by {`${writer.firstName} ${writer.lastName}`}</strong>
-                        &emsp;
-                        &emsp;
-                        &emsp;
-                        <strong>rating: {rating(props.data.stars)}</strong>
-                        &emsp;
-                        &emsp;
-                        <div className="container d-flex justify-content-end">
-                            <div className="dropdown">
-                                <button
-                                    className="btn dropdown-toggle"
-                                    type="button"
-                                    id="dropdownMenuButton"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
-                                </button>
-
-                                <div
-                                    className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
-                                    aria-labelledby="dropdownMenuButton"
-                                >
-                                    {props.OwnerOfPost() || props.Administrator() ? (
-                                        <>
-                                            <Link
-                                                className="dropdown-item text-danger"
-                                                onClick={() => props.DeleteReview(props.data._id)}
-                                            >
-                                                <span className="d-flex justify-content-between">
-                                                    Delete Review <i className="fa-solid fa-trash mt-1"></i>
-                                                </span>
-                                            </Link>
-                                        </>
-                                    ) : null}
+            {/* <div className="d-flex justify-content-center"> */}
+                <div className=" shadow-sm p-3 mb-5 bg-white rounded">
+                    {/* <div className="col-md-3">
+                        <img alt="rounded-circle home_post_user-img" src={componentService.convertImageFromBase64(writer.picture, "pic")} />
+                    </div> */}
+                    
+                    <div className="d-flex">
+                        <div class="col-md-3 btn post_user" onClick={() => props.goToProfile(props.data.writer)}>
+                            <img src={componentService.convertImageFromBase64(writer.picture, "pic")} alt="lol" class="rounded-circle home_post_user-img" />
+                        </div>
+                            <div className="d-flex flex-column justify-content-around">
+                                <div className="d-flex justify-content-between">
+                                    <div>
+                                        <p>
+                                            {props.data.description}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <p>
+                                        <strong>posted by {`${writer.firstName} ${writer.lastName}`}</strong>
+                                        &emsp;
+                                        &emsp;
+                                        &emsp;
+                                        <strong>rating: {rating(props.data.stars)}</strong>
+                                        &emsp;
+                                        &emsp;
+                                        
+                                        {/* <button type="button" class="btn btn-outline-secondary">
+                                            :
+                                        </button> */}
+                                        
+                                        {/* <button type="button" className="btn btn-success" onClick={() => props.DeleteReview(props.data._id)}> delete </button> */}
+                                    </p>
 
                                 </div>
+
+
                             </div>
+                            <div className="dropdown col-md-1">
+                                        <button
+                                            className="btn dropdown-toggle"
+                                            type="button"
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            <i className="text-dark fa-solid fa-ellipsis-vertical fa-2xl"></i>
+                                        </button>
 
-                        </div>
-                        {/* <button type="button" class="btn btn-outline-secondary">
-                            :
-                        </button> */}
-                        
-                        {/* <button type="button" className="btn btn-success" onClick={() => props.DeleteReview(props.data._id)}> delete </button> */}
-                    </p>
+                                        <div
+                                            className="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded border-popup"
+                                            aria-labelledby="dropdownMenuButton"
+                                        >
+                                            {props.OwnerOfPost() || props.Administrator() ? (
+                                                <>
+                                                    <Link
+                                                        className="dropdown-item text-danger"
+                                                        onClick={() => props.DeleteReview(props.data._id)}
+                                                    >
+                                                        <span className="d-flex justify-content-between">
+                                                            Delete Review <i className="fa-solid fa-trash mt-1"></i>
+                                                        </span>
+                                                    </Link>
+                                                </>
+                                            ) : null}
 
+                                        </div>
+                                    </div> 
+                    </div>
                 </div>
-            </div>
+            {/* </div> */}
+
         </div>
     )
 }
