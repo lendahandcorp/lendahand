@@ -31,7 +31,7 @@
     margin: auto;
 }
 
-.form-signin input[type="number"] {
+.form-signin input[type="tel"] {
     width: 80%;
     margin: auto;
 }

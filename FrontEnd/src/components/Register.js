@@ -198,11 +198,12 @@ const Register = (props) => {
           <input
             onChange={handleChange}
             name="phone"
-            type="text"
+            type="tel"
             id="telephoneNumber"
             className="form-control"
-            placeholder="TelephoneNumber"
+            placeholder="000-000-0000"
             required
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           />
 
           <br />
