@@ -5,6 +5,14 @@ import { useParams } from 'react-router-dom';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import {
+    titleValidator,
+    locationValidator,
+    availabilityValidator,
+    tagsValidator,
+    bodyValidator,
+    peopleNeededValidator,
+} from './Validator';
 
 const PostEdit = (props) => {
     const [title, setTitle] = useState('');
@@ -18,6 +26,12 @@ const PostEdit = (props) => {
     const [displayPhone, setDisplayPhone] = useState(false);
     const [media, setMedia] = useState('');
     const [defaultDate, setDefaultDate] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [locationError, setLocationError] = useState('');
+    const [availabilityError, setAvailabilityError] = useState('');
+    const [tagsError, setTagsError] = useState('');
+    const [bodyError, setBodyError] = useState('');
+    const [peopleNeededError, setPeopleNeededError] = useState('');
 
     const navigate = useNavigate();
     const params = useParams();
@@ -90,6 +104,37 @@ const PostEdit = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+
+        if (titleValidator(title) !== '') {
+            setTitleError(titleValidator(title));
+            return;
+        }
+
+        if (locationValidator(location) !== '') {
+            setLocationError(locationValidator(location));
+            return;
+        }
+
+        if (availabilityValidator(availability) !== '') {
+            setAvailabilityError(availabilityValidator(availability));
+            return;
+        }
+
+        if (tagsValidator(tags) !== '') {
+            setTagsError(tagsValidator(tags));
+            return;
+        }
+
+        if (bodyValidator(body) !== '') {
+            setBodyError(bodyValidator(body));
+            return;
+        }
+
+        if (peopleNeededValidator(people_needed) !== '') {
+            setPeopleNeededError(peopleNeededValidator(people_needed));
+            return;
+        }
+
         console.log(objectify(tags))
 
         let post = {
@@ -153,11 +198,11 @@ const PostEdit = (props) => {
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
-          //console.log(reader.result);
+            //console.log(reader.result);
         };
 
         reader.onerror = function (error) {
-          console.log('Error: ', error);
+            console.log('Error: ', error);
         };
     }
 
@@ -166,6 +211,7 @@ const PostEdit = (props) => {
         switch (event.target.name) {
             case 'title':
                 setTitle(event.target.value);
+                setTitleError(titleValidator(event.target.value));
                 break;
             case 'media':
                 //setMedia(fileManip(event.target.files))
@@ -174,23 +220,30 @@ const PostEdit = (props) => {
                 break;
             case 'body':
                 setBody(event.target.value);
+                setBodyError(bodyValidator(event.target.value));
                 break;
             case 'tags':
                 convertTagsToArray(event.target.value, event.target);
+                setTagsError(tagsValidator(event.target.value));
                 break;
             case 'availability':
                 setAvailability(event.target.value);
+                setAvailabilityError(availabilityValidator(event.target.value));
                 break;
             case 'location':
                 setLocation(event.target.value);
+                setLocationError(locationValidator(event.target.value));
                 break;
             case 'people_needed':
                 setPeople_needed(event.target.value);
+                setPeopleNeededError(peopleNeededValidator(event.target.value));
+                break;
+            default:
                 break;
         }
     }
 
-       // return (
+    // return (
     //     <input type="date" {...innerProps} onChange={handleChange} />
     // );
     return (
@@ -207,6 +260,8 @@ const PostEdit = (props) => {
                     defaultValue={title}
                     onChange={handleChange}
                     required />
+                {titleError && <p className="text-danger">{titleError}</p>}
+
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
@@ -233,10 +288,12 @@ const PostEdit = (props) => {
                     defaultValue={location}
                     onChange={handleChange}
                     required />
+                {locationError && <p className="text-danger">{locationError}</p>}
+
             </div>
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
                 <label htmlFor="availability" className="mb-2 fw-bold">End Date</label>
                 <input type="datetime-local"
                     id="availability"
@@ -246,10 +303,12 @@ const PostEdit = (props) => {
                     defaultValue={defaultDate}
                     onChange={handleChange}
                     required />
+                {availabilityError && <p className="text-danger">{availabilityError}</p>}
+
             </div>
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
                 <label htmlFor="tags" className="mb-2 fw-bold">Tags</label>
                 <input type="text"
                     id="tags"
@@ -259,10 +318,12 @@ const PostEdit = (props) => {
                     defaultValue={arrToTagString(tags)}
                     onChange={handleChange}
                     required />
+                {tagsError && <p className="text-danger">{tagsError}</p>}
+
             </div>
 
-                        {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-                        <div className="form-group mb-4">
+            {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
+            <div className="form-group mb-4">
                 <label htmlFor="body" className="mb-2 fw-bold">Description</label>
                 <textarea cols="50" rows="3"
                     id="body"
@@ -272,6 +333,8 @@ const PostEdit = (props) => {
                     defaultValue={body}
                     onChange={handleChange}
                     required />
+                {bodyError && <p className="text-danger">{bodyError}</p>}
+
             </div>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-5">
@@ -283,6 +346,8 @@ const PostEdit = (props) => {
                     value={people_needed}
                     onChange={handleChange}
                     required />
+                {peopleNeededError && <p className="text-danger">{peopleNeededError}</p>}
+
             </div>
 
             <button type="submit"
