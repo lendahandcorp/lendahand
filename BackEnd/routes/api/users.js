@@ -6,8 +6,6 @@ const validateToken = require('../../middleware/validateToken');
 const { userValidationSchema } = require('../../middleware/joiValidation');
 const { loginValidationSchema } = require('../../middleware/joiValidation');
 
-
-
 // import the User model
 const User = require('../../models/user');
 const Login = require('../../models/login');
@@ -71,7 +69,6 @@ router.post('/register', (req, res) => {
   if (error) {
     return res.status(422).send(error.details[0].message);
   } else {
-
     // get the email from the body of the request
     // query the db with User model to see if a document already exists
     // with the submitted email
@@ -118,7 +115,6 @@ router.post('/register', (req, res) => {
         });
       });
     });
-
   }
 });
 
@@ -131,9 +127,10 @@ router.post('/login', (req, res) => {
 
   const { error, value } = loginValidationSchema.validate(loginObject);
   if (error) {
-    return res.status(422).send(error.details[0].message);
+    return res
+      .status(422)
+      .send('Email address and password combination is incorrect.');
   } else {
-
     // sample req.body could be { email: "joe@foo.com", password: "letmein" }
     // query the database using the User model to see
     User.findOne({ email: value.email }, (err, user) => {
