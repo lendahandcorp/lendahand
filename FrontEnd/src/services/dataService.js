@@ -62,6 +62,7 @@ class dataService {
     }
 
     createReview(APIdata, callback) {
+        console.log(APIdata)
         axios.post(`${process.env.REACT_APP_API_URL}/reviews`, APIdata, this.getUserId())
             .then(
                 response => {
@@ -70,6 +71,22 @@ class dataService {
                     }
                 })
             .catch(error => {
+                console.log(error.response)
+                callback(false)
+            })
+    }
+
+    DeleteReview(id, callback) {
+        axios.delete(`${process.env.REACT_APP_API_URL}/reviews/${id}`, this.getUserId())
+            .then(
+                response => {
+                    console.log(response);
+                    if (response.status === 201) {
+                        callback(true)
+                    }
+                })
+            .catch(error => {
+                console.log(error)
                 console.log(error.response)
                 callback(false)
             })
@@ -96,10 +113,15 @@ class dataService {
         .then(response => {
 
             let APIdata = response.data;
-        
+
             APIdata.applicants = APIdata.applicants.filter(a => {
                 return a != applicant_id;
             })
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
 
             APIdata.people_accepted.push(applicant_id);
 
@@ -125,7 +147,13 @@ class dataService {
         .then(response => {
 
             let APIdata = response.data;
-    
+
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.people_accepted = [];
             APIdata.applicants = [];
 
@@ -150,6 +178,12 @@ class dataService {
 
 
             let APIdata = response.data;
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.status = "Closed";
 
 
@@ -174,6 +208,13 @@ class dataService {
 
 
             let APIdata = response.data;
+            //console.log(APIdata.tags)
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+            //console.log(APIdata)
             APIdata.status = "Open";
 
 
@@ -197,10 +238,15 @@ class dataService {
         .then(response => {
 
             let APIdata = response.data;
-        
+
             APIdata.people_accepted = APIdata.people_accepted.filter(a => {
                 return a != applicant_id;
             })
+
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
 
             APIdata.applicants.push(applicant_id);
 
@@ -227,6 +273,11 @@ class dataService {
 
             let APIdata = response.data;
 
+            APIdata.tags = APIdata.tags.map(tag => {
+                return {title: tag.title}
+            })
+            delete APIdata["__v"]
+
             APIdata.applicants.push(applicant_id);
 
             axios.put(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, APIdata, this.getUserId())
@@ -243,7 +294,6 @@ class dataService {
             })
         })
     }
-
 
     deletePost(id, callback) {
         axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, this.getUserId())

@@ -18,7 +18,6 @@ import {
 
 
 const PostCreate = (props) => {
-
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState("");
     const [body, setBody] = useState('');
@@ -38,18 +37,13 @@ const PostCreate = (props) => {
 
     const navigate = useNavigate();
 
-
     const objectify = (tags) => {
-
         let objectedTags = [];
-
         tags.forEach(tag => {
             objectedTags.push({ title: tag })
         });
-
         return objectedTags
     }
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -128,14 +122,10 @@ const PostCreate = (props) => {
         //its not neccesary but makes it look nicer.
         if (rawTagString[0] != '#')
             rawTagString = '#' + rawTagString;
-
         //this uses regex to limit the search bar to only having one # in a row.
         rawTagString = rawTagString.replace(/##+/g, "#");
-
         //this uses regex to limit the search bar to only alphanumeric and # symbols.
         rawTagString = rawTagString.replace(/(?=\W)([^#])/g, "");
-
-
         //this uses regex to split the raw string into seperate strings that start with #
         //and populate a new array with the new strings.
         //if no matches (and therefore returns undefined) it defaults to an empty array.
@@ -143,20 +133,15 @@ const PostCreate = (props) => {
         element.value = rawTagString;
         setTags(splitTags);
     }
-
     const fileManip = (a) => {
         console.log(a)
         let f = a;
         console.log(f[0])
         console.log(f.length)
-
         let file = a[0];
-
         var reader = new FileReader();
         reader.readAsDataURL(file);
-
         reader.onload = function () {
-
             let p = new RegExp("^(data:image/png;base64,)|^(data:image/jpeg;base64,)", "g");
             //let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
             let image = reader.result.replace(p, "");
@@ -206,7 +191,6 @@ const PostCreate = (props) => {
                 break;
         }
     }
-
     return (
         <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
 
@@ -303,7 +287,6 @@ const PostCreate = (props) => {
                     onChange={handleChange} />
                 <label className="form-check-label" htmlFor="displayPhone">Display Phone Number?</label>
             </div> */}
-
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
                 <label htmlFor="location" className="mb-2 fw-bold">Location</label>
@@ -389,5 +372,4 @@ const PostCreate = (props) => {
         </form>
     )
 }
-
 export default PostCreate

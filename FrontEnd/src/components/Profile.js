@@ -5,10 +5,7 @@ import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/profile.css';
 import ProfilePost from './ProfilePost';
-import { Buffer } from 'buffer';
 import { descriptionValidator } from './Validator';
-const no_image = require('../img/no_image.png');
-
 
 const Profile = () => {
 
@@ -25,54 +22,47 @@ const Profile = () => {
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [user_img, setUserImg] = useState('');
-  const [img_type, SetImgType] = useState('');
+
   const [description, setDescription] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
-  const [been_helped, setBeenHelped] = useState('');
-  const [helped_others, setHelpedOthers] = useState(''); 
-  const [errors, setErrors] = useState({});
 
+  const [hands_requested, setHandsRequested] = useState('');
+  const [hands_given, setHandsGiven] = useState('');
   const full_name = first_name + ' ' + last_name;
+
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
-  const findImgType = (e) => {
-    let s = e.slice(0,3)
-    if( s = '/9j' ){
-      return 'jpg'
-    } else{
-      return 'png'
-    }
-  }
-
+  // User Data
   useEffect(() => {
     dataService.getOneUser(userId, (info) => {
       setFirstName(info.firstName);
       setLastName(info.lastName);
       setEmail(info.email)
-      // let x = Buffer.isBuffer(info.picture)
-      // if(x)
       setUserImg(info.picture)
-      SetImgType(findImgType(info.picture))
       setDescription(info.description);
-      setBeenHelped(info.been_helped);
-      setHelpedOthers(info.helped_others);
     });
   }, []);
 
-  console.log(Buffer.isBuffer(user_img))
-  // console.log(img_type)
-  // Get Image URL
-  const img_url = `data:image/png;base64,${user_img}`
-  console.log(img_url)
+  const [tags, updateTags] = useState([]);
 
- // Posts
+  useEffect(() => {
+    componentService.MostCommonTagsForUser(userId , 3, (ts) => updateTags(ts) )
+    // console.log(ts)
+  }, []);
+
+  // console.log(tags)
+
+ // Posts Data
  const [postData, updatePostData] = useState([]);
 
   useEffect(() => {
     const getPostData = async () => {
       const resp = await componentService.grabMyPosts(userId)
       updatePostData(resp.postCreatedByUser);
+      setHandsRequested(resp.postCreatedByUser.length);
+      setHandsGiven(resp.postAttendedByUser.length);
     }
     getPostData();
   }, []);
@@ -105,39 +95,13 @@ const Profile = () => {
   }
   };
 
-  // console.log(description)
-  
-  // ** Remove it after getting funtion from other member **
-  // Get the first three duplicate tags
-  let newArr = []
-  for(var i=0; i<postData.length; i++){
-
-    let tags = postData[i].tags
-    for(var x=0;x<tags.length;x++){
-      newArr.push(tags[x].title)
+  const getTagColorId = (num) => {
+    let newNum = num.toString(7);
+    newNum = newNum.match(/(\d)$/g)[0];
+    newNum = parseInt(newNum, 7);
+    newNum++;
+    return newNum
     }
-  }
-
-  let array = []
-  for (var i=0; i<newArr.length; i++)
-  {
-    for (var j=i; j<newArr.length; j++)
-    {
-      if (newArr[i] == newArr[j]){
-        array.push(newArr[i])
-      }
-
-    }
-  }
-
-  let unique = [];
-  for(i=0; i < array.length; i++){ 
-      if(unique.indexOf(array[i]) === -1) { 
-          unique.push(array[i]); 
-      } 
-  }
-
-  const tagsArray = unique.slice(0, 3);
 
   return (
     <div className="container-fluid profile">
@@ -145,7 +109,7 @@ const Profile = () => {
         <div className="col d-flex justify-content-center">
           <img 
           className="rounded-circle profile-img" 
-          src={user_img ? img_url: no_image}
+          src={ componentService.convertImageFromBase64(user_img, "pic") }
           data-holder-rendered="true" />
         </div>
       </div>
@@ -188,14 +152,12 @@ const Profile = () => {
             <p className="fw-normal desc-p">{description}</p>
           </div>  }
           <div className="d-flex">
-            <ul className="tags">
+            <ul className="tags d-flex">
               {
-                tagsArray.map(tag => {
-                  return(
-                    <li className="tag btn">#{tag}</li>
-                  )
+                tags.map( (tag, i) => {
+                  return (<li key={i} className={`btn badge badge${getTagColorId(i)}`}>#{tag.title}</li>)
                 })
-              }
+               }
             </ul>
           </div>
           <div className="post-num">{postData.length} posts</div>
@@ -203,11 +165,11 @@ const Profile = () => {
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
             <h4 className="fw-bold">Hands Requested</h4>
-            <div className="hands-circle shadow">{been_helped}</div>
+            <div className="hands-circle shadow">{hands_requested}</div>
           </div>
           <div className="hands">
             <h4 className="fw-bold">Hands Given</h4>
-            <div className="hands-circle shadow">{helped_others}</div>
+            <div className="hands-circle shadow">{hands_given}</div>
           </div>
         </div>
       </div>

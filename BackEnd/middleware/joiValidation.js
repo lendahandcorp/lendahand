@@ -33,12 +33,14 @@ const postValidationSchema = Joi.object({
   status: Joi.string().required().valid('Draft', 'Open', 'In Progress', 'Closed'),
   location: Joi.string().required(),
   people_needed: Joi.number().integer().min(1).required(),
-  applicants: Joi.array().items(Joi.object({
-    userID: Joi.string()
-  })),
-  people_accepted: Joi.array().items(Joi.object({
-    userID: Joi.string()
-  })),
+  applicants: Joi.array().items(Joi.string()),
+  people_accepted: Joi.array().items(Joi.string()),
+  // applicants: Joi.array().items(Joi.object({
+  //   userID: Joi.string()
+  // })),
+  // people_accepted: Joi.array().items(Joi.object({
+  //   userID: Joi.string()
+  // })),
   media : Joi.string(),
   date_created: Joi.date().required()
 });
@@ -54,6 +56,7 @@ const reviewSchemaValidation = Joi.object({
     post_id: Joi.string().required(),
     description: Joi.string().max(255),
     stars: Joi.number().integer().min(1).max(5).required(),
+    date_created: Joi.any()
 });
 
 

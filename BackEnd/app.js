@@ -23,6 +23,7 @@ const corsOptions = {
 };
 
 // connect to MongoDB
+// connect to MongoDB
 console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
 mongoDB = db.getDb(process.env.MONGO_DB);
 // mongoose.set('strictQuery', false);
@@ -34,7 +35,8 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../FrontEnd/build')));
-
+// import routers
+var indexRouter = require('./routes/index'); //index = index.js
 // import routers
 var indexRouter = require('./routes/index'); //index = index.js
 var apiRouter = require('./routes/api'); //api = api folder

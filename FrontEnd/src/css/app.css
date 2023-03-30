@@ -93,3 +93,21 @@
 .form-control:focus {
     box-shadow: none;
 }
+
+/* Home */
+.home_post-img{
+    background-size: cover;
+    width: 400px;
+    aspect-ratio: 3 / 2;
+}
+
+.home_post_user-img{
+    margin-right: 10px;
+    background-size: cover;
+    max-width: 55px;
+    aspect-ratio: 1 / 1;
+}
+
+.home_post_user-name{
+    margin: auto 0px;
+}

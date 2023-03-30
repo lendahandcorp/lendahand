@@ -67,7 +67,6 @@ const SignIn = (props) => {
                         setEmailError(error);}} />
                     </div>
 
-                    
                     <br/>
 
                     <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>{passwordError}</p>

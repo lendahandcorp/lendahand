@@ -80,13 +80,13 @@ export const emailValidator = email => {
         return "End Date cannot be in the past";
       }
     }
-  
+
     return "";
   };
-  
-  
-  
-  
+
+
+
+
 
   export const tagsValidator = tags => {
     if (!tags || tags.length == 0) {
@@ -104,7 +104,7 @@ export const emailValidator = email => {
     }
     return "";
   };
-  
+
   export const bodyValidator = body => {
     if (!body) {
       return "Description is required";
@@ -122,7 +122,7 @@ export const emailValidator = email => {
     return "";
   };
 
-  
+
   export const descriptionValidator = des => {
     if (des.length > 280) {
       return "Description must be less than 280 chars";

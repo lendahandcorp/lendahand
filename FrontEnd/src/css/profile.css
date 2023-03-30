@@ -10,19 +10,12 @@
  width: 200px;
 }
 
-.email{
- font-size: 20px;
-}
-
-.desc-p{
- font-size: 20px;
+.email, .desc-p{
+ font-size: 1.1rem;
 }
 
 .tag{
- margin: 5px;
- padding: 1px 10px;
- border-radius: 30px;
- border: #edeaea solid 0.2px;
+ list-style-type: none;
 }
 
 .hands{
@@ -59,5 +52,8 @@
 
 /* Profile-Post */
 .profile-post-img{
- max-width: 400px;
+ /* position: relative; */
+ background-size: cover;
+ width: 400px;
+ aspect-ratio: 3 / 2;
 }

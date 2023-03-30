@@ -5,6 +5,7 @@ import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import '../css/app.css';
 
 const no_image = require('../img/no_image.png');
 const tempPosts = require('../pseudodata_posts.json')
@@ -21,7 +22,7 @@ const Home = (props) => {
 
     useEffect(() => {
         dataService.getPosts(posts => {
-            
+
             //convert the tag ids into names
             //dataService.getTagsById();
 
@@ -31,14 +32,13 @@ const Home = (props) => {
 
     const goToProfile = (id) => {
         console.log('%c user attempted to go to profile:' + id, 'color:blue');
-        console.log(id);
         navigate('/profile/' + id);
     }
 
-    const showPost = (id) => {
-        console.log('%c user attempted to go to post view page:' + id, 'color:blue');
-        navigate('/postdetails/' + id); // this will be for when post-page is made
-    }
+    // const showPost = (id) => {
+    //     console.log('%c user attempted to go to post view page:' + id, 'color:blue');
+    //     navigate('/postdetails/' + id); // this will be for when post-page is made
+    // }
 
     const tagSearchBarChanged = () => {
         let searchBar = document.getElementById("searchBar");
@@ -99,16 +99,6 @@ const Home = (props) => {
 
     const testerBoy = () => {
         //console.log(componentService.grabMyUserDetails().userId)
-        componentService.MostCommonTagsForUser("63f414487cf34484cee0fda8", 4, (t => {
-            console.log(t);
-        })); //john
-
-        componentService.MostCommonTagsForAllUsers(6, (t => {
-            console.log(t);
-        })); //all
-
-
-        //componentService.MostCommonTagsForUser("641de21868df47fa8d5f1a05"); //joy
     }
 
 
@@ -136,8 +126,8 @@ const Home = (props) => {
 
 
     return (
-        <div class="container">
-            {/* <h1>Home.</h1> */}
+        <div class="container home">
+        
             {/* Search bar */}
             <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
                 <div class="input-group">
@@ -148,30 +138,25 @@ const Home = (props) => {
                 </div>
             </div>
 
-            {/* <div className="ml-5 w-50">
-                <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-sm btn-outline-primary mb-4">+ Write a Post</button>
-            </div> */}
-            {/* <button type="button" onClick={() => testerBoy()} className="btn btn-sm btn-outline-secondary">test Button</button> */}
-
             {/* Post Container */}
             <div class="container mt-5">
                 <div class="col-md-12 col-lg-12">
                 <div className="ml-5 w-50">
                     <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-4 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
                 </div>
+            </div>
+
+            {/* Post Container */}
+            <div className="row">
+                <div className="col-md-12 col-lg-12">
                     {
-                        //console.log(getPostsWithRelevantTags())
-                    }
-                    {
-                        //console.log(getPostsWithRelevantTags());
                         getPostsWithRelevantTags().map((tp, i) => {
-                            //console.log('post');
+                            console.log('post');
                             return <Post key={i} data={tp} 
                                 goToProfile={goToProfile} 
-                                showPost={showPost} 
+                                // showPost={showPost} 
                                 tagClicked={tagClicked}
                             />
-                            //return <Post/>
                         })
                     }
                 </div>

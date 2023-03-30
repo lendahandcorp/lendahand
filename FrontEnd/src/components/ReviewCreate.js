@@ -31,6 +31,7 @@ const ReviewCreate = (props) => {
 
         dataService.createReview(review, (success) => {
             if (success) {
+                props.updateData();
                 //navigate('/');
             } else {
             }
