@@ -7,6 +7,15 @@
     width: 95%;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: rgb(81, 81, 81);
+}
+
 .userImage {
     aspect-ratio: 1/1;
     max-width: 40px;
@@ -16,6 +25,11 @@
 .user {
     width: 210px;
 }
+
+.user:hover {
+    color: rgb(81, 81, 81);
+}
+
 
 .badge {
     margin-right: 5px;

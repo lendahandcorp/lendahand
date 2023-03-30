@@ -9,9 +9,7 @@ const Applicant = (props) => {
     const [user, setUser] = useState([])
 
     useEffect(() => {
-        console.log(props.id);
         dataService.getOneUser(props.id, user => {
-            console.log(user);
             setUser(user);
         })
     }, [])

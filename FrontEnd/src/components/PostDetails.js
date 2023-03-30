@@ -33,24 +33,14 @@ const PostDetails = (props) => {
     }, [])
 
     const updateData = () => {
-        console.log("update called.");
         dataService.getOnePost(params.id, post => {
-
-            console.log(post);
-            //console.log(post.applicants)
-
+            //console.log(post);
             dataService.getOneUser(post.writer, user => {
-                console.log(user);
                 setWriter(user);
             })
             dataService.getReviews(post._id, newReviews => {
-                //console.log(newReviews);
                 setReviews(newReviews);
             })
-
-            //console.log(post);
-            console.log(`Status: ${post.status}`);
-            //console.log(post);
             setPost(post);
         })
     }
@@ -141,10 +131,10 @@ const PostDetails = (props) => {
     const DeleteReview = (review_id) => {
         dataService.DeleteReview(review_id, (success) => {
             if (success) {
-                console.log("review deleted")
+                //console.log("review deleted")
                 updateData();
             } else {
-                console.log("problem deleting")
+                //console.log("problem deleting")
             }
         });
     }
@@ -209,23 +199,12 @@ const PostDetails = (props) => {
                 return <Applicant key={i} accepted={false} id={applicant} />
             })
         } else {
-            console.log("loading applicants...")
+            //console.log("loading applicants...")
         }
         // console.log(post)
         // console.log(post.applicants)
     }
 
-    const testy = () => {
-
-        if (post.applicants == null) {
-            console.log("NONE")
-        }
-        else {
-            console.log("GOTEM")
-        }
-
-        //console.log("loading applicants...")
-    }
 
     const OwnerOfPost = () => {
         return componentService.grabMyUserDetails().userId == writer._id
@@ -449,7 +428,7 @@ const PostDetails = (props) => {
 
       {(OwnerOfPost() || Administrator()) && PostIsClosed() ? (
         <>
-          <h4>Write Review</h4>
+          {/* <h4>Write Review</h4> */}
           <div className="row">
             <div className="col-md-12">
               <ReviewCreate poster={post.writer} post_id={post._id} updateData={updateData} />
