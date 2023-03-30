@@ -13,6 +13,7 @@ import PostDetails from './components/PostDetails';
 import PostCreate from './components/PostCreate';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import PostEdit from './components/PostEdit';
+import TestTags from './components/TestTags';
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import authService from './services/authService';
@@ -47,6 +48,7 @@ const App = () => {
               <Route path='/security' element={<Security />}/>
               <Route path='/about' element={<About />}/>
               <Route path='/contact' element={<Contact />}/>
+              <Route path='/testtags' element={<TestTags />}/>
 
               {/* This is the navbar */}
               {/* <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/> */}
