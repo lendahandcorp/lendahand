@@ -271,7 +271,7 @@ const PostDetails = (props) => {
   // console.log(writer._id);
 
   return (
-    <div className="container">
+    <div className="container postContainer">
       <div className="shadow-sm p-3 mb-5 bg-white rounded mx-2 my-5">
         <div className="row">
           <div className="col-md-6">
