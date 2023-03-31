@@ -213,7 +213,7 @@ const Home = (props) => {
                             type="button" 
                             onClick={() => toggleShowPost()} 
                             className="btn btn-outline-secondary rounded-pill mb-2 createButton shadow-sm">
-                            {showClosed ? "Show All" : "show Open"}
+                            {showClosed ? "Show All" : "Show Open"}
                         </button>
                     </div>
                 </div>

@@ -11,3 +11,7 @@
 .volunteer > div {
     margin: 1px;
   } */
+
+  .cursor-pointer{
+    cursor: pointer;
+  }
