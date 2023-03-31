@@ -58,9 +58,9 @@ const reviewSchemaValidation = Joi.object({
   reviewer: Joi.string().required(),
   personBeingReviewed: Joi.string().required(),
   post_id: Joi.string().required(),
-  description: Joi.string().max(255),
+  description: Joi.string().max(255).required(),
   stars: Joi.number().integer().min(1).max(5).required(),
-  date_created: Joi.any(),
+  date_created: Joi.date().required()
 });
 
 //User schema validation
