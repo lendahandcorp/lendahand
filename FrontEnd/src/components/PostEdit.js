@@ -265,7 +265,7 @@ const PostEdit = (props) => {
     //     <input type="date" {...innerProps} onChange={handleChange} />
     // );
     return (
-        <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
+        <form className="form-edit-post mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Edit Post</h1>
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
@@ -409,7 +409,7 @@ const PostEdit = (props) => {
             </div>
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Edit Post</button>
+                className="btn btn-lg btn-block mt-5 mb-3 d-flex edit-post-btn" >Edit Post</button>
         </form>
     )
 }

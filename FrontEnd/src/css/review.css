@@ -1,0 +1,15 @@
+.review-post {
+    width: 60%;
+}
+
+@media (max-width: 992px ) { 
+    .review-post{
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px ) { 
+    .review-post{
+        width: 90%;
+    }
+}

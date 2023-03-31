@@ -73,7 +73,7 @@ const ReviewCreate = (props) => {
         <div><h1 className="h3 mb-3 font-weight-normal text-center">Create Review</h1>
         <div className="d-flex justify-content-center">
             <div className="w-45 shadow-sm px-4 py-5 mb-5 bg-white rounded">
-                <form className="form-create-post w-60 mx-auto" onSubmit={handleSubmit}>
+                <form className="review-post mx-auto" onSubmit={handleSubmit}>
 
             <div className="form-group mt-3">
                 <label htmlFor="body" className="mb-2 fw-bold">Review</label>
