@@ -24,6 +24,7 @@ const Home = (props) => {
 
     const [searchedTags, setSearchedTags] = useState([])
     const [posts, setPosts] = useState([])
+    const [showClosed, setShowClosed] = useState(false)
 
     const navigate = useNavigate();
 
@@ -137,7 +138,10 @@ const Home = (props) => {
         //console.log(componentService.grabMyUserDetails().userId)
     }
 
-
+    const toggleShowPost = () => {
+        setShowClosed(!showClosed);
+        //console.log(componentService.grabMyUserDetails().userId)
+    }
     // const splitTagBar = (rawTags) => {
     //     return rawTags.match(/((?<=#)|^)[a-z|A-Z]+/g)
     // }
@@ -145,25 +149,27 @@ const Home = (props) => {
     //takes an array of post
     //example ["bike","fix","ect"]
     const getPostsWithRelevantTags = () => {
-        //console.log("p");
-
         if (searchedTags.length > 0) {
             return posts.filter((post) => {
                 if (post.tags.some(tag => searchedTags.indexOf(tag.title) >= 0)) {
-
-                    return post;
+                    if(post.status === "Open" || showClosed){
+                        return post;
+                    }
                 }
             })
         }
         else {
-            return posts.filter((post) => post);
+            return posts.filter((post) => {
+                if(post.status === "Open" || showClosed){
+                    return post;
+                }
+            });
         }
     }
 
 
     return (
         <div class="container home">
-
             {/* Search bar */}
             <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
                 <div class="input-group">
@@ -199,7 +205,15 @@ const Home = (props) => {
             <div class="container mt-5">
                 <div class="col-md-12 col-lg-12">
                     <div className="ml-5 w-50">
-                        <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-4 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
+                        <button type="button" onClick={() => navigate('/postcreate')} className="btn btn-primary rounded-pill mb-2 createButton shadow-sm"><i className="fa-solid fa-plus"></i> Write a Post</button>
+                    </div>
+                    <div className="ml-5 w-50">
+                        <button 
+                            type="button" 
+                            onClick={() => toggleShowPost()} 
+                            className="btn btn-outline-secondary rounded-pill mb-2 createButton shadow-sm">
+                            {showClosed ? "Show All" : "show Open"}
+                        </button>
                     </div>
                 </div>
 
