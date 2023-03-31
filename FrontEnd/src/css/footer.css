@@ -65,7 +65,10 @@ footer p {
 }
 
 @media (max-width: 992px ) { 
-
+  .other-links {
+    width: 49%;
+  }
+  
 }
 
 @media (max-width: 576px ) { 
