@@ -116,7 +116,7 @@ export const peopleNeededValidator = (people_needed) => {
   if (!people_needed) {
     return 'People needed is required';
   } else if (people_needed < 1) {
-    return 'People needed cannot be 0';
+    return 'People needed less than 1';
   }
   return '';
 };
@@ -127,6 +127,28 @@ export const descriptionValidator = (des) => {
   }
   return '';
 };
+
+export const reviewDesValidator = (reviewDes) => {
+  if (reviewDes.length > 255) {
+    return 'Review description must be less than 255 chars';
+  } else if (!reviewDes) {
+    return 'Review description is required';
+  }
+  return '';
+};
+
+export const reviewStarsValidator = (stars) => {
+  if (!stars) {
+    return 'Rating is required';
+  } else if (stars < 1) {
+    return 'Rating cannot be less than 1';
+  } else if (stars > 5) {
+    return 'Rating cannot be more than 5';
+  }
+  return '';
+};
+
+
 
 // Sample of form fields validation
 
