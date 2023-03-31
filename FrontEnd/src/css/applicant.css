@@ -15,3 +15,13 @@
   .cursor-pointer{
     cursor: pointer;
   }
+
+.userImage {
+  width: 140px;
+}
+
+@media (max-width: 576px) {}
+  .userImage2 {
+    max-width: 90px;
+    max-height: 90px;
+}

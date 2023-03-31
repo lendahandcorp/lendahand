@@ -21,7 +21,7 @@ const Applicant = (props) => {
         <div className="container-fluid">
             <div className="mb-4 d-flex volunteer shadow-sm p-3 bg-white rounded">
                 <div>
-                    <img className="rounded-circle img-fluid userImage" alt="Bootstrap Image Preview" src={componentService.convertImageFromBase64(user.picture, "pic")} />
+                    <img className="rounded-circle img-fluid userImage2" alt="Bootstrap Image Preview" src={componentService.convertImageFromBase64(user.picture, "pic")} />
                 </div>
                 <div
                 >

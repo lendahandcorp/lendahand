@@ -271,7 +271,7 @@ const PostDetails = (props) => {
   // console.log(writer._id);
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="shadow-sm p-3 mb-5 bg-white rounded mx-2 my-5">
         <div className="row">
           <div className="col-md-6">
@@ -437,7 +437,7 @@ const PostDetails = (props) => {
       <br />
       {(OwnerOfPost() || Administrator()) && PostIsOpen() ? (
         <>
-          <div className="d-flex people">
+          <div className="d-flex people justify-content-around">
             <div>
             
               <h4 className="mb-3 title">Accepted</h4>
@@ -462,7 +462,7 @@ const PostDetails = (props) => {
               </div>
             </div>
 
-            <div className="mx-auto">
+            <div>
               <h4 className="mb-3 title">Volunteered</h4>
               <div className="row">
                 <div className="col-md-12">
