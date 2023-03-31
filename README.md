@@ -73,9 +73,11 @@ Closing a post
 ![Closing a Post](./FrontEnd/wireframes/post_close.PNG)
 
 Writing a review
+
 ![Writing a review](./FrontEnd/wireframes/create_review.PNG)
 
 Reading reviews
+
 ![Reading a review](./FrontEnd/wireframes/reading_review.PNG)
 
 
