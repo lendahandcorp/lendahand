@@ -370,6 +370,7 @@ const PostEdit = (props) => {
                     onChange={handleTagChange}
                     addKeys={[9, 13, 32]}
                     onlyUnique="true"
+                    addOnBlur={true}
                     tagProps={{
                         className: `tap-react-tagsinput-tag btn badge badge1`,
                         placeholder: "add a tag",
