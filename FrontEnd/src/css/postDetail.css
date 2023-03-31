@@ -76,8 +76,8 @@ input[type=number] {
 
     .dropdown-div {
         position: absolute;
-        bottom: 370px;
-        right: 35px;
+        bottom: 690px;
+        right: 240px;
     }
 
     .postImage {
@@ -87,5 +87,10 @@ input[type=number] {
     .grid {
         display: flex;
         flex-direction: column;
+    }
+
+    .people {
+        display: flex;
+        flex-direction: column; 
     }
 }
