@@ -123,153 +123,155 @@ const Register = (props) => {
       <div className="d-flex justify-content-center mb-4">
         <h3 className="text-white">Join Us</h3>
       </div>
-      <div className="card-register card">
-        <form className="form-signin" onSubmit={handleSubmit}>
-          {/* HTML */}
-          {/* <h1 className="h3 mb-3 font-weight-normal text-center">Register to Lend a Hand</h1> */}
+      <div className="d-flex">
+        <div className="card-register card">
+          <form className="form-signin" onSubmit={handleSubmit}>
+            {/* HTML */}
+            {/* <h1 className="h3 mb-3 font-weight-normal text-center">Register to Lend a Hand</h1> */}
 
-          <p
-            className={firstNameError ? 'text-danger validationErr' : 'hidden'}
-          >
-            {firstNameError}
-          </p>
-          <label htmlFor="inputFirstName" className="sr-only">
-            First Name
-          </label>
-          <input
-            onChange={handleChange}
-            name="firstName"
-            type="text"
-            id="firstName"
-            className="form-control"
-            placeholder="Enter First Name"
-            autoFocus
-            required
-          />
-
-          <br />
-
-          <p className={lastNameError ? 'text-danger validationErr' : 'hidden'}>
-            {lastNameError}
-          </p>
-          <label htmlFor="inputLastName" className="sr-only">
-            Last Name
-          </label>
-          <input
-            onChange={handleChange}
-            name="lastName"
-            type="text"
-            id="lastName"
-            className="form-control"
-            placeholder="Enter Last Name"
-            required
-          />
-
-          <br />
-
-          <p className={addressError ? 'text-danger validationErr' : 'hidden'}>
-            {addressError}
-          </p>
-          <label htmlFor="inputAddress" className="sr-only">
-            Address
-          </label>
-          <input
-            onChange={handleChange}
-            name="address"
-            type="text"
-            id="address"
-            className="form-control"
-            placeholder="Enter Address"
-            required
-          />
-
-          <br />
-
-          <p
-            className={
-              telephoneNumberError ? 'text-danger validationErr' : 'hidden'
-            }
-          >
-            {telephoneNumberError}
-          </p>
-          <label htmlFor="inputTelephoneNumber" className="sr-only">
-            Telephone Number
-          </label>
-          <input
-            onChange={handleChange}
-            name="phone"
-            type="tel"
-            id="telephoneNumber"
-            className="form-control"
-            placeholder="000-000-0000"
-            required
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          />
-
-          <br />
-
-          {/* Picture is Not Mandatory */}
-          <label class="text fw-bold">Upload your profile picture:</label>
-          <input
-            onChange={handleImageBuffer}
-            name="picture"
-            type="file"
-            id="picture"
-            className="mt-1 form-control"
-            required
-          />
-
-          <br />
-
-          <p className={emailError ? 'text-danger validationErr' : 'hidden'}>
-            {emailError}
-          </p>
-          <label htmlFor="inputEmail" className="sr-only">
-            Email address
-          </label>
-          <input
-            onChange={handleChange}
-            name="email"
-            type="email"
-            id="inputEmail"
-            className="form-control"
-            placeholder="Email address"
-            required
-          />
-
-          <br />
-
-          <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>
-            {passwordError}
-          </p>
-          <label htmlFor="inputPassword" className="sr-only">
-            Password
-          </label>
-          <input
-            onChange={handleChange}
-            name="password"
-            type="password"
-            id="inputPassword"
-            className="form-control"
-            placeholder="Password"
-            required
-          />
-
-          <div className="d-flex mt-4">
-            <button
-              className="btn register-btn btn-lg btn-primary btn-block"
-              type="submit"
+            <p
+              className={firstNameError ? 'text-danger validationErr' : 'hidden'}
             >
-              Register
-            </button>
-          </div>
-
-          <div className="d-flex justify-content-center mt-4">
-            <p>
-              Already a member? <Link to="/signin"><span className="link-primary "><u>Sign in</u></span></Link>
+              {firstNameError}
             </p>
-          </div>
-        </form>
+            <label htmlFor="inputFirstName" className="sr-only">
+              First Name
+            </label>
+            <input
+              onChange={handleChange}
+              name="firstName"
+              type="text"
+              id="firstName"
+              className="form-control"
+              placeholder="Enter First Name"
+              autoFocus
+              required
+            />
+
+            <br />
+
+            <p className={lastNameError ? 'text-danger validationErr' : 'hidden'}>
+              {lastNameError}
+            </p>
+            <label htmlFor="inputLastName" className="sr-only">
+              Last Name
+            </label>
+            <input
+              onChange={handleChange}
+              name="lastName"
+              type="text"
+              id="lastName"
+              className="form-control"
+              placeholder="Enter Last Name"
+              required
+            />
+
+            <br />
+
+            <p className={addressError ? 'text-danger validationErr' : 'hidden'}>
+              {addressError}
+            </p>
+            <label htmlFor="inputAddress" className="sr-only">
+              Address
+            </label>
+            <input
+              onChange={handleChange}
+              name="address"
+              type="text"
+              id="address"
+              className="form-control"
+              placeholder="Enter Address"
+              required
+            />
+
+            <br />
+
+            <p
+              className={
+                telephoneNumberError ? 'text-danger validationErr' : 'hidden'
+              }
+            >
+              {telephoneNumberError}
+            </p>
+            <label htmlFor="inputTelephoneNumber" className="sr-only">
+              Telephone Number
+            </label>
+            <input
+              onChange={handleChange}
+              name="phone"
+              type="tel"
+              id="telephoneNumber"
+              className="form-control"
+              placeholder="000-000-0000"
+              required
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            />
+
+            <br />
+
+            {/* Picture is Not Mandatory */}
+            <label class="text fw-bold">Upload your profile picture:</label>
+            <input
+              onChange={handleImageBuffer}
+              name="picture"
+              type="file"
+              id="picture"
+              className="mt-1 form-control"
+              required
+            />
+
+            <br />
+
+            <p className={emailError ? 'text-danger validationErr' : 'hidden'}>
+              {emailError}
+            </p>
+            <label htmlFor="inputEmail" className="sr-only">
+              Email address
+            </label>
+            <input
+              onChange={handleChange}
+              name="email"
+              type="email"
+              id="inputEmail"
+              className="form-control"
+              placeholder="Email address"
+              required
+            />
+
+            <br />
+
+            <p className={passwordError ? 'text-danger validationErr' : 'hidden'}>
+              {passwordError}
+            </p>
+            <label htmlFor="inputPassword" className="sr-only">
+              Password
+            </label>
+            <input
+              onChange={handleChange}
+              name="password"
+              type="password"
+              id="inputPassword"
+              className="form-control"
+              placeholder="Password"
+              required
+            />
+
+            <div className="d-flex mt-4">
+              <button
+                className="btn register-btn btn-lg btn-primary btn-block"
+                type="submit"
+              >
+                Register
+              </button>
+            </div>
+
+            <div className="d-flex justify-content-center mt-4">
+              <p>
+                Already a member? <Link to="/signin"><span className="link-primary "><u>Sign in</u></span></Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

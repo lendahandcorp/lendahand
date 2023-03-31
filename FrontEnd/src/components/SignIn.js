@@ -52,10 +52,11 @@ const SignIn = (props) => {
   };
 
   return (
-    <div className="card1 p-5">
+    <div className="card1 p-5 ">
       <div className="d-flex justify-content-center mb-4">
         <h3 className="text-white">Sign In</h3>
       </div>
+      <div className="d-flex">
       <div className="card-signin card">
         <form className="form-signin" onSubmit={handleSubmit}>
           <p className={errors ? 'text-danger text-center' : 'hidden'}>
@@ -110,6 +111,7 @@ const SignIn = (props) => {
                         <p>Don't have an account? <Link to="/register"><span className="link-primary "><u>Sign up</u></span></Link>!</p>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
      );
