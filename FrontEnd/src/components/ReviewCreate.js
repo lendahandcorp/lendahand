@@ -5,6 +5,7 @@ import Post from './Post';
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
+import { reviewDesValidator, reviewStarsValidator} from "./Validator";
 
 
 
@@ -12,12 +13,23 @@ const ReviewCreate = (props) => {
 
     const [description, setDescription] = useState('');
     const [stars, setStars] = useState(1);
+    const [descriptionError, setDescriptionError] = useState('');
+    const [starError, setStarError] = useState('');
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        if (reviewDesValidator(description) !== '') {
+            setDescriptionError(reviewDesValidator(description));
+            return;
+          }
+      
+          if (reviewStarsValidator(stars) !== '') {
+              setStarError(reviewStarsValidator(stars));
+            return;
+          }
 
         let review = {
             personBeingReviewed: props.poster,
@@ -43,9 +55,14 @@ const ReviewCreate = (props) => {
         switch (event.target.name) {
             case 'description':
                 setDescription(event.target.value);
+                setDescriptionError(reviewDesValidator(event.target.value));
+
                 break;
             case 'stars':
                 setStars(event.target.value);
+                setStarError(reviewStarsValidator(event.target.value));
+                break;
+                default:
                 break;
         }
     }
@@ -64,6 +81,7 @@ const ReviewCreate = (props) => {
                     placeholder="..."
                     onChange={handleChange}
                     required />
+            {descriptionError && <p className="text-danger">{descriptionError}</p>}
             </div>
 
             <div className="form-group">
@@ -74,6 +92,8 @@ const ReviewCreate = (props) => {
                     className="form-control"
                     onChange={handleChange}
                     required />
+                {starError && <p className="text-danger">{starError}</p>}
+
             </div>
 
 

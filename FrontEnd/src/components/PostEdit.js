@@ -381,7 +381,7 @@ const PostEdit = (props) => {
             </div>
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
+                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Edit Post</button>
         </form>
     )
 }
