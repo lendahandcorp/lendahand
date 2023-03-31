@@ -231,7 +231,7 @@ const PostCreate = (props) => {
                     id="media"
                     name="media"
                     className="form-control"
-                    accept="image/png"
+                    accept="image/*"
                     onChange={handleChange}
                     required
                 />

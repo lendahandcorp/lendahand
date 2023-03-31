@@ -62,20 +62,6 @@ const Header = () => {
                       <button
                         type="button"
                         className="dropdown-item"
-                        onClick={() => navigate('/postcreate')}
-                      >
-                        Write a Post
-                      </button>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to={'/signout'}>
-                        Sign out
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        className="dropdown-item"
                         onClick={() => {
                           navigate(
                             '/profile/' +
@@ -85,6 +71,20 @@ const Header = () => {
                       >
                         Profile
                       </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className="dropdown-item"
+                        onClick={() => navigate('/postcreate')}
+                      >
+                        Write a Post
+                      </button>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to={'/signout'}>
+                        Sign out
+                      </Link>
                     </li>
                   </ul>
                 </div>
