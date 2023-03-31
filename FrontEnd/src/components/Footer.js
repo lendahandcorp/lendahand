@@ -13,15 +13,15 @@ const Footer = (props) => {
         <div className="container d-flex justify-content-between">
           <div className="float-left socials">
             <div className="d-flex justify-content-between">
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
+              <a href="https://twitter.com/LendAHandCanada/" target="_blank" rel="noreferrer">
                 {/* <img className="social-link" src={twitter} alt="twitter"/> */}
                 <i className="fa-brands fa-twitter fa-2xl"></i>
               </a>
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
+              <a href="https://www.instagram.com/lend_a_hand_canada/" target="_blank" rel="noreferrer">
                 {/* <img className="social-link" src={instagram} alt="instagram"/> */}
                 <i className="fa-brands fa-instagram fa-2xl"></i>
               </a>
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
+              <a href="/" target="_blank" rel="noreferrer" disabled>
                 {/* <img className="social-link" src={facebook} alt="facebook" /> */}
                 <i className="fa-brands fa-facebook fa-2xl"></i>
               </a>
