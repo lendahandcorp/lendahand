@@ -8,10 +8,35 @@
 .profile-img{
  height: 200px;
  width: 200px;
+ border: #ffffff 6px solid;
 }
 
 .email, .desc-p{
  font-size: 1.1rem;
+}
+
+.buttonSubmit {
+    background-color: #ff781f;
+    color: white; 
+    border: 2px solid white;
+}
+  
+.buttonSubmit:hover {
+    background-color: white;
+    color: #ff781f; 
+    border: 2px solid #ff781f;
+}
+
+.buttonEdit {
+    background-color: #0080FF;
+    color: white; 
+    border: 2px solid white;
+}
+  
+.buttonEdit:hover {
+    background-color: white;
+    color: #0080FF; 
+    border: 2px solid #0080FF;
 }
 
 .hands{
@@ -42,8 +67,10 @@
 
 .post-num{
  background: #FFDF8B;
+ color: #ff781f;
  width: 100px;
  height: 35px;
+ border-radius: 15px;
  display: flex;
  justify-content: center;
  align-items: center;
@@ -64,7 +91,7 @@
 /* Profile-Post */
 .profilePost-img{
  background-size: cover;
- max-width: 400px;
+ max-width: 300px;
  /* width: 400px; */
  aspect-ratio: 3 / 2;
 }

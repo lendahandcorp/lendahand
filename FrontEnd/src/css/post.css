@@ -4,7 +4,11 @@
 } */
 
 .postImage1 {
-    width: 95%;
+    /* width: 95%; */
+    background-size: cover;
+    max-width: 300px;
+    /* width: 400px; */
+    aspect-ratio: 3 / 2;
 }
 
 a {
@@ -62,11 +66,19 @@ a:hover {
     .form-create-post{
         width: 80%;
     }
+
+    .postImage1 {
+        max-width: 450px;
+    }
 }
 
 @media (max-width: 576px ) { 
     .form-create-post{
         width: 90%;
+    }
+
+    .postImage1 {
+        max-width: 225px;
     }
 
     .userImage {
