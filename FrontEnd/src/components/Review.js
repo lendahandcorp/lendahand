@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dataService from '../services/dataService';
 import componentService from '../services/componentService';
+import '../css/review.css';
 
 const Review = (props) => {
     const [writer, setWriter] = useState([])
@@ -52,7 +53,7 @@ const Review = (props) => {
                         <img alt="rounded-circle home_post_user-img" src={componentService.convertImageFromBase64(writer.picture, "pic")} />
                     </div> */}
                     
-                    <div className="d-flex">
+                    <div className="d-flex reviewCard">
                         <div class="col-md-3 btn post_user" onClick={() => props.goToProfile(props.data.writer)}>
                             <img src={componentService.convertImageFromBase64(writer.picture, "pic")} alt="lol" class="rounded-circle home_post_user-img" />
                         </div>
@@ -85,7 +86,7 @@ const Review = (props) => {
 
 
                             </div>
-                            <div className="dropdown col-md-1">
+                            <div className="dropdown1 col-md-1">
                                         <button
                                             className="btn dropdown-toggle"
                                             type="button"
