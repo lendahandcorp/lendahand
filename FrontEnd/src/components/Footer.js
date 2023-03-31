@@ -9,7 +9,7 @@ const facebook = require('../img/facebook.png');
 
 const Footer = (props) => {
     return (
-      <footer className="text-muted mt-5">
+      <footer className="text-muted">
         <div className="container d-flex justify-content-between">
           <div className="float-left socials">
             <div className="d-flex justify-content-between">
