@@ -133,20 +133,15 @@ const PostCreate = (props) => {
         setTags(splitTags);
     }
     const fileManip = (a) => {
-        console.log(a)
         let f = a;
-        console.log(f[0])
-        console.log(f.length)
         let file = a[0];
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
             let p = new RegExp("^(data:image/png;base64,)|^(data:image/jpeg;base64,)", "g");
-            //let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
-            //console.log(reader.result);
         };
 
         reader.onerror = function (error) {
