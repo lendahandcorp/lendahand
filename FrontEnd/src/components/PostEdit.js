@@ -285,8 +285,8 @@ const PostEdit = (props) => {
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             {
                 editingImage ?
-                    <div className="form-group">
-                        <label htmlFor="media">Image</label>
+                    <div className="form-group mb-4">
+                        <label htmlFor="media" className="mb-2 fw-bold">Image</label>
                         <input type="file"
                             id="media"
                             name="media"
