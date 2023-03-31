@@ -156,7 +156,7 @@ const Profile = () => {
             <p className="fw-normal desc-p">{description}</p>
           </div>  }
           <div className="d-flex mt-5"> 
-            <p className="mt-2 fw-bold">Tags used: </p>
+            <p className="mt-2 fw-bold">Tags used most:&nbsp;&nbsp;</p>
             <ul className="profile-tags d-flex">
               {
                 tags.map( (tag, i) => {
@@ -179,7 +179,7 @@ const Profile = () => {
       </div>
       <div className="row">
         <div className="col-sm-12 m-sm-100 m-auto profile-post">
-            <h2>My Posts </h2>
+            <h2>Posts</h2>
             <div className="post-num mt-5 fw-bold">{postData.length} posts</div>
           <ProfilePost key={postData._id} postData={postData} />
         </div>

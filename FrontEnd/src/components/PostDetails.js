@@ -36,6 +36,7 @@ const PostDetails = (props) => {
 
   useEffect(() => {
     dataService.getOneUser(post.writer, (user) => {
+      console.log(user)
       setUserImg(user.picture);
     });
   });

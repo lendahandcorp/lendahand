@@ -146,8 +146,6 @@ const PostEdit = (props) => {
             return;
         }
 
-        console.log(objectify(tags))
-
         let post = {
             title: title,
             writer: writer,
@@ -168,7 +166,6 @@ const PostEdit = (props) => {
             } else {
             }
         });
-        //navigate('/');
     }
 
     const convertTagsToArray = (rawTagString, element) => {
@@ -193,24 +190,14 @@ const PostEdit = (props) => {
     }
 
     const fileManip = (a) => {
-        console.log(a)
-        let f = a;
-        console.log(f[0])
-        console.log(f.length)
-
         let file = a[0];
-
         var reader = new FileReader();
         reader.readAsDataURL(file);
-
         reader.onload = function () {
-
-            let p = new RegExp("^(data:image/png;base64,)", "g");
-            let g = "data:image/png;base64,jkfgfhkdujfkgjdfghdkfjgdkfgjdkfjghkdfjghkdfjghkdfj"
+            let p = new RegExp("^(data:image/png;base64,)|^(data:image/jpeg;base64,)", "g");
             let image = reader.result.replace(p, "");
             console.log(image);
             setMedia(image);
-            //console.log(reader.result);
         };
 
         reader.onerror = function (error) {
@@ -291,7 +278,7 @@ const PostEdit = (props) => {
                             id="media"
                             name="media"
                             className="form-control"
-                            accept="image/png"
+                            accept="image/*"
                             onChange={handleChange}
                             required />
                     </div>
@@ -299,7 +286,7 @@ const PostEdit = (props) => {
                     <>
                         <img
                             src={componentService.convertImageFromBase64(media, 'img')}
-                            alt="lol"
+                            alt="Post Image"
                             className="rounded editImage"
                         />
                         <button
