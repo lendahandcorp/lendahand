@@ -121,7 +121,7 @@ const Post = (props) => {
           </Link>
 
           <div
-            className="btn mt-3 d-flex justify-content-around user"
+            className="btn mt-3 d-flex user"
             onClick={() => props.goToProfile(props.data.writer)}
           >
             <img
@@ -132,11 +132,11 @@ const Post = (props) => {
               alt="lol"
               class="rounded-circle img-fluid userImage"
             />
-            <span className="mt-1 fw-bold">By {username()}</span>
+            <span className="mt-1 userName fw-bold font">By {username()}</span>
           </div>
         </div>
         <div className="col-sm d-flex flex-column">
-          <div className="d-flex flex-column">
+          <div className="d-flex flex-column postBody">
             <Link to={`/postDetails/${props.data._id}`}>
               <h5
                 class="fw-bold"
@@ -159,7 +159,7 @@ const Post = (props) => {
               </Link>
             </span>
           </p>
-          <div className="d-flex">
+          <div className=".col-sm-8">
             {props.data.tags.map((tag, i) => {
               return (
                 <div
