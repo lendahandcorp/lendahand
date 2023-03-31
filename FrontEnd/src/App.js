@@ -1,5 +1,6 @@
 import React from 'react';
 import SignIn from './components/SignIn';
+import SignOut from './components/SignOut';
 import Register from './components/Register';
 import Home from './components/Home';
 import Header from './components/Header';
@@ -55,7 +56,7 @@ const App = () => {
               
               {/* Raw signin page, to be removed */}
               <Route path='/signin' element={<SignIn />}/>
-
+              <Route path='/signout' element={<SignOut />} />
               <Route element={<ProtectedRoutes />}>
                 <Route path='/profile/:UserId' element={<Profile />}/>
                 <Route path='/postedit/:id' element={<PostEdit />}/>

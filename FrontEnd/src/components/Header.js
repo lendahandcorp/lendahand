@@ -4,8 +4,13 @@ import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/header.css';
 
+
+
 const Header = () => {
+  
+  
   const navigate = useNavigate();
+
 
   const logo = require('../img/logo.png');
 
@@ -63,7 +68,7 @@ const Header = () => {
                       </button>
                     </li>
                     <li>
-                      <Link className="dropdown-item" onClick={() => logout()}>
+                      <Link className="dropdown-item" to={'/signout'}>
                         Sign out
                       </Link>
                     </li>
