@@ -39,6 +39,8 @@ Each registered user is provided with a profile page where you can see:
 - The list of posts that the user has helped someone
 - The reviews given and received in each finalized post
 
+You can access it through the dropdown menu in the header.
+
  ![Profile Page](./FrontEnd/wireframes/profile.png)
 
  ## Post
@@ -55,14 +57,32 @@ Each registered user is provided with a profile page where you can see:
  ![Profile Page](./FrontEnd/wireframes/post.png)
 
  ## Apply to a post
- Each registered user can apply to help someone within a post. The registered user can filter for a specific tag in the homepage to seek a category he likes the most. To apply to a post, the registered user just need to click "Quick Help". The post owner will see a list of people who have applied to his post and approve them or not. As a criteria, the post owner can check the users profile page and check the reviews, recent posts, [hands given and requested](#profile) or contact other users by email.
+ Each registered user can apply to help someone within a post. The registered user can filter for a specific tag in the homepage to seek a category he likes the most. To apply to a post, the registered user just need to click on "Apply" within a post. The post owner will see a list of people who have applied to his post and approve them or not. As a criteria, the post owner can check the users profile page and check the reviews, recent posts, [hands given and requested](#profile) or contact other users by email.
+
+ ![Apply for A Post](./FrontEnd/wireframes/apply_for_a_post.PNG)
+
+ ![Post Volunteer](./FrontEnd/wireframes/post_volunteer.PNG)
+
+ ![Post Accepted](./FrontEnd/wireframes/post_accepted.PNG)
+
 
  ## Review
-Each finalized post will have review fields, allowing users involved in the task to review each other. The review is an element of a post and the reviews can be reached from the [profile page](#profile), from the post list.
+Each finalized post will have review fields, allowing users involved in the task to review each other. The review is a component of a post and the reviews can be accessed from the post list in the homepage or from the [profile page](#profile), from the post list.
 
-![Profile Page](./FrontEnd/wireframes/reviews.png)
+Closing a post
+![Closing a Post](./FrontEnd/wireframes/post_close.PNG)
+
+Writing a review
+![Writing a review](./FrontEnd/wireframes/create_review.PNG)
+
+Reading reviews
+![Reading a review](./FrontEnd/wireframes/reading_review.PNG)
+
 
 # Instructions
 
 1. Git clone this repository.
 2. Run `npm run dev`. This command will install all dependencies, initiate a local server and the app will open in the default browser.
+3. We will need to include your ISP IP Address in our MongoDB firewall if you are testing this from home. From NSCC it should be working fine. 
+4. We have a release on [https://lendahand.onrender.com/](https://lendahand.onrender.com/).
+5. We are using MongoDB Atlas to host our data, as it is a shared resource, sometimes it could be really slow, taking up to 2 min to retrieve data.
