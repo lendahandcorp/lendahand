@@ -18,6 +18,7 @@ import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 
 import '../css/tags_in_tagbar.css';
+import '../css/postEdit.css';
 //i hate git
 const PostEdit = (props) => {
     const [title, setTitle] = useState('');
@@ -37,6 +38,7 @@ const PostEdit = (props) => {
     const [tagsError, setTagsError] = useState('');
     const [bodyError, setBodyError] = useState('');
     const [peopleNeededError, setPeopleNeededError] = useState('');
+    const [editingImage, setEditingImage] = useState(false);
 
     const navigate = useNavigate();
     const params = useParams();
@@ -90,6 +92,10 @@ const PostEdit = (props) => {
             n = '0' + n;
         return n;
     };
+
+    const openImageEdit = () => {
+        setEditingImage(true);
+    }
 
     const objectify = (tags) => {
 
@@ -151,7 +157,8 @@ const PostEdit = (props) => {
             location: location,
             people_needed: people_needed,
             applicants: [],
-            people_accepted: []
+            people_accepted: [],
+            media: media
         }
 
         console.log(post)
@@ -276,17 +283,37 @@ const PostEdit = (props) => {
             </div>
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
-            {/* <div className="form-group">
-                <label htmlFor="media">Image</label>
-                <input type="file"
-                    id="media"
-                    name="media"
-                    className="form-control"
-                    accept="image/png, image/jpeg"
-                    value={convertImage(media)}
-                    onChange={handleChange}
-                    required />
-            </div> */}
+            {
+                editingImage ?
+                    <div className="form-group">
+                        <label htmlFor="media">Image</label>
+                        <input type="file"
+                            id="media"
+                            name="media"
+                            className="form-control"
+                            accept="image/png"
+                            onChange={handleChange}
+                            required />
+                    </div>
+                    :
+                    <>
+                        <img
+                            src={componentService.convertImageFromBase64(media, 'img')}
+                            alt="lol"
+                            className="rounded editImage"
+                        />
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-sm col-12"
+                            onClick={() => setEditingImage(true)}
+                        >
+                            Change Image
+                        </button>
+                    </>
+            }
+
+
+
 
             {/*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo*/}
             <div className="form-group mb-4">
@@ -348,7 +375,7 @@ const PostEdit = (props) => {
                         placeholder: "add a tag",
                         classNameRemove: 'react-tagsinput-remove'
                     }}
-                /> 
+                />
                 {tagsError && <p className="text-danger">{tagsError}</p>}
             </div>
 
