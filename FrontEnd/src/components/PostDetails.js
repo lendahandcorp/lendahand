@@ -196,6 +196,22 @@ const PostDetails = (props) => {
     });
   };
 
+  const isAcceptedPerson = () => {
+    let userId = componentService.grabMyUserDetails().userId;
+
+    console.log(post.people_accepted);
+    console.log(post.people_accepted.indexOf(userId));
+
+    if(post.people_accepted.indexOf(userId) > -1 || OwnerOfPost){
+      console.log("allowed")
+      return true;
+    } else {
+      console.log("not allowed")
+      return false;
+    }
+    //console.log(post.people_accepted);
+  }
+
   const ClearApplicants = () => {
     dataService.clearApplicant(params.id, (success) => {
       if (success) {
@@ -489,7 +505,7 @@ const PostDetails = (props) => {
       <br />
       <br />
 
-      {(OwnerOfPost() || Administrator()) && PostIsClosed() ? (
+      {(OwnerOfPost() || Administrator()) && PostIsClosed() && isAcceptedPerson() ? (
         <>
           {/* <h4>Write Review</h4> */}
           <div className="row">
