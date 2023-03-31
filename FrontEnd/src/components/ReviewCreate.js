@@ -6,6 +6,7 @@ import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 import { reviewDesValidator, reviewStarsValidator} from "./Validator";
+import'../css/review.css';
 
 
 
@@ -97,9 +98,9 @@ const ReviewCreate = (props) => {
                     required />
             </div>
 
-                    <div className="d-flex mt-4">
+                    <div className="d-flex mt-5">
                         <button type="submit"
-                            className="btn btn-lg btn-primary btn-block mx-auto" >Create Review
+                            className="btn btn-lg btn-review btn-block mx-auto" >Create Review
                         </button>
                     </div>
                 </form>
