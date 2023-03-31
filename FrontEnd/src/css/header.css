@@ -9,6 +9,10 @@ nav {
     background-size: contain;
 }
 
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
+
 .links {
     width: 40%;
 }
@@ -25,4 +29,20 @@ nav {
     background-color: white;
     color: #fd6a02;
     border-radius: 10px;
+}
+
+@media (max-width: 576px ) { 
+    /* .button-toggle {
+        top: 320px;
+        right: 30px;
+        position: relative;
+    }
+    .navbar-nav .dropdown-menu {
+        top: 400px;
+        position: relative;
+    } */
+    .dropdown {
+        bottom: 0px;
+        left: 230px;
+    }
 }

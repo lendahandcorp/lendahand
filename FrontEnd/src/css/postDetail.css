@@ -69,10 +69,10 @@ input[type=number] {
 }
 
 @media (max-width: 576px) {
-    .dropdown {
+    /* .dropdown {
         bottom: 315px;
         left: 20px;
-    }
+    } */
 
     .dropdown-div {
         position: absolute;

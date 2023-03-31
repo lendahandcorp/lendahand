@@ -1,37 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 import '../css/header.css';
 
+
+
 const Header = () => {
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height
-    };
-  }
-
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   
-  const useWindowDimensions = () => {
-
-    useEffect(() => {
-      function handleResize() {
-        setWindowDimensions(getWindowDimensions());
-      }
   
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    // console.log(windowDimensions);
-    return windowDimensions;
-  }
-  
-  useWindowDimensions()
   const navigate = useNavigate();
 
 
@@ -49,7 +26,7 @@ const Header = () => {
         </Link>
 
         {/* <div className="collapse navbar-collapse">   */}
-        {/* <div className="d-flex">
+        <div className="d-flex">
           <button
             type="button"
             className="navbar-toggler ml-auto"
@@ -58,11 +35,11 @@ const Header = () => {
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-        </div> */}
+        </div>
 
         <div
-          // class="collapse navbar-collapse justify-content-between"
-          // id="navbarCollapse"
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarCollapse"
         >
           <div className="d-flex justify-content-between">
             <div className="navbar-nav">
@@ -75,7 +52,7 @@ const Header = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {windowDimensions.width <= 768 ? <span class="navbar-toggler-icon"></span> : <span>{componentService.grabMyUserDetails().email}</span>}
+                    {componentService.grabMyUserDetails().email}
                   </button>
                   <ul
                     class="dropdown-menu"
