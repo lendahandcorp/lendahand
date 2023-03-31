@@ -114,7 +114,7 @@ const Post = (props) => {
                 'img'
               )}
               alt="lol"
-              className="rounded postImage"
+              className="rounded postImage1"
               onClick={() => props.showPost(props.data._id)}
               //onClick={() => aa()}
             />
@@ -136,10 +136,10 @@ const Post = (props) => {
           </div>
         </div>
         <div className="col-sm d-flex flex-column">
-          <div className="d-flex flex-column postBody">
+          <div className="d-flex flex-column">
             <Link to={`/postDetails/${props.data._id}`}>
               <h5
-                class="fw-bold"
+                class="fw-bold postBody"
                 onClick={() => props.showPost(props.data._id)}
               >
                 {props.data.title}

@@ -2,12 +2,13 @@
     display: flex;
     justify-content: center;
 } */
-.userName {
-    margin-left: 8px;
-}
 
-.postImage {
-    width: 95%;
+.postImage1 {
+    /* width: 95%; */
+    background-size: cover;
+    max-width: 300px;
+    /* width: 400px; */
+    aspect-ratio: 3 / 2;
 }
 
 a {
@@ -19,15 +20,14 @@ a:hover {
     color: rgb(81, 81, 81);
 }
 
-.postImage {
-    max-width: 340px;
-    max-height: 240px;
-}
-
 .userImage {
     aspect-ratio: 1/1;
     max-width: 40px;
     max-height: 40px;
+}
+
+.userName {
+    margin-left: 13px;
 }
 
 .user {
@@ -45,21 +45,53 @@ a:hover {
     margin-bottom: 12px;
 }
 
-@media (max-width: 992px) {
-
+/* PostCreate */
+.form-create-post{
+    width: 50%;
 }
 
-@media (max-width: 576px) {
-    .font {
-        font-size: 12px;
+.create-post-btn{
+    background-color: #fd6a02;
+    color: white;
+    border: solid 2px #fd6a02;;
+}
+
+.create-post-btn:hover {
+    background-color: white;
+    color: #fd6a02;
+    border: solid 2px #fd6a02;
+}
+
+@media (max-width: 992px ) { 
+    .form-create-post{
+        width: 80%;
+    }
+
+    .postImage1 {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 576px ) { 
+    .form-create-post{
+        width: 90%;
+    }
+
+    .postImage1 {
+        max-width: 225px;
     }
 
     .userImage {
-        max-width: 25px;
-        max-height: 25px;
+        max-width: 20px;
+        max-height: 20px;
+    }
+
+    .userName {
+        margin-left: 13px;
+        font-size: 10px;
     }
 
     .postBody {
-        margin-top: 8%;
+        margin-top: 15px;
     }
 }

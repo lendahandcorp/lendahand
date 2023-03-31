@@ -296,9 +296,9 @@ const PostDetails = (props) => {
               </p>
             </div>
             {post.status === 'Closed' ? (
-              <p className="fw-bold text-danger">Closed</p>
+              <p className="fw-bold text-danger mt-3">Closed</p>
             ) : (
-              <p className="fw-bold">Ends: {getDate()}</p>
+              <p className="fw-bold mt-3">Ends: {getDate()}</p>
             )}
 
             {/* <button>
@@ -325,7 +325,7 @@ const PostDetails = (props) => {
                                 <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
                             </button> */}
 
-                <div className="container d-flex justify-content-end">
+                <div className="container d-flex justify-content-end dropdown-div">
                     <div className="dropdown">
                     <button
                         className="btn dropdown-toggle"

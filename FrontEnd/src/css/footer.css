@@ -63,3 +63,25 @@ footer p {
   width: 250px;
   aspect-ratio: 1 / 1;
 }
+
+@media (max-width: 992px ) { 
+  .other-links {
+    width: 49%;
+  }
+  
+}
+
+@media (max-width: 576px ) { 
+  .nav {
+    /* display: flex; */
+    flex-direction: column;
+  }
+
+  .nav > li {
+    margin: 6px;
+  }
+
+  .customButton2 {
+    width: 115px;
+  }
+}

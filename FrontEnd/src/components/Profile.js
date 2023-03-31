@@ -147,13 +147,16 @@ const Profile = () => {
               }}
               disabled = {isReadOnly}
             />
-            <button className="btn mt-1 form-btn btn btn-secondary" type="submit" onClick={() => {  setIsReadOnly(true); } }>Submit</button>
-            <button className="btn mt-1 form-btn btn btn-outline-secondary" type="edit" onClick={() => { setIsReadOnly(false); } }>Edit</button>
+            <div className="mt-3 d-flex flex-row-reverse">
+              <div className="p-2"><button className="btn mt-1 form-btn btn buttonSubmit mr-3" type="submit" onClick={() => {  setIsReadOnly(true); } }>Submit</button></div>
+              <div className="p-2"><button className="btn mt-1 form-btn btn buttonEdit" type="edit" onClick={() => { setIsReadOnly(false); } }>Edit</button></div>
+            </div>
           </form> :
           <div className="description">
             <p className="fw-normal desc-p">{description}</p>
           </div>  }
-          <div className="d-flex"> 
+          <div className="d-flex mt-5"> 
+            <p className="mt-2 fw-bold">Tags used: </p>
             <ul className="profile-tags d-flex">
               {
                 tags.map( (tag, i) => {
@@ -162,7 +165,6 @@ const Profile = () => {
                }
             </ul>
           </div>
-          <div className="post-num">{postData.length} posts</div>
         </div>
         <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex hands-box m-auto mt-3 justify-content-lg-end justify-content-center">
           <div className="hands">
@@ -177,6 +179,8 @@ const Profile = () => {
       </div>
       <div className="row">
         <div className="col-sm-12 m-sm-100 m-auto profile-post">
+            <h2>My Posts </h2>
+            <div className="post-num mt-5 fw-bold">{postData.length} posts</div>
           <ProfilePost key={postData._id} postData={postData} />
         </div>
       </div>

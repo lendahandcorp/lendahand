@@ -6,6 +6,7 @@ import dataService from '../services/dataService';
 import authService from '../services/authService';
 import componentService from '../services/componentService';
 import { reviewDesValidator, reviewStarsValidator} from "./Validator";
+import'../css/review.css';
 
 
 
@@ -73,7 +74,7 @@ const ReviewCreate = (props) => {
         <div><h1 className="h3 mb-3 font-weight-normal text-center">Create Review</h1>
         <div className="d-flex justify-content-center">
             <div className="w-45 shadow-sm px-4 py-5 mb-5 bg-white rounded">
-                <form className="form-create-post w-60 mx-auto" onSubmit={handleSubmit}>
+                <form className="review-post mx-auto" onSubmit={handleSubmit}>
 
             <div className="form-group mt-3">
                 <label htmlFor="body" className="mb-2 fw-bold">Review</label>
@@ -97,9 +98,9 @@ const ReviewCreate = (props) => {
                     required />
             </div>
 
-                    <div className="d-flex mt-4">
+                    <div className="d-flex mt-5">
                         <button type="submit"
-                            className="btn btn-lg btn-primary btn-block mx-auto" >Create Review
+                            className="btn btn-lg btn-review btn-block mx-auto" >Create Review
                         </button>
                     </div>
                 </form>

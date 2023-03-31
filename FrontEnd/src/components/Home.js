@@ -171,11 +171,11 @@ const Home = (props) => {
     return (
         <div class="container home">
             {/* Search bar */}
-            <div class="p-1 bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
+            <div class=" bg-light rounded rounded-pill mt-5 mb-5 searchbar shadow-sm mb-4 mx-auto">
                 <div class="input-group">
                     <TagsInput
                         value={searchedTags}
-                        className="form-control border-0 bg-transparent"
+                        className="form-control border-0 bg-transparent mt-1"
                         onChange={handleTagChange}
                         addKeys={[9, 13, 32]}
                         onlyUnique="true"
@@ -187,7 +187,7 @@ const Home = (props) => {
                         }}
                     />
                     <div class="input-group-append">
-                        <button id="button-addon1" type="submit" class="btn btn-link searchIcon"><i class="fa fa-search"></i></button>
+                        <button id="button-addon1" type="submit" className="btn btn-link searchIcon mt-2"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </div>

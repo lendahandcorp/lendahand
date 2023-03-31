@@ -206,7 +206,7 @@ const PostCreate = (props) => {
         }
     }
     return (
-        <form className="form-create-post w-50 mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
+        <form className="form-create-post mx-auto my-5 shadow-sm py-3 px-5 mb-5 bg-white rounded" onSubmit={handleSubmit}>
 
             <h1 className="h3 mb-5 mt-4 fw-bold text-center">Create Post</h1>
 
@@ -331,7 +331,7 @@ const PostCreate = (props) => {
 
 
             <button type="submit"
-                className="btn btn-lg btn-primary btn-block mt-5 mb-3 d-flex" >Create Post</button>
+                className="btn btn-lg btn-block mt-5 mb-3 d-flex create-post-btn" >Create Post</button>
         </form>
     )
 }

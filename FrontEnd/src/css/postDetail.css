@@ -61,3 +61,31 @@ input[type=number] {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+@media (max-width: 992px ) { 
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    /* .dropdown {
+        bottom: 315px;
+        left: 20px;
+    } */
+
+    .dropdown-div {
+        position: absolute;
+        bottom: 370px;
+        right: 35px;
+    }
+
+    .postImage {
+        width: 90%;
+    }
+
+    .grid {
+        display: flex;
+        flex-direction: column;
+    }
+}
