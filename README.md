@@ -88,3 +88,4 @@ Reading reviews
 3. We will need to include your ISP IP Address in our MongoDB firewall if you are testing this from home. From NSCC it should be working fine. 
 4. We have a release on [https://lendahand.onrender.com/](https://lendahand.onrender.com/).
 5. We are using MongoDB Atlas to host our data, as it is a shared resource, sometimes it could be really slow, taking up to 2 min to retrieve data.
+6. Any user can do CRUD actions anywhere. We decided to build like this to make it easier to explore every functionality of the app, so one do not need to sign out and sign in with different users to perform those actions.
