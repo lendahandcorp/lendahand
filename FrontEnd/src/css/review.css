@@ -1,0 +1,27 @@
+.review-post {
+    width: 80%;
+}
+
+.btn-review{
+    background-color: #fd6a02;
+    color: white;
+    border: solid 2px #fd6a02;;
+}
+
+.btn-review:hover {
+    background-color: white;
+    color: #fd6a02;
+    border: solid 2px #fd6a02;
+}
+
+@media (max-width: 992px ) { 
+    .review-post{
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px ) { 
+    .review-post{
+        width: 90%;
+    }
+}

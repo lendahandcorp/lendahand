@@ -1,0 +1,74 @@
+.alertDiv {
+  width: 90%;
+}
+
+.validationErr {
+  margin-left: 4vw;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 70px 0px 100px 0px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  /* padding: 10px; */
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  /* margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; */
+  width: 80%;
+  margin: auto;
+}
+.form-signin input[type="password"] {
+  /* margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+  width: 80%;
+  margin: auto;
+}
+
+button {
+  margin: auto;
+}
+
+.hidden { display: none; }
+
+/* orange background */
+.card1 {
+  width: 100%;
+  height: 100vh;
+  background-color: #fd6a02;
+}
+
+.card-signin {
+  width: 20rem;
+  height: auto;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: rgb(191, 57, 0) 0px 5px 15px;
+}
+
+.signin-btn {
+  background-color: #ff781f;
+  color: white; 
+  border: 2px solid white;
+}
+
+.signin-btn:hover {
+  background-color: white;
+  color: #ff781f; 
+  border: 2px solid #ff781f;
+}

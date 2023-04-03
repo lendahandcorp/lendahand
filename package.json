@@ -1,0 +1,19 @@
+{
+  "name": "lab3b",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api": "cd BackEnd && npm install && nodemon app.js",
+    "client": "cd FrontEnd && npm install && npm start",
+    "dev": "npm install && concurrently \"npm run api\" \"npm run client\" --kill-others --kill-others-on-fail"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
