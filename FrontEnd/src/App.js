@@ -61,12 +61,9 @@ const App = () => {
                 <Route path='/profile/:UserId' element={<Profile />}/>
                 <Route path='/postedit/:id' element={<PostEdit />}/>
                 <Route path='/postcreate' element={<PostCreate />}/>
+                <Route path='/postdetails/:id' element={<PostDetails />}/>
               </Route>
-              
-
-              <Route path='/postdetails/:id' element={<PostDetails />}/>
-
-
+          
               {/* routes that require token */}
               {/* <Route element={<ProtectedRoutes/>}>
                 <Route path='/create' element={<CreatePokemon />}/>

@@ -146,6 +146,7 @@ const Post = (props) => {
               </h5>
             </Link>
             <h6 class="fst-italic">Availability: {getDate()} </h6>
+            <h6 class="text-muted">Status: <mark>{props.data.status}</mark></h6>
           </div>
 
           <p class="fw-light">
