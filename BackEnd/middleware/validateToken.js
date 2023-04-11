@@ -31,9 +31,11 @@ const validateToken = (req, res, next) => {
     if (user === null) {
       return res.status(401).send('No user exists');
     }
+
+    next();
   });
 
-  next();
+  
   // TEMPORARY
   // res.send('You reached the validate token middleware')
   // res.send(`The token is ${req.get('x-auth-token')}`)
