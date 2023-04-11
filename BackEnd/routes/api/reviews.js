@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
 // Get all the reviews by post_id
 // frontEnd will need that
-router.get('/:post_id', validateToken, (req, res) => {
+router.get('/:post_id', (req, res) => {
     console.log('A1')
     Reviews.find((err, data) => {
 
