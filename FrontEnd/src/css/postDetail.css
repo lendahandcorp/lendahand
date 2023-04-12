@@ -2,6 +2,10 @@ textarea {
     resize: none;
 }
 
+.postContainer {
+    max-width: 1000px;
+}
+
 .post-btn {
     background-color: #ff781f;
     color: white; 
